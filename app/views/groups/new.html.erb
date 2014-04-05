@@ -1,0 +1,33 @@
+<%= form_for :group, html: {class: "form-horizontal", role: "form"} do |f| %>
+
+<div class="row">
+	<div class="col-md-12">
+		<fieldset>
+			<legend>Group details</legend>
+
+			<p class="lead">Groups of users exchange tickets among its membership. You can assign tickets to other users, or request their available tickets.</p> 
+
+			<div class="form-group">
+				<%= f.label :group_name, :class => 'col-md-3 control-label' %>
+				<div class="col-md-9">
+					<%= f.text_field :group_name, :class => 'form-control', :placeholder => 'Cellblock 303' %>
+				</div>
+			</div>
+			<div class="form-group">
+				<%= f.label :entity_id, :class => 'col-md-3 control-label'  %>
+				<div class="col-md-9">
+					<%= f.select :entity_id, @entities, {}, { :class => 'form-control' } %>
+					<p class="help-block"><strong>Choose carefully!</strong> You cannot change your team / venue after the group is created.</p>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div class="row">
+	<div style="text-align:right;">
+		<%= f.submit 'Create Group', :class => 'btn btn-primary' %>
+	</div>
+</div>
+
+<% end %>

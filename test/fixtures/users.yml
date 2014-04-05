@@ -1,0 +1,39 @@
+jim:
+  id: 1
+  first_name: Jim
+  last_name: Stone
+  email: stonej@example.net
+  encrypted_password: 8gi3jfu6334ijyeydh
+  status: 1
+
+jill:
+  id: 2
+  first_name: Jill
+  last_name: Smith
+  email: jillsmith83@us.example.org
+  encrypted_password: 3i4058njfdhjefwh7y8
+  status: 1
+
+rick:
+  id: 3
+  first_name: Rick
+  last_name: Taylor
+  email: rick.taylor@example.net
+  encrypted_password: 28fjmruj3hy3jnw3dg
+  status: 1
+
+sarah:
+  id: 4
+  first_name: Sarah
+  last_name: Becker
+  email: sarahb@example.org
+  encrypted_password: h4heryueu32hjfwgo
+  status: 1
+
+peter:
+  id: 5
+  first_name: Peter
+  last_name: Jones
+  email: pjones@example.com
+  encrypted_password: 28uerjfeu7327yhg
+  status: 0

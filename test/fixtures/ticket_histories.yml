@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+
+history_1:
+  ticket_id: 1
+  event_id: 1
+  group_id: 1
+  event_id: 1
+  user_id: 1
+  entry: '{"text":"created","user":{"user_id":"1","username":"jstone","first_name":"Jim","last_name":"Stone","email":"stonej@example.net","status":"1"},"ticket":{"event_id":"1","section":"326","row":"K","seat":"9","cost":"32.00","user_id":"1","ticket_id":1}}'
+
+history_2:
+  ticket_id: 2
+  event_id: 1
+  group_id: 1
+  event_id: 1
+  user_id: 0
+  entry: '{"text":"created","user":{"user_id":"1","username":"jstone","first_name":"Jim","last_name":"Stone","email":"stonej@example.net","status":"1"},"ticket":{"event_id":"1","section":"326","row":"K","seat":"9","cost":"32.00","user_id":"0","ticket_id":2}}'

@@ -1,0 +1,16 @@
+<%= form_for :groups, html: {class: "form-horizontal", role: "form"}, url: 'groups#leave' do |f| %>
+
+<div class="alert alert-danger alert-block">
+	<h3>Are you sure you want to leave "<strong><%= @group.group_name %></strong>?"</h3>
+	<ul class="list">
+		<li>Your created tickets will be deleted</li>
+		<li>Your assigned tickets will show "Unassigned"</li>
+		<li>You will have to be invited again to join the group</li>
+	</ul>
+	<p class="text-right">
+		<%= f.hidden_field :id, :value => @group.id %>
+		<%= f.submit 'Leave the Group', :class => 'btn btn-danger' %>
+	</p>
+</div>
+
+<% end %>

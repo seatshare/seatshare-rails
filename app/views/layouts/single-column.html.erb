@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+
+  <title><%= @page_title || 'SeatShare' %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+<meta charset="utf-8">
+
+<%= favicon_link_tag 'favicon.png', type: 'image/png' %>
+
+<%= render 'layouts/ios' %>
+
+<%= render 'layouts/mixpanel' %>
+
+</head>
+<body class="default">
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+
+<%= yield %>
+
+<%= render 'layouts/footer' %>
+
+</div>
+
+<%= render 'layouts/analytics' %>
+
+<%= render 'layouts/growl' %>
+
+</body>
+</html>

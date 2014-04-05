@@ -1,0 +1,13 @@
+bob:
+  invitation_code: ABCDEFG123
+  email: bob@example.com
+  user_id: 4
+  group_id: 1
+  status: 1
+
+jane:
+  invitation_code: HIJKLMNO456
+  email: jane@example.org
+  user_id: 1
+  group_id: 1
+  status: 0

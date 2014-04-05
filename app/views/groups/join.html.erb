@@ -1,0 +1,22 @@
+<%= form_for :groups, html: {class: "form-horizontal", role: "form"}, url: groups_join_path do |f| %>
+
+<fieldset>
+  <legend>Join a Group</legend>
+  <p class="lead">To join a group, please enter the invitation code provided to you from the group administrator. It may have been included in an email.</p>
+  <div class="form-group">
+  	<%= f.label :invitation_code, :class => 'col-md-3 control-label' %>
+  	<div class="col-md-9">
+      <%= f.text_field :invitation_code, autofocus: true, :class => 'form-control', :placeholder => 'ABCDEFG123' %>
+  	</div>
+  </div>
+</fieldset>
+
+<div class="row">
+	<div class="col-md-12">
+		<p class="text-right">
+			<%= f.submit 'Join the Group', :class => 'btn btn-primary' %>
+		</p>
+	</div>
+</div>
+
+<% end %>

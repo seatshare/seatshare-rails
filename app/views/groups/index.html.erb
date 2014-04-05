@@ -1,0 +1,52 @@
+<p class="lead">Groups of users exchange tickets among its membership. You can assign tickets to other users, or request their available tickets.</p> 
+
+<hr />
+
+<div class="row">
+
+	<% for group in @groups %>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="pull-right">
+					<% if group.is_admin(current_user) %><span class="label label-default">Administrator</span><% end %>
+				</div>
+				<strong class="group_name"><%= link_to group.group_name, {:action => 'show', :id => group.id } %></strong>
+			</div>
+			<div class="panel-body">
+				<ul class="list-unstyled text-center">
+					<li>A <strong><%= group.entity.entity_name %></strong> group.</li>
+					<li>
+						<%= group.members.count %> members.
+					</li>
+				</ul>
+				<hr />
+				<ul class="list-inline text-center">
+					<li><%= link_to 'Switch to Group', {:action => 'show', :id => group.id }, :class => 'btn btn-default' %></li>
+					<li><%= link_to 'Leave Group', {:action => 'leave', :id => group.id }, :class => 'btn btn-default' %></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<% end %>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>Join or Create a Group</strong>
+			</div>
+			<div class="panel-body">
+				<p class="text-center">
+					You can create a new group<br />
+					to share your season tickets.
+				</p>
+				<hr />
+				<ul class="list-inline text-center">
+					<li><%= link_to 'Join a Group', groups_join_path, :class => 'btn btn-primary' %></li>
+					<li><%= link_to 'Create a Group', groups_new_path, :class => 'btn btn-primary' %></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</div>

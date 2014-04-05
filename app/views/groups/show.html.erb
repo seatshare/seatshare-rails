@@ -1,0 +1,164 @@
+<div class="row visible-xs" style="margin-top:-20px;">
+  <div class="well well-sm text-center">
+    <ul class="list-inline" style="margin:0;">
+      <li><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-calendar"></span> Add Season Tickets</a></li>
+      <li><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-bullhorn"></span> Group Message</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= image_tag @group.entity.logo, :alt => @group.entity.entity_name, :class => 'img-responsive img-thumbnail hidden-xs' %>
+  </div>
+  <div class="col-md-10">
+    <p>Your <strong><%= @group.entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.full_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %></p>
+    <h2 style="margin-top:0">Upcoming Events</h2>
+  </div>
+</div>
+
+<br />
+
+<% if !@group.events.blank? %>
+
+<% for event in @group.events %>
+
+<% if @group.events.first === event %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <span class="glyphicon glyphicon-calendar"></span> <% if event.date_tba === 0 %><%= event.start_time.strftime('%B %-d, %Y') %><% end %> <%if event.time_tba === 0 %> <%= event.start_time.strftime('%-I:%M %P') %><% end %>
+  </div>
+  <div class="panel-body">
+    <h2><%= link_to event.event_name, :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id %></h2>
+    <p><%= event.description %></p>
+    <% if false %>
+    <p class="lead"><strong>No tickets are available right now.</strong><br />You can still <a href="#">send a group message</a> to see if everyone is going.</p>
+    <% else %>
+    <p class="lead"><strong>There are tickets available for this event!</strong><br />Click on a ticket below to send a request.</p>
+    <% end %>
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-success" role="progressbar" style="width:<%= 50 %>%">
+      </div>
+    </div>
+
+    <% if 1 %>
+    <table class="table">
+      <tbody>
+        <% for ticket in event.tickets %>
+        <% next if ticket.is_assigned? %>
+        <tr>
+          <td>
+            <%= link_to ticket.section_row_seat, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
+            <% if ticket.note? %>
+            <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
+            <% end %>
+            <% if ticket.ticket_files.count > 0 %>
+            <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
+            <% end %>
+          </td>
+          <td>via <%= ticket.owner.full_name %></td>
+          <td class="text-right">
+            <%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id }, :class => 'btn btn-primary', :data => {:toggle => 'tooltip' }, :title => 'Request Ticket' %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <% end %>
+  </div>
+</div>
+
+<% else %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <% if 1 %>
+      <div class="pull-right">
+        <a href="javascript:void(0)" onclick="$('#tickets-<%= event.id %>').collapse('toggle')" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></a>
+      </div>
+      <% end %>
+      <span class="glyphicon glyphicon-calendar"></span> <% if event.date_tba === 0 %><%= event.start_time.strftime('%B %-d, %Y') %><% end %> <%if event.time_tba === 0 %> <%= event.start_time.strftime('%-I:%M %P') %><% end %>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-7">
+        <h3><%= link_to event.event_name, :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id %></h3>
+        <p><%= event.description %></p>
+      </div>
+      <div class="col-md-5">
+        [stats]
+      </div>
+    </div>
+    
+    <div id="tickets-<%= event.id %>" class="collapse">
+      <table class="table">
+        <tbody>
+          <% for ticket in event.tickets %>
+          <% next if ticket.is_assigned? %>
+          <tr>
+            <td>
+              <%= link_to ticket.section_row_seat, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
+              <% if ticket.note? %>
+              <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
+              <% end %>
+              <% if ticket.ticket_files.count > 0 %>
+              <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
+              <% end %>
+            </td>
+            <td>via <%= ticket.owner.full_name %></td>
+            <td class="text-right">
+              <%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id }, :class => 'btn btn-primary', :data => {:toggle => 'tooltip' }, :title => 'Request Ticket' %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% end %>
+
+<% else %>
+
+<div class="alert alert-info">
+  <p>
+    There are no events available right now. Please check back later.
+  </p>
+</div>
+
+<% end %>
+
+<% content_for :sidebar do %>
+
+<% if @group.events.count > 0 %>
+
+<div class="well text-center">
+  <ul class="list-inline" style="margin-bottom:0;">
+    <li><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-calendar"></span> Add Season Tickets</a></li>
+    <li><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-bullhorn"></span> Group Message</a></li>
+  </ul>
+</div>
+
+<fieldset>
+  <legend>Calendar</legend>
+  <div id="sidebar_calendar"></div>
+</fieldset>
+
+<% end %>
+
+<fieldset>
+  <legend>Group members</legend>
+
+<ul class="list-unstyled group-members">
+  <% for member in @group.members %>
+  <li><%= image_tag member.gravatar %> <%= link_to member.full_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></li>
+  <% end %>
+</ul>
+
+</fieldset>
+
+<% end %>

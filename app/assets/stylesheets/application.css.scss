@@ -1,0 +1,94 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+@import "bootstrap";
+
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+th.action {
+	width: 40px;
+}
+
+ul.group-members li {
+	margin-bottom: 0.25em;
+}
+
+.navbar-inverse {
+    background-color: #4963AE;
+    border-color: #4963AE;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: #ffffff;
+}
+
+.navbar-inverse .navbar-brand a {
+	color: #ffffff;
+}
+
+.navbar-inverse .logo {
+	background-image: image-url('seatshare-inverted.svg');
+	background-size: 150px 50px;
+	background-repeat: no-repeat;
+	height: 50px;
+	width: 150px;
+	overflow: hidden;
+}
+
+.navbar-inverse .logo a {
+	margin: 0;
+	display: block;
+	width: 165px;
+	padding-top: 50px;
+}
+
+.home {
+	padding-top: 0;
+}
+
+.home-navbar {
+	border-radius: 0;
+}
+
+.home-header {
+	margin-top: -20px;
+	background-color: #4963AE;
+    border-color: #4963AE;
+}
+
+.home-logo {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.home-topbar {
+	position: relative;
+	margin-bottom: -50px;
+	z-index: 1000;
+}
+
+.home-screenshot {
+	margin-bottom: -50px;
+}
+
+.home-cta {
+	margin-top: 2em;
+}
+
+/* Tooltips */
+[data-toggle="tooltip"] {
+	cursor: pointer;
+}

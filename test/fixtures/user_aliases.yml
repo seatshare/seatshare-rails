@@ -1,0 +1,17 @@
+kevin:
+  id: 1
+  user_id: 4
+  first_name: Kevin
+  last_name: Jones
+
+jennifer:
+  id: 2
+  user_id: 2
+  first_name: Jennifer
+  last_name: Newton
+
+rita:
+  id: 3
+  user_id: 2
+  first_name: Rita
+  last_name: Bell

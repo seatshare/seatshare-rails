@@ -1,0 +1,11 @@
+jim_reminder:
+  user_id: 1
+  group_id: 2
+  reminder_type_id: 2
+  entry: '{"user":{"user_id":"1","first_name":"Jim","last_name":"Stone","email":"stonej@example.net","status":"1","inserted_ts":"2013-10-01 13:57:31","name":"Stephen Yeargin"},"group":{"group_id":"1","entity_id":"1","group":"Geeks Watching Hockey","creator_id":"1","invitation_code":"LUHH1XIMYH6R8RQT","status":"1"}}'
+
+jill_reminder:
+  user_id: 2
+  group_id: 1
+  reminder_type_id: 1
+  entry: '{"user":{"user_id":"2","first_name":"Jill","last_name":"Smith","email":"jillsmith83@us.example.org","status":"1"},"group":{"group_id":"1","entity_id":"1","group":"Geeks Watching Hockey","creator_id":"1","invitation_code":"LUHH1XIMYH6R8RQT","status":"1"}}'

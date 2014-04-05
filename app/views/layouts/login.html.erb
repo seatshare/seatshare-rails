@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+
+  <title><%= @page_title || 'SeatShare' %></title>
+  <%= stylesheet_link_tag    "login", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+<meta charset="utf-8">
+
+<%= favicon_link_tag 'favicon.png', type: 'image/png' %>
+
+<%= render 'layouts/ios' %>
+
+<%= render 'layouts/mixpanel' %>
+
+</head>
+
+<body class="login">
+
+<div class="container">
+
+  <div class="logo">
+    <h1><%= link_to 'SeatShare', :root %></h1>
+  </div>
+
+  <%= yield %>
+
+</div>
+
+<div class="sr-only">
+  <p>Existing users can use this page to access their account. If you need an access, you can <%= link_to 'create an account', 'register' %>. You can also <%= link_to 'retrieve your password', new_password_path(resource_name) %>retrieve your username and password</a> if needed.</p>
+</div>
+
+<%= render 'layouts/analytics' %>
+
+<%= render 'layouts/growl' %>
+
+</body>
+</html>
