@@ -8,12 +8,22 @@ class PublicControllerTest < ActionController::TestCase
     assert_select 'h1', 'What is SeatShare?', 'page heading matches'
   end
 
-  test "gets redirected when logged in" do 
+  test "gets redirected when logged in and has no groups" do 
+    @user = User.find(5)
+    sign_in :user, @user
+
+    get :index
+    assert_response :redirect, 'redirected to another page'
+    assert_redirected_to :controller => 'groups', :action => 'index'
+  end
+
+  test "gets redirected when logged in and is a group member" do 
     @user = User.find(1)
     sign_in :user, @user
 
     get :index
-    assert_response 302, 'redirected to groups page'
+    assert_response :redirect, 'redirected to another page'
+    assert_redirected_to :controller => 'groups', :action => 'show', :id => 1
   end
 
   test "gets terms of service page" do

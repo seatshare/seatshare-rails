@@ -1,2 +1,21 @@
-<h1>Profiles#show</h1>
-<p>Find me in app/views/profiles/show.html.erb</p>
+<div class="row">
+  <div class="col-md-3">
+    <p>
+      <%= image_tag @user.gravatar('250x250'), :class => 'img-thumbnail img-responsive' %>
+    </p>
+    <p>
+      <small>Joined <%= @user.created_at.strftime('%B %-d, %Y') %></small>
+    </p>
+  </div>
+  <div class="col-md-9">
+    <% if current_user === @user %>
+    <p class="text-right">
+      <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span> Edit Profile'), { :action => 'edit' }, :class => 'btn btn-default' %>
+    </p>
+    <% end %>
+    <h2><%= @user.full_name %></h2>
+    <ul class="list-unstyled">
+      <li><span class="glyphicon glyphicon-envelope"></span> <%= mail_to @user.email, @user.email %></li>
+    </ul>
+  </div>
+</div>

@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class TicketsControllerTest < ActionController::TestCase
+  test "should be redirected" do
+    get :edit, :group_id => 1, :event_id => 1, :id => 2
+
+    assert_response :redirect
+    assert_redirected_to '/login'
+  end
+
   test "should get edit" do
     @user = User.find(1)
     sign_in :user, @user
