@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
 
   before_action :authenticate_user!
+  layout 'two-column'
 
   def show
     @user = User.find_by_id(params[:id]) || not_found
@@ -13,5 +14,19 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    current_user.first_name = user_params[:first_name]
+    current_user.last_name = user_params[:last_name]
+    current_user.save!
+
+    flash[:success] = "Profile updated!"
+    redirect_to :action => 'show', :id => @current_user.id
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name)
+  end
+
+
 end

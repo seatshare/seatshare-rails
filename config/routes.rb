@@ -25,6 +25,6 @@ SeatShare::Application.routes.draw do
 
   get 'profiles/:id' => 'profiles#show'
   get 'profile' => 'profiles#edit'
-  post 'profile' => 'profile#update'
+  post 'profile' => 'profiles#update'
 
 end
