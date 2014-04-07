@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require moment
+//= require underscore
+//= require clndr/clndr.js
 //= require_tree .

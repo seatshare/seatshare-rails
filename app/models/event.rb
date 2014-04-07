@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
 
   validates :entity_id, :event_name, :start_time, :presence => true
 
+  @ticket_stats = nil
+
   def initialize(attributes={})
     attr_with_defaults = {
       :date_tba => 0,
@@ -11,6 +13,44 @@ class Event < ActiveRecord::Base
       :description => ''
     }.merge(attributes)
     super(attr_with_defaults)
+  end
+
+  def tickets(group=nil)
+    if group.nil?
+      Ticket.where("event_id = #{self.id}")
+    else
+      Ticket.where("event_id = #{self.id} AND group_id = #{group.id}")      
+    end
+  end
+
+  def ticket_stats(group=nil, user=nil)
+    if group.nil?
+      raise "NoGroupSpecified"
+    end
+    if user.nil?
+      railse "NoUserSpecified"
+    end
+
+    tickets = self.tickets(group)
+
+    stats = {:available => 0, :total => 0, :held => 0}
+    for ticket in tickets do
+      if ticket.user_id === 0
+        stats[:available] += 1
+      end
+      if ticket.user_id === user.id
+        stats[:held] += 1
+      end
+      stats[:total] += 1
+    end
+
+    if stats[:total] > 0
+      stats[:percent_full] = ((stats[:total].to_f - stats[:available].to_f)/stats[:total].to_f) * 100
+    else
+      stats[:percent_full] = 0
+    end
+
+    return stats
   end
 
   def self.get_by_group_id(group_id=nil)

@@ -13,7 +13,7 @@
     <div class="navbar-collapse collapse">
       <% if user_signed_in? %>
         <% if !@group_selector.blank? %>
-        <%= form_for :group, html: {class: "navbar-form navbar-left", role: "form"}, :url => groups_path, :method => 'get' do |f| %>
+        <%= form_for :group, html: {class: "navbar-form navbar-left", role: "form", id: 'group_switcher'}, :url => groups_path, :method => 'get' do |f| %>
         <div class="form-group">
           <%= f.select :id, @group_selector, {}, { :class => 'form-control' } %>
         </div>

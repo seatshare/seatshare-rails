@@ -41,8 +41,38 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find_by_id(params[:id]) || not_found
+    if @group.status != 1
+      not_found
+    end
+    if !@group.is_member(@current_user)
+      redirect_to :action => 'index'
+    end
+    @events = @group.events
     session[:current_group_id] = @group.id
     @page_title = @group.group_name
+  end
+
+  def events_feed
+    @group = Group.find_by_id(params[:id]) || not_found
+    if @group.status != 1
+      not_found
+    end
+    if !@group.is_member(@current_user)
+      redirect_to :action => 'index'
+    end
+    @events = @group.events
+
+    feed = []
+    for event in @events
+      event_link = "/groups/#{@group.id}/event-#{event.id}"
+      feed << {
+        :date => event.start_time.strftime('%Y-%m-%d'),
+        :title => event.event_name,
+        :url => event_link
+      }
+    end
+
+    render json: feed
   end
 
   def join

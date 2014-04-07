@@ -56,4 +56,13 @@ class GroupsControllerTest < ActionController::TestCase
     assert_select 'title', 'Geeks Watching Hockey', 'page title matches'
   end
 
+  test "non-member should get redirected to groups index" do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :show, {:id => 2}
+    assert_response :redirect, 'was redirected to groups listing'
+    assert_redirected_to :controller => 'groups', :action => 'index'
+  end
+
 end
