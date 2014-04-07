@@ -41,9 +41,23 @@ class EventTest < ActiveSupport::TestCase
   test "get event by ticket ID" do
     event = Event.get_by_ticket_id(2)
 
-    assert event.id === 1, 'event ID matches'
-    assert event.entity_id === 2, 'entity ID matches'
-    assert event.event_name === 'Belmont Bruins vs. Brescia', 'event name matches'
+    assert event.id === 4, 'event ID matches'
+    assert event.entity_id === 1, 'entity ID matches'
+    assert event.event_name === 'Nashville Predators vs. St. Louis Blues', 'event name matches'
+  end
+
+  test "get ticket status counts" do
+    event = Event.find(4)
+    user = User.find(1)
+    group = Group.find(1)
+
+    stats = event.ticket_stats(group, user)
+
+    assert stats.is_a? Hash
+    assert stats[:available] === 1
+    assert stats[:total] === 2
+    assert stats[:held] === 1
+    assert stats[:percent_full] === 50
   end
 
 end

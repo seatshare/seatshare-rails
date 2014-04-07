@@ -19,11 +19,14 @@
 
 <br />
 
-<% if !@group.events.blank? %>
+<% if !@events.blank? %>
 
-<% for event in @group.events %>
+<% for event in @events %>
 
-<% if @group.events.first === event %>
+<% tickets = event.tickets(@group) %>
+<% ticket_stats = event.ticket_stats(@group, current_user) %>
+
+<% if @events.first === event %>
 <div class="panel panel-primary">
   <div class="panel-heading">
     <span class="glyphicon glyphicon-calendar"></span> <% if event.date_tba === 0 %><%= event.start_time.strftime('%B %-d, %Y') %><% end %> <%if event.time_tba === 0 %> <%= event.start_time.strftime('%-I:%M %P') %><% end %>
@@ -31,21 +34,20 @@
   <div class="panel-body">
     <h2><%= link_to event.event_name, :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id %></h2>
     <p><%= event.description %></p>
-    <% if false %>
-    <p class="lead"><strong>No tickets are available right now.</strong><br />You can still <a href="#">send a group message</a> to see if everyone is going.</p>
-    <% else %>
+    <% if ticket_stats[:available] > 0 %>
     <p class="lead"><strong>There are tickets available for this event!</strong><br />Click on a ticket below to send a request.</p>
+    <% else %>
+    <p class="lead"><strong>No tickets are available right now.</strong><br />You can still <a href="#">send a group message</a> to see if everyone is going.</p>
     <% end %>
 
     <div class="progress">
-      <div class="progress-bar progress-bar-success" role="progressbar" style="width:<%= 50 %>%">
-      </div>
+      <div class="progress-bar progress-bar-success" role="progressbar" style="width:<%= ticket_stats[:percent_full] %>%"></div>
     </div>
 
-    <% if 1 %>
+    <% if ticket_stats[:available] > 0 %>
     <table class="table">
       <tbody>
-        <% for ticket in event.tickets %>
+        <% for ticket in tickets %>
         <% next if ticket.is_assigned? %>
         <tr>
           <td>
@@ -74,7 +76,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-      <% if 1 %>
+      <% if ticket_stats[:available] > 0 %>
       <div class="pull-right">
         <a href="javascript:void(0)" onclick="$('#tickets-<%= event.id %>').collapse('toggle')" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></a>
       </div>
@@ -88,14 +90,21 @@
         <p><%= event.description %></p>
       </div>
       <div class="col-md-5">
-        [stats]
+        <div class="progress">
+          <div class="progress-bar progress-bar-success" role="progressbar" style="width:<%= ticket_stats[:percent_full] %>%"></div>
+        </div>
+        <ul class="list-unstyled">
+          <li><span class="badge"><%= ticket_stats[:available] %></span> available in the group</li>
+          <li><span class="badge"><%= ticket_stats[:total] %></span> total in the group</li>
+          <li><span class="badge"><%= ticket_stats[:held] %></span> held by you</li>
+        </ul>
       </div>
     </div>
     
     <div id="tickets-<%= event.id %>" class="collapse">
       <table class="table">
         <tbody>
-          <% for ticket in event.tickets %>
+          <% for ticket in tickets %>
           <% next if ticket.is_assigned? %>
           <tr>
             <td>
@@ -134,7 +143,7 @@
 
 <% content_for :sidebar do %>
 
-<% if @group.events.count > 0 %>
+<% if @events.count > 0 %>
 
 <div class="well text-center">
   <ul class="list-inline" style="margin-bottom:0;">
@@ -146,6 +155,25 @@
 <fieldset>
   <legend>Calendar</legend>
   <div id="sidebar_calendar"></div>
+  <script>
+    $.get('/groups/<%= @group.id %>/events_feed', function(result) {
+      $('#sidebar_calendar').clndr({
+        daysOfTheWeek: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+        numberOfRows: 5,
+        events: result,
+        clickEvents: {
+          click: function(target) {
+            if (!_.isObject(target.events) || _.isEmpty(target.events[0])) {
+              return false;
+            }
+            window.location = target.events[0].url;
+          }
+        },
+        showAdjacentMonths: true,
+        adjacentDaysChangeMonth: true
+      });
+    });
+  </script>
 </fieldset>
 
 <% end %>

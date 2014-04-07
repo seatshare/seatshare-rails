@@ -6,8 +6,8 @@ $(document).ready(function() {
 		return;
 	}
 
-	$('#group_switcher').change(function(e) {
-		window.location = SITE_ROOT+'/groups/switch_groups/' + $(this).val();
+	$('#group_switcher select#group_id').change(function(e) {
+		window.location = '/groups/' + $(this).val();
 	});
 });
 
@@ -18,32 +18,6 @@ $('a.confirm').click(function() {
 
 // Tooltips
 $('a[data-toggle="tooltip"], span[data-toggle="tooltip"], div[data-toggle="tooltip"]').tooltip();
-
-// Sidebar Calendar
-// @requires clndr.js
-$(document).ready(function() {
-	if (!$('#sidebar_calendar').length) {
-		return;
-	}
-
-	$.get(SITE_ROOT+'/events/ajax_calendar_data_source', function(result) {
-		$('#sidebar_calendar').clndr({
-			daysOfTheWeek: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-			numberOfRows: 5,
-			events: result,
-			clickEvents: {
-				click: function(target) {
-					if (!_.isObject(target.events) || _.isEmpty(target.events[0])) {
-						return false;
-					}
-					window.location = target.events[0].url;
-				}
-			},
-			showAdjacentMonths: true,
-			adjacentDaysChangeMonth: true
-		});
-	});
-});
 
 // Ticket alias toggle
 $(document).ready(function() {
