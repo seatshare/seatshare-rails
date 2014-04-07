@@ -49,3 +49,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 
 # Use Devise
 gem 'devise'
+
+# Javascript libraries
+gem 'momentjs-rails'
+gem 'underscore-rails'

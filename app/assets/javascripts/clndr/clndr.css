@@ -1,0 +1,56 @@
+.clndr table {
+	width: 100%;
+	margin-bottom: 2em;
+}
+.clndr .clndr-controls {
+	clear: both;
+}
+
+.clndr div.clndr-controls div {
+	text-align: center;
+	display: block;
+	float: left;
+}
+.clndr div.clndr-controls div.clndr-control-button {
+	cursor: pointer;
+	text-align: left;
+	width: 20%;
+}
+.clndr div.clndr-controls div.clndr-control-button.rightalign {
+	text-align: right;
+}
+.clndr div.clndr-controls div.month {
+	line-height: 2em;
+	font-size: 110%;
+	font-weight: bold;
+	width: 60%;
+}
+.clndr td.header-day {
+	font-weight: bold;
+	border: solid 1px #DDDDDD;
+	background: #F5F5F5;
+	text-align: center;
+	padding: 4px;
+}
+.clndr td.day {
+	border: solid 1px #DDDDDD;
+	text-align: center;
+	padding: 4px;
+}
+.clndr td.day.event {
+	color: blue;
+	background-color: #DFF0D8;
+	cursor: pointer;
+}
+.clndr td.day.today {
+	font-weight:bold;
+	background-color: #F5F5F5;
+}
+.clndr td.day.adjacent-month {
+	font-style: italic;
+	color: #F5F5F5;
+}
+.clndr td.day.adjacent-month.event {
+	color: blue;
+	background-color: #FFFFFF;
+}
