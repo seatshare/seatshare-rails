@@ -1,0 +1,96 @@
+<%= form_for :ticket, html: {class: "form-horizontal", role: "form"} do |f| %>
+
+<fieldset>
+  <legend>Ticket details</legend>
+
+  <div class="form-group">
+    <%= f.label :section, :class => 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :section, :class=>'form-control', :placeholder=>'326' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :row, :class => 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :row, :class=>'form-control', :placeholder=>'K' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :seat, :class => 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :seat, :class=>'form-control', :placeholder=>'9' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cost, :class => 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :cost, :class=>'form-control', :placeholder=>'25.00' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id, :class => 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.select :user_id, @members, {}, { :class => 'form-control', :selected => current_user.id } %>
+    </div>
+  </div>
+  <div id="alias_control" style="<%= (@ticket.assigned === current_user) ? '' : 'display:none;' %>">
+    <div class="form-group">
+      <%= f.label :alias_id, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.select :alias_id, @user_aliases, {}, { :class => 'form-control' } %>
+        <span class="help-block"><%= link_to 'Manage my user aliases', 'profile' %></span>
+      </div>
+    </div>
+  </div>
+
+</fieldset>
+
+<fieldset>
+
+  <% if params[:event_id] %>
+  <legend>Event</legend>
+
+  <div class="form-group">
+    <label class="col-md-3 control-label" for="events">Select Event</label>
+    <div class="col-md-9">
+        <div class="checkbox">
+          <label>
+            <%= @event.event_name %>
+            <%= f.hidden_field :event_id, :value => @event.id %>
+            <div class="help-block"><span class="glyphicon glyphicon-calendar"></span> <%= @event.date_time %></div>
+          </label>
+        </div>
+    </div>
+  </div>
+
+  <% else %>
+  <legend>Events</legend>
+
+  <div class="form-group">
+    <label class="col-md-3 control-label" for="events">Select Events</label>
+    <div class="col-md-9">
+      <% for event in @events %>
+        <div class="checkbox">
+          <label>
+            <%= check_box_tag 'ticket[event_id][]', event.id, :checked => true %> <%= event.event_name %>
+            <div class="help-block"><span class="glyphicon glyphicon-calendar"></span> <%= event.date_time %></div>
+          </label>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% end %>
+
+</fieldset>
+
+<div class="row">
+  <div class="col-md-12">
+    <p class="text-right">
+      <%= f.submit 'Add Ticket', :class => 'btn btn-primary' %>
+    </p>
+  </div>
+</div>
+
+<% end %>

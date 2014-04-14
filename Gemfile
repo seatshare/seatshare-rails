@@ -44,6 +44,9 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Use thin instead of Webrick
+gem 'thin'
+
 # Use Bootstrap
 gem 'bootstrap-sass', '~> 3.1.1'
 

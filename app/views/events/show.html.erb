@@ -1,4 +1,91 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<%= render 'tickets/event.html.erb' %>
+<% if @event.start_time > Date.today %>
+<% if @ticket_stats[:available] > 0 %>
+<div class="alert alert-info">
+  <p><strong>There are tickets available for this event!</strong> Click on a ticket below to send a request.</p>
+</div>
+<% else %>
+<div class="alert alert-warning">
+  <p><strong>No tickets are available right now.</strong> You can still <a href="#" class="alert-link">send a group message</a> to see if everyone is going.</p>
+</div>
+<% end %>
+<% end %>
 
-<table></table>
+<div class="pull-right">
+  <ul class="list-inline">
+    <li><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Add Ticket for this Event'), { :controller => 'tickets', :action => 'new', :group_id => @group.id, :event_id => @event.id }, :class => 'btn btn-default btn-sm' %></li>
+    <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Add Season Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
+  </ul>
+</div>
+
+<p class="lead">These are the tickets that have been added for this event.</p> 
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>Purchased By</th>
+      <th>Assigned</th>
+      <th>Cost</th>
+      <th class="action"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% if @tickets.count > 0 %>
+  <% for ticket in @tickets %>
+    <tr>
+      <td>
+        <%= link_to ticket.section_row_seat, { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => @event.id } %>
+        <% if ticket.note.length > 0 %>
+        <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
+        <% end %>
+        <% if ticket.ticket_files.count > 0 %>
+        <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to ticket.owner.full_name, :controller => 'profiles', :action => 'show', :id => ticket.owner.id %>
+      </td>
+      <td>
+        <% if ticket.assigned %>
+        <%= link_to ticket.assigned.full_name, :controller => 'profiles', :action => 'show', :id => ticket.assigned.id %>
+        <% if ticket.alias %>
+        <br />(for <%= ticket.alias.full_name %>)
+        <% end %>
+        <% else %>
+        <%= link_to raw('<span class="badge badge-lg">Available!</span>'), { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => @event.id }, { :data => { :toggle => 'tooltip'}, :title => 'Request Ticket' } %>
+        <% end %>
+      </td>
+      <td class="text-right">
+        <%= number_to_currency(ticket.cost) %>
+      </td>
+      <td>
+        <div class="dropdown">
+          <a data-toggle="dropdown" href="#" class="btn btn-default" id="ticket"><span class="glyphicon glyphicon-wrench"></span></a>
+          <ul class="dropdown-menu pull-right" role="menu">
+            <% if ticket.owner.id != current_user.id %>
+            <li role="presentation"><%= link_to 'Request', { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => @event.id, :id => ticket.id }, {:role => 'menuitem', :tabindex => '-1'} %></li>
+            <% end %>
+            <% if ticket.owner.id == current_user.id && ticket.assigned %>
+            <li role="presentation"><%= link_to 'Unassign', { :controller => 'tickets', :action => 'unassign', :group_id => @group.id, :event_id => @event.id, :id => ticket.id }, {:class => 'confirm', :role => 'menuitem', :tabindex => '-1'} %></li>
+            <% else %>
+            <li role="presentation"><%= link_to 'Assign', { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => @event.id, :id => ticket.id }, {:role => 'menuitem', :tabindex => '-1'} %></li>
+            <% end %>
+            <% if ticket.owner.id == current_user.id %>
+            <li role="presentation"><%= link_to 'Delete', { :controller => 'tickets', :action => 'delete', :group_id => @group.id, :event_id => @event.id, :id => ticket.id }, {:class => 'confirm', :role => 'menuitem', :tabindex => '-1'} %></li>
+            <% end %>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  <% else %>
+    <tr>
+      <td colspan="5">
+        <div class="alert alert-info">
+            There are no tickets listed for this event in this group.
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

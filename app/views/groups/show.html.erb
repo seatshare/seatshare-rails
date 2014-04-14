@@ -29,7 +29,7 @@
 <% if @events.first === event %>
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <span class="glyphicon glyphicon-calendar"></span> <% if event.date_tba === 0 %><%= event.start_time.strftime('%B %-d, %Y') %><% end %> <%if event.time_tba === 0 %> <%= event.start_time.strftime('%-I:%M %P') %><% end %>
+    <span class="glyphicon glyphicon-calendar"></span> <%= event.date_time %>
   </div>
   <div class="panel-body">
     <h2><%= link_to event.event_name, :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id %></h2>
@@ -81,7 +81,7 @@
         <a href="javascript:void(0)" onclick="$('#tickets-<%= event.id %>').collapse('toggle')" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></a>
       </div>
       <% end %>
-      <span class="glyphicon glyphicon-calendar"></span> <% if event.date_tba === 0 %><%= event.start_time.strftime('%B %-d, %Y') %><% end %> <%if event.time_tba === 0 %> <%= event.start_time.strftime('%-I:%M %P') %><% end %>
+    <span class="glyphicon glyphicon-calendar"></span> <%= event.date_time %>
   </div>
   <div class="panel-body">
     <div class="row">
@@ -147,7 +147,7 @@
 
 <div class="well text-center">
   <ul class="list-inline" style="margin-bottom:0;">
-    <li><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-calendar"></span> Add Season Tickets</a></li>
+    <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Add Season'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
     <li><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-bullhorn"></span> Group Message</a></li>
   </ul>
 </div>
