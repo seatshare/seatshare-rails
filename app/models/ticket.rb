@@ -6,6 +6,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :event
   
   validates :group_id, :event_id, :owner_id, :user_id, :presence => true
+  validates :cost, :numericality => { :greater_than_or_equal_to => 0 }
 
   def owner
     User.find_by_id(self.owner_id)
@@ -13,6 +14,10 @@ class Ticket < ActiveRecord::Base
 
   def assigned
     User.find_by_id(self.user_id)
+  end
+
+  def alias
+    UserAlias.find_by_id(self.alias_id)
   end
 
   def section_row_seat

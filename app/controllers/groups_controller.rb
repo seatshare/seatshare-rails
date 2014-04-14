@@ -47,7 +47,7 @@ class GroupsController < ApplicationController
     if !@group.is_member(@current_user)
       redirect_to :action => 'index'
     end
-    @events = @group.events
+    @events = @group.events.order('start_time ASC').where("start_time > '#{Date.today}'")
     session[:current_group_id] = @group.id
     @page_title = @group.group_name
   end
@@ -64,7 +64,7 @@ class GroupsController < ApplicationController
 
     feed = []
     for event in @events
-      event_link = "/groups/#{@group.id}/event-#{event.id}"
+      event_link = url_for :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id
       feed << {
         :date => event.start_time.strftime('%Y-%m-%d'),
         :title => event.event_name,

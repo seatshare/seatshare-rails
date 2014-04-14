@@ -15,7 +15,27 @@ class TicketsControllerTest < ActionController::TestCase
     get :edit, :group_id => 1, :event_id => 1, :id => 2
 
     assert_response :success, 'received 200 status'
-    assert_select 'title', '326 K 10 | Belmont Bruins vs. Brescia', 'ticket edit title matches'
+    assert_select 'title', 'Belmont Bruins vs. Brescia - 326 K 10', 'ticket edit title matches'
+  end
+
+  test "should unassign ticket" do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :unassign, :group_id => 1, :event_id => 1, :id => 2
+
+    assert_response :redirect, 'received a redirect'
+    assert_redirected_to '/groups/1/event-1'
+  end
+
+  test "should delete ticket" do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :delete, :group_id => 1, :event_id => 1, :id => 2
+
+    assert_response :redirect, 'received a redirect'
+    assert_redirected_to '/groups/1/event-1'
   end
 
 end

@@ -53,6 +53,18 @@ class Event < ActiveRecord::Base
     return stats
   end
 
+  def date_time
+    out = ''
+    if self.date_tba === 0
+      out += self.start_time.strftime('%A, %B %-d, %Y')
+    end
+    if self.time_tba === 0
+      out += ' - '
+      out += self.start_time.strftime('%-I:%M %P')
+    end
+    return out
+  end
+
   def self.get_by_group_id(group_id=nil)
     entity = Entity.get_by_group_id(group_id)
     events = Event.where("entity_id = #{entity.id}")
