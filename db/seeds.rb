@@ -23,9 +23,3 @@ entities = Entity.create([
     entity_name: 'Nashville Symphony', logo: '//upload.wikimedia.org/wikipedia/en/b/b7/NashvilleSymphonyLogo.png', status: 0
   }
 ])
-
-Event.create([
-  {
-    entity_id: entities.first.id, event_name: 'Nashville Predators vs. Washington Capitals', start_time: '2014-04-05 19:00'
-  }
-])
