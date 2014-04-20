@@ -23,4 +23,16 @@ class UserAliasTest < ActiveSupport::TestCase
     assert user_alias.user_id === 4, 'fixture user alias user ID matches'
   end
 
+  test "user alias unset from matching tickets when deleted" do
+    user_alias = UserAlias.find(2)
+    ticket = Ticket.find(4);
+
+    assert user_alias.id === ticket.alias_id, 'ticket is assigned to user'
+
+    user_alias.destroy
+
+    ticket = Ticket.find(4);
+    assert ticket.alias_id === 0, 'ticket was assigned back to 0'
+  end
+
 end

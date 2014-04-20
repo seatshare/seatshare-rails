@@ -35,7 +35,7 @@
     <tr>
       <td>
         <%= link_to ticket.section_row_seat, { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => @event.id } %>
-        <% if ticket.note.length > 0 %>
+        <% if !ticket.note.nil? && ticket.note.length > 0 %>
         <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
         <% end %>
         <% if ticket.ticket_files.count > 0 %>

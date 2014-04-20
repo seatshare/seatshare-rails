@@ -19,22 +19,6 @@ $('a.confirm').click(function() {
 // Tooltips
 $('a[data-toggle="tooltip"], span[data-toggle="tooltip"], div[data-toggle="tooltip"]').tooltip();
 
-// Ticket alias toggle
-$(document).ready(function() {
-	if (!$('select[name="assigned"]').length) {
-		return;
-	}
-	$('select[name="assigned"]').change(function() {
-		var self = this;
-		if ($(self).data('current') != $(self).val()) {
-			$('#alias_control').hide();
-			$('select[name="alias"]').val(0);
-		} else {
-			$('#alias_control').show();
-		}
-	});
-});
-
 // Mobile Safari in standalone mode
 if(("standalone" in window.navigator) && window.navigator.standalone){
 

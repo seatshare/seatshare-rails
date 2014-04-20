@@ -31,18 +31,20 @@
   <div class="form-group">
     <%= f.label :user_id, :class => 'col-md-3 control-label' %>
     <div class="col-md-9">
-      <%= f.select :user_id, @members, {}, { :class => 'form-control', :selected => current_user.id } %>
+      <%= f.select :user_id, @members, {}, { :class => 'form-control', :selected => current_user.id, :data => { :current => current_user.id } } %>
     </div>
   </div>
+  <% if current_user.user_aliases.count > 0 %>
   <div id="alias_control" style="<%= (@ticket.assigned === current_user) ? '' : 'display:none;' %>">
     <div class="form-group">
       <%= f.label :alias_id, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
         <%= f.select :alias_id, @user_aliases, {}, { :class => 'form-control' } %>
-        <span class="help-block"><%= link_to 'Manage my user aliases', 'profile' %></span>
+        <span class="help-block"><%= link_to "Manage my user aliases", {:controller => 'profiles', :action => 'edit' } %></span>
       </div>
     </div>
   </div>
+  <% end %>
 
 </fieldset>
 

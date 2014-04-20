@@ -45,7 +45,7 @@ class GroupsController < ApplicationController
       not_found
     end
     if !@group.is_member(@current_user)
-      redirect_to :action => 'index'
+      redirect_to :action => 'index' and return
     end
     @events = @group.events.order('start_time ASC').where("start_time > '#{Date.today}'")
     session[:current_group_id] = @group.id
@@ -58,7 +58,7 @@ class GroupsController < ApplicationController
       not_found
     end
     if !@group.is_member(@current_user)
-      redirect_to :action => 'index'
+      raise "NotGroupMember"
     end
     @events = @group.events
 
