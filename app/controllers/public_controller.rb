@@ -6,13 +6,13 @@ class PublicController < ApplicationController
   def index
     if user_signed_in?
       if session[:current_group_id].is_a? Numeric
-        redirect_to :controller => 'groups', :action => 'show', :id => session[:current_group_id], :status => 302
+        redirect_to :controller => 'groups', :action => 'show', :id => session[:current_group_id], :status => 302 and return
       else
         groups = Group.get_groups_by_user_id(current_user.id)
         if groups.blank?
-          redirect_to :controller => 'groups', :action => 'index', :status => 302
+          redirect_to :controller => 'groups', :action => 'index', :status => 302 and return
         else
-          redirect_to :controller => 'groups', :action => 'show', :id => groups.first.id, :status => 302
+          redirect_to :controller => 'groups', :action => 'show', :id => groups.first.id, :status => 302 and return
         end
       end
     end

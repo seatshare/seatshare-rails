@@ -6,12 +6,14 @@ class TicketsController < ApplicationController
   def new
     @group = Group.find_by_id(params[:group_id]) || not_found
     @ticket = Ticket.new({
-      :owner_id => current_user.id
+      :owner_id => current_user.id,
+      :user_id => current_user.id
     })
 
     @members = @group.members.collect {|p| [ p.full_name, p.id ] }
     @members.unshift(['Unassigned', 0])
-    @user_aliases = current_user.user_aliases.collect {|p| [ p.full_name, p.id ] } 
+    @user_aliases = current_user.user_aliases.collect {|p| [ p.full_name, p.id ] }
+    @user_aliases.unshift(['Not Set', 0])
 
     if params[:event_id]
       @event = Event.find_by_id(params[:event_id]) || not_found
@@ -34,19 +36,22 @@ class TicketsController < ApplicationController
       :section => ticket_params[:section],
       :row => ticket_params[:row],
       :seat => ticket_params[:seat],
-      :cost => ticket_params[:cost],
-      :user_id => ticket_params[:user_id],
+      :cost => ticket_params[:cost].gsub(/[^0-9\.]/,'').to_f,
+      :user_id => ticket_params[:user_id].to_i,
       :owner_id => current_user.id
     })
-    if !ticket_params[:alias_id].nil? && ticket_params[:user_id] == current_user.id
-      ticket.alias_id = ticket_params[:alias_id]
+
+    if !ticket_params[:alias_id].nil? && ticket_params[:user_id].to_i == current_user.id
+      ticket.alias_id = ticket_params[:alias_id].to_i
+    else
+      ticket.alias_id = 0
     end
 
     if ticket_params[:event_id].is_a? String
       ticket.event_id = ticket_params[:event_id]
       ticket.save!
       flash[:success] = "Ticket added!"
-      redirect_to :controller => 'groups', :action => 'show', :id => group.id
+      redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
     else
       for event_id in params[:ticket][:event_id]
         season_ticket = ticket.dup
@@ -54,7 +59,7 @@ class TicketsController < ApplicationController
         season_ticket.save!
       end
       flash[:success] = "Tickets added!"
-      redirect_to :controller => 'groups', :action => 'show', :id => group.id   
+      redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
     end
   end
 
@@ -66,7 +71,8 @@ class TicketsController < ApplicationController
     @ticket_stats = @event.ticket_stats(@group, current_user)
     @members = @group.members.collect {|p| [ p.full_name, p.id ] }
     @members.unshift(['Unassigned', 0])
-    @user_aliases = current_user.user_aliases.collect {|p| [ p.full_name, p.id ] } 
+    @user_aliases = current_user.user_aliases.collect {|p| [ p.full_name, p.id ] }
+    @user_aliases.unshift(['Unassigned', 0])
 
     @can_edit_ticket = @ticket.assigned === current_user || @ticket.owner === current_user
 
@@ -80,11 +86,14 @@ class TicketsController < ApplicationController
     end
 
     ticket = Ticket.find(params[:id])
-    ticket.cost = ticket_params[:cost].to_f
-    ticket.user_id = ticket_params[:user_id]
+    ticket.cost = ticket_params[:cost].gsub(/[^0-9\.]/,'').to_f
+    ticket.user_id = ticket_params[:user_id].to_i
     ticket.note = ticket_params[:note]
-    if !ticket_params[:alias_id].nil? && ticket_params[:user_id] == current_user.id
-      ticket.alias_id = ticket_params[:alias_id]
+
+    if !ticket_params[:alias_id].nil? && ticket_params[:user_id].to_i == current_user.id
+      ticket.alias_id = ticket_params[:alias_id].to_i
+    else
+      ticket.alias_id = 0
     end
 
     if ticket.save
@@ -93,7 +102,7 @@ class TicketsController < ApplicationController
       flash[:error] = 'Ticket could not be updated.'
     end
     puts flash.inspect
-    redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => ticket.event_id
+    redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => ticket.event_id and return
   end
 
   def unassign
@@ -110,7 +119,7 @@ class TicketsController < ApplicationController
     ticket.user_id = 0
     ticket.save!
 
-    redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id
+    redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
   end
 
   def delete
@@ -124,7 +133,7 @@ class TicketsController < ApplicationController
 
     ticket.destroy!
 
-    redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id
+    redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
   end
 
   private

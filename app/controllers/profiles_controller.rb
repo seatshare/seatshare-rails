@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
 
   def edit
     @user = current_user
+    @user_aliases = current_user.user_aliases
     @page_title = "Edit Profile"
   end
 
@@ -19,7 +20,7 @@ class ProfilesController < ApplicationController
     current_user.save!
 
     flash[:success] = "Profile updated!"
-    redirect_to :action => 'show', :id => @current_user.id
+    redirect_to :action => 'show', :id => @current_user.id and return
   end
 
   private
