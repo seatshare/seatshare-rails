@@ -1,0 +1,43 @@
+<p><%= @recipient.first_name %>,</p>
+
+<p><%= @user.full_name %> (<%= mail_to @user.email, @user.email %>) has assigned a ticket to you for the following event in your group <%= @group.group_name %>.</p>
+
+<table cellpadding="10px">
+  <tr>
+    <th style="width:100px">Group</th>
+    <td><%= @group.group_name %></td>
+  </tr>
+  <tr>
+    <th>Event</th>
+    <td><%= @event.event_name %> : <%= @event.date_time %></td>
+  </tr>
+  <tr>
+    <th>Ticket</th>
+    <td><%= link_to @ticket.section_row_seat, { :controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id } %></td>
+  </tr>
+</table>
+
+<% if !@ticket.ticket_files.blank? %>
+<table cellpadding="10px">
+  <tr>
+    <th style="width:100px">Attachments</th>
+    <td>
+      <table>
+        <% for file in @ticket.ticket_files %>
+        <tr>
+          <td><%= link_to file.file_name, file.download_link %></td>
+        </tr>
+        <% end %>
+      </table>
+    </td>
+  </tr>
+</table>
+<% end %>
+ 
+<p>Thank you!</p>
+ 
+<p>
+  ---<br />
+  <%= link_to 'SeatShare', { :controller => 'public', :action => 'index' } %>  on behalf of <%= @user.full_name %><br />
+  <%= mail_to @user.email, @user.email %></a>
+</p>

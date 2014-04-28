@@ -37,6 +37,19 @@ class GroupsController < ApplicationController
   end
 
   def update
+    group = Group.find(params[:id])
+    if !group.is_admin(current_user)
+      raise "NotGroupAdmin"
+    end
+
+    group.group_name = group_params[:group_name]
+
+    if group.save
+      flash[:success] = 'Group updated!'
+    else
+      flash[:error] = 'Group could not be updated.'
+    end
+    redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
   end
 
   def show
@@ -77,6 +90,22 @@ class GroupsController < ApplicationController
 
   def join
     @page_title = "Join a Group"
+  end
+
+  def do_join
+    # Use group invitation
+    group = Group.find_by_invitation_code(params[:groups][:invitation_code])
+
+    puts params.inspect
+
+    # Fall back to normal user invitation
+    if group.blank?
+      invitation = GroupInvitation.get_by_invitation_code(params[:groups][:invitation_code])
+      invitation.use_invitation!
+      group = invitation.group
+    end
+    group.join_group(current_user, 'member')
+    redirect_to :action => 'show', :id => group.id and return
   end
 
   def leave

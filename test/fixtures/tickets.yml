@@ -44,7 +44,7 @@ jill_1:
   alias_id: 0
   cost: 12.00
 
-jill_1:
+jill_2:
   id: 4
   group_id: 2
   event_id: 1
@@ -56,3 +56,16 @@ jill_1:
   note: 
   alias_id: 2
   cost: 12.00
+
+jill_3:
+  id: 5
+  group_id: 2
+  event_id: 1
+  section: VIP
+  row:
+  seat:
+  owner_id: 2
+  user_id: 2
+  note: 
+  alias_id: 0
+  cost: 44.00

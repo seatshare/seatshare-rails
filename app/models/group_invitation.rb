@@ -1,5 +1,6 @@
 class GroupInvitation < ActiveRecord::Base
   belongs_to :groups
+  belongs_to :users
 
   validates :email, :user_id, :group_id, :invitation_code, :presence => true
 
@@ -28,6 +29,14 @@ class GroupInvitation < ActiveRecord::Base
     end
     self.status = 0
     self.save!
+  end
+
+  def user
+    User.find_by_id(self.user_id)
+  end
+
+  def group
+    Group.find_by_id(self.group_id)
   end
 
   private

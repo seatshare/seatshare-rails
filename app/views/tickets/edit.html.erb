@@ -51,7 +51,7 @@
         <% for file in @ticket.ticket_files %>
         <tr>
           <td>
-            <a href="<%= file.path %>"><span class="glyphicon glyphicon-save"></span> <%= file.file_name %></a>
+            <%= link_to raw('<span class="glyphicon glyphicon-save"></span> ') + file.file_name, file.download_path %>
             <br /><small>Uploaded <%= file.created_at %></small>
           </td>
           <td><a href="#" class="btn btn-sm btn-danger confirm"><span class="glyphicon glyphicon-trash"></span></a></td>
