@@ -20,6 +20,10 @@ class Ticket < ActiveRecord::Base
     UserAlias.find_by_id(self.alias_id)
   end
 
+  def group
+    Group.find_by_id(self.group_id)
+  end
+
   def section_row_seat
     [self.section, self.row, self.seat].join(" ").strip
   end

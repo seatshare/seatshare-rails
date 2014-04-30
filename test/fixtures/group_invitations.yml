@@ -1,4 +1,5 @@
 bob:
+  id: 1
   invitation_code: ABCDEFG123
   email: bob@example.com
   user_id: 4
@@ -6,6 +7,7 @@ bob:
   status: 1
 
 jane:
+  id: 2
   invitation_code: HIJKLMNO456
   email: jane@example.org
   user_id: 1

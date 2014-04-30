@@ -1,0 +1,49 @@
+<% if !@personalized.blank? %>
+<p><%= @personalized %></p>
+
+<hr />
+<% end %>
+
+<p>Hi!</p>
+ 
+<p><%= @user.full_name %> has invited you to join our <strong><%= @group.entity.entity_name %></strong> group on <%= link_to 'SeatShare', '/' %>, a service that helps manage our season tickets.</p>
+
+<table cellpadding="10px">
+  <tr>
+    <th style="width:150px;">Create an Account</th>
+    <td>
+      <%= link_to 'Use Invitation ' + @invite.invitation_code, { :controller => 'devise/registrations', :action => 'new', :invite_code => @invite.invitation_code } %>
+    </td>
+  </tr>
+</table>
+ 
+<p>Once you have signed up, your access code to join our group is below.</p>
+
+<table cellpadding="10px">
+  <tr>
+    <th style="width:150px;">Group Name</th>
+    <td><%= @group.group_name %></td>
+  </tr>
+  <tr>
+    <th>Invitation Code</th>
+    <td><%= @invite.invitation_code %></td>
+  </tr>
+</table>
+
+<p>If you have already registered, you will be able to join the group at: </p>
+ 
+<table cellpadding="10px">
+  <tr>
+    <th style="width:150px;">Group Management</th>
+    <td><%= link_to 'Manage My Groups', { :controller => 'groups', :action => 'index' } %></td>
+  </tr>
+</table>
+
+<p>Thank you!</p>
+ 
+<p>
+  ---<br />
+  <%= link_to 'SeatShare', '/' %>, on behalf of
+  <%= @user.full_name %><br />
+  <%= mail_to @user.email, @user.email %>
+</p>

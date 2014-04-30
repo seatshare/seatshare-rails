@@ -12,6 +12,7 @@ SeatShare::Application.routes.draw do
   get 'groups/new' => 'groups#new'
   post 'groups/new' => 'groups#create'
   get 'groups/join' => 'groups#join'
+  post 'groups/join' => 'groups#do_join'
   get 'groups/:id' => 'groups#show'
   get 'groups/:id/edit' => 'groups#edit'
   post 'groups/:id/edit' => 'groups#update'

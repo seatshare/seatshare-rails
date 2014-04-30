@@ -101,7 +101,6 @@ class TicketsController < ApplicationController
     else
       flash[:error] = 'Ticket could not be updated.'
     end
-    puts flash.inspect
     redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => ticket.event_id and return
   end
 

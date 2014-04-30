@@ -3,3 +3,9 @@ ticket_file_1:
   ticket_id: 1
   path: abcdefg1234.pdf
   file_name: 12345-7890.pdf
+
+ticket_file_1:
+  user_id: 1
+  ticket_id: 3
+  path: abcdefg7890.pdf
+  file_name: ABCDEFG-7890.pdf
