@@ -5,6 +5,8 @@ class CreateGroupUsers < ActiveRecord::Migration
       t.integer :group_id   # groups.id
       t.integer :user_id    # users.id
       t.string :role        # [member, admin]
+      t.integer :daily_reminder
+      t.integer :weekly_reminder
       t.timestamps
     end
 

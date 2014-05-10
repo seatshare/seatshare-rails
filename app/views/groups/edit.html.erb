@@ -1,3 +1,5 @@
+<% if @group.is_admin(current_user) %>
+
 <%= form_for :group, html: {class: "form-horizontal", role: "form"} do |f| %>
 
 <fieldset>
@@ -10,12 +12,69 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <%= f.label :invitation_code, :class => 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :group_name, :class => 'form-control', :disabled => true, :value => @group.invitation_code %>
+    </div>
+  </div>
+
 </fieldset>
 
 <div class="row">
   <div style="text-align:right;">
+    <%= f.hidden_field :form_type, :value => 'group' %>
     <%= f.submit 'Update Group', :class => 'btn btn-primary' %>
   </div>
 </div>
+
+<% end %>
+
+<% else %>
+
+<fieldset>
+  <legend>Group details</legend>
+
+  <p class="lead">You are a member of <strong><%= @group.group_name %></strong>, a <strong><%= @group.entity.entity_name %></strong> group. You can choose to receive reminders when there is an upcoming event for this group.</p>
+
+</fieldset>
+
+<div class="row">
+  <div style="text-align:right;">
+    <%= link_to raw('<span class="glyphicon glyphicon-remove"></span> Leave Group'), { :action => 'leave', :id => @group.id }, :class => 'btn btn-large btn-danger' %> 
+  </div>
+
+</div>
+
+<% end %>
+
+<% content_for :sidebar do %>
+
+<%= form_for :group_user, html: {class: "form-horizontal", role: "form"} do |f| %>
+
+<fieldset>
+  <legend>Reminder Settings</legend>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <div class="checkbox">
+        <label><%= f.check_box :daily_reminder %> Daily Schedule Reminder</label>
+      </div>
+      <div class="checkbox">
+        <label><%= f.check_box :weekly_reminder%> Weekly Schedule Reminder</label>
+      </div>
+    </div>
+  </div>
+
+</fieldset>
+
+<div class="row">
+  <div style="text-align:right;">
+    <%= f.hidden_field :form_type, :value => 'reminders' %>
+    <%= f.submit 'Update Settings', :class => 'btn btn-secondary' %>
+  </div>
+</div>
+
+<% end %>
 
 <% end %>

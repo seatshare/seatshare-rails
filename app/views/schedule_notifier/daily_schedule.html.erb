@@ -1,13 +1,13 @@
 <p><%= @user.first_name; %>,</p>
 
-<p>This is your daily summary for <%= link_to @group.group_name, :controller => 'groups', :action => 'show', :id => @group.id %>. We send these every morning if there are events that day. You can update your reminder settings on <%= link_to 'the group page', { :controller => 'groups', :action => 'edit', :id => @group.id } %>.</p>
+<p>This is your daily summary for <%= link_to @group.group_name, :controller => 'groups', :action => 'show', :id => @group.id, :only_path => false %>. We send these every morning if there are events that day. You can update your reminder settings on <%= link_to 'the group page', { :controller => 'groups', :action => 'edit', :id => @group.id, :only_path => false } %>.</p>
 
 <% for event in @events %>
 <hr />
 <table cellpadding="10px">
 	<tr>
 		<th style="width:100px">Event</th>
-		<td><%= link_to event.event_name, { :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id } %></td>
+		<td><%= link_to event.event_name, { :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id, :only_path => false } %></td>
 	</tr>
 	<tr>
 		<th>Starts</th>
@@ -36,10 +36,10 @@
 					<% for ticket in tickets %>
 					<% next if ticket.is_assigned? %>
 					<tr>
-						<td><%= link_to ticket.section_row_seat, { :controller => 'tickets', :action => 'show', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id } %></td>
+						<td><%= link_to ticket.section_row_seat, { :controller => 'tickets', :action => 'show', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %></td>
 						<td>via <%= ticket.owner.full_name; %></td>
 						<td>
-							<%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'show', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id } %>
+							<%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'show', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %>
 						</td>
 					</tr>
 					<% end %>
@@ -51,5 +51,5 @@
 <% end %>
 
 <% content_for :footer do %>
-	<%= link_to 'Manage My Notifications', { :controller => 'groups', :action => 'edit', :id => @group.id } %>
+	<%= link_to 'Manage My Reminders', { :controller => 'groups', :action => 'edit', :id => @group.id, :only_path => false } %>
 <% end %>

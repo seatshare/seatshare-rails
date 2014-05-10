@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20140403043152) do
     t.integer  "group_id"
     t.integer  "user_id"
     t.string   "role"
+    t.integer  "daily_reminder"
+    t.integer  "weekly_reminder"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -142,16 +144,6 @@ ActiveRecord::Schema.define(version: 20140403043152) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "user_reminders", id: false, force: true do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.integer  "reminder_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "user_reminders", ["group_id", "user_id"], name: "index_user_reminders_on_group_id_and_user_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
