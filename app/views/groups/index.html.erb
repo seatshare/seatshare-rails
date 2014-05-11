@@ -23,8 +23,9 @@
 				<hr />
 				<ul class="list-inline text-center">
 					<li><%= link_to 'Switch to Group', {:action => 'show', :id => group.id }, :class => 'btn btn-default' %></li>
+					<% if !group.is_admin(current_user) %>
 					<li><%= link_to 'Leave Group', {:action => 'leave', :id => group.id }, :class => 'btn btn-default' %></li>
-
+					<% end %>
 				</ul>
 			</div>
 		</div>

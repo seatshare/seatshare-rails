@@ -17,7 +17,9 @@ SeatShare::Application.routes.draw do
   get 'groups/:id/edit' => 'groups#edit'
   post 'groups/:id/edit' => 'groups#update'
   get 'groups/:id/leave' => 'groups#leave'
-  post 'groups/:id/leave' => 'groups#leave'
+  post 'groups/:id/leave' => 'groups#do_leave'
+  get 'groups/:id/invite' => 'groups#invite'
+  post 'groups/:id/invite' => 'groups#do_invite'
   get 'groups/:id/events_feed' => 'groups#events_feed'
 
   get 'groups/:group_id/event-:id' => 'events#show'

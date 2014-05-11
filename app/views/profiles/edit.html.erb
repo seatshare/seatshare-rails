@@ -37,6 +37,33 @@
 
 <% content_for :sidebar do %>
 
-<%= render 'aliases' %>
+<fieldset>
+  <legend>Aliases</legend>
+  <p class="text-muted">"Aliases" allow you to flag tickets that are assigned to you, but under a different name, such as your spouse or sibling. You can create as many aliases as you need.</p>
+
+  <% if @user_aliases.count > 0 %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th class="action">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for user_alias in @user_aliases %>
+      <tr>
+        <td><%= link_to user_alias.full_name, :controller => 'user_aliases', :action => 'edit', :id => user_alias.id %></td>
+        <td><%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), { :controller => 'user_aliases', :action => 'delete', :id => user_alias.id }, :class => 'btn btn-sm btn-danger confirm' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+  <p class="text-right">
+    <%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Add Alias'), { :controller => 'user_aliases', :action => 'new' }, :class => 'btn btn-default' %>
+  </p>
+
+</fieldset>
 
 <% end %>

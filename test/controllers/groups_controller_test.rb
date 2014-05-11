@@ -38,6 +38,15 @@ class GroupsControllerTest < ActionController::TestCase
     assert_select 'title', 'Join a Group', 'page title matches'
   end
 
+  test "should see invite page" do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :invite, {:id => 2}
+    assert_response :success, 'got a 200 status'
+    assert_select 'title', 'Invite Member to Nashville Fans of Ballsports'
+  end
+
   test "should see leave page" do
     @user = User.find(1)
     sign_in :user, @user

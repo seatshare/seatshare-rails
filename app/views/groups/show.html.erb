@@ -29,7 +29,7 @@
     <% if ticket_stats[:available] > 0 %>
     <p class="lead"><strong>There are tickets available for this event!</strong><br />Click on a ticket below to send a request.</p>
     <% else %>
-    <p class="lead"><strong>No tickets are available right now.</strong><br />You can still <a href="#">send a group message</a> to see if everyone is going.</p>
+    <p class="lead"><strong>No tickets are available right now.</strong><br />You can contact ticket holders to make sure they are still going.</p>
     <% end %>
 
     <div class="progress">
@@ -139,8 +139,8 @@
 
 <div class="well text-center">
   <ul class="list-inline" style="margin-bottom:0;">
-    <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Add Season'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
-    <li><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-bullhorn"></span> Group Message</a></li>
+    <li>Have tickets to share?</li>
+    <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Add Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
   </ul>
 </div>
 
@@ -177,6 +177,7 @@
   <% for member in @group.members %>
   <li><%= image_tag member.gravatar %> <%= link_to member.full_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></li>
   <% end %>
+  <li class="text-right"><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
 </ul>
 
 </fieldset>
