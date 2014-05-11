@@ -14,7 +14,7 @@ class ScheduleNotifierTest < ActionMailer::TestCase
     assert_equal ['stonej@example.net'], email.to
     assert_equal 'Today\'s events for Geeks Watching Hockey', email.subject
     assert_includes email.body.to_s, '<title>Today&#39;s events for Geeks Watching Hockey</title>'
-    assert_includes email.body.to_s, '<td><a href="/groups/1/event-7">Nashville Predators vs. Florida Panthers</a></td>'
+    assert_includes email.body.to_s, '<td><a href="http://localhost:3000/groups/1/event-7">Nashville Predators vs. Florida Panthers</a></td>'
   end
 
   test "send weekly schedule" do
@@ -29,7 +29,7 @@ class ScheduleNotifierTest < ActionMailer::TestCase
     assert_equal ['stonej@example.net'], email.to
     assert_equal 'The week ahead for Geeks Watching Hockey', email.subject
     assert_includes email.body.to_s, '<title>The week ahead for Geeks Watching Hockey</title>'
-    assert_includes email.body.to_s, '<td><a href="/groups/1/event-6">Nashville Predators vs. Los Angeles Kings</a></td>'
+    assert_includes email.body.to_s, '<td><a href="http://localhost:3000/groups/1/event-6">Nashville Predators vs. Los Angeles Kings</a></td>'
   end
 
 end

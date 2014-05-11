@@ -86,6 +86,8 @@ class TicketsController < ApplicationController
     end
 
     ticket = Ticket.find(params[:id])
+    original_ticket = ticket.dup
+
     ticket.cost = ticket_params[:cost].gsub(/[^0-9\.]/,'').to_f
     ticket.user_id = ticket_params[:user_id].to_i
     ticket.note = ticket_params[:note]
@@ -98,6 +100,17 @@ class TicketsController < ApplicationController
 
     if ticket.save
       flash[:success] = 'Ticket updated!'
+
+      if ticket.user_id != current_user.id && ticket.user_id != 0 && original_ticket.user_id != ticket.user_id
+        if !group.is_member(ticket.assigned)
+          raise "NotGroupMember"
+        end
+        TicketNotifier.assign(ticket, ticket.assigned).deliver
+      else
+        puts ticket.inspect
+        puts original_ticket.inspect
+      end
+
     else
       flash[:error] = 'Ticket could not be updated.'
     end
@@ -109,9 +122,7 @@ class TicketsController < ApplicationController
     event = Event.find_by_id(params[:event_id]) || not_found
     ticket = Ticket.find_by_id(params[:id]) || not_found
 
-    if ticket.owner_id != current_user.id
-      raise 'AccessDenied'
-    elsif !ticket.assigned.nil? && ticket.assigned.id != current_user.id
+    if ticket.owner_id != current_user.id && !ticket.assigned.nil? && ticket.assigned.id != current_user.id
       raise 'AccessDenied'
     end
 

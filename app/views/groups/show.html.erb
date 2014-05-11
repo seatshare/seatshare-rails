@@ -1,23 +1,15 @@
-<div class="row visible-xs" style="margin-top:-20px;">
-  <div class="well well-sm text-center">
-    <ul class="list-inline" style="margin:0;">
-      <li><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-calendar"></span> Add Season Tickets</a></li>
-      <li><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-bullhorn"></span> Group Message</a></li>
-    </ul>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Your <strong><%= @group.entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.full_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
+    <div class="pull-right">
+      <%= link_to raw('<span class="glyphicon glyphicon-cog"></span> Edit Settings'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
+    </div>
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse">
+    <div class="panel-body">
+    </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-md-2">
-    <%= image_tag @group.entity.logo, :alt => @group.entity.entity_name, :class => 'img-responsive img-thumbnail hidden-xs' %>
-  </div>
-  <div class="col-md-10">
-    <p>Your <strong><%= @group.entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.full_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %></p>
-    <h2 style="margin-top:0">Upcoming Events</h2>
-  </div>
-</div>
-
-<br />
 
 <% if !@events.blank? %>
 

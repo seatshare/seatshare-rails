@@ -13,7 +13,7 @@
   </tr>
   <tr>
     <th>Ticket</th>
-    <td><%= link_to @ticket.section_row_seat, { :controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id } %></td>
+    <td><%= link_to @ticket.section_row_seat, { :controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id, :only_path => false } %></td>
   </tr>
 </table>
 
@@ -38,6 +38,6 @@
  
 <p>
   ---<br />
-  <%= link_to 'SeatShare', { :controller => 'public', :action => 'index' } %>  on behalf of <%= @user.full_name %><br />
+  <%= link_to 'SeatShare', { :controller => 'public', :action => 'index', :only_path => false } %>  on behalf of <%= @user.full_name %><br />
   <%= mail_to @user.email, @user.email %></a>
 </p>

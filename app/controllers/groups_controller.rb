@@ -34,21 +34,37 @@ class GroupsController < ApplicationController
   def edit
     @page_title = "Edit Group"
     @group = Group.find_by_id(params[:id]) || not_found
+    @group_user = GroupUser.where("user_id = #{current_user.id} AND group_id = #{@group.id}").first
   end
 
   def update
     group = Group.find(params[:id])
-    if !group.is_admin(current_user)
-      raise "NotGroupAdmin"
-    end
 
-    group.group_name = group_params[:group_name]
+    if params[:group_user].nil?
 
-    if group.save
-      flash[:success] = 'Group updated!'
+      if !group.is_admin(current_user)
+        raise "NotGroupAdmin"
+      end
+      group.group_name = group_params[:group_name]
+      if group.save
+        flash[:success] = 'Group updated!'
+      else
+        flash[:error] = 'Group could not be updated.'
+      end
     else
-      flash[:error] = 'Group could not be updated.'
+
+      if !group.is_member(current_user)
+        raise "NotGroupAdmin"
+      end
+      daily_reminder = params[:group_user][:daily_reminder].to_i
+      weekly_reminder = params[:group_user][:weekly_reminder].to_i
+      if GroupUser.where("user_id = #{current_user.id} AND group_id = #{group.id}").update_all("daily_reminder = #{daily_reminder}, weekly_reminder = #{weekly_reminder}")
+        flash[:success] = 'Reminder settings updated!'
+      else
+        flash[:error] = 'Reminder settings could not be updated.'
+      end
     end
+
     redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
   end
 
@@ -116,7 +132,7 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:group_name, :entity_id)
+    params.require(:group).permit(:group_name, :entity_id, :form_type)
   end
 
 end

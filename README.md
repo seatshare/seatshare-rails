@@ -33,6 +33,11 @@ NOTE: Intially, none of the `entities` will have `events`. This is a `@TODO` tas
 
 Migrations are found in `db/migrate/` and can be processed using the standard `rake db:migrate` command. Use the `rails generate migration AddColumnToSomeTable` to generate a new migration. [See the Rails documentation](http://guides.rubyonrails.org/migrations.html) for more details.
 
+## Rake Tasks
+
+* `rake send_reminders:daily` - Sends reminders to subscribed users for today.
+* `rake send_reminders:weekly` - Sends reminders to subscribed users for current week (Monday - Sunday)
+
 ## Contributing
 
 See [CONTRIBUTING.md](https://github.com/stephenyeargin/seatshare-rails/blob/master/CONTRIBUTING.md) in the repository for more information.

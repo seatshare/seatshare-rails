@@ -1,9 +1,0 @@
-jim_reminder:
-  user_id: 1
-  group_id: 1
-  reminder_type_id: 2
-
-jill_reminder:
-  user_id: 2
-  group_id: 1
-  reminder_type_id: 1
