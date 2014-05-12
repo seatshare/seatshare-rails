@@ -86,6 +86,23 @@ class Group < ActiveRecord::Base
     return user_group
   end
 
+  def leave_group(user=nil)
+    group_user = GroupUser.where("user_id = #{user.id} AND group_id = #{self.id}").first
+    if group_user.role = 'admin'
+      raise 'AdminUserCannotLeave'
+    end
+
+    Ticket.where("group_id = #{self.id} AND owner_id = #{user.id}").delete_all
+    Ticket.where("group_id = #{self.id} AND user_id = #{user.id}").update_all({
+      :user_id => 0,
+      :alias_id => 0
+    })
+
+    ActiveRecord::Base.connection.execute("DELETE FROM group_users WHERE group_id = #{self.id} AND user_id = #{user.id}")
+
+  end
+
+
   private
 
   def generate_invite_code(size = 10)

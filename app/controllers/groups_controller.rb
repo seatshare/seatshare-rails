@@ -109,24 +109,70 @@ class GroupsController < ApplicationController
   end
 
   def do_join
-    # Use group invitation
-    group = Group.find_by_invitation_code(params[:groups][:invitation_code])
+    begin
 
-    puts params.inspect
+      # Use group invitation
+      group = Group.find_by_invitation_code(params[:groups][:invitation_code])
 
-    # Fall back to normal user invitation
-    if group.blank?
-      invitation = GroupInvitation.get_by_invitation_code(params[:groups][:invitation_code])
-      invitation.use_invitation!
-      group = invitation.group
+      # Fall back to normal user invitation
+      if group.blank?
+        invitation = GroupInvitation.get_by_invitation_code(params[:groups][:invitation_code])
+        invitation.use_invitation
+        group = invitation.group
+      end
+      group.join_group(current_user, 'member')
+      redirect_to :action => 'show', :id => group.id and return
+
+    rescue InvitationAlreadyUsed
+      flash[:error] = "The provided invitation code has already been used."
+      redirect_to :action => 'join' and return
     end
-    group.join_group(current_user, 'member')
-    redirect_to :action => 'show', :id => group.id and return
+
   end
 
   def leave
     @group = Group.find_by_id(params[:id]) || not_found
+    if @group.is_admin(current_user)
+      flash[:error] = "Administrator cannot leave group."
+      redirect_to :action => 'show', :id => @group.id and return
+    end
     @page_title = "Leave #{@group.group_name}"
+  end
+
+  def do_leave
+    group = Group.find_by_id(params[:id]) || not_found
+
+    group.leave_group(current_user)
+
+    flash[:success] = "You have left #{group.group_name}"
+    redirect_to :controller => 'groups', :action => 'index' and return
+  end
+
+  def invite
+    @group = Group.find(params[:id]) || not_found
+    @page_title = "Invite Member to #{@group.group_name}"
+  end
+
+
+  def do_invite
+    group = Group.find(params[:id]) || not_found
+
+    group_invitation = GroupInvitation.new({
+      group_id: group.id,
+      user_id: current_user.id,
+      email: params[:group_invitation][:email]
+    })
+
+    if group_invitation.save!
+
+      GroupNotifier.create_invite(group_invitation, params[:group_invitation][:message]).deliver
+      flash[:success] = 'Group invitation sent!'
+
+    else
+      flash[:error] = 'Unable to send group invitation.'
+    end
+
+    redirect_to :action => 'show', :id => group.id and return
   end
 
   private
