@@ -15,6 +15,16 @@ NOTE: The application currently uses a local SQLite database while in developmen
 4. Run `rake test` to verify that existing tests pass.
 5. Execute `rails server` to bring up a local instance.
 
+### Environment Variables
+
+The following are used within the application:
+
+* `SEATSHARE_S3_KEY` - The S3 credentials to use for storing ticket files.
+* `SEATSHARE_S3_SECRET` - The S3 credentials to use for storing ticket files.
+* `SEATSHARE_S3_BUCKET` - The bucket name to use for storing ticket files.
+
+The easiest way to do this is to create a file called `config/local_env.yml` (see the example file in that directory). When configuring on Heroku, you will simply add these as configuration settings.
+
 ### Recommended Tools
 
 There are a handful of tools that will make using the application easier.

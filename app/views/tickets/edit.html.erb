@@ -65,8 +65,8 @@
 
   <div class="form-group">
     <div class="col-md-offset-3 col-md-9">
-      <label for="ticket_file" class="sr-only">File input</label>
-      <input type="file" id="ticket_file" name="ticket_file" />
+      <%= f.label :ticket_file, :class => 'sr-only' %>
+      <%= f.file_field :ticket_file %>
       <p class="help-block">(Optional) Maximum upload size 2 MB.</p>
     </div>
   </div>

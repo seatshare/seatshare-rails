@@ -56,3 +56,6 @@ gem 'devise'
 # Javascript libraries
 gem 'momentjs-rails'
 gem 'underscore-rails'
+
+# S3
+gem 'aws-s3'
