@@ -98,7 +98,33 @@ class TicketsController < ApplicationController
       ticket.alias_id = 0
     end
 
+    if !ticket_params[:ticket_file].nil?
+      uploaded_io = ticket_params[:ticket_file]
+      File.open(Rails.root.join('tmp', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      if !File.exists?(Rails.root.join('tmp', 'uploads', uploaded_io.original_filename))
+        raise "TicketFileNotSaved"
+      end
+      File.open(Rails.root.join('tmp', 'uploads', uploaded_io.original_filename), 'rb') do |file|
+        file_s3_key = "#{params[:id]}-#{SecureRandom.hex}/#{uploaded_io.original_filename}"
+        AWS::S3::S3Object.store(
+          file_s3_key,
+          open(file),
+          ENV['SEATSHARE_S3_BUCKET']
+        )
+        ticket_file = TicketFile.new({
+          file_name: uploaded_io.original_filename,
+          user_id: ticket.owner_id,
+          ticket_id: ticket.id,
+          path: file_s3_key
+        })
+        ticket_file.save!
+      end
+    end
+
     if ticket.save
+
       flash[:success] = 'Ticket updated!'
 
       if ticket.user_id != current_user.id && ticket.user_id != 0 && original_ticket.user_id != ticket.user_id
@@ -106,11 +132,7 @@ class TicketsController < ApplicationController
           raise "NotGroupMember"
         end
         TicketNotifier.assign(ticket, ticket.assigned).deliver
-      else
-        puts ticket.inspect
-        puts original_ticket.inspect
       end
-
     else
       flash[:error] = 'Ticket could not be updated.'
     end
@@ -149,7 +171,7 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:section, :row, :seat, :cost, :user_id, :alias_id, :event_id, :note)
+    params.require(:ticket).permit(:section, :row, :seat, :cost, :user_id, :alias_id, :event_id, :note, :ticket_file)
   end
 
 end
