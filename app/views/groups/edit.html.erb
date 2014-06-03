@@ -69,6 +69,11 @@
     </tbody>
   </table>
 
+<div class="text-right">
+  <%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default btn-sm' %>
+</div>
+
+
 </fieldset>
 
 <% content_for :sidebar do %>

@@ -88,8 +88,8 @@ class Group < ActiveRecord::Base
 
   def leave_group(user=nil)
     group_user = GroupUser.where("user_id = #{user.id} AND group_id = #{self.id}").first
-    if group_user.role = 'admin'
-      raise 'AdminUserCannotLeave'
+    if group_user.role == 'admin'
+      raise "AdminUserCannotLeave"
     end
 
     Ticket.where("group_id = #{self.id} AND owner_id = #{user.id}").delete_all

@@ -87,4 +87,32 @@ class GroupTest < ActiveSupport::TestCase
     assert group.is_admin(user) === true, 'user is an admin'
   end
 
+  test "leave a group" do
+    user = User.find(2)
+    group = Group.find(1)
+
+    assert group.is_member(user) === true, 'user is a member'
+    assert group.is_admin(user) === false, 'user is not an admin'
+
+    group.leave_group(user)
+
+    assert group.is_member(user) === false, 'user is not a member'
+    assert group.is_admin(user) === false, 'user is not an admin'
+  end
+
+  test "leave a group as an admin" do
+    user = User.find(1)
+    group = Group.find(1)
+
+    assert group.is_member(user) === true, 'user is a member'
+    assert group.is_admin(user) === true, 'user is an admin'
+
+    assert_raises RuntimeError do
+      group.leave_group(user)
+    end
+
+    assert group.is_member(user) === true, 'user is still a member'
+    assert group.is_admin(user) === true, 'user is still an admin'
+  end
+
 end

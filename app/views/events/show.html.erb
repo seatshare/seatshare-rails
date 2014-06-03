@@ -34,7 +34,11 @@
   <% for ticket in @tickets %>
     <tr>
       <td>
+        <% if ticket.owner.id != current_user.id && ticket.assigned.id != current_user.id %>
+        <%= link_to ticket.section_row_seat, { :controller => 'tickets', :action => 'request_ticket', :group_id => @group.id, :event_id => @event.id, :id => ticket.id } %>
+        <% else %>
         <%= link_to ticket.section_row_seat, { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => @event.id } %>
+        <% end %>
         <% if !ticket.note.nil? && ticket.note.length > 0 %>
         <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
         <% end %>
@@ -63,11 +67,11 @@
           <a data-toggle="dropdown" href="#" class="btn btn-default" id="ticket"><span class="glyphicon glyphicon-wrench"></span></a>
           <ul class="dropdown-menu pull-right" role="menu">
             <% if ticket.owner.id != current_user.id %>
-            <li role="presentation"><%= link_to 'Request', { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => @event.id, :id => ticket.id }, {:role => 'menuitem', :tabindex => '-1'} %></li>
+            <li role="presentation"><%= link_to 'Request', { :controller => 'tickets', :action => 'request_ticket', :group_id => @group.id, :event_id => @event.id, :id => ticket.id }, {:role => 'menuitem', :tabindex => '-1'} %></li>
             <% end %>
             <% if ticket.owner.id == current_user.id && ticket.assigned %>
             <li role="presentation"><%= link_to 'Unassign', { :controller => 'tickets', :action => 'unassign', :group_id => @group.id, :event_id => @event.id, :id => ticket.id }, {:class => 'confirm', :role => 'menuitem', :tabindex => '-1'} %></li>
-            <% else %>
+            <% elsif ticket.owner.id == current_user.id && ticket.assigned.nil? %>
             <li role="presentation"><%= link_to 'Assign', { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => @event.id, :id => ticket.id }, {:role => 'menuitem', :tabindex => '-1'} %></li>
             <% end %>
             <% if ticket.owner.id == current_user.id %>

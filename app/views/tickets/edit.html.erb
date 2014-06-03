@@ -1,7 +1,5 @@
 <%= render 'event' %>
 
-<% if @can_edit_ticket %>
-
 <%= form_for :ticket, html: {class: "form-horizontal", role: "form"} do |f| %>
 
   <div class="form-group">
@@ -78,68 +76,6 @@
       </p>
     </div>
   </div>
-<% end %>
-
-<% else %>
-
-
-<%= form_for :ticket, html: {class: "form-horizontal", role: "form"} do |f| %>
-
-  <div class="form-group">
-    <%= f.label :owner_id, :class => 'col-md-3 control-label' %>
-    <div class="col-md-9">
-      <p class="form-control-static"><%= @ticket.owner.full_name %></p>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :user_id, :class => 'col-md-3 control-label' %>
-    <div class="col-md-9">
-      <% if !@ticket.assigned.nil? %>
-      <p class="form-control-static"><%= @ticket.assigned.full_name %></p>
-      <% else %>
-      <p class="form-control-static">Unassigned</p>
-      <% end %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :cost, :class => 'col-md-3 control-label' %>
-    <div class="col-md-9">
-      <p class="form-control-static"><%= number_to_currency(@ticket.cost) %></p>
-    </div>
-  </div>
-  <% if ticket.note %>
-  <div class="form-group">
-    <%= f.label :note, :class => 'col-md-3 control-label' %>
-    <div class="col-md-9">
-      <p class="form-control-static"><%= @ticket.note %></p>
-    </div>
-  </div>
-  <% end %>
-  <div class="form-group">
-    <%= f.label :message, :class => 'col-md-3 control-label' %>
-    <div class="col-md-9">
-      <%= f.text_area :message, :class => 'form-control', :placeholder => 'You can include additional notes here for this request. We will already include the ticket details.' %>
-    </div>
-  </div>
-
-  <% if !@ticket.ticket_files.blank? %>
-  <div class="row">
-    <div class="col-md-offset-3 col-md-9">
-      <p class="form-control-static">This ticket has <strong><%= ticket.ticket_files.count %> file(s)</strong> attached. Only the owner or ticket assignee can download attachments.</p>
-    </div>
-  </div>
-  <% end %>
-
-  <div class="row">
-    <div class="col-md-12">
-      <p class="text-right">
-        <%= f.submit 'Request Ticket', :class => 'btn btn-primary' %>
-      </p>
-    </div>
-  </div>
-
-<% end %>
-
 <% end %>
 
 <% if !@ticket.ticket_histories.blank? %>
