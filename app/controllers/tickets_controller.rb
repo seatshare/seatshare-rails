@@ -68,13 +68,15 @@ class TicketsController < ApplicationController
     @event = Event.find_by_id(params[:event_id]) || not_found
     @ticket = Ticket.find_by_id(params[:id]) || not_found
 
+    if @ticket.assigned != current_user && @ticket.owner != current_user
+      raise "NotAllowedToEditTicket"
+    end
+
     @ticket_stats = @event.ticket_stats(@group, current_user)
     @members = @group.members.collect {|p| [ p.full_name, p.id ] }
     @members.unshift(['Unassigned', 0])
     @user_aliases = current_user.user_aliases.collect {|p| [ p.full_name, p.id ] }
     @user_aliases.unshift(['Unassigned', 0])
-
-    @can_edit_ticket = @ticket.assigned === current_user || @ticket.owner === current_user
 
     @page_title = "#{@event.event_name} - #{@ticket.section_row_seat}"
   end
@@ -139,6 +141,29 @@ class TicketsController < ApplicationController
     redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => ticket.event_id and return
   end
 
+  def request_ticket
+    @group = Group.find_by_id(params[:group_id]) || not_found
+    @event = Event.find_by_id(params[:event_id]) || not_found
+    @ticket = Ticket.find_by_id(params[:id]) || not_found
+
+    @ticket_stats = @event.ticket_stats(@group, current_user)
+
+    @page_title = "#{@event.event_name} - #{@ticket.section_row_seat}"
+  end
+
+  def do_request_ticket
+    group = Group.find_by_id(params[:group_id]) || not_found
+    event = Event.find_by_id(params[:event_id]) || not_found
+    ticket = Ticket.find_by_id(params[:id]) || not_found
+
+    message = params[:message][:personalization]
+
+    TicketNotifier.request_ticket(ticket, current_user, message).deliver
+
+    flash[:success] = 'Ticket request sent!'
+    redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
+  end
+
   def unassign
     group = Group.find_by_id(params[:group_id]) || not_found
     event = Event.find_by_id(params[:event_id]) || not_found
@@ -151,6 +176,7 @@ class TicketsController < ApplicationController
     ticket.user_id = 0
     ticket.save!
 
+    flash[:success] = 'Ticket unassigned!'
     redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
   end
 
