@@ -6,14 +6,19 @@ This project is a mock SaaS to allow a group of people to manage a pool of ticke
 
 ## Instalation
 
-NOTE: The application currently uses a local SQLite database while in development. The eventual target is Postgres.
+### Pre-requisites
 
-1. Clone the repository into your projects directory.
-2. Ensure you have [Bundler](http://bundler.io/) installed.
-3. Execute `bundle install`.
-4. Execute `rake db:migrate` (creates the `development.sqlite` database) and `rake db:seed` (loads the default fixtures).
-4. Run `rake test` to verify that existing tests pass.
-5. Execute `rails server` to bring up a local instance.
+* [Bundler](http://bundler.io/).
+* PosgtresSQL (e.g. `brew install postgresql`)
+* An Amazon S3 bucket for ticket files
+ 
+### Install Steps
+
+1. Clone the repository into your projects directory
+2. Execute `bundle install`
+3. Execute `rake db:setup` (creates the development and test database and seeds the initial data)
+4. Run `rake test` to verify that existing tests pass
+5. Execute `rails server` to bring up a local instance
 
 ### Environment Variables
 
@@ -37,7 +42,7 @@ When you first launch the application (`http://localhost:3000/`), you will be pr
 
 Once you have installed the application, the next step is to create a group. You will be prompted to select a registered entity and provide a group name. You will be taken to your group page.
 
-NOTE: Intially, none of the `entities` will have `events`. This is a `@TODO` task to have default set of events to use for development that can be seeded. In the interim, connect to the `test.sqlite3` database and export the contents of the `events` table and import it into `development.sqlite3` for testing purposes.
+NOTE: Intially, only one of the `entities` will have `events` (the Tennessee Titans). This is a `@TODO` task to have default set of events to use for development that can be seeded.
 
 ## Database Migrations
 
@@ -54,4 +59,4 @@ See [CONTRIBUTING.md](https://github.com/stephenyeargin/seatshare-rails/blob/mas
 
 ## Deploying
 
-* `@TODO`
+* Push master to the `seatshare-app` repository on Heroku.
