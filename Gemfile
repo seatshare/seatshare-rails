@@ -62,3 +62,6 @@ gem 'aws-s3'
 
 # Postgres
 gem 'pg'
+
+# 12factor
+gem 'rails_12factor', group: :production
