@@ -3,7 +3,7 @@ require 'test_helper'
 class ScheduleNotifierTest < ActionMailer::TestCase
 
   test "send daily schedule" do
-    events = Event.where('DATE(start_time) = "2013-10-15"')
+    events = Event.where('DATE(start_time) = \'2013-10-15\'')
     group = Group.find(1)
     user = User.find(1)
 
@@ -18,7 +18,7 @@ class ScheduleNotifierTest < ActionMailer::TestCase
   end
 
   test "send weekly schedule" do
-    events = Event.where('start_time >= "2013-10-13" AND start_time <= "2013-10-20"').order('start_time ASC')
+    events = Event.where('start_time >= \'2013-10-13\' AND start_time <= \'2013-10-20\'').order('start_time ASC')
     group = Group.find(1)
     user = User.find(1)
 

@@ -33,11 +33,11 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test "get events by group ID" do
-    events = Event.get_by_group_id(1)
+    events = Event.get_by_group_id(1).order('start_time ASC')
 
     assert events[0].class.to_s === 'Event', 'returned item is an event'
-    assert events[0].event_name === "Nashville Predators vs. St. Louis Blues", 'event title matches'
-    assert events.count === 7, 'event count equals five'
+    assert events[0].event_name === "Nashville Predators vs. Minnesota Wild", 'event title matches'
+    assert events.count === 7, 'event count equals seven'
   end
 
   test "get event by ticket ID" do
