@@ -78,6 +78,15 @@
   </div>
 <% end %>
 
+<% content_for :sidebar do %>
+
 <% if !@ticket.ticket_histories.blank? %>
+<h3>Ticket History</h3>
+<ul class="list-unstyled">
+  <% for history in @ticket.ticket_histories %>
+  <li><%= history.entry_to_string %> <%= history.date_time %></li>
+  <% end %>
+</ul>
+<% end %>
 
 <% end %>
