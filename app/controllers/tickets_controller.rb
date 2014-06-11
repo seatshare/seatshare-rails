@@ -50,6 +50,9 @@ class TicketsController < ApplicationController
     if ticket_params[:event_id].is_a? String
       ticket.event_id = ticket_params[:event_id]
       ticket.save!
+
+      log_ticket_history ticket, 'created'
+
       flash[:success] = "Ticket added!"
       redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
     else
@@ -57,6 +60,9 @@ class TicketsController < ApplicationController
         season_ticket = ticket.dup
         season_ticket.event_id = event_id
         season_ticket.save!
+
+        log_ticket_history season_ticket, 'created'
+
       end
       flash[:success] = "Tickets added!"
       redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
@@ -134,6 +140,10 @@ class TicketsController < ApplicationController
           raise "NotGroupMember"
         end
         TicketNotifier.assign(ticket, ticket.assigned).deliver
+
+        log_ticket_history ticket, 'assigned'
+      else
+        log_ticket_history ticket, 'updated'
       end
     else
       flash[:error] = 'Ticket could not be updated.'
@@ -160,6 +170,8 @@ class TicketsController < ApplicationController
 
     TicketNotifier.request_ticket(ticket, current_user, message).deliver
 
+    log_ticket_history ticket, 'requested'
+
     flash[:success] = 'Ticket request sent!'
     redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
   end
@@ -175,6 +187,8 @@ class TicketsController < ApplicationController
 
     ticket.user_id = 0
     ticket.save!
+
+    log_ticket_history ticket, 'unassigned'
 
     flash[:success] = 'Ticket unassigned!'
     redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
@@ -195,6 +209,28 @@ class TicketsController < ApplicationController
   end
 
   private
+
+  def log_ticket_history(ticket=nil, action=nil)
+    user = User.find_by_id(ticket.user_id)
+    if !user.nil?
+      user_record = user.attributes
+    else
+      user_record = nil
+    end
+
+    ticket_history = TicketHistory.new({
+      :event_id => ticket.event_id,
+      :user_id => current_user.id,
+      :ticket_id => ticket.id,
+      :group_id => ticket.group_id,
+      :entry => JSON.generate({
+        text: action,
+        user: user_record,
+        ticket: ticket.attributes
+      })
+    })
+    ticket_history.save
+  end
 
   def ticket_params
     params.require(:ticket).permit(:section, :row, :seat, :cost, :user_id, :alias_id, :event_id, :note, :ticket_file)

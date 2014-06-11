@@ -24,15 +24,15 @@ class Group < ActiveRecord::Base
     User.find_by_id(self.creator_id)
   end
 
-  def events()
+  def events
     Event.where("entity_id = #{self.entity.id}")
   end
 
-  def members()
+  def members
     User.get_users_by_group_id(self.id)
   end
 
-  def administrators()
+  def administrators
     User.get_users_by_group_id(self.id, 'admin')
   end
 

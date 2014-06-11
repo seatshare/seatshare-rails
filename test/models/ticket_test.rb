@@ -2,6 +2,27 @@ require 'test_helper'
 
 class TicketTest < ActiveSupport::TestCase
 
+  test "new ticket has attributes" do
+    ticket = Ticket.new({
+      :group_id => 1,
+      :event_id => 4,
+      :section => '301',
+      :row => 'Q',
+      :seat => '3',
+      :cost => 45.00,
+      :owner_id => 1,
+      :user_id => 2
+    })
+    ticket.save!
+
+    assert ticket.cost === 45.00
+    assert ticket.section_row_seat === '301 Q 3'
+    assert ticket.owner.full_name === 'Jim Stone'
+    assert ticket.assigned.full_name === 'Jill Smith'
+    assert ticket.group.group_name === 'Geeks Watching Hockey'
+    assert ticket.event.event_name === 'Nashville Predators vs. St. Louis Blues'
+  end
+
   test "owner property is set" do
     ticket = Ticket.find(1)
 
@@ -34,7 +55,7 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket.group.group_name === 'Geeks Watching Hockey'
   end
 
-  test "section_row_set property is set" do
+  test "section_row_seat property is set" do
     ticket = Ticket.find(1)
 
     assert ticket.section_row_seat === '326 K 9'
