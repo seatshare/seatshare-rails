@@ -17,4 +17,5 @@
 //= require moment
 //= require underscore
 //= require clndr/clndr.js
+//= require bootstrap-growl/jquery.bootstrap-growl.min.js
 //= require_tree .
