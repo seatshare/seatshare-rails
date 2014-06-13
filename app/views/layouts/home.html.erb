@@ -23,8 +23,8 @@
 <div class="navbar navbar-inverse home-navbar hidden-xs">
   <div class="container">
       <ul class="nav navbar-nav pull-right">
-        <li class=""><%= link_to 'Create Account', new_user_session_path %></li>
-        <li><%= link_to 'Login', 'login' %></li>
+        <li class=""><%= link_to 'Create Account', new_user_registration_path %></li>
+        <li><%= link_to 'Login', new_user_session_path %></li>
       </ul>
     </div>
 </div>
@@ -33,10 +33,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <%= link_to image_tag('seatshare-inverted.svg', :class => 'home-logo img-responsive', :alt => "SeatShare", :title => "SeatShare Logo"), new_user_session_path %>
+                <%= link_to image_tag('seatshare-inverted.svg', :class => 'home-logo img-responsive', :alt => "SeatShare", :title => "SeatShare Logo"), new_user_registration_path %>
             </div>
             <div class="col-md-5">
-                <%= link_to image_tag('screenshot-laptop.png', :class => 'home-screenshot img-responsive visible-md visible-lg', :alt => 'Screenshots', :title => 'Simulated Desktop Screenshot'), new_user_session_path %>
+                <%= link_to image_tag('screenshot-laptop.png', :class => 'home-screenshot img-responsive visible-md visible-lg', :alt => 'Screenshots', :title => 'Simulated Desktop Screenshot'), new_user_registration_path %>
             </div>
         </div>
     </div>
