@@ -31,6 +31,8 @@ The following are used within the application:
 * `MANDRILL_SMTP_USER` - User identifier for Mandrill (production only)
 * `MANDRILL_SMTP_PASS` - API key for Mandrill (production only)
 * `MANDRILL_SMTP_HOST` - Hostname to use with Mandrill (production only)
+* `GOOGLE_ANALYTICS_ID` - Google Analytics profile identifier (production only)
+* `MIXPANEL_API_KEY` - API key for Mixpanel (production only)
 
 The easiest way to do this is to create a file called `config/local_env.yml` (see the example file in that directory). When configuring on Heroku, you will simply add these as configuration settings.
 

@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 # Ticket alias toggle
-ready = ->
+ticketsReady = ->
 
 	ticket_user_id_field = $('select[name="ticket[user_id]"]')
 
@@ -25,5 +25,5 @@ ready = ->
 
 	true
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).ready(ticketsReady)
+$(document).on('page:load', ticketsReady)
