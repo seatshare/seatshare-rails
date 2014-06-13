@@ -1,6 +1,6 @@
 class GroupUser < ActiveRecord::Base
-  belongs_to :groups
-  belongs_to :users
+  belongs_to :group
+  belongs_to :user
 
   def initialize(attributes={})
     attr_with_defaults = {

@@ -1,5 +1,5 @@
 class TicketFile < ActiveRecord::Base
-  belongs_to :tickets
+  belongs_to :ticket
 
   validates :user_id, :ticket_id, :path, :file_name, :presence => true
 

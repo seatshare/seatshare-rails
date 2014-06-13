@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-	belongs_to :entities
+	belongs_to :entity
   has_many :tickets
 
   validates :entity_id, :event_name, :start_time, :presence => true

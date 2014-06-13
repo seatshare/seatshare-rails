@@ -1,6 +1,6 @@
 class GroupInvitation < ActiveRecord::Base
-  belongs_to :groups
-  belongs_to :users
+  belongs_to :group
+  belongs_to :user
 
   validates :email, :user_id, :group_id, :invitation_code, :presence => true
 
