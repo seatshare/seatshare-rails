@@ -6,9 +6,6 @@ class User < ActiveRecord::Base
   has_many :groups
   has_many :tickets
   has_many :user_aliases
-  has_many :subscriptions, through: :groups
-  has_many :entities, through: :groups
-  has_many :reminders, through: :user_reminders
   
   validates :first_name, :last_name, :presence => true
 
@@ -17,6 +14,10 @@ class User < ActiveRecord::Base
       :status => 1,
     }.merge(attributes)
     super(attr_with_defaults)
+  end
+
+  def display_name
+    "#{first_name} #{last_name}"
   end
 
   def full_name

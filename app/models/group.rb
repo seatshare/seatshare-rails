@@ -1,10 +1,5 @@
 class Group < ActiveRecord::Base
-  has_many :group_users
-  has_many :users, through: :group_users
-  has_many :tickets, through: :events
-  has_many :events, through: :entities
-  has_many :subscriptions
-  belongs_to :entities
+  belongs_to :entity
 
   validates :entity_id, :group_name, :creator_id, :invitation_code, :presence => true
 
@@ -14,6 +9,10 @@ class Group < ActiveRecord::Base
       :invitation_code => generate_invite_code(10)
     }.merge(attributes)
     super(attr_with_defaults)
+  end
+
+  def display_name
+    "#{group_name}"
   end
 
   def entity

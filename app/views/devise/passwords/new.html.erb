@@ -1,7 +1,7 @@
 <%= form_for(resource, html: {class: "form-signin", role: "form", method: :post}, as: resource_name, url: password_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <%= f.email_field :email, autofocus: true, :class => 'form-control', :placeholder => 'Email Address' %>
+  <%= f.email_field :email, autofocus: true, :class => 'form-control', :placeholder => 'Email address' %>
   <br />
   <%= f.submit "Retrieve Password", :class => 'btn btn-lg btn-primary btn-block' %>
 
@@ -9,7 +9,7 @@
 
   <div class="alert alert-info">
     <p>
-      Need to <%= link_to 'register for an account',  new_user_registration_path(resource_name), :class => 'alert-link' %>?
+      Need to <%= link_to 'register for an account', new_user_registration_path, :class => 'alert-link' %>?
     </p>
   </div>
 

@@ -12,6 +12,10 @@ class GroupInvitation < ActiveRecord::Base
     super(attr_with_defaults)
   end
 
+  def display_name
+    "#{invitation_code}"
+  end
+
   def self.get_by_invitation_code(invitation_code=nil)
     if invitation_code.length != 10
       raise "InvalidInvitation"

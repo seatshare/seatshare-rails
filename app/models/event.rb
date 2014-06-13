@@ -15,6 +15,10 @@ class Event < ActiveRecord::Base
     super(attr_with_defaults)
   end
 
+  def display_name
+    "#{event_name}"
+  end
+
   def tickets(group=nil)
     if group.nil?
       Ticket.where("event_id = #{self.id}")
