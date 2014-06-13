@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require clndr/clndr.css
- *= require_tree .
+ *= require_directory .
  */
 
 @import "bootstrap";

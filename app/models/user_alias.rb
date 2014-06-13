@@ -3,6 +3,10 @@ class UserAlias < ActiveRecord::Base
 
   validates :first_name, :last_name, :user_id, :presence => true
 
+  def display_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

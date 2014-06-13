@@ -8,6 +8,10 @@ class Ticket < ActiveRecord::Base
   validates :group_id, :event_id, :owner_id, :user_id, :section, :presence => true
   validates :cost, :numericality => { :greater_than_or_equal_to => 0 }
 
+  def display_name
+    "#{section_row_seat}"
+  end
+
   def owner
     User.find_by_id(self.owner_id)
   end

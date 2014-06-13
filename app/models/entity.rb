@@ -14,6 +14,10 @@ class Entity < ActiveRecord::Base
     super(attr_with_defaults)
   end
 
+  def display_name
+    "#{entity_name}"
+  end
+
   def self.get_by_group_id(group_id=nil)
     group = Group.find(group_id)
     entity = Entity.find(group.entity_id)

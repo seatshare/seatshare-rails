@@ -29,5 +29,7 @@ module SeatShare
       end if File.exists?(env_file)
     end
 
+    config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
+
   end
 end
