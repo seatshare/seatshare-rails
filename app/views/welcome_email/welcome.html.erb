@@ -1,0 +1,19 @@
+<h2>Welcome to SeatShare!</h2>
+
+<p><%= @recipient.first_name %>,</p>
+
+<p>You have successfully created your <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %> account. We are glad to have you on board!</p>
+
+<p>Your next steps:</p>
+
+<ul>
+  <li>If you have not already, you will want to <%= link_to 'join', :controller => 'groups', :action => 'join', :only_path => false %> or <%= link_to 'create a group', :controller => 'groups', :action => 'new', :only_path => false %>.</li>
+  <li>Add your season tickets and make sure you assign one to yourself.</li>
+</ul>
+
+<p>Now you can manage your tickets! If you have any questions, be sure to <%= mail_to 'let us know', 'contact@seatsha.re' %>!
+
+<p>
+  ---<br />
+  <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %>
+</p>

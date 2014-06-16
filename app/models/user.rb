@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   
   validates :first_name, :last_name, :presence => true
 
+  after_create :send_welcome_email
+
   def initialize(attributes={})
     attr_with_defaults = {
       :status => 1,
@@ -44,6 +46,12 @@ class User < ActiveRecord::Base
       users.push user
     end
     users
+  end
+
+  private
+
+  def send_welcome_email
+    WelcomeEmail.welcome(self).deliver
   end
 
 end
