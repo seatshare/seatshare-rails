@@ -205,6 +205,7 @@ class TicketsController < ApplicationController
 
     ticket.destroy!
 
+    flash[:success] = 'Ticket deleted!'
     redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
   end
 

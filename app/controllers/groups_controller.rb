@@ -112,15 +112,16 @@ class GroupsController < ApplicationController
     begin
 
       # Use group invitation
-      group = Group.find_by_invitation_code(params[:groups][:invitation_code])
+      group = Group.find_by_invitation_code(params[:group][:invitation_code])
 
       # Fall back to normal user invitation
       if group.blank?
-        invitation = GroupInvitation.get_by_invitation_code(params[:groups][:invitation_code])
+        invitation = GroupInvitation.get_by_invitation_code(params[:group][:invitation_code])
         invitation.use_invitation
         group = invitation.group
       end
       group.join_group(current_user, 'member')
+      flash[:success] = 'Group joined!'
       redirect_to :action => 'show', :id => group.id and return
 
     rescue InvitationAlreadyUsed

@@ -7,9 +7,13 @@ class User < ActiveRecord::Base
   has_many :tickets
   has_many :user_aliases
   
-  validates :first_name, :last_name, :presence => true
+  validates :first_name, :last_name, :email, :presence => true
 
   after_create :send_welcome_email
+
+  def active_for_authentication?
+    super && status === 1
+  end
 
   def initialize(attributes={})
     attr_with_defaults = {
