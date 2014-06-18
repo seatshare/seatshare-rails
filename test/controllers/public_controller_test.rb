@@ -9,7 +9,7 @@ class PublicControllerTest < ActionController::TestCase
   end
 
   test "gets redirected when logged in and has no groups" do 
-    @user = User.find(5)
+    @user = User.find(6)
     sign_in :user, @user
 
     get :index
