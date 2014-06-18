@@ -3,7 +3,7 @@ jim:
   first_name: Jim
   last_name: Stone
   email: stonej@example.net
-  encrypted_password: 8gi3jfu6334ijyeydh
+  encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
   status: 1
 
 jill:
@@ -11,7 +11,7 @@ jill:
   first_name: Jill
   last_name: Smith
   email: jillsmith83@us.example.org
-  encrypted_password: 3i4058njfdhjefwh7y8
+  encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
   status: 1
 
 rick:
@@ -19,7 +19,7 @@ rick:
   first_name: Rick
   last_name: Taylor
   email: rick.taylor@example.net
-  encrypted_password: 28fjmruj3hy3jnw3dg
+  encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
   status: 1
 
 sarah:
@@ -27,7 +27,7 @@ sarah:
   first_name: Sarah
   last_name: Becker
   email: sarahb@example.org
-  encrypted_password: h4heryueu32hjfwgo
+  encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
   status: 1
 
 peter:
@@ -35,5 +35,21 @@ peter:
   first_name: Peter
   last_name: Jones
   email: pjones@example.com
-  encrypted_password: 28uerjfeu7327yhg
+  encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
   status: 0
+
+bob:
+  id: 6
+  first_name: Bob
+  last_name: Loblaw
+  email: bobloblaw@example.com
+  encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
+  status: 1
+
+jane:
+  id: 7
+  first_name: Jane
+  last_name: Birch
+  email: jane@example.com
+  encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
+  status: 1
