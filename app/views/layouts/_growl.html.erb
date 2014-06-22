@@ -1,11 +1,11 @@
 <script>
   <% if flash[:notice] %>
-  $.bootstrapGrowl("<%= flash[:notice] %>", { type: 'success' });
+  $.growl("<%= flash[:notice] %>", { type: 'success' });
   <% end %>
   <% if flash[:alert] %>
-  $.bootstrapGrowl("<%= flash[:alert] %>", { type: 'info' });
+  $.growl("<%= flash[:alert] %>", { type: 'info' });
   <% end %>
   <% if flash[:error] %>
-  $.bootstrapGrowl("<%= flash[:error] %>", { type: 'danger' });
+  $.growl("<%= flash[:error] %>", { type: 'danger' });
   <% end %>
 </script>
