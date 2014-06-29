@@ -58,6 +58,7 @@ class Event < ActiveRecord::Base
   end
 
   def date_time
+    Time.zone = 'Central Time (US & Canada)' 
     out = ''
     if self.date_tba === 0
       out += self.start_time.strftime('%A, %B %-d, %Y')
@@ -71,14 +72,12 @@ class Event < ActiveRecord::Base
 
   def self.get_by_group_id(group_id=nil)
     entity = Entity.get_by_group_id(group_id)
-    events = Event.where("entity_id = #{entity.id}")
-    return events
+    Event.where("entity_id = #{entity.id}")
   end
 
   def self.get_by_ticket_id(ticket_id=nil)
     ticket = Ticket.find(ticket_id)
-    event = Event.find(ticket.event_id)
-    return event
+    Event.find(ticket.event_id)
   end
 
 end
