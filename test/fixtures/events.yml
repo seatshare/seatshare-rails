@@ -2,7 +2,7 @@ belmont_20131126:
   id: 1
   entity_id: 2
   event_name: Belmont Bruins vs. Brescia
-  start_time: 2013-11-26 00:00:00
+  start_time: 2013-11-26 12:00:00
   date_tba: false
   time_tba: true
 
@@ -10,7 +10,7 @@ belmont_20131120:
   id: 2
   entity_id: 2
   event_name: Belmont Bruins vs. Lipscomb
-  start_time: 2013-11-20 00:00:00
+  start_time: 2013-11-20 12:00:00
   date_tba: false
   time_tba: true
 
@@ -18,7 +18,7 @@ belmont_20131114:
   id: 3
   entity_id: 2
   event_name: Belmont Bruins vs. Indiana State
-  start_time: 2013-11-14 00:00:00
+  start_time: 2013-11-14 12:00:00
   date_tba: false
   time_tba: true
 

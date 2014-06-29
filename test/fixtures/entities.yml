@@ -2,28 +2,40 @@ preds:
   id: 1
   entity_name: Nashville Predators
   status: 1
+  import_key: Nashville
+  entity_type: NHL
 
 belmont:
   id: 2
   entity_name: Belmont Bruins MBB
   status: 1
+  import_key: Belmont
+  entity_type: NCAAMB
 
 nrg:
   id: 3
   entity_name: Nashville Rollergirls
   status: 1
+  import_key: Nashville
+  entity_type: WFTDA
 
 titans:
   id: 4
   entity_name: Tennessee Titans
   status: 1
+  import_key: Tennessee
+  entity_type: NFL
 
 symphony:
   id: 5
   entity_name: Nashville Symphony
   status: 0
+  import_key: Nashville Symphony
+  entity_type: Arts
 
 sportsball:
   id: 6
   entity_name: Nashville Sportsball
   status: 1
+  import_key: Nashville
+  entity_type: Sportsball
