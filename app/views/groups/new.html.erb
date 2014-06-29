@@ -14,7 +14,7 @@
   <div class="form-group">
     <%= f.label :entity_id, :class => 'col-md-3 control-label'  %>
     <div class="col-md-9">
-      <%= f.select :entity_id, @entities, {}, { :class => 'form-control' } %>
+      <%= select_tag 'group[entity_id]', grouped_options_for_select(@entities), { :class => 'form-control' } %>
       <p class="help-block"><strong>Choose carefully!</strong> You cannot change your team / venue after the group is created.</p>
     </div>
   </div>

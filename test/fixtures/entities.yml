@@ -1,35 +1,29 @@
 preds:
   id: 1
   entity_name: Nashville Predators
-  logo: //upload.wikimedia.org/wikipedia/en/9/9c/Nashville_Predators_Logo_%282011%29.svg
   status: 1
 
 belmont:
   id: 2
   entity_name: Belmont Bruins MBB
-  logo: //upload.wikimedia.org/wikipedia/en/3/3d/BelmontBruins.png
   status: 1
 
 nrg:
   id: 3
   entity_name: Nashville Rollergirls
-  logo: //upload.wikimedia.org/wikipedia/en/d/da/Nashville_Rollergirls.gif
   status: 1
 
 titans:
   id: 4
   entity_name: Tennessee Titans
-  logo: //upload.wikimedia.org/wikipedia/en/c/c1/Tennessee_Titans_logo.svg
   status: 1
 
 symphony:
   id: 5
   entity_name: Nashville Symphony
-  logo: //upload.wikimedia.org/wikipedia/en/b/b7/NashvilleSymphonyLogo.png
   status: 0
 
 sportsball:
   id: 6
   entity_name: Nashville Sportsball
-  logo: //upload.wikimedia.org/wikipedia/commons/3/32/To_pot_the_red.jpg
   status: 1
