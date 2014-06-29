@@ -13,10 +13,7 @@ class GroupsController < ApplicationController
 
   def new
     @page_title = "Create a Group"
-    @entities = Entity.get_active_entities.inject({}) do |options, entity|
-      (options[entity.entity_type] ||= []) << [entity.entity_name, entity.id]
-      options
-    end
+    @entities = Entity.get_active_entities.collect {|p| [ p.entity_name, p.id ] }
     @group = Group.new
   end
 
