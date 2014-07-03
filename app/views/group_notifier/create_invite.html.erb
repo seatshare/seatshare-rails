@@ -12,7 +12,7 @@
   <tr>
     <th style="width:150px;">Create an Account</th>
     <td>
-      <%= link_to 'Use Invitation ' + @invite.invitation_code, { :controller => 'devise/registrations', :action => 'new', :invite_code => @invite.invitation_code, :only_path => false } %>
+      <%= link_to 'Use Invitation ' + @invite.invitation_code, { :controller => 'registrations', :action => 'new', :invite_code => @invite.invitation_code, :only_path => false } %>
     </td>
   </tr>
 </table>

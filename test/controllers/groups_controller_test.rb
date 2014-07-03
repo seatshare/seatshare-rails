@@ -38,6 +38,16 @@ class GroupsControllerTest < ActionController::TestCase
     assert_select 'title', 'Join a Group', 'page title matches'
   end
 
+  test "should see join page with pre-populated code" do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :join, :invite_code => 'ABC123'
+    assert_response :success, 'got a 200 status'
+    assert_select 'title', 'Join a Group', 'page title matches'
+    assert_tag :tag => "input", :attributes => { :id => "group_invitation_code", :value => "ABC123" }
+  end
+
   test "should see invite page" do
     @user = User.find(1)
     sign_in :user, @user

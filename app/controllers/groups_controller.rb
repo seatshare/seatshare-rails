@@ -108,6 +108,7 @@ class GroupsController < ApplicationController
   end
 
   def join
+    @invite_code = params[:invite_code]
     @page_title = "Join a Group"
   end
 

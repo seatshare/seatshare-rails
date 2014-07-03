@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
 
   after_create :send_welcome_email
 
+  attr_accessor :newsletter_signup
+  attr_accessor :invite_code
+
   def active_for_authentication?
     super && status === 1
   end
@@ -35,9 +38,6 @@ class User < ActiveRecord::Base
     email_address = self.email.downcase
     hash = Digest::MD5.hexdigest(email_address)
     "https://www.gravatar.com/avatar/#{hash}?s=#{dimensions}&d=mm"
-  end
-
-  def newsletter_signup
   end
 
   def self.get_users_by_group_id(group_id=nil, role=nil)

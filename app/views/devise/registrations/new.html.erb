@@ -64,6 +64,9 @@
 
   <div class="row">
     <div class="col-md-12">
+        <% if params[:invite_code] %>
+        <%= f.hidden_field :invite_code, :value => params[:invite_code] %>
+        <% end %>
         <p class="text-right">
           <%= f.submit 'Create Account', :class => 'btn btn-primary' %>
         </p>
@@ -76,12 +79,12 @@
 
 <% content_for :sidebar do %>
 
-<% if @invitation_code %>
+<% if params[:invite_code] %>
 <div class="alert alert-success">
   <h4>You've been invited join a group!</h4>
   <p>You are registering with an invitation code, so you will be ready to go here in just a bit!</p>
   <br />
-  <p class="text-lg">Invitation code: <strong><%= @invitation_code %></strong></p>
+  <p class="text-lg">Invitation code: <strong class="invite_code"><%= params[:invite_code] %></strong></p>
 </div>
 <% else %>
 <div class="alert alert-info">
