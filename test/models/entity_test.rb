@@ -8,7 +8,6 @@ class EntityTest < ActiveSupport::TestCase
     entity.save!
 
     assert entity.entity_name?, 'Name for entity is set'
-    assert entity.logo?, 'Logo for entity is set'
     assert entity.status == 0, 'Status for entity is inactive'
   end
 
@@ -16,7 +15,6 @@ class EntityTest < ActiveSupport::TestCase
     entity = Entity.find(1)
 
     assert entity.entity_name === 'Nashville Predators', 'Name for entity is set'
-    assert_match(/svg/, entity.logo, 'Logo for entity is set')
     assert entity.status === 1, 'Status for entity is inactive'
   end
 
