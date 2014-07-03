@@ -118,7 +118,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  # config.allow_comments = false
+  config.allow_comments = false
   #
   # You can disable the menu item for the comments index page:
   # config.show_comments_in_menu = false
@@ -240,9 +240,15 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
+  # Slight security issue here, but only exposed in admin panel
+  # See https://github.com/gregbell/active_admin/issues/2595
+  config.before_filter do
+    params.permit!
+  end
+
+  # Don't share the assets with main application
   config.clear_stylesheets!
   config.register_stylesheet 'admin/active_admin.css'
-
   config.clear_javascripts!
   config.register_javascript 'admin/active_admin.js'
 

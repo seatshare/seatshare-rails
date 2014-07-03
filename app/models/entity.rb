@@ -14,7 +14,7 @@ class Entity < ActiveRecord::Base
   end
 
   def display_name
-    "#{entity_name}"
+    "#{entity_name} (#{entity_type})"
   end
 
   def self.get_by_group_id(group_id=nil)

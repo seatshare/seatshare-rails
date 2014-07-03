@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   end
 
   def display_name
-    "#{event_name}"
+    "#{entity.entity_name}: #{event_name} #{date_time}"
   end
 
   def tickets(group=nil)
