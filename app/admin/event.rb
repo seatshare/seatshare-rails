@@ -1,5 +1,20 @@
 ActiveAdmin.register Event do
 
+  index do
+    selectable_column
+    id_column
+    column :event_name
+    column :description
+    column :start_time
+    column :entity
+    actions
+  end
+
+  filter :entity
+  filter :event_name
+  filter :description
+  filter :start_time
+
   action_item :only => :index do
     link_to 'Import JSON Schedule', :action => 'import_json'
   end

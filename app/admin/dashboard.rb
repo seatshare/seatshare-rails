@@ -14,25 +14,31 @@ ActiveAdmin.register_page "Dashboard" do
     #
     columns do
 
-      # column do
-      #   panel "Recent Posts" do
-      #     ul do
-      #       Post.recent(5).map do |post|
-      #         li link_to(post.title, admin_post_path(post))
-      #       end
-      #     end
-      #   end
-      # end
-
       column do
-        panel "Welcome to SeatShare Admin!" do
-          para "Use this tool to manage Events and Entities, as well as users and group."
+        panel "Upcoming's Events" do
+          ul do
+            Event.where("start_time > '#{Date.today}'").first(5).map do |event|
+              li link_to(event.display_name, admin_event_path(event))
+            end
+          end
         end
       end
 
       column do
-        panel "About Dashboard Modules" do
-          para "These can be configured in the codebase to show more information. See `app/admin/dashboard.rb`."
+        panel "Recent Users" do
+          ul do
+            User.last(5).map do |user|
+              li link_to(user.full_name, admin_user_path(user))
+            end
+          end
+        end
+
+        panel "Recent Groups" do
+          ul do
+            Group.last(5).map do |group|
+              li link_to(group.group_name, admin_group_path(group))
+            end
+          end
         end
       end
 

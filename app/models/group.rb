@@ -1,5 +1,6 @@
 class Group < ActiveRecord::Base
   belongs_to :entity
+  belongs_to :creator, :class_name => 'User'
 
   validates :entity_id, :group_name, :creator_id, :invitation_code, :presence => true
 
@@ -13,14 +14,6 @@ class Group < ActiveRecord::Base
 
   def display_name
     "#{group_name}"
-  end
-
-  def entity
-    Entity.find_by_id(self.entity_id)
-  end
-
-  def creator
-    User.find_by_id(self.creator_id)
   end
 
   def events
