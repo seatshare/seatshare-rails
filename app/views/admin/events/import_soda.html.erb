@@ -1,0 +1,86 @@
+<p><strong>Hey!</strong> This tool imports schedules from the <a href="http://www.xmlteam.com/soda/">Sports On Demand API</a> from XML Team. Each team import can cost between $0.50 and $2.50, so use this tool only when <u>absolutely necessary</u> to import new schedules. The script will automatically update previously imported events.</p>
+
+<% if @messages %>
+
+<h3>Status</h3>
+<ul>
+  <% for message in @messages %>
+  <li><%= message %>
+  <% end %>
+</ul>
+
+<% end %>
+
+<% if @events_list %>
+
+<h3>Imported Events</h3>
+
+<fieldset>
+<table>
+  <thead>
+    <tr>
+      <th>Event ID</th>
+      <th>Entity ID</th>
+      <th>Event Name</th>
+      <th>Start Time</th>
+      <th>Import Key</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for event in @events_list %>
+    <tr>
+      <td><%= link_to(event.id, admin_event_path(event)) %></td>
+      <td><%= event.entity_id %></td>
+      <td><%= event.event_name %></td>
+      <td><%= event.start_time %></td>
+      <td><%= event.import_key %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</fieldset>
+
+<% end %>
+
+<%= form_tag do %>
+<fieldset class="inputs">
+<ol>
+  <li class="string input">
+    <%= label_tag :start_datetime, "Start Date Time", :class => 'label' %>
+    <%= text_field_tag 'start_datetime', @start_datetime %>
+  </li>
+  <li class="string input">
+    <%= label_tag :end_datetime, "End Date Time", :class => 'label' %>
+    <%= text_field_tag 'end_datetime', @end_datetime %>
+  </li>
+  <li class="string input">
+    <%= label_tag :force_update, "Force Update?", :class => 'label' %>
+    <%= check_box_tag :force_update, "1", @force_update == "1" %> <em>This bypasses the restriction on existing documents, which is rarely necessary.</em>
+  </li>
+  <% @entities.each do |entity_type, entities| %>
+  <li class="select input">
+    <fieldset class="fragments">
+      <legend class="label" style="width:inherit;">
+        <strong><%= entity_type %></strong><br />
+        <a href="javascript:void(0);" onclick="$('.team_id_<%= entity_type %>').prop('checked', true);">select all</a> | <a href="javascript:void(0);" onclick="$('.team_id_<%= entity_type %>').prop('checked', false);">select none</a>
+      </legend>
+      <ol class="fragments-group">
+      <% for entity_list in entities %>
+      <%for entity in entity_list %>
+      <li><label><%= check_box_tag "team_id[]", entity.import_key, false, :class=>"team_id_#{entity_type}" %> <%= entity.entity_name %></label><li>
+      <% end %>
+      <% end %>
+      </ol>
+    </fieldset>
+  </li>
+  <% end %>
+</ol>
+</fieldset>
+
+<ul class="actions">
+  <ol>
+    <li><%= submit_tag("Import Schedules") %></li>
+  </ol>
+</ul>
+
+<% end %>

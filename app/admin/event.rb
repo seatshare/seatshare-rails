@@ -7,6 +7,7 @@ ActiveAdmin.register Event do
     column :description
     column :start_time
     column :entity
+    column :import_key
     actions
   end
 
@@ -14,54 +15,108 @@ ActiveAdmin.register Event do
   filter :event_name
   filter :description
   filter :start_time
+  filter :import_key
 
   action_item :only => :index do
-    link_to 'Import JSON Schedule', :action => 'import_json'
+    link_to 'Import from SODA', :action => 'import_soda'
   end
 
-  collection_action :import_json, :method => :get
-  collection_action :import_json, :method => :post do
+  collection_action :import_soda, :method => :get
+  collection_action :import_soda, :method => :post do
 
-    @page_title = 'Import JSON Schedule'
+    @page_title = 'Import from SODA'
 
-    if !params[:json_file].nil?
-      entities = Entity.get_by_entity_type(params[:entity_type])
-      if entities.nil? || entities.count == 0
-        raise "InvalidEntityType"
+    # Build entity list
+    @entities = {}
+    Entity.where("import_key != ''").where("status = 1").group_by(&:entity_type).each do |entity_type, entity|
+      if @entities[entity_type].nil?
+        @entities[entity_type] = []
       end
+      @entities[entity_type] << entity
+    end
 
-      uploaded_io = params[:json_file]
-      if uploaded_io.respond_to?(:read)
-        json_contents = uploaded_io.read
-      elsif uploaded_io.respond_to?(:path)
-        json_contents = File.read(uploaded_io.path)
-      else
-        logger.error "Bad uploaded_io: #{uploaded_io.class.name}: #{uploaded_io.inspect}"
-      end
+    @start_datetime = params[:start_datetime] || Time.new
+    @end_datetime = params[:end_datetime] || Time.new + 60*60*24*365
+    @force_update = params[:force_update] || false
 
-      schedule = JSON.parse(json_contents)
+    if !params[:team_id].nil?
+
+      # Used to display the list back upon completion
       @events_list = []
-      for row in schedule
-        entity = entities.find_by_import_key(row['home_team'])
-        puts entity.inspect
-        if entity.nil?
-          raise "InvalidImportKey[#{row['home_team']}]"
-        end
-        event = Event.new({
-          entity_id:  entity.id,
-          event_name: row['event_name'],
-          start_time: row['iso_datetime'],
 
+      # Used to flash messages describing error or success
+      @messages = []
+
+      # Connect to SODA
+      soda = SodaXmlTeam::Client.new(ENV['SODA_USERNAME'], ENV['SODA_PASSWORD'])
+
+      # First, we're going to work with each entity individually
+      for team_id in params[:team_id]
+
+        entity = Entity.find_by_import_key(team_id) || @messages << "Team #{team_id} not found in database!"
+        league_id = team_id.split("-")[0]
+
+        listing = soda.get_listing({
+          sandbox: ENV['SODA_ENVIRONMENT'] != 'production',
+          league_id: league_id,
+          team_id: team_id,
+          type: 'schedule-single-team',
+          start_datetime: DateTime.parse(params[:start_datetime]),
+          end_datetime: DateTime.parse(params[:end_datetime])
         })
-        if params[:confirm]
-          event.save!
+
+        # See if there were any documents at all
+        if listing.css('item link').length === 0
+          @messages << "No events were available for #{entity.entity_name}."
+          next
         end
-        @events_list << event
+
+        # Grab the latest URI available
+        latest = URI.parse(listing.css('item link').first)
+        document_id = CGI.parse(latest.query)['doc-ids'].first
+
+        # Check to see if you already have this document ID
+        if File.exists? File.join(Rails.root, 'tmp', 'soda', document_id)
+          if params[:force_update] != "1"
+            @messages << "Already downloaded schedule for #{entity.entity_name} as #{document_id}."
+            next
+          end
+        end
+
+        # Retrieve the document (this counts as using an API credit)
+        schedule_document = soda.get_document({
+          sandbox: ENV['SODA_ENVIRONMENT'] != 'production',
+          document_id: document_id
+        })
+
+        # Cache the document to prevent re-downloads
+        File.open File.join(Rails.root, 'tmp', 'soda', document_id), 'w' do |f|
+          f.write schedule_document.to_s
+        end
+
+        # Parse the schedule and create the events
+        schedule = SodaXmlTeam::Schedule.parse_schedule(schedule_document)
+        for row in schedule
+
+          # Map in entity_id for import
+          row[:entity_id] = entity.id
+
+          # Skip the away games
+          if row[:home_team_id] != team_id
+            next
+          end
+
+          # Create or update the row
+          event = Event.import row
+
+          @events_list << event
+        end
+
+        # Done with that team
+        @messages << "#{entity.entity_name} schedule imported!"
+
       end
-      if params[:confirm]
-         flash[:success] = 'Events imported!'
-        redirect_to admin_events_path and return
-      end
+
     end
 
   end

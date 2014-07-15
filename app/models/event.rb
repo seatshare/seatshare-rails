@@ -80,4 +80,19 @@ class Event < ActiveRecord::Base
     Event.find(ticket.event_id)
   end
 
+  def self.import(row=nil)
+    event = find_by_import_key(row[:event_key])
+    if event.nil?
+      event = new
+    end
+
+    event.entity_id = row[:entity_id]
+    event.event_name = "#{row[:away_team]} vs. #{row[:home_team]}"
+    event.start_time = row[:start_date_time]
+    event.import_key = row[:event_key]
+    event.save!
+
+    return event
+  end
+
 end

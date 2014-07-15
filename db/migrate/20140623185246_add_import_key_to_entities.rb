@@ -3,8 +3,8 @@ class AddImportKeyToEntities < ActiveRecord::Migration
     change_table(:entities) do |t|
       t.string :import_key, null: false, default: ""
       t.string :entity_type, null: false, default: ""
-      remove_column :entities, :logo
     end
+    add_index :entities, :import_key, unique: true
   end
 
   def self.down
@@ -13,5 +13,6 @@ class AddImportKeyToEntities < ActiveRecord::Migration
     change_table(:entities) do |t|
       t.string :logo
     end
+    remove_index :entities, :import_key
   end
 end
