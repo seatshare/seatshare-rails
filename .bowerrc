@@ -1,4 +1,4 @@
 {
-  "directory": "vendor/assets/components"
-  "storage":{ "packages":"tmp/bower" }
+  "directory": "vendor/assets/components",
+  "storage": { "packages":"tmp/bower" }
 }
