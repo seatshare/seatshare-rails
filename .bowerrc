@@ -1,3 +1,4 @@
 {
   "directory": "vendor/assets/components"
+  "storage":{ "packages":"tmp/bower" }
 }
