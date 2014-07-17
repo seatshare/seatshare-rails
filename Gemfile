@@ -68,3 +68,6 @@ gem 'rails_12factor', group: :production
 
 # ActiveAdmin
 gem 'activeadmin', github: 'gregbell/active_admin'
+
+# SeatShare's own SODA gem
+gem 'soda_xml_team', '~> 1.0.0'

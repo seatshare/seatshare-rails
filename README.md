@@ -34,13 +34,16 @@ The following are used within the application:
 * `SEATSHARE_S3_SECRET` - S3 credentials to use for storing ticket files.
 * `SEATSHARE_S3_BUCKET` - Bucket name to use for storing ticket files.
 * `SEATSHARE_S3_PUBLIC` - Public address for S3 downloads.
+* `SODA_USERNAME` - Username for SODA from XML Team
+* `SODA_PASSWORD` - Password for SODA from XML Team
+* `SODA_ENVIRONMENT` - Either `development` or `production`
 * `MANDRILL_SMTP_USER` - User identifier for Mandrill (production only)
 * `MANDRILL_SMTP_PASS` - API key for Mandrill (production only)
 * `MANDRILL_SMTP_HOST` - Hostname to use with Mandrill (production only)
 * `GOOGLE_ANALYTICS_ID` - Google Analytics profile identifier (production only)
 * `MIXPANEL_API_KEY` - API key for Mixpanel (production only)
 
-The easiest way to do this is to create a file called `config/local_env.yml` (see the example file in that directory). When configuring on Heroku, you will simply add these as configuration settings.
+The easiest way to do this is to create a file called `config/local_env.yml` (see the example file in that directory). When configuring on Heroku, you will simply add these as configuration settings. To see the current production values, simply run `heroku config`.
 
 ## Getting started with the application
 
@@ -52,6 +55,20 @@ The group will not have any events yet. You need to use the `/admin` route to lo
 
 * Email: `admin@example.com`
 * Password: `password`
+
+## Importing events from SODA
+
+When using the `development` environment (set in `SODA_ENVIRONMENT`), you will only have access to a few date ranges for data in the "trial database". These are the two ranges that are acceptable:
+
+### NHL, NBA, NFL
+
+* Start Date: `2010-01-01 00:00:00 -0500`
+* End Date: `2011-01-01 00:00:00 -0500`
+
+### MLB
+
+* Start Date: `2005-01-01 00:00:00 -0500`
+* End Date: `2006-01-01 00:00:00 -0500`
 
 ## Database Migrations
 

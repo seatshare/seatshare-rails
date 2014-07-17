@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623185246) do
+ActiveRecord::Schema.define(version: 20140713235038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140623185246) do
 
   create_table "entities", force: true do |t|
     t.string   "entity_name"
+    t.string   "logo"
     t.integer  "status",      default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 20140623185246) do
   end
 
   add_index "entities", ["entity_name"], name: "index_entities_on_entity_name", unique: true, using: :btree
+  add_index "entities", ["import_key"], name: "index_entities_on_import_key", unique: true, using: :btree
 
   create_table "events", force: true do |t|
     t.integer  "entity_id"
@@ -69,9 +71,11 @@ ActiveRecord::Schema.define(version: 20140623185246) do
     t.integer  "time_tba"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "import_key",  default: "", null: false
   end
 
   add_index "events", ["entity_id"], name: "index_events_on_entity_id", using: :btree
+  add_index "events", ["import_key"], name: "index_events_on_import_key", unique: true, using: :btree
 
   create_table "group_invitations", force: true do |t|
     t.integer  "user_id"
@@ -112,17 +116,6 @@ ActiveRecord::Schema.define(version: 20140623185246) do
   add_index "groups", ["creator_id"], name: "index_groups_on_creator_id", using: :btree
   add_index "groups", ["entity_id"], name: "index_groups_on_entity_id", using: :btree
   add_index "groups", ["invitation_code"], name: "index_groups_on_invitation_code", unique: true, using: :btree
-
-  create_table "reminders", force: true do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.integer  "reminder_type_id"
-    t.text     "entry"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "reminders", ["user_id"], name: "index_reminders_on_user_id", using: :btree
 
   create_table "subscriptions", force: true do |t|
     t.integer  "group_id"
