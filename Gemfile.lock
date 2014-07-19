@@ -16,8 +16,8 @@ GIT
       sass-rails
 
 GIT
-  remote: git://github.com/seatshare/soda_xml_Team.git
-  revision: 76ec1c17468aff22887cfdd7fcb187a9213a7fc0
+  remote: git://github.com/seatshare/soda_xml_team.git
+  revision: bfe7f571475b217e27dad7d9b0e42b6f8fb3a893
   specs:
     soda_xml_team (1.0.1)
       httparty (~> 0.13, >= 0.13)
