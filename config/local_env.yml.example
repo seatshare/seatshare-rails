@@ -12,6 +12,9 @@ SEATSHARE_S3_SECRET: 'the_s3_secret'
 SEATSHARE_S3_BUCKET: 'lockbox.seatsha.re'
 SEATSHARE_S3_PUBLIC: 'https://lockbox.seatsha.re'
 
+MAILCHIMP_API_KEY: 'the_api_key'
+MAILCHIMP_LIST_ID: 'the_list_id'
+
 SODA_USERNAME: 'the_soda_username'
 SODA_PASSWORD: 'the_soda_password'
 SODA_ENVIRONMENT: 'development'

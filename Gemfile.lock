@@ -80,6 +80,7 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    excon (0.38.0)
     execjs (2.2.1)
     formtastic (2.3.0.rc3)
       actionpack (>= 3.0)
@@ -109,6 +110,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailchimp-api (2.0.5)
+      excon (>= 0.16.0)
+      json (>= 1.7.7)
     mime-types (1.25.1)
     mini_portile (0.6.0)
     minitest (4.7.5)
@@ -205,6 +209,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 1.2)
   jquery-rails
+  mailchimp-api (~> 2.0.5)
   momentjs-rails
   pg
   rails (= 4.0.3)

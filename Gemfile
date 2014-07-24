@@ -69,5 +69,8 @@ gem 'rails_12factor', group: :production
 # ActiveAdmin
 gem 'activeadmin', github: 'gregbell/active_admin'
 
+# Mailchimp API
+gem 'mailchimp-api', '~> 2.0.5'
+
 # SeatShare's own SODA gem
 gem 'soda_xml_team', github: 'seatshare/soda_xml_team'
