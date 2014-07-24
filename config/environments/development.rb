@@ -33,4 +33,8 @@ SeatShare::Application.configure do
   config.action_mailer.default_url_options = { :host => 'http://localhost:3000' }
   config.action_mailer.smtp_settings = { :address => "127.0.0.1", :port => 1025 }
   config.action_mailer.asset_host = "http://localhost:3000"
+
+  # Stop SSL issues with MailChimp API
+  OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE) 
+
 end

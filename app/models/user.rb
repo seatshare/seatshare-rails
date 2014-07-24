@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
   
   validates :first_name, :last_name, :email, :presence => true
 
-  after_create :send_welcome_email
-
   attr_accessor :newsletter_signup
   attr_accessor :invite_code
 
@@ -50,12 +48,6 @@ class User < ActiveRecord::Base
       users.push user
     end
     users
-  end
-
-  private
-
-  def send_welcome_email
-    WelcomeEmail.welcome(self).deliver
   end
 
 end
