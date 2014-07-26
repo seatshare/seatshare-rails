@@ -5,6 +5,7 @@ belmont_20131126:
   start_time: 2013-11-26 12:00:00
   date_tba: false
   time_tba: true
+  import_key: belmont_20131126
 
 belmont_20131120:
   id: 2
@@ -13,6 +14,7 @@ belmont_20131120:
   start_time: 2013-11-20 12:00:00
   date_tba: false
   time_tba: true
+  import_key: belmont_20131120
 
 belmont_20131114:
   id: 3
@@ -21,6 +23,7 @@ belmont_20131114:
   start_time: 2013-11-14 12:00:00
   date_tba: false
   time_tba: true
+  import_key: belmont_20131114
 
 preds_20131026:
   id: 4
@@ -29,6 +32,7 @@ preds_20131026:
   start_time: 2013-10-26 19:00:00
   date_tba: false
   time_tba: true
+  import_key: preds_20131026
 
 preds_20131024:
   id: 5
@@ -37,6 +41,7 @@ preds_20131024:
   start_time: 2013-10-24 19:00:00
   date_tba: false
   time_tba: true
+  import_key: preds_20131024
 
 preds_20131017:
   id: 6
@@ -45,6 +50,7 @@ preds_20131017:
   start_time: 2013-10-17 19:00:00
   date_tba: false
   time_tba: true
+  import_key: preds_20131017
 
 preds_20131015:
   id: 7
@@ -53,6 +59,7 @@ preds_20131015:
   start_time: 2013-10-15 19:00:00
   date_tba: false
   time_tba: true
+  import_key: preds_20131015
 
 preds_20131012:
   id: 8
@@ -61,6 +68,7 @@ preds_20131012:
   start_time: 2013-10-12 19:00:00
   date_tba: false
   time_tba: true
+  import_key: preds_20131012
 
 preds_20131010:
   id: 9
@@ -69,6 +77,7 @@ preds_20131010:
   start_time: 2013-10-10 19:00:00
   date_tba: false
   time_tba: true
+  import_key: preds_20131010
 
 preds_20131008:
   id: 10
@@ -77,3 +86,4 @@ preds_20131008:
   start_time: 2013-10-08 19:00:00
   date_tba: false
   time_tba: true
+  import_key: preds_20131008

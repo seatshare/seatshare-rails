@@ -10,7 +10,8 @@ class Event < ActiveRecord::Base
     attr_with_defaults = {
       :date_tba => 0,
       :time_tba => 0,
-      :description => ''
+      :description => '',
+      :import_key => SecureRandom.uuid
     }.merge(attributes)
     super(attr_with_defaults)
   end
