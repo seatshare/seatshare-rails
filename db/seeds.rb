@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+AdminUser.create([
+  {
+    email: 'stephen@seatsha.re', password: 'password', password_confirmation: 'password'
+  }
+])
+
 Entity.create([
   {
     id: 101, entity_name: 'Anaheim Ducks', import_key: 'l.nhl.com-t.22', entity_type: 'NHL', status: 1

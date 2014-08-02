@@ -35,6 +35,8 @@ SeatShare::Application.configure do
   config.action_mailer.asset_host = "http://localhost:3000"
 
   # Stop SSL issues with MailChimp API
-  OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE) 
+  silence_warnings do
+    OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
+  end
 
 end
