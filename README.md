@@ -30,10 +30,12 @@ This project is a mock SaaS to allow a group of people to manage a pool of ticke
 
 The following are used within the application:
 
-* `SEATSHARE_S3_KEY` - S3 credentials to use for storing ticket files.
-* `SEATSHARE_S3_SECRET` - S3 credentials to use for storing ticket files.
-* `SEATSHARE_S3_BUCKET` - Bucket name to use for storing ticket files.
-* `SEATSHARE_S3_PUBLIC` - Public address for S3 downloads.
+* `SEATSHARE_S3_KEY` - S3 credentials to use for storing ticket files
+* `SEATSHARE_S3_SECRET` - S3 credentials to use for storing ticket files
+* `SEATSHARE_S3_BUCKET` - Bucket name to use for storing ticket files
+* `SEATSHARE_S3_PUBLIC` - Public address for S3 downloads
+* `SIMPLE_FORM_API_TOKEN` - The private API token for a Simple Form instance
+* `SIMPLE_FORM_FORM_API_TOKEN` - The public API token for a Simple Form instance
 * `SODA_USERNAME` - Username for SODA from XML Team
 * `SODA_PASSWORD` - Password for SODA from XML Team
 * `SODA_ENVIRONMENT` - Either `development` or `production`

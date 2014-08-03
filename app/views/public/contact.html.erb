@@ -1,3 +1,39 @@
 <h1>Have questions or comments?</h1>
 
 <p class="text-muted">We value your feedback on how we can improve SeatShare to better serve your needs. The form below will send an email to our team. We try to answer every message promptly, but may not be able to give an individual response.</p>
+
+<% if params[:thank_you] %>
+<div class="alert alert-success">
+  <p>Your message has been sent!</p>
+</div>
+<% end %>
+
+<%= form_tag "http://getsimpleform.com/messages?form_api_token=#{ENV['SIMPLE_FORM_FORM_API_TOKEN']}", :class => "form-horizontal", :role => "form" do |f| %>
+
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Your Name</label>
+    <div class="col-sm-10">
+      <%= text_field_tag :name, nil, { :class => "form-control", :placeholder => "Your Name" } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
+      <%= email_field_tag :email, nil, { :class => "form-control", :placeholder => "user@example.com" } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="message" class="col-sm-2 control-label">Message</label>
+    <div class="col-sm-10">
+      <%= text_area_tag :message, nil, { :class => "form-control", :rows => 10, :placeholder => "Let us know how we can help!" } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </div>
+  </div>
+
+  <%= hidden_field_tag :redirect_to, "/contact/?thank_you=1" %>
+
+<% end %>

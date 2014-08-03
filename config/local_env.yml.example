@@ -15,6 +15,9 @@ SEATSHARE_S3_PUBLIC: 'https://lockbox.seatsha.re'
 MAILCHIMP_API_KEY: 'the_api_key'
 MAILCHIMP_LIST_ID: 'the_list_id'
 
+SIMPLE_FORM_API_TOKEN: 'the_private_token'
+SIMPLE_FORM_FORM_API_TOKEN: 'the_public_token'
+
 SODA_USERNAME: 'the_soda_username'
 SODA_PASSWORD: 'the_soda_password'
 SODA_ENVIRONMENT: 'development'
