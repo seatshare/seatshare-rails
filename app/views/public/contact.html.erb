@@ -34,6 +34,6 @@
     </div>
   </div>
 
-  <%= hidden_field_tag :redirect_to, "/contact/?thank_you=1" %>
+  <%= hidden_field_tag :redirect_to, url_for({:controller => 'public', :action => 'contact', :host => 'seatsha.re', :thank_you => 1}) %>
 
 <% end %>
