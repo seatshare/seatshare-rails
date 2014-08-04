@@ -1,30 +1,40 @@
 ActiveAdmin.register_page "Dashboard" do
 
+  contact_form_messages = HTTParty.get("http://getsimpleform.com/messages.json?api_token=#{ENV['SIMPLE_FORM_API_TOKEN']}").first(5) || []
+
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
-    # div class: "blank_slate_container", id: "dashboard_default_message" do
-    #   span class: "blank_slate" do
-    #     span I18n.t("active_admin.dashboard_welcome.welcome")
-    #     small I18n.t("active_admin.dashboard_welcome.call_to_action")
-    #   end
-    # end
 
-    # Here is an example of a simple dashboard with columns and panels.
-    #
     columns do
 
       column do
-        panel "Upcoming's Events" do
-          ul do
-            Event.where("start_time > '#{Date.today}'").first(5).map do |event|
-              li link_to(event.display_name, admin_event_path(event))
+
+        panel "Recent Contact Messages" do
+          div do
+            if !contact_form_messages.nil? && contact_form_messages.count > 0
+              for message in contact_form_messages
+                h4 mail_to(message["data"]["email"], message["data"]["name"] + " - " + message["data"]["email"])
+                div do
+                  simple_format "#{message["data"]["message"]}"
+                end
+                div "#{message["created_at"]} - #{message["request_ip"]}"
+                hr
+              end
+            else
+              div "No messages available."
+              hr
             end
           end
+          div :style => "text-align: right" do
+            link_to("Manage Messages", "http://getsimpleform.com/messages?api_token=#{ENV['SIMPLE_FORM_API_TOKEN']}", :target => "_blank")
+          end
         end
+
       end
 
       column do
+
         panel "Recent Users" do
           ul do
             User.last(5).map do |user|
@@ -40,6 +50,15 @@ ActiveAdmin.register_page "Dashboard" do
             end
           end
         end
+
+        panel "Upcoming's Events" do
+          ul do
+            Event.where("start_time > '#{Date.today}'").first(5).map do |event|
+              li link_to(event.display_name, admin_event_path(event))
+            end
+          end
+        end
+
       end
 
     end

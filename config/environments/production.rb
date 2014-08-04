@@ -88,6 +88,6 @@ SeatShare::Application.configure do
     password:             ENV['MANDRILL_SMTP_PASS'],
     authentication:       'plain',
     enable_starttls_auto: true  }
-  config.action_mailer.default_url_options = { :host => 'http://heroku.seatsha.re' }
+  config.action_mailer.default_url_options = { :host => 'http://seatsha.re' }
 
 end
