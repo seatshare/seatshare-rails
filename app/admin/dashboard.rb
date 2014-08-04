@@ -12,9 +12,6 @@ ActiveAdmin.register_page "Dashboard" do
 
         panel "Recent Contact Messages" do
           div do
-            puts '---'
-            puts contact_form_messages.inspect
-            puts '---'
             if !contact_form_messages.nil? && contact_form_messages.count > 0
               for message in contact_form_messages
                 h4 mail_to(message["data"]["email"], message["data"]["name"] + " - " + message["data"]["email"])
