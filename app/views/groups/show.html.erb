@@ -2,7 +2,7 @@
   <div class="panel-heading">
     Your <strong><%= @group.entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.full_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
     <div class="pull-right">
-      <%= link_to raw('<span class="glyphicon glyphicon-cog"></span> Edit Settings'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
+      <%= link_to raw('<span class="glyphicon glyphicon-cog"></span>'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
     </div>
   </div>
   <div id="collapseOne" class="panel-collapse collapse">
