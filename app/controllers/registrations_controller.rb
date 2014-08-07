@@ -1,6 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   def new
-    @page_title = "Create an Account"
+    @page_title = "Create Your SeatShare Account"
+    @meta_description = %q{Register for an account with SeatShare to start managing your season tickets.}
     super
   end
 

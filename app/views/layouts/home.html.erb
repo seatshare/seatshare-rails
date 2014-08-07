@@ -5,6 +5,9 @@
 <meta charset="utf-8">
 
   <title><%= @page_title || 'SeatShare' %></title>
+  <% if !@meta_description.nil? %>
+  <meta name="description" content="<%= @meta_description %>" />
+  <% end %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -16,6 +19,8 @@
 <%= render 'layouts/ios' %>
 
 <%= render 'layouts/mixpanel' %>
+
+<%= yield :page_header %>
 
 </head>
 <body class="home">

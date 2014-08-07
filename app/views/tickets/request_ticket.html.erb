@@ -56,3 +56,7 @@
   </div>
 
 <% end %>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View request ticket"); }</script>
+<% end %>

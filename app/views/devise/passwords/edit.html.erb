@@ -8,3 +8,7 @@
   <%= f.submit "Change Password", :class => 'btn btn-lg btn-primary btn-block' %>
 
 <% end %>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View change password"); }</script>
+<% end %>

@@ -91,3 +91,7 @@
          <%= link_to image_tag('screenshot-tickets.png', :alt=>"Screenshot", :title=>"Tickets", :class=>"img-thumbnail hidden-xs"), new_user_registration_path %>
     </div>
 </div>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View home page"); }</script>
+<% end %>

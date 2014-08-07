@@ -16,18 +16,23 @@ class PublicController < ApplicationController
         end
       end
     end
+    @page_title = %q{Welcome to SeatShare}
+    @meta_description = %q{SeatShare helps you manage your group's season tickets for sporting or performing arts events. Sign up for free.}
   end
 
   def tos
-    @page_title = 'Terms of Service'
+    @page_title = %q{Terms of Service - SeatShare}
+    @meta_description = %q{The Terms of Service for SeatShare are the rules that govern access and use of the website.}
   end
 
   def privacy
-    @page_title = 'Privacy Policy'
+    @page_title = %q{Privacy Policy - SeatShare}
+    @meta_description = %q{SeatShare values your privacy and will not sell or share your information.}
   end
 
   def contact
-    @page_title = 'Contact'
+    @page_title = %q{Contact - SeatShare}
+    @meta_description = %q{Have questions or comments about SeatShare? We are here to help.}
   end
 
   private

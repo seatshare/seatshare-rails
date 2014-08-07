@@ -28,3 +28,7 @@
 </div>
 
 <% end %>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View new group"); }</script>
+<% end %>

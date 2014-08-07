@@ -90,3 +90,7 @@
 <% end %>
 
 <% end %>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View edit ticket"); }</script>
+<% end %>

@@ -183,3 +183,7 @@
 </fieldset>
 
 <% end %>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View group"); }</script>
+<% end %>
