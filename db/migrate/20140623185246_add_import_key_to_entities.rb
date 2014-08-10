@@ -10,9 +10,6 @@ class AddImportKeyToEntities < ActiveRecord::Migration
   def self.down
     remove_column :entities, :import_key
     remove_column :entities, :entity_type
-    change_table(:entities) do |t|
-      t.string :logo
-    end
     remove_index :entities, :import_key
   end
 end

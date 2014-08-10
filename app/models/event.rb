@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
       :date_tba => 0,
       :time_tba => 0,
       :description => '',
-      :import_key => SecureRandom.uuid
+      :import_key => generate_import_key(attributes)
     }.merge(attributes)
     super(attr_with_defaults)
   end
@@ -95,5 +95,13 @@ class Event < ActiveRecord::Base
 
     return event
   end
+
+  private
+
+  def generate_import_key(attributes)
+    "#{attributes[:entity_id]}: #{attributes[:event_name]} #{attributes[:date_time]}".parameterize
+  end
+
+
 
 end
