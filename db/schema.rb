@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(version: 20140713235038) do
 
   create_table "entities", force: true do |t|
     t.string   "entity_name"
-    t.string   "logo"
     t.integer  "status",      default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
