@@ -9,6 +9,7 @@ class Entity < ActiveRecord::Base
   def initialize(attributes={})
     attr_with_defaults = {
       :status => 0,
+      :import_key => generate_import_key(attributes)
     }.merge(attributes)
     super(attr_with_defaults)
   end
@@ -28,6 +29,12 @@ class Entity < ActiveRecord::Base
 
   def self.get_active_entities
     Entity.where("status = 1").order('entity_type ASC, entity_name ASC')
+  end
+
+  private
+
+  def generate_import_key(attributes)
+    "#{attributes[:entity_type]}: #{attributes[:entity_name]}".parameterize
   end
 
 end
