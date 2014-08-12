@@ -124,8 +124,8 @@ Entity.create([
     id: 1040, entity_name: "Purdue Boilermakers", status: 1, created_at: "2014-08-12 00:08:08", import_key: "l.ncaa.org.mfoot-t.584", entity_type: "NCAAF"
   },
   {
-    id: 1041, entity_name: "Iowa Hawkeyes", status: 1, created_at: "2014-08-12 00:08:08", import_key: "l.ncaa.org.mfoot-t.517", entity_type: "NCAAF
-  "}
+    id: 1041, entity_name: "Iowa Hawkeyes", status: 1, created_at: "2014-08-12 00:08:08", import_key: "l.ncaa.org.mfoot-t.517", entity_type: "NCAAF"
+  },
   {
     id: 1042, entity_name: "Iowa State Cyclones", status: 1, created_at: "2014-08-12 00:08:08", import_key: "l.ncaa.org.mfoot-t.518", entity_type: "NCAAF"
   },
