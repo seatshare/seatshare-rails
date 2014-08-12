@@ -4,48 +4,9 @@
 
 This project is a mock SaaS to allow a group of people to manage a pool of tickets to events. The most common use case is to share season tickets to a sports team.
 
-## Instalation
+## Installation
 
-### Pre-requisites
-
-* [Bundler](http://bundler.io/) (`gem install bundler`)
-* [Bower](http://bower.io/) (`npm install bower -g`)
-* [PosgtresSQL](http://www.postgresql.org/) (`brew install postgresql`)
-* [Mailcatcher](http://mailcatcher.me) (`gem install mailcatcher`)
-* [Heroku Toolbelt](https://toolbelt.heroku.com/) (for deployment to server, reading configs)
-* An Amazon S3 bucket for ticket files (see `heroku config` for credentials)
- 
-### Install Steps
-
-1. Clone the repository into your projects directory
-2. Execute `bundle install` (for required gems)
-3. Execute `bower install` (for required JS assets)
-3. Execute `rake db:setup` (creates the development and test database and seeds the initial data)
-4. Run `rake test` to verify that existing tests pass
-5. Run `mailcatcher` to bring up the local email transport (registration fails without it)
-6. Execute `rails server` to bring up a local instance
-7. Register for an account through the normal process
-
-### Environment Variables
-
-The following are used within the application:
-
-* `SEATSHARE_S3_KEY` - S3 credentials to use for storing ticket files
-* `SEATSHARE_S3_SECRET` - S3 credentials to use for storing ticket files
-* `SEATSHARE_S3_BUCKET` - Bucket name to use for storing ticket files
-* `SEATSHARE_S3_PUBLIC` - Public address for S3 downloads
-* `SIMPLE_FORM_API_TOKEN` - The private API token for a Simple Form instance
-* `SIMPLE_FORM_FORM_API_TOKEN` - The public API token for a Simple Form instance
-* `SODA_USERNAME` - Username for SODA from XML Team
-* `SODA_PASSWORD` - Password for SODA from XML Team
-* `SODA_ENVIRONMENT` - Either `development` or `production`
-* `MANDRILL_SMTP_USER` - User identifier for Mandrill (production only)
-* `MANDRILL_SMTP_PASS` - API key for Mandrill (production only)
-* `MANDRILL_SMTP_HOST` - Hostname to use with Mandrill (production only)
-* `GOOGLE_ANALYTICS_ID` - Google Analytics profile identifier (production only)
-* `MIXPANEL_API_KEY` - API key for Mixpanel (production only)
-
-The easiest way to do this is to create a file called `config/local_env.yml` (see the example file in that directory). When configuring on Heroku, you will simply add these as configuration settings. To see the current production values, simply run `heroku config`.
+Please see the complete [installation instructions](https://github.com/stephenyeargin/seatshare-rails/wiki/Installation) in the wiki.
 
 ## Getting started with the application
 
@@ -74,9 +35,8 @@ When using the `development` environment (set in `SODA_ENVIRONMENT`), you will o
 
 ## Database Migrations
 
-Migrations are found in `db/migrate/` and can be processed using the standard `rake db:migrate` command. Use the `rails generate migration AddColumnToSomeTable` to generate a new migration. [See the Rails documentation](http://guides.rubyonrails.org/migrations.html) for more details.
+Please see the [migration instructions](https://github.com/stephenyeargin/seatshare-rails/wiki/Database-Migrations) in the wiki.
 
-If you completely hose your local database, run `rake db:reset && rake db:seed` to clean it up and start over. You may have to manually add your admin user back through the `rails console`.
 
 ## Rake Tasks
 
