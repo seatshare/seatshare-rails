@@ -1,1056 +1,717 @@
 # -*- coding: utf-8 -*-
 Entity.create([
   {
-    id: 1127, entity_name: 'University at Albany, SUNY (Albany) Great Danes', entity_type: 'NCAAMB', status: 1
+    id: 1127, entity_name: "Albany Great Danes", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A07", entity_type: "NCAAMB"
   },
   {
-    id: 1128, entity_name: 'Binghamton University (Binghamton) Bearcats', entity_type: 'NCAAMB', status: 1
+    id: 1128, entity_name: "Binghamton Bearcats", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A24", entity_type: "NCAAMB"
   },
   {
-    id: 1129, entity_name: 'University of Hartford (Hartford) Hawks', entity_type: 'NCAAMB', status: 1
+    id: 1129, entity_name: "Hartford Hawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B09", entity_type: "NCAAMB"
   },
   {
-    id: 1130, entity_name: 'University of Maine (Maine) Black Bears', entity_type: 'NCAAMB', status: 1
+    id: 1130, entity_name: "Maine Black Bears", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B53", entity_type: "NCAAMB"
   },
   {
-    id: 1131, entity_name: 'University of Maryland, Baltimore County (UMBC) Retrievers', entity_type: 'NCAAMB', status: 1
+    id: 1131, entity_name: "UMBC Retrievers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B59", entity_type: "NCAAMB"
   },
   {
-    id: 1132, entity_name: 'University of New Hampshire (UNH) Wildcats', entity_type: 'NCAAMB', status: 1
+    id: 1132, entity_name: "UNH Wildcats", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B88", entity_type: "NCAAMB"
   },
   {
-    id: 1133, entity_name: 'University of Massachusetts Lowell (UMass Lowell) River Hawks', entity_type: 'NCAAMB', status: 1
+    id: 1133, entity_name: "UMass Lowell River Hawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.KH2", entity_type: "NCAAMB"
   },
   {
-    id: 1134, entity_name: 'Stony Brook University (Stony Brook) Seawolves', entity_type: 'NCAAMB', status: 1
+    id: 1134, entity_name: "Stony Brook Seawolves", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C75", entity_type: "NCAAMB"
   },
   {
-    id: 1135, entity_name: 'University of Vermont (UVM) Catamounts', entity_type: 'NCAAMB', status: 1
+    id: 1135, entity_name: "UVM Catamounts", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D03", entity_type: "NCAAMB"
   },
   {
-    id: 1136, entity_name: 'University of Central Florida (UCF) Knights', entity_type: 'NCAAMB', status: 1
+    id: 1138, entity_name: "UConn Huskies", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A63", entity_type: "NCAAMB"
   },
   {
-    id: 1137, entity_name: 'University of Cincinnati (Cincinnati) Bearcats', entity_type: 'NCAAMB', status: 1
+    id: 1143, entity_name: "USF Bulls", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C61", entity_type: "NCAAMB"
   },
   {
-    id: 1138, entity_name: 'University of Connecticut (UConn) Huskies', entity_type: 'NCAAMB', status: 1
+    id: 1146, entity_name: "BC Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A27", entity_type: "NCAAMB"
   },
   {
-    id: 1139, entity_name: 'University of Houston (Houston) Cougars', entity_type: 'NCAAMB', status: 1
+    id: 1154, entity_name: "NC State Wolfpack", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B99", entity_type: "NCAAMB"
   },
   {
-    id: 1140, entity_name: 'University of Louisville (Louisville) Cardinals', entity_type: 'NCAAMB', status: 1
+    id: 1156, entity_name: "Pitt Panthers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C23", entity_type: "NCAAMB"
   },
   {
-    id: 1141, entity_name: 'University of Memphis (Memphis) Tigers', entity_type: 'NCAAMB', status: 1
+    id: 1161, entity_name: "East Tennessee State Buccaneers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A80", entity_type: "NCAAMB"
   },
   {
-    id: 1142, entity_name: 'Rutgers University (Rutgers) Scarlet Knights', entity_type: 'NCAAMB', status: 1
+    id: 1162, entity_name: "Florida Gulf Coast Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.F75", entity_type: "NCAAMB"
   },
   {
-    id: 1143, entity_name: 'University of South Florida (USF) Bulls', entity_type: 'NCAAMB', status: 1
+    id: 1163, entity_name: "Jacksonville Dolphins", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B30", entity_type: "NCAAMB"
   },
   {
-    id: 1144, entity_name: 'Southern Methodist University (SMU) Mustangs', entity_type: 'NCAAMB', status: 1
+    id: 1164, entity_name: "Kennesaw State Owls", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.E97", entity_type: "NCAAMB"
   },
   {
-    id: 1145, entity_name: 'Temple University (Temple) Owls', entity_type: 'NCAAMB', status: 1
+    id: 1165, entity_name: "Lipscomb Bisons", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B42", entity_type: "NCAAMB"
   },
   {
-    id: 1146, entity_name: 'Boston College (BC) Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1166, entity_name: "Mercer Bears", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B64", entity_type: "NCAAMB"
   },
   {
-    id: 1147, entity_name: 'Clemson University (Clemson) Tigers', entity_type: 'NCAAMB', status: 1
+    id: 1167, entity_name: "Northern Kentucky Norse", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.I27", entity_type: "NCAAMB"
   },
   {
-    id: 1148, entity_name: 'Duke University (Duke) Blue Devils', entity_type: 'NCAAMB', status: 1
+    id: 1168, entity_name: "North Florida Ospreys", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.G22", entity_type: "NCAAMB"
   },
   {
-    id: 1149, entity_name: 'Florida State University (Florida State) Seminoles', entity_type: 'NCAAMB', status: 1
+    id: 1169, entity_name: "SC Upstate Spartans", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.E45", entity_type: "NCAAMB"
   },
   {
-    id: 1150, entity_name: 'Georgia Institute of Technology (Georgia Tech) Yellow Jackets', entity_type: 'NCAAMB', status: 1
+    id: 1170, entity_name: "Stetson Hatters", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C74", entity_type: "NCAAMB"
   },
   {
-    id: 1151, entity_name: 'University of Maryland, College Park (Maryland) Terrapins', entity_type: 'NCAAMB', status: 1
+    id: 1171, entity_name: "Dayton Flyers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A69", entity_type: "NCAAMB"
   },
   {
-    id: 1152, entity_name: 'University of Miami (Miami) Hurricanes', entity_type: 'NCAAMB', status: 1
+    id: 1172, entity_name: "Duquesne Dukes", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A78", entity_type: "NCAAMB"
   },
   {
-    id: 1153, entity_name: 'University of North Carolina at Chapel Hill (North Carolina) Tar Heels', entity_type: 'NCAAMB', status: 1
+    id: 1173, entity_name: "Fordham Rams", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A94", entity_type: "NCAAMB"
   },
   {
-    id: 1154, entity_name: 'North Carolina State University (NC State) Wolfpack', entity_type: 'NCAAMB', status: 1
+    id: 1174, entity_name: "George Mason Patriots", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A98", entity_type: "NCAAMB"
   },
   {
-    id: 1155, entity_name: 'University of Notre Dame (Notre Dame) Fighting Irish', entity_type: 'NCAAMB', status: 1
+    id: 1175, entity_name: "GW Colonials", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A99", entity_type: "NCAAMB"
   },
   {
-    id: 1156, entity_name: 'University of Pittsburgh (Pitt) Panthers', entity_type: 'NCAAMB', status: 1
+    id: 1176, entity_name: "La Salle Explorers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B37", entity_type: "NCAAMB"
   },
   {
-    id: 1157, entity_name: 'Syracuse University (Syracuse) Orange', entity_type: 'NCAAMB', status: 1
+    id: 1178, entity_name: "URI Rams", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C32", entity_type: "NCAAMB"
   },
   {
-    id: 1158, entity_name: 'University of Virginia (Virginia) Cavaliers', entity_type: 'NCAAMB', status: 1
+    id: 1179, entity_name: "Richmond Spiders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C34", entity_type: "NCAAMB"
   },
   {
-    id: 1159, entity_name: 'Virginia Polytechnic Institute and State University (Virginia Tech) Hokies', entity_type: 'NCAAMB', status: 1
+    id: 1180, entity_name: "St. Bonaventure Bonnies", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C40", entity_type: "NCAAMB"
   },
   {
-    id: 1160, entity_name: 'Wake Forest University (Wake Forest) Demon Deacons', entity_type: 'NCAAMB', status: 1
+    id: 1181, entity_name: "St. Joseph's Hawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C44", entity_type: "NCAAMB"
   },
   {
-    id: 1161, entity_name: 'East Tennessee State University (East Tennessee State) Buccaneers', entity_type: 'NCAAMB', status: 1
+    id: 1182, entity_name: "St. Louis Billikens", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C45", entity_type: "NCAAMB"
   },
   {
-    id: 1162, entity_name: 'Florida Gulf Coast University (Florida Gulf Coast) Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1183, entity_name: "VCU Rams", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D06", entity_type: "NCAAMB"
   },
   {
-    id: 1163, entity_name: 'Jacksonville University (Jacksonville) Dolphins', entity_type: 'NCAAMB', status: 1
+    id: 1184, entity_name: "Butler Bulldogs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A35", entity_type: "NCAAMB"
   },
   {
-    id: 1164, entity_name: 'Kennesaw State University (Kennesaw State) Owls', entity_type: 'NCAAMB', status: 1
+    id: 1185, entity_name: "Creighton Bluejays", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A66", entity_type: "NCAAMB"
   },
   {
-    id: 1165, entity_name: 'Lipscomb University (Lipscomb) Bisons', entity_type: 'NCAAMB', status: 1
+    id: 1186, entity_name: "DePaul Blue Demons", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A73", entity_type: "NCAAMB"
   },
   {
-    id: 1166, entity_name: 'Mercer University (Mercer) Bears', entity_type: 'NCAAMB', status: 1
+    id: 1187, entity_name: "Georgetown Hoyas", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B01", entity_type: "NCAAMB"
   },
   {
-    id: 1167, entity_name: 'Northern Kentucky University (Northern Kentucky) Norse', entity_type: 'NCAAMB', status: 1
+    id: 1188, entity_name: "Marquette Golden Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B56", entity_type: "NCAAMB"
   },
   {
-    id: 1168, entity_name: 'University of North Florida (North Florida) Ospreys', entity_type: 'NCAAMB', status: 1
+    id: 1189, entity_name: "Providence Friars", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C28", entity_type: "NCAAMB"
   },
   {
-    id: 1169, entity_name: 'University of South Carolina Upstate (SC Upstate) Spartans', entity_type: 'NCAAMB', status: 1
+    id: 1190, entity_name: "St. John's Red Storm", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C43", entity_type: "NCAAMB"
   },
   {
-    id: 1170, entity_name: 'Stetson University (Stetson) Hatters', entity_type: 'NCAAMB', status: 1
+    id: 1191, entity_name: "Seton Hall Pirates", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C56", entity_type: "NCAAMB"
   },
   {
-    id: 1171, entity_name: 'University of Dayton (Dayton) Flyers', entity_type: 'NCAAMB', status: 1
+    id: 1192, entity_name: "Villanova Wildcats", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D04", entity_type: "NCAAMB"
   },
   {
-    id: 1172, entity_name: 'Duquesne University (Duquesne) Dukes', entity_type: 'NCAAMB', status: 1
+    id: 1193, entity_name: "Xavier Musketeers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D28", entity_type: "NCAAMB"
   },
   {
-    id: 1173, entity_name: 'Fordham University (Fordham) Rams', entity_type: 'NCAAMB', status: 1
+    id: 1194, entity_name: "Eastern Washington Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A84", entity_type: "NCAAMB"
   },
   {
-    id: 1174, entity_name: 'George Mason University (George Mason) Patriots', entity_type: 'NCAAMB', status: 1
+    id: 1195, entity_name: "Idaho State Bengals", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B18", entity_type: "NCAAMB"
   },
   {
-    id: 1175, entity_name: 'George Washington University (GW) Colonials', entity_type: 'NCAAMB', status: 1
+    id: 1196, entity_name: "Montana Grizzlies", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B77", entity_type: "NCAAMB"
   },
   {
-    id: 1176, entity_name: 'La Salle University (La Salle) Explorers', entity_type: 'NCAAMB', status: 1
+    id: 1197, entity_name: "Montana State Bobcats", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B78", entity_type: "NCAAMB"
   },
   {
-    id: 1177, entity_name: 'University of Massachusetts Amherst (UMass) Minutemen', entity_type: 'NCAAMB', status: 1
+    id: 1198, entity_name: "North Dakota North Dakota", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.F01", entity_type: "NCAAMB"
   },
   {
-    id: 1178, entity_name: 'University of Rhode Island (URI) Rams', entity_type: 'NCAAMB', status: 1
+    id: 1199, entity_name: "Northern Arizona Lumberjacks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C04", entity_type: "NCAAMB"
   },
   {
-    id: 1179, entity_name: 'University of Richmond (Richmond) Spiders', entity_type: 'NCAAMB', status: 1
+    id: 1200, entity_name: "Northern Colorado Bears", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.E91", entity_type: "NCAAMB"
   },
   {
-    id: 1180, entity_name: 'St. Bonaventure University (St. Bonaventure) Bonnies', entity_type: 'NCAAMB', status: 1
+    id: 1201, entity_name: "Portland State Vikings", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C25", entity_type: "NCAAMB"
   },
   {
-    id: 1181, entity_name: 'Saint Joseph\'s University (St. Joseph\'s) Hawks', entity_type: 'NCAAMB', status: 1
+    id: 1202, entity_name: "Sacramento State Hornets", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C38", entity_type: "NCAAMB"
   },
   {
-    id: 1182, entity_name: 'Saint Louis University (St. Louis) Billikens', entity_type: 'NCAAMB', status: 1
+    id: 1203, entity_name: "Southern Utah Thunderbirds", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C69", entity_type: "NCAAMB"
   },
   {
-    id: 1183, entity_name: 'Virginia Commonwealth University (VCU) Rams', entity_type: 'NCAAMB', status: 1
+    id: 1204, entity_name: "Weber State Wildcats", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D13", entity_type: "NCAAMB"
   },
   {
-    id: 1184, entity_name: 'Butler University (Butler) Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1205, entity_name: "Campbell Fighting Camels", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A43", entity_type: "NCAAMB"
   },
   {
-    id: 1185, entity_name: 'Creighton University (Creighton) Bluejays', entity_type: 'NCAAMB', status: 1
+    id: 1206, entity_name: "Charleston Southern Buccaneers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A50", entity_type: "NCAAMB"
   },
   {
-    id: 1186, entity_name: 'DePaul University (DePaul) Blue Demons', entity_type: 'NCAAMB', status: 1
+    id: 1207, entity_name: "Coastal Carolina Chanticleers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A58", entity_type: "NCAAMB"
   },
   {
-    id: 1187, entity_name: 'Georgetown University (Georgetown) Hoyas', entity_type: 'NCAAMB', status: 1
+    id: 1208, entity_name: "Gardner-Webb Runnin' Bulldogs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A97", entity_type: "NCAAMB"
   },
   {
-    id: 1188, entity_name: 'Marquette University (Marquette) Golden Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1209, entity_name: "High Point Panthers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B12", entity_type: "NCAAMB"
   },
   {
-    id: 1189, entity_name: 'Providence College (Providence) Friars', entity_type: 'NCAAMB', status: 1
+    id: 1210, entity_name: "Liberty Flames", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B41", entity_type: "NCAAMB"
   },
   {
-    id: 1190, entity_name: 'St. John\'s University (St. John\'s) Red Storm', entity_type: 'NCAAMB', status: 1
+    id: 1211, entity_name: "Longwood Lancers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.G89", entity_type: "NCAAMB"
   },
   {
-    id: 1191, entity_name: 'Seton Hall University (Seton Hall) Pirates', entity_type: 'NCAAMB', status: 1
+    id: 1212, entity_name: "Presbyterian Blue Hose", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.I67", entity_type: "NCAAMB"
   },
   {
-    id: 1192, entity_name: 'Villanova University (Villanova) Wildcats', entity_type: 'NCAAMB', status: 1
+    id: 1213, entity_name: "Radford Highlanders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C31", entity_type: "NCAAMB"
   },
   {
-    id: 1193, entity_name: 'Xavier University (Xavier) Musketeers', entity_type: 'NCAAMB', status: 1
+    id: 1214, entity_name: "UNC Asheville Bulldogs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B97", entity_type: "NCAAMB"
   },
   {
-    id: 1194, entity_name: 'Eastern Washington University (Eastern Washington) Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1215, entity_name: "VMI Keydets", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D07", entity_type: "NCAAMB"
   },
   {
-    id: 1195, entity_name: 'Idaho State University (Idaho State) Bengals', entity_type: 'NCAAMB', status: 1
+    id: 1216, entity_name: "Winthrop Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D21", entity_type: "NCAAMB"
   },
   {
-    id: 1196, entity_name: 'University of Montana (Montana) Grizzlies', entity_type: 'NCAAMB', status: 1
+    id: 1237, entity_name: "Texas Tech University Red Raiders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C86", entity_type: "NCAAMB"
   },
   {
-    id: 1197, entity_name: 'Montana State University (Montana State) Bobcats', entity_type: 'NCAAMB', status: 1
+    id: 1239, entity_name: "Cal Poly Mustangs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A40", entity_type: "NCAAMB"
   },
   {
-    id: 1198, entity_name: 'University of North Dakota (North Dakota) North Dakota', entity_type: 'NCAAMB', status: 1
+    id: 1240, entity_name: "Cal State Fullerton Titans", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A41", entity_type: "NCAAMB"
   },
   {
-    id: 1199, entity_name: 'Northern Arizona University (Northern Arizona) Lumberjacks', entity_type: 'NCAAMB', status: 1
+    id: 1241, entity_name: "Cal State Northridge Matadors", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A42", entity_type: "NCAAMB"
   },
   {
-    id: 1200, entity_name: 'University of Northern Colorado (Northern Colorado) Bears', entity_type: 'NCAAMB', status: 1
+    id: 1243, entity_name: "Long Beach State 49ers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B43", entity_type: "NCAAMB"
   },
   {
-    id: 1201, entity_name: 'Portland State University (Portland State) Vikings', entity_type: 'NCAAMB', status: 1
+    id: 1244, entity_name: "UC Davis Aggies", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.E64", entity_type: "NCAAMB"
   },
   {
-    id: 1202, entity_name: 'California State University, Sacramento (Sacramento State) Hornets', entity_type: 'NCAAMB', status: 1
+    id: 1245, entity_name: "UC Irvine Anteaters", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A37", entity_type: "NCAAMB"
   },
   {
-    id: 1203, entity_name: 'Southern Utah University (Southern Utah) Thunderbirds', entity_type: 'NCAAMB', status: 1
+    id: 1246, entity_name: "UC Riverside Highlanders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A38", entity_type: "NCAAMB"
   },
   {
-    id: 1204, entity_name: 'Weber State University (Weber State) Wildcats', entity_type: 'NCAAMB', status: 1
+    id: 1247, entity_name: "UC Santa Barbara Gauchos", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A39", entity_type: "NCAAMB"
   },
   {
-    id: 1205, entity_name: 'Campbell University (Campbell) Fighting Camels', entity_type: 'NCAAMB', status: 1
+    id: 1248, entity_name: "College of Charleston Cougars", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A49", entity_type: "NCAAMB"
   },
   {
-    id: 1206, entity_name: 'Charleston Southern University (Charleston Southern) Buccaneers', entity_type: 'NCAAMB', status: 1
+    id: 1249, entity_name: "Delaware Fightin' Blue Hens", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A70", entity_type: "NCAAMB"
   },
   {
-    id: 1207, entity_name: 'Coastal Carolina University (Coastal Carolina) Chanticleers', entity_type: 'NCAAMB', status: 1
+    id: 1250, entity_name: "Drexel Dragons", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A76", entity_type: "NCAAMB"
   },
   {
-    id: 1208, entity_name: 'Gardner-Webb University (Gardner-Webb) Runnin\' Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1251, entity_name: "Hofstra Pride", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B13", entity_type: "NCAAMB"
   },
   {
-    id: 1209, entity_name: 'High Point University (High Point) Panthers', entity_type: 'NCAAMB', status: 1
+    id: 1252, entity_name: "James Madison Dukes", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B32", entity_type: "NCAAMB"
   },
   {
-    id: 1210, entity_name: 'Liberty University (Liberty) Flames', entity_type: 'NCAAMB', status: 1
+    id: 1253, entity_name: "Northeastern Huskies", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C03", entity_type: "NCAAMB"
   },
   {
-    id: 1211, entity_name: 'Longwood University (Longwood) Lancers', entity_type: 'NCAAMB', status: 1
+    id: 1254, entity_name: "Towson Tigers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C93", entity_type: "NCAAMB"
   },
   {
-    id: 1212, entity_name: 'Presbyterian College (Presbyterian) Blue Hose', entity_type: 'NCAAMB', status: 1
+    id: 1255, entity_name: "UNC Wilmington Seahawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C01", entity_type: "NCAAMB"
   },
   {
-    id: 1213, entity_name: 'Radford University (Radford) Highlanders', entity_type: 'NCAAMB', status: 1
+    id: 1256, entity_name: "William & Mary Tribe", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D20", entity_type: "NCAAMB"
   },
   {
-    id: 1214, entity_name: 'University of North Carolina at Asheville (UNC Asheville) Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1257, entity_name: "Charlotte 49ers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A51", entity_type: "NCAAMB"
   },
   {
-    id: 1215, entity_name: 'Virginia Military Institute (VMI) Keydets', entity_type: 'NCAAMB', status: 1
+    id: 1258, entity_name: "ECU Pirates", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A79", entity_type: "NCAAMB"
   },
   {
-    id: 1216, entity_name: 'Winthrop University (Winthrop) Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1260, entity_name: "FIU Panthers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A92", entity_type: "NCAAMB"
   },
   {
-    id: 1217, entity_name: 'University of Illinois at Urbana-Champaign (Illinois) Fighting Illini', entity_type: 'NCAAMB', status: 1
+    id: 1263, entity_name: "MT Blue Raiders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B69", entity_type: "NCAAMB"
   },
   {
-    id: 1218, entity_name: 'Indiana University Bloomington (Indiana) Hoosiers', entity_type: 'NCAAMB', status: 1
+    id: 1265, entity_name: "Old Dominion Monarchs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C15", entity_type: "NCAAMB"
   },
   {
-    id: 1219, entity_name: 'University of Iowa (Iowa) Hawkeyes', entity_type: 'NCAAMB', status: 1
+    id: 1273, entity_name: "Cleveland State Vikings", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A57", entity_type: "NCAAMB"
   },
   {
-    id: 1220, entity_name: 'University of Michigan (Michigan) Wolverines', entity_type: 'NCAAMB', status: 1
+    id: 1274, entity_name: "Detroit Titans", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A74", entity_type: "NCAAMB"
   },
   {
-    id: 1221, entity_name: 'Michigan State University (Michigan State) Spartans', entity_type: 'NCAAMB', status: 1
+    id: 1275, entity_name: "Milwaukee Panthers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D24", entity_type: "NCAAMB"
   },
   {
-    id: 1222, entity_name: 'University of Minnesota (Minnesota) Golden Gophers', entity_type: 'NCAAMB', status: 1
+    id: 1276, entity_name: "Oakland Golden Grizzlies", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C10", entity_type: "NCAAMB"
   },
   {
-    id: 1223, entity_name: 'University of Nebraska-Lincoln (Nebraska) Cornhuskers', entity_type: 'NCAAMB', status: 1
+    id: 1277, entity_name: "UIC Flames", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B21", entity_type: "NCAAMB"
   },
   {
-    id: 1224, entity_name: 'Northwestern University (Northwestern) Wildcats', entity_type: 'NCAAMB', status: 1
+    id: 1278, entity_name: "UW–Green Bay Phoenix", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D23", entity_type: "NCAAMB"
   },
   {
-    id: 1225, entity_name: 'Ohio State University (Ohio State) Buckeyes', entity_type: 'NCAAMB', status: 1
+    id: 1279, entity_name: "Valparaiso Crusaders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D01", entity_type: "NCAAMB"
   },
   {
-    id: 1226, entity_name: 'Pennsylvania State University (Penn State) Nittany Lions', entity_type: 'NCAAMB', status: 1
+    id: 1280, entity_name: "Wright State Raiders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D26", entity_type: "NCAAMB"
   },
   {
-    id: 1227, entity_name: 'Purdue University (Purdue) Boilermakers', entity_type: 'NCAAMB', status: 1
+    id: 1281, entity_name: "Youngstown State Penguins", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D30", entity_type: "NCAAMB"
   },
   {
-    id: 1228, entity_name: 'University of Wisconsin–Madison (Wisconsin) Badgers', entity_type: 'NCAAMB', status: 1
+    id: 1282, entity_name: "NJIT Highlanders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.I45", entity_type: "NCAAMB"
   },
   {
-    id: 1229, entity_name: 'Baylor University (Baylor) Bears', entity_type: 'NCAAMB', status: 1
+    id: 1283, entity_name: "Brown Bears", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A32", entity_type: "NCAAMB"
   },
   {
-    id: 1230, entity_name: 'Iowa State University (Iowa State) Cyclones', entity_type: 'NCAAMB', status: 1
+    id: 1284, entity_name: "Columbia Lions", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A62", entity_type: "NCAAMB"
   },
   {
-    id: 1231, entity_name: 'University of Kansas (Kansas) Jayhawks', entity_type: 'NCAAMB', status: 1
+    id: 1285, entity_name: "Cornell Big Red", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A65", entity_type: "NCAAMB"
   },
   {
-    id: 1232, entity_name: 'Kansas State University (Kansas State) Wildcats', entity_type: 'NCAAMB', status: 1
+    id: 1286, entity_name: "Dartmouth Big Green", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A67", entity_type: "NCAAMB"
   },
   {
-    id: 1233, entity_name: 'University of Oklahoma (Oklahoma) Sooners', entity_type: 'NCAAMB', status: 1
+    id: 1287, entity_name: "Harvard Crimson", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B10", entity_type: "NCAAMB"
   },
   {
-    id: 1234, entity_name: 'Oklahoma State University–Stillwater (Oklahoma State) Cowboys', entity_type: 'NCAAMB', status: 1
+    id: 1288, entity_name: "Penn Quakers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C20", entity_type: "NCAAMB"
   },
   {
-    id: 1235, entity_name: 'University of Texas at Austin (Texas) Longhorns', entity_type: 'NCAAMB', status: 1
+    id: 1289, entity_name: "Princeton Tigers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C27", entity_type: "NCAAMB"
   },
   {
-    id: 1236, entity_name: 'Texas Christian University (TCU) Horned Frogs', entity_type: 'NCAAMB', status: 1
+    id: 1290, entity_name: "Yale Bulldogs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D29", entity_type: "NCAAMB"
   },
   {
-    id: 1237, entity_name: 'Texas Tech University Red Raiders', entity_type: 'NCAAMB', status: 1
+    id: 1291, entity_name: "Canisius Golden Griffins", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A44", entity_type: "NCAAMB"
   },
   {
-    id: 1238, entity_name: 'West Virginia University (West Virginia) Mountaineers', entity_type: 'NCAAMB', status: 1
+    id: 1292, entity_name: "Fairfield Stags", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A87", entity_type: "NCAAMB"
   },
   {
-    id: 1239, entity_name: 'California Polytechnic State University (Cal Poly) Mustangs', entity_type: 'NCAAMB', status: 1
+    id: 1293, entity_name: "Iona Gaels", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B26", entity_type: "NCAAMB"
   },
   {
-    id: 1240, entity_name: 'California State University, Fullerton (Cal State Fullerton) Titans', entity_type: 'NCAAMB', status: 1
+    id: 1294, entity_name: "Manhattan Jaspers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B54", entity_type: "NCAAMB"
   },
   {
-    id: 1241, entity_name: 'California State University, Northridge (Cal State Northridge) Matadors', entity_type: 'NCAAMB', status: 1
+    id: 1295, entity_name: "Marist Red Foxes", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B55", entity_type: "NCAAMB"
   },
   {
-    id: 1242, entity_name: 'University of Hawaiʻi at Mānoa (Hawaii) Rainbow Warriors', entity_type: 'NCAAMB', status: 1
+    id: 1296, entity_name: "Monmouth Hawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B76", entity_type: "NCAAMB"
   },
   {
-    id: 1243, entity_name: 'California State University, Long Beach (Long Beach State) 49ers', entity_type: 'NCAAMB', status: 1
+    id: 1297, entity_name: "Niagara Purple Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B92", entity_type: "NCAAMB"
   },
   {
-    id: 1244, entity_name: 'University of California, Davis (UC Davis) Aggies', entity_type: 'NCAAMB', status: 1
+    id: 1298, entity_name: "Quinnipiac Bobcats", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C30", entity_type: "NCAAMB"
   },
   {
-    id: 1245, entity_name: 'University of California, Irvine (UC Irvine) Anteaters', entity_type: 'NCAAMB', status: 1
+    id: 1299, entity_name: "Rider Broncs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C35", entity_type: "NCAAMB"
   },
   {
-    id: 1246, entity_name: 'University of California, Riverside (UC Riverside) Highlanders', entity_type: 'NCAAMB', status: 1
+    id: 1300, entity_name: "St. Peter's Peacocks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C47", entity_type: "NCAAMB"
   },
   {
-    id: 1247, entity_name: 'University of California, Santa Barbara (UC Santa Barbara) Gauchos', entity_type: 'NCAAMB', status: 1
+    id: 1301, entity_name: "Siena Saints", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C57", entity_type: "NCAAMB"
   },
   {
-    id: 1248, entity_name: 'College of Charleston Cougars', entity_type: 'NCAAMB', status: 1
+    id: 1309, entity_name: "Miami Ohio RedHawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B66", entity_type: "NCAAMB"
   },
   {
-    id: 1249, entity_name: 'University of Delaware (Delaware) Fightin\' Blue Hens', entity_type: 'NCAAMB', status: 1
+    id: 1314, entity_name: "Bethune Cookman Wildcats", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A23", entity_type: "NCAAMB"
   },
   {
-    id: 1250, entity_name: 'Drexel University (Drexel) Dragons', entity_type: 'NCAAMB', status: 1
+    id: 1315, entity_name: "Coppin State Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A64", entity_type: "NCAAMB"
   },
   {
-    id: 1251, entity_name: 'Hofstra University (Hofstra) Pride', entity_type: 'NCAAMB', status: 1
+    id: 1316, entity_name: "Delaware State Hornets", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A71", entity_type: "NCAAMB"
   },
   {
-    id: 1252, entity_name: 'James Madison University (James Madison) Dukes', entity_type: 'NCAAMB', status: 1
+    id: 1317, entity_name: "Florida A & M Rattlers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A90", entity_type: "NCAAMB"
   },
   {
-    id: 1253, entity_name: 'Northeastern University (Northeastern) Huskies', entity_type: 'NCAAMB', status: 1
+    id: 1318, entity_name: "Hampton Pirates", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B08", entity_type: "NCAAMB"
   },
   {
-    id: 1254, entity_name: 'Towson University (Towson) Tigers', entity_type: 'NCAAMB', status: 1
+    id: 1319, entity_name: "Howard Bison", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B16", entity_type: "NCAAMB"
   },
   {
-    id: 1255, entity_name: 'University of North Carolina at Wilmington (UNC Wilmington) Seahawks', entity_type: 'NCAAMB', status: 1
+    id: 1320, entity_name: "UMES Hawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B60", entity_type: "NCAAMB"
   },
   {
-    id: 1256, entity_name: 'College of William and Mary (William & Mary) Tribe', entity_type: 'NCAAMB', status: 1
+    id: 1321, entity_name: "Morgan State Bears", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B80", entity_type: "NCAAMB"
   },
   {
-    id: 1257, entity_name: 'University of North Carolina at Charlotte (Charlotte) 49ers', entity_type: 'NCAAMB', status: 1
+    id: 1322, entity_name: "Norfolk State Spartans", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B94", entity_type: "NCAAMB"
   },
   {
-    id: 1258, entity_name: 'East Carolina University (ECU) Pirates', entity_type: 'NCAAMB', status: 1
+    id: 1323, entity_name: "NC A & T Aggies", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B96", entity_type: "NCAAMB"
   },
   {
-    id: 1259, entity_name: 'Florida Atlantic University (Florida Atlantic) Owls', entity_type: 'NCAAMB', status: 1
+    id: 1324, entity_name: "NC Central Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.E17", entity_type: "NCAAMB"
   },
   {
-    id: 1260, entity_name: 'Florida International University (FIU) Panthers', entity_type: 'NCAAMB', status: 1
+    id: 1325, entity_name: "Savannah State University Tigers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C55", entity_type: "NCAAMB"
   },
   {
-    id: 1261, entity_name: 'Louisiana Tech University (Louisiana Tech) Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1326, entity_name: "SC State Bulldogs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C60", entity_type: "NCAAMB"
   },
   {
-    id: 1262, entity_name: 'Marshall University (Marshall) Thundering Herd', entity_type: 'NCAAMB', status: 1
+    id: 1327, entity_name: "Bradley Braves", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A30", entity_type: "NCAAMB"
   },
   {
-    id: 1263, entity_name: 'Middle Tennessee State University (MT) Blue Raiders', entity_type: 'NCAAMB', status: 1
+    id: 1328, entity_name: "Drake Bulldogs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A75", entity_type: "NCAAMB"
   },
   {
-    id: 1264, entity_name: 'University of North Texas (North Texas) Mean Green', entity_type: 'NCAAMB', status: 1
+    id: 1329, entity_name: "Evansville Purple Aces", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A86", entity_type: "NCAAMB"
   },
   {
-    id: 1265, entity_name: 'Old Dominion University (Old Dominion) Monarchs', entity_type: 'NCAAMB', status: 1
+    id: 1330, entity_name: "Illinois State Redbirds", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B20", entity_type: "NCAAMB"
   },
   {
-    id: 1266, entity_name: 'Rice University (Rice) Owls', entity_type: 'NCAAMB', status: 1
+    id: 1331, entity_name: "Indiana State Sycamores", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B23", entity_type: "NCAAMB"
   },
   {
-    id: 1267, entity_name: 'University of Southern Mississippi (Southern Miss) Golden Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1332, entity_name: "Loyola Chicago Ramblers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B51", entity_type: "NCAAMB"
   },
   {
-    id: 1268, entity_name: 'University of Texas at El Paso (UTEP) Miners', entity_type: 'NCAAMB', status: 1
+    id: 1333, entity_name: "Missouri State Bears", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C70", entity_type: "NCAAMB"
   },
   {
-    id: 1269, entity_name: 'University of Texas at San Antonio (UTSA) Roadrunners', entity_type: 'NCAAMB', status: 1
+    id: 1334, entity_name: "Northern Iowa Panthers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C06", entity_type: "NCAAMB"
   },
   {
-    id: 1270, entity_name: 'Tulane University (Tulane) Green Wave', entity_type: 'NCAAMB', status: 1
+    id: 1335, entity_name: "Southern Illinois Salukis", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C65", entity_type: "NCAAMB"
   },
   {
-    id: 1271, entity_name: 'University of Tulsa (Tulsa) Golden Hurricane', entity_type: 'NCAAMB', status: 1
+    id: 1336, entity_name: "Wichita State Shockers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D19", entity_type: "NCAAMB"
   },
   {
-    id: 1272, entity_name: 'University of Alabama at Birmingham (UAB) Blazers', entity_type: 'NCAAMB', status: 1
+    id: 1345, entity_name: "UNLV Runnin' Rebels", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B87", entity_type: "NCAAMB"
   },
   {
-    id: 1273, entity_name: 'Cleveland State University (Cleveland State) Vikings', entity_type: 'NCAAMB', status: 1
+    id: 1348, entity_name: "Bryant Bulldogs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.JL9", entity_type: "NCAAMB"
   },
   {
-    id: 1274, entity_name: 'University of Detroit Mercy (Detroit) Titans', entity_type: 'NCAAMB', status: 1
+    id: 1349, entity_name: "Central Connecticut State Blue Devils", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A46", entity_type: "NCAAMB"
   },
   {
-    id: 1275, entity_name: 'University of Wisconsin–Milwaukee (Milwaukee) Panthers', entity_type: 'NCAAMB', status: 1
+    id: 1350, entity_name: "Fairleigh Dickinson Knights", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A88", entity_type: "NCAAMB"
   },
   {
-    id: 1276, entity_name: 'Oakland University (Oakland) Golden Grizzlies', entity_type: 'NCAAMB', status: 1
+    id: 1351, entity_name: "LIU-Brooklyn Blackbirds", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B44", entity_type: "NCAAMB"
   },
   {
-    id: 1277, entity_name: 'University of Illinois at Chicago (UIC) Flames', entity_type: 'NCAAMB', status: 1
+    id: 1352, entity_name: "Mt. St. Mary's Mountaineers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B82", entity_type: "NCAAMB"
   },
   {
-    id: 1278, entity_name: 'University of Wisconsin–Green Bay (UW–Green Bay) Phoenix', entity_type: 'NCAAMB', status: 1
+    id: 1353, entity_name: "Robert Morris Colonials", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C36", entity_type: "NCAAMB"
   },
   {
-    id: 1279, entity_name: 'Valparaiso University (Valparaiso) Crusaders', entity_type: 'NCAAMB', status: 1
+    id: 1354, entity_name: "Sacred Heart Pioneers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C39", entity_type: "NCAAMB"
   },
   {
-    id: 1280, entity_name: 'Wright State University (Wright State) Raiders', entity_type: 'NCAAMB', status: 1
+    id: 1355, entity_name: "St. Francis NY Terriers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C41", entity_type: "NCAAMB"
   },
   {
-    id: 1281, entity_name: 'Youngstown State University (Youngstown State) Penguins', entity_type: 'NCAAMB', status: 1
+    id: 1356, entity_name: "St. Francis PA Red Flash", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C42", entity_type: "NCAAMB"
   },
   {
-    id: 1282, entity_name: 'New Jersey Institute of Technology (NJIT) Highlanders', entity_type: 'NCAAMB', status: 1
+    id: 1357, entity_name: "Wagner Seahawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D09", entity_type: "NCAAMB"
   },
   {
-    id: 1283, entity_name: 'Brown University (Brown) Bears', entity_type: 'NCAAMB', status: 1
+    id: 1358, entity_name: "Austin Peay Governors", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A19", entity_type: "NCAAMB"
   },
   {
-    id: 1284, entity_name: 'Columbia University (Columbia) Lions', entity_type: 'NCAAMB', status: 1
+    id: 1359, entity_name: "Belmont Bruins", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A22", entity_type: "NCAAMB"
   },
   {
-    id: 1285, entity_name: 'Cornell University (Cornell) Big Red', entity_type: 'NCAAMB', status: 1
+    id: 1360, entity_name: "Eastern Illinois Panthers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A81", entity_type: "NCAAMB"
   },
   {
-    id: 1286, entity_name: 'Dartmouth College (Dartmouth) Big Green', entity_type: 'NCAAMB', status: 1
+    id: 1361, entity_name: "Eastern Kentucky Colonels", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A82", entity_type: "NCAAMB"
   },
   {
-    id: 1287, entity_name: 'Harvard University (Harvard) Crimson', entity_type: 'NCAAMB', status: 1
+    id: 1362, entity_name: "Jacksonville State Gamecocks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B31", entity_type: "NCAAMB"
   },
   {
-    id: 1288, entity_name: 'University of Pennsylvania (Penn) Quakers', entity_type: 'NCAAMB', status: 1
+    id: 1363, entity_name: "Morehead State Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B79", entity_type: "NCAAMB"
   },
   {
-    id: 1289, entity_name: 'Princeton University (Princeton) Tigers', entity_type: 'NCAAMB', status: 1
+    id: 1364, entity_name: "Murray State Racers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B83", entity_type: "NCAAMB"
   },
   {
-    id: 1290, entity_name: 'Yale University (Yale) Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1365, entity_name: "SE Missouri State Redhawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C62", entity_type: "NCAAMB"
   },
   {
-    id: 1291, entity_name: 'Canisius College (Canisius) Golden Griffins', entity_type: 'NCAAMB', status: 1
+    id: 1366, entity_name: "SIU Edwardsville Cougars", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.G01", entity_type: "NCAAMB"
   },
   {
-    id: 1292, entity_name: 'Fairfield University (Fairfield) Stags', entity_type: 'NCAAMB', status: 1
+    id: 1367, entity_name: "Tennessee-Martin Skyhawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C79", entity_type: "NCAAMB"
   },
   {
-    id: 1293, entity_name: 'Iona College (Iona) Gaels', entity_type: 'NCAAMB', status: 1
+    id: 1368, entity_name: "Tennessee State Tigers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C80", entity_type: "NCAAMB"
   },
   {
-    id: 1294, entity_name: 'Manhattan College (Manhattan) Jaspers', entity_type: 'NCAAMB', status: 1
+    id: 1369, entity_name: "Tennessee Tech Golden Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C81", entity_type: "NCAAMB"
   },
   {
-    id: 1295, entity_name: 'Marist College (Marist) Red Foxes', entity_type: 'NCAAMB', status: 1
+    id: 1382, entity_name: "American Eagles", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A09", entity_type: "NCAAMB"
   },
   {
-    id: 1296, entity_name: 'Monmouth University (Monmouth) Hawks', entity_type: 'NCAAMB', status: 1
+    id: 1384, entity_name: "BU Terriers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A28", entity_type: "NCAAMB"
   },
   {
-    id: 1297, entity_name: 'Niagara University (Niagara) Purple Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1385, entity_name: "Bucknell Bison", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A33", entity_type: "NCAAMB"
   },
   {
-    id: 1298, entity_name: 'Quinnipiac University (Quinnipiac) Bobcats', entity_type: 'NCAAMB', status: 1
+    id: 1386, entity_name: "Colgate Raiders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A59", entity_type: "NCAAMB"
   },
   {
-    id: 1299, entity_name: 'Rider University (Rider) Broncs', entity_type: 'NCAAMB', status: 1
+    id: 1387, entity_name: "Holy Cross Crusaders", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B14", entity_type: "NCAAMB"
   },
   {
-    id: 1300, entity_name: 'Saint Peter\'s University (St. Peter\'s) Peacocks', entity_type: 'NCAAMB', status: 1
+    id: 1388, entity_name: "Lafayette Leopards", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B38", entity_type: "NCAAMB"
   },
   {
-    id: 1301, entity_name: 'Siena College (Siena) Saints', entity_type: 'NCAAMB', status: 1
+    id: 1389, entity_name: "Lehigh Mountain Hawks", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B40", entity_type: "NCAAMB"
   },
   {
-    id: 1302, entity_name: 'University of Akron (Akron) Zips', entity_type: 'NCAAMB', status: 1
+    id: 1390, entity_name: "Loyola-MD Greyhounds", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B52", entity_type: "NCAAMB"
   },
   {
-    id: 1303, entity_name: 'Ball State University (Ball State) Cardinals', entity_type: 'NCAAMB', status: 1
+    id: 1404, entity_name: "Texas A & M Aggies", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C83", entity_type: "NCAAMB"
   },
   {
-    id: 1304, entity_name: 'Bowling Green State University (Bowling Green) Falcons', entity_type: 'NCAAMB', status: 1
+    id: 1407, entity_name: "Chattanooga Spartans", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A52", entity_type: "NCAAMB"
   },
   {
-    id: 1305, entity_name: 'University at Buffalo (Buffalo) Bulls', entity_type: 'NCAAMB', status: 1
+    id: 1408, entity_name: "The Citadel Bulldogs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A55", entity_type: "NCAAMB"
   },
   {
-    id: 1306, entity_name: 'Central Michigan University (Central Michigan) Chippewas', entity_type: 'NCAAMB', status: 1
+    id: 1409, entity_name: "Davidson Wildcats", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A68", entity_type: "NCAAMB"
   },
   {
-    id: 1307, entity_name: 'Eastern Michigan University (Eastern Michigan) Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1410, entity_name: "Elon Phoenix", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A85", entity_type: "NCAAMB"
   },
   {
-    id: 1308, entity_name: 'Kent State University (Kent State) Golden Flashes', entity_type: 'NCAAMB', status: 1
+    id: 1411, entity_name: "Furman Paladins", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.A96", entity_type: "NCAAMB"
   },
   {
-    id: 1309, entity_name: 'Miami University (Ohio) (Miami Ohio) RedHawks', entity_type: 'NCAAMB', status: 1
+    id: 1413, entity_name: "Samford Bulldogs", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.C49", entity_type: "NCAAMB"
   },
   {
-    id: 1310, entity_name: 'Northern Illinois University (Northern Illinois) Huskies', entity_type: 'NCAAMB', status: 1
+    id: 1414, entity_name: "UNC Greensboro Spartans", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.B98", entity_type: "NCAAMB"
   },
   {
-    id: 1311, entity_name: 'Ohio University (Ohio) Bobcats', entity_type: 'NCAAMB', status: 1
+    id: 1415, entity_name: "Western Carolina Catamounts", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D15", entity_type: "NCAAMB"
   },
   {
-    id: 1312, entity_name: 'University of Toledo (Toledo) Rockets', entity_type: 'NCAAMB', status: 1
+    id: 1416, entity_name: "Wofford Terriers", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D25", entity_type: "NCAAMB"
   },
   {
-    id: 1313, entity_name: 'Western Michigan University (Western Michigan) Broncos', entity_type: 'NCAAMB', status: 1
+    id: 1417, entity_name: "Abilene Christian Wildcats", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.G81", entity_type: "NCAAMB"
   },
   {
-    id: 1314, entity_name: 'Bethune-Cookman University (Bethune Cookman) Wildcats', entity_type: 'NCAAMB', status: 1
+    id: 1418, entity_name: "University of Central Arkansas Bears", status: 1, created_at: "2014-08-12 23:17:51", import_key: "l.ncaa.org.mbasket-t.D56", entity_type: "NCAAMB"
   },
   {
-    id: 1315, entity_name: 'Coppin State University (Coppin State) Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1419, entity_name: "Houston Baptist Huskies", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.G79", entity_type: "NCAAMB"
   },
   {
-    id: 1316, entity_name: 'Delaware State University (Delaware State) Hornets', entity_type: 'NCAAMB', status: 1
+    id: 1420, entity_name: "Incarnate Word Cardinals", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.I72", entity_type: "NCAAMB"
   },
   {
-    id: 1317, entity_name: 'Florida Agricultural and Mechanical University (Florida A & M) Rattlers', entity_type: 'NCAAMB', status: 1
+    id: 1421, entity_name: "Lamar Cardinals", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B39", entity_type: "NCAAMB"
   },
   {
-    id: 1318, entity_name: 'Hampton University (Hampton) Pirates', entity_type: 'NCAAMB', status: 1
+    id: 1422, entity_name: "McNeese State Cowboys", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B62", entity_type: "NCAAMB"
   },
   {
-    id: 1319, entity_name: 'Howard University (Howard) Pirates', entity_type: 'NCAAMB', status: 1
+    id: 1423, entity_name: "New Orleans Privateers", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B91", entity_type: "NCAAMB"
   },
   {
-    id: 1320, entity_name: 'University of Maryland Eastern Shore (UMES) Hawks', entity_type: 'NCAAMB', status: 1
+    id: 1424, entity_name: "Nicholls State University Colonels", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B93", entity_type: "NCAAMB"
   },
   {
-    id: 1321, entity_name: 'Morgan State University (Morgan State) Bears', entity_type: 'NCAAMB', status: 1
+    id: 1425, entity_name: "Northwestern State Demons", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C08", entity_type: "NCAAMB"
   },
   {
-    id: 1322, entity_name: 'Norfolk State University (Norfolk State) Spartans', entity_type: 'NCAAMB', status: 1
+    id: 1426, entity_name: "Oral Roberts Golden Eagles", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C16", entity_type: "NCAAMB"
   },
   {
-    id: 1323, entity_name: 'North Carolina Agricultural and Technical State University (NC A & T) Aggies', entity_type: 'NCAAMB', status: 1
+    id: 1427, entity_name: "Sam Houston State Bearkats", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C48", entity_type: "NCAAMB"
   },
   {
-    id: 1324, entity_name: 'North Carolina Central University (NC Central) Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1428, entity_name: "Southeastern Louisiana Lions", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C63", entity_type: "NCAAMB"
   },
   {
-    id: 1325, entity_name: 'Savannah State University Tigers', entity_type: 'NCAAMB', status: 1
+    id: 1429, entity_name: "Stephen F. Austin Lumberjacks", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C73", entity_type: "NCAAMB"
   },
   {
-    id: 1326, entity_name: 'South Carolina State University (SC State) Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1430, entity_name: "Texas A&M University-Corpus Christi Islanders", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C88", entity_type: "NCAAMB"
   },
   {
-    id: 1327, entity_name: 'Bradley University (Bradley) Braves', entity_type: 'NCAAMB', status: 1
+    id: 1431, entity_name: "Alabama A & M Bulldogs", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.A04", entity_type: "NCAAMB"
   },
   {
-    id: 1328, entity_name: 'Drake University (Drake) Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1433, entity_name: "Alabama State Hornets", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.A05", entity_type: "NCAAMB"
   },
   {
-    id: 1329, entity_name: 'University of Evansville (Evansville) Purple Aces', entity_type: 'NCAAMB', status: 1
+    id: 1434, entity_name: "Alcorn State Braves", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.A08", entity_type: "NCAAMB"
   },
   {
-    id: 1330, entity_name: 'Illinois State University (Illinois State) Redbirds', entity_type: 'NCAAMB', status: 1
+    id: 1435, entity_name: "Arkansas-Pine Bluff Golden Lions", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.A16", entity_type: "NCAAMB"
   },
   {
-    id: 1331, entity_name: 'Indiana State University (Indiana State) Sycamores', entity_type: 'NCAAMB', status: 1
+    id: 1436, entity_name: "Grambling State Tigers", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B07", entity_type: "NCAAMB"
   },
   {
-    id: 1332, entity_name: 'Loyola University Chicago (Loyola Chicago) Ramblers', entity_type: 'NCAAMB', status: 1
+    id: 1437, entity_name: "Jackson State Tigers", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B29", entity_type: "NCAAMB"
   },
   {
-    id: 1333, entity_name: 'Missouri State University (Missouri State) Bears', entity_type: 'NCAAMB', status: 1
+    id: 1438, entity_name: "Mississippi Valley State Delta Devils", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B73", entity_type: "NCAAMB"
   },
   {
-    id: 1334, entity_name: 'University of Northern Iowa (Northern Iowa) Panthers', entity_type: 'NCAAMB', status: 1
+    id: 1439, entity_name: "Prairie View A & M Panthers", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C26", entity_type: "NCAAMB"
   },
   {
-    id: 1335, entity_name: 'Southern Illinois University Carbondale (Southern Illinois) Salukis', entity_type: 'NCAAMB', status: 1
+    id: 1440, entity_name: "Southern Jaguars", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C68", entity_type: "NCAAMB"
   },
   {
-    id: 1336, entity_name: 'Wichita State University (Wichita State) Shockers', entity_type: 'NCAAMB', status: 1
+    id: 1441, entity_name: "Texas Southern Tigers", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C85", entity_type: "NCAAMB"
   },
   {
-    id: 1337, entity_name: 'United States Air Force Academy (Air Force) Falcons', entity_type: 'NCAAMB', status: 1
+    id: 1442, entity_name: "Denver Pioneers", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.A72", entity_type: "NCAAMB"
   },
   {
-    id: 1338, entity_name: 'Boise State University (Boise State) Broncos', entity_type: 'NCAAMB', status: 1
+    id: 1443, entity_name: "IPFW Mastodons", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B25", entity_type: "NCAAMB"
   },
   {
-    id: 1339, entity_name: 'Colorado State University (Colorado State) Rams', entity_type: 'NCAAMB', status: 1
+    id: 1444, entity_name: "IUPUI Jaguars", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B24", entity_type: "NCAAMB"
   },
   {
-    id: 1340, entity_name: 'California State University, Fresno (Fresno State) Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1445, entity_name: "Nebraska-Omaha Mavericks", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.E88", entity_type: "NCAAMB"
   },
   {
-    id: 1341, entity_name: 'University of Nevada, Reno (Nevada) Wolf Pack', entity_type: 'NCAAMB', status: 1
+    id: 1446, entity_name: "North Dakota State Bison", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.H20", entity_type: "NCAAMB"
   },
   {
-    id: 1342, entity_name: 'University of New Mexico (New Mexico) Lobos', entity_type: 'NCAAMB', status: 1
+    id: 1447, entity_name: "South Dakota Coyotes", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.JM1", entity_type: "NCAAMB"
   },
   {
-    id: 1343, entity_name: 'San Diego State University (San Diego State) Aztecs', entity_type: 'NCAAMB', status: 1
+    id: 1448, entity_name: "South Dakota State Jackrabbits", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.H21", entity_type: "NCAAMB"
   },
   {
-    id: 1344, entity_name: 'San Jose State University (San Jose State) Spartans', entity_type: 'NCAAMB', status: 1
+    id: 1449, entity_name: "Western Illinois Leathernecks", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.D16", entity_type: "NCAAMB"
   },
   {
-    id: 1345, entity_name: 'University of Nevada, Las Vegas (UNLV) Runnin\' Rebels', entity_type: 'NCAAMB', status: 1
+    id: 1450, entity_name: "Arkansas Little Rock Trojans", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.A15", entity_type: "NCAAMB"
   },
   {
-    id: 1346, entity_name: 'Utah State University (Utah State) Aggies', entity_type: 'NCAAMB', status: 1
+    id: 1453, entity_name: "Louisiana Lafayette Ragin' Cajuns", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B47", entity_type: "NCAAMB"
   },
   {
-    id: 1347, entity_name: 'University of Wyoming (Wyoming) Cowboys', entity_type: 'NCAAMB', status: 1
+    id: 1454, entity_name: "Louisiana Monroe Warhawks", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B48", entity_type: "NCAAMB"
   },
   {
-    id: 1348, entity_name: 'Bryant University (Bryant) Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1456, entity_name: "Texas–Arlington Mavericks", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C87", entity_type: "NCAAMB"
   },
   {
-    id: 1349, entity_name: 'Central Connecticut State University (Central Connecticut State) Blue Devils', entity_type: 'NCAAMB', status: 1
+    id: 1461, entity_name: "Gonzaga Bulldogs", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B06", entity_type: "NCAAMB"
   },
   {
-    id: 1350, entity_name: 'Fairleigh Dickinson University (Fairleigh Dickinson) Knights', entity_type: 'NCAAMB', status: 1
+    id: 1462, entity_name: "Loyola Marymount Lions", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B50", entity_type: "NCAAMB"
   },
   {
-    id: 1351, entity_name: 'Long Island University (Brooklyn Campus) (LIU-Brooklyn) Blackbirds', entity_type: 'NCAAMB', status: 1
+    id: 1463, entity_name: "Pacific Tigers", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C19", entity_type: "NCAAMB"
   },
   {
-    id: 1352, entity_name: 'Mount St. Mary\'s University (Mt. St. Mary\'s) Mountaineers', entity_type: 'NCAAMB', status: 1
+    id: 1464, entity_name: "Pepperdine Waves", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C22", entity_type: "NCAAMB"
   },
   {
-    id: 1353, entity_name: 'Robert Morris University (Robert Morris) Colonials', entity_type: 'NCAAMB', status: 1
+    id: 1465, entity_name: "Portland Pilots", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C24", entity_type: "NCAAMB"
   },
   {
-    id: 1354, entity_name: 'Sacred Heart University (Sacred Heart) Pioneers', entity_type: 'NCAAMB', status: 1
+    id: 1466, entity_name: "St. Mary's Gaels", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C46", entity_type: "NCAAMB"
   },
   {
-    id: 1355, entity_name: 'St. Francis College (St. Francis NY) Terriers', entity_type: 'NCAAMB', status: 1
+    id: 1467, entity_name: "San Diego Toreros", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C50", entity_type: "NCAAMB"
   },
   {
-    id: 1356, entity_name: 'St. Francis University (St. Francis PA) Red Flash', entity_type: 'NCAAMB', status: 1
+    id: 1468, entity_name: "San Francisco Dons", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C52", entity_type: "NCAAMB"
   },
   {
-    id: 1357, entity_name: 'Wagner College (Wagner) Seahawks', entity_type: 'NCAAMB', status: 1
+    id: 1469, entity_name: "Santa Clara Broncos", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C54", entity_type: "NCAAMB"
   },
   {
-    id: 1358, entity_name: 'Austin Peay State University (Austin Peay) Governors', entity_type: 'NCAAMB', status: 1
+    id: 1470, entity_name: "Cal State Bakersfield Roadrunners", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.G97", entity_type: "NCAAMB"
   },
   {
-    id: 1359, entity_name: 'Belmont University (Belmont) Bruins', entity_type: 'NCAAMB', status: 1
+    id: 1471, entity_name: "Chicago State Cougars", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.A53", entity_type: "NCAAMB"
   },
   {
-    id: 1360, entity_name: 'Eastern Illinois University (Eastern Illinois) Panthers', entity_type: 'NCAAMB', status: 1
+    id: 1472, entity_name: "Grand Canyon Antelopes", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.H03", entity_type: "NCAAMB"
   },
   {
-    id: 1361, entity_name: 'Eastern Kentucky University (Eastern Kentucky) Colonels', entity_type: 'NCAAMB', status: 1
+    id: 1474, entity_name: "UMKC Kangaroos", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.B75", entity_type: "NCAAMB"
   },
   {
-    id: 1362, entity_name: 'Jacksonville State University (Jacksonville State) Gamecocks', entity_type: 'NCAAMB', status: 1
+    id: 1476, entity_name: "Seattle Redhawks", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.H02", entity_type: "NCAAMB"
   },
   {
-    id: 1363, entity_name: 'Morehead State University (Morehead State) Eagles', entity_type: 'NCAAMB', status: 1
+    id: 1477, entity_name: "UTPA Broncs", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.C90", entity_type: "NCAAMB"
   },
   {
-    id: 1364, entity_name: 'Murray State University (Murray State) Racers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1365, entity_name: 'Southeast Missouri State University (SE Missouri State) Redhawks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1366, entity_name: 'Southern Illinois University Edwardsville (SIU Edwardsville) Cougars', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1367, entity_name: 'University of Tennessee at Martin (Tennessee-Martin) Skyhawks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1368, entity_name: 'Tennessee State University (Tennessee State) Tigers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1369, entity_name: 'Tennessee Technological University (Tennessee Tech) Golden Eagles', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1370, entity_name: 'University of Arizona (Arizona) Wildcats', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1371, entity_name: 'Arizona State University (Arizona State) Sun Devils', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1372, entity_name: 'University of California, Berkeley (California) Golden Bears', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1373, entity_name: 'University of Colorado (Colorado) Buffaloes', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1374, entity_name: 'University of Oregon (Oregon) Ducks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1375, entity_name: 'Oregon State University (Oregon State) Beavers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1376, entity_name: 'Stanford University (Stanford) Cardinal', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1377, entity_name: 'University of California, Los Angeles (UCLA) Bruins', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1378, entity_name: 'University of Southern California (USC) Trojans', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1379, entity_name: 'University of Utah (Utah) Utes', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1380, entity_name: 'University of Washington (Washington) Huskies', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1381, entity_name: 'Washington State University (Washington State) Cougars', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1382, entity_name: 'American University (American) Eagles', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1383, entity_name: 'United States Military Academy (Army) Black Knights', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1384, entity_name: 'Boston University (BU) Terriers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1385, entity_name: 'Bucknell University (Bucknell) Bison', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1386, entity_name: 'Colgate University (Colgate) Raiders', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1387, entity_name: 'College of the Holy Cross (Holy Cross) Crusaders', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1388, entity_name: 'Lafayette College (Lafayette) Leopards', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1389, entity_name: 'Lehigh University (Lehigh) Mountain Hawks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1390, entity_name: 'Loyola University Maryland (Loyola-MD) Greyhounds', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1391, entity_name: 'United States Naval Academy (Navy) Midshipmen', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1392, entity_name: 'University of Alabama (Alabama) Crimson Tide', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1393, entity_name: 'University of Arkansas (Arkansas) Razorbacks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1394, entity_name: 'Auburn University (Auburn) Tigers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1395, entity_name: 'University of Florida (Florida) Gators', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1396, entity_name: 'University of Georgia (Georgia) Bulldogs', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1397, entity_name: 'University of Kentucky (Kentucky) Wildcats', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1398, entity_name: 'Louisiana State University (LSU) Tigers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1399, entity_name: 'University of Mississippi (Ole Miss) Rebels', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1400, entity_name: 'Mississippi State University (Mississippi State) Bulldogs', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1401, entity_name: 'University of Missouri (Missouri) Tigers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1402, entity_name: 'University of South Carolina (South Carolina) Gamecocks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1403, entity_name: 'University of Tennessee (Tennessee) Volunteers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1404, entity_name: 'Texas A&M University (Texas A & M) Aggies', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1405, entity_name: 'Vanderbilt University (Vanderbilt) Commodores', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1406, entity_name: 'Appalachian State University (Appalachian State) Mountaineers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1407, entity_name: 'University of Tennessee at Chattanooga (Chattanooga) Spartans', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1408, entity_name: 'The Citadel Bulldogs', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1409, entity_name: 'Davidson College (Davidson) Wildcats', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1410, entity_name: 'Elon University (Elon) Phoenix', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1411, entity_name: 'Furman University (Furman) Paladins', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1412, entity_name: 'Georgia Southern University (Georgia Southern) Eagles', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1413, entity_name: 'Samford University (Samford) Bulldogs', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1414, entity_name: 'University of North Carolina at Greensboro (UNC Greensboro) Spartans', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1415, entity_name: 'Western Carolina University (Western Carolina) Catamounts', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1416, entity_name: 'Wofford College (Wofford) Terriers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1417, entity_name: 'Abilene Christian University (Abilene Christian) Wildcats', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1418, entity_name: 'University of Central Arkansas Bears', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1419, entity_name: 'Houston Baptist University (Houston Baptist) Huskies', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1420, entity_name: 'University of the Incarnate Word (Incarnate Word) Cardinals', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1421, entity_name: 'Lamar University (Lamar) Cardinals', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1422, entity_name: 'McNeese State University (McNeese State) Cowboys', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1423, entity_name: 'University of New Orleans (New Orleans) Privateers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1424, entity_name: 'Nicholls State University Colonels', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1425, entity_name: 'Northwestern State University (Northwstern State) Demons', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1426, entity_name: 'Oral Roberts University (Oral Roberts) Golden Eagles', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1427, entity_name: 'Sam Houston State University (Sam Houston State) Bearkats', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1428, entity_name: 'Southeastern Louisiana University (Southeastern Louisiana) Lions', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1429, entity_name: 'Stephen F. Austin State University (Stephen F. Austin) Lumberjacks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1430, entity_name: 'Texas A&M University-Corpus Christi Islanders', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1431, entity_name: 'Alabama Agricultural and Mechanical University (Alabama A & M) Bulldogs', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1433, entity_name: 'Alabama State University (Alabama State) Hornets', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1434, entity_name: 'Alcorn State University (Alcorn State) Braves', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1435, entity_name: 'University of Arkansas at Pine Bluff (Arkansas-Pine Bluff) Golden Lions', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1436, entity_name: 'Grambling State University (Grambling State) Tigers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1437, entity_name: 'Jackson State University (Jackson State) Tigers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1438, entity_name: 'Mississippi Valley State University (Mississippi Valley State) Delta Devils', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1439, entity_name: 'Prairie View A&M University (Prairie View A & M) Panthers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1440, entity_name: 'Southern University (Southern) Jaguars', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1441, entity_name: 'Texas Southern University (Texas Southern) Tigers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1442, entity_name: 'University of Denver (Denver) Pioneers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1443, entity_name: 'Indiana University - Purdue University Fort Wayne (IPFW) Mastodons', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1444, entity_name: 'Indiana University - Purdue University Indianapolis (IUPUI) Jaguars', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1445, entity_name: 'University of Nebraska at Omaha (Nebraska-Omaha) Mavericks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1446, entity_name: 'North Dakota State University (North Dakota State) Bison', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1447, entity_name: 'University of South Dakota (South Dakota) Coyotes', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1448, entity_name: 'South Dakota State University (South Dakota State) Jackrabbits', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1449, entity_name: 'Western Illinois University (Western Illinois) Leathernecks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1450, entity_name: 'University of Arkansas at Little Rock (Arkansas Little Rock) Trojans', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1451, entity_name: 'Arkansas State University (Arkansas State) Red Wolves', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1452, entity_name: 'Georgia State University (Georgia State) Panthers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1453, entity_name: 'University of Louisiana at Lafayette (Louisiana Lafayette) Ragin\' Cajuns', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1454, entity_name: 'University of Louisiana at Monroe (Louisiana Monroe) Warhawks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1455, entity_name: 'University of South Alabama (South Alabama) Jaguars', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1456, entity_name: 'University of Texas at Arlington (Texas–Arlington) Mavericks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1457, entity_name: 'Texas State University (Texas State) Bobcats', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1458, entity_name: 'Troy University (Troy) Trojans', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1459, entity_name: 'Western Kentucky University (Western Kentucky) Hilltoppers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1460, entity_name: 'Brigham Young University (BYU) Cougars', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1461, entity_name: 'Gonzaga University (Gonzaga) Bulldogs', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1462, entity_name: 'Loyola Marymount University (Loyola Marymount) Lions', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1463, entity_name: 'University of the Pacific (Pacific) Tigers', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1464, entity_name: 'Pepperdine University (Pepperdine) Waves', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1465, entity_name: 'University of Portland (Portland) Pilots', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1466, entity_name: 'Saint Mary\'s College of California (St. Mary\'s) Gaels', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1467, entity_name: 'University of San Diego (San Diego) Toreros', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1468, entity_name: 'University of San Francisco (San Francisco) Dons', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1469, entity_name: 'Santa Clara University (Santa Clara) Broncos', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1470, entity_name: 'California State University, Bakersfield (Cal State Bakersfield) Roadrunners', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1471, entity_name: 'Chicago State University (Chicago State) Cougars', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1472, entity_name: 'Grand Canyon University (Grand Canyon) Antelopes', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1473, entity_name: 'University of Idaho (Idaho) Vandals', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1474, entity_name: 'University of Missouri–Kansas City (UMKC) Kangaroos', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1475, entity_name: 'New Mexico State University (New Mexico State) Aggies', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1476, entity_name: 'Seattle University (Seattle) Redhawks', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1477, entity_name: 'University of Texas–Pan American (UTPA) Broncs', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1478, entity_name: 'Utah Valley University (Utah Valley) Wolverines', entity_type: 'NCAAMB', status: 1
+    id: 1478, entity_name: "Utah Valley Wolverines", status: 1, created_at: "2014-08-12 23:17:52", import_key: "l.ncaa.org.mbasket-t.G35", entity_type: "NCAAMB"
   }
 ])

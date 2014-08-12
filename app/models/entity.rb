@@ -4,7 +4,7 @@ class Entity < ActiveRecord::Base
   has_many :events
 
   validates :entity_name, :presence => true
-  validates_uniqueness_of :entity_name
+  # validates_uniqueness_of :entity_name, scope: :entity_type
 
   def initialize(attributes={})
     attr_with_defaults = {
