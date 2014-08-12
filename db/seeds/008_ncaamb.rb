@@ -913,10 +913,7 @@ Entity.create([
     id: 1430, entity_name: 'Texas A&M University-Corpus Christi Islanders', entity_type: 'NCAAMB', status: 1
   },
   {
-    id: 1431, entity_name: 'Alabama Agricultural and Mechanical University ', entity_type: 'NCAAMB', status: 1
-  },
-  {
-    id: 1432, entity_name: '(Alabama A & M) Bulldogs', entity_type: 'NCAAMB', status: 1
+    id: 1431, entity_name: 'Alabama Agricultural and Mechanical University (Alabama A & M) Bulldogs', entity_type: 'NCAAMB', status: 1
   },
   {
     id: 1433, entity_name: 'Alabama State University (Alabama State) Hornets', entity_type: 'NCAAMB', status: 1
