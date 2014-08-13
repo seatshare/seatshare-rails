@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140713235038) do
     t.string   "entity_type", default: "", null: false
   end
 
-  add_index "entities", ["entity_name"], name: "index_entities_on_entity_name", unique: true, using: :btree
+  add_index "entities", ["entity_name", "entity_type"], name: "index_entities_on_entity_name_and_entity_type", unique: true, using: :btree
   add_index "entities", ["import_key"], name: "index_entities_on_import_key", unique: true, using: :btree
 
   create_table "events", force: true do |t|
