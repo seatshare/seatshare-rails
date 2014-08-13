@@ -168,6 +168,8 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    select2-rails (3.5.9)
+      thor (~> 0.14)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -216,6 +218,7 @@ DEPENDENCIES
   rails_12factor
   sass-rails (~> 4.0.0)
   sdoc
+  select2-rails
   soda_xml_team!
   thin
   turbolinks
