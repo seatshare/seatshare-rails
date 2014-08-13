@@ -66,6 +66,9 @@ gem 'pg'
 # 12factor
 gem 'rails_12factor', group: :production
 
+# Select2
+gem 'select2-rails'
+
 # ActiveAdmin
 gem 'activeadmin', github: 'gregbell/active_admin'
 
