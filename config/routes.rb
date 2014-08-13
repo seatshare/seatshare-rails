@@ -7,6 +7,7 @@ SeatShare::Application.routes.draw do
 
   root 'public#index'
 
+  get 'teams' => 'public#teams'
   get 'tos' => 'public#tos'
   get 'privacy' => 'public#privacy'
   get 'contact' => 'public#contact'
