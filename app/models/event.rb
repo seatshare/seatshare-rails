@@ -13,6 +13,12 @@ class Event < ActiveRecord::Base
       :description => '',
       :import_key => generate_import_key(attributes)
     }.merge(attributes)
+
+    # Prevent empty import key
+    if attributes[:import_key] === ''
+      attr_with_defaults[:import_key] = generate_import_key(attributes)
+    end
+
     super(attr_with_defaults)
   end
 
@@ -99,7 +105,7 @@ class Event < ActiveRecord::Base
   private
 
   def generate_import_key(attributes)
-    "#{attributes[:entity_id]}: #{attributes[:event_name]} #{attributes[:date_time]}".parameterize
+    "#{attributes[:entity_id]}: #{attributes[:event_name]} #{attributes[:start_time]}".parameterize
   end
 
 

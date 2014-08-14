@@ -62,4 +62,23 @@ class EventTest < ActiveSupport::TestCase
     assert stats[:percent_full] === 50
   end
 
+  test "two created events do not share an import key" do
+    event1 = Event.create({
+        event_name: 'Event 1',
+        entity_id: 1,
+        start_time: '2014-01-01 12:00',
+        import_key: ''
+    })
+    event2 = Event.create({
+        event_name: 'Event 2',
+        entity_id: 1,
+        start_time: '2014-01-01 12:00',
+        import_key: ''
+    })
+
+    assert event1[:event_name] === 'Event 1'
+    assert event2[:event_name] === 'Event 2'
+
+  end
+
 end
