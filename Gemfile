@@ -81,3 +81,4 @@ gem 'soda_xml_team', '~> 1.0.6'
 # Capistrano
 gem 'capistrano', '~> 3.2.1'
 gem 'capistrano-rails', '~> 1.1'
+gem 'capistrano-bower', '~> 1.0'
