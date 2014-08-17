@@ -77,3 +77,7 @@ gem 'mailchimp-api', '~> 2.0.5'
 
 # SeatShare's own SODA gem
 gem 'soda_xml_team', '~> 1.0.6'
+
+# Capistrano
+gem 'capistrano', '~> 3.2.1'
+gem 'capistrano-rails', '~> 1.1'
