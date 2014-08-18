@@ -26,6 +26,9 @@ set :default_env, { path: "/opt/rbenv/shims:$PATH" }
 
 set :keep_releases, 5
 
+# Whenever (for scheduled jobs)
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+
 namespace :deploy do
 
   desc 'Restart application'
