@@ -2,11 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-# Ticket alias toggle
 ticketsReady = ->
 
+	# Ticket alias toggle
 	ticket_user_id_field = $('select[name="ticket[user_id]"]')
-
 	ticket_alias_toggle = ->
 		current_user = parseInt(ticket_user_id_field.data('current'),10)
 		ticket_user = parseInt(ticket_user_id_field.val(),10)
@@ -22,6 +21,12 @@ ticketsReady = ->
 
 	# Bind change event
 	ticket_user_id_field.change ticket_alias_toggle
+   
+   # Ticket toggles
+	$('.tickets_select_all').click ->
+		$('input:checkbox').prop('checked',true)
+	$('.tickets_select_none').click ->
+		$('input:checkbox').prop('checked',false)
 
 	true
 
