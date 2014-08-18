@@ -7,7 +7,7 @@ class GroupNotifierTest < ActionMailer::TestCase
     email = GroupNotifier.create_invite(invite).deliver
 
     assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal ['no-reply@seatsha.re'], email.from
+    assert_equal ['no-reply@myseatshare.com'], email.from
     assert_equal ['bob@example.com'], email.to
     assert_equal 'You have been invited to join Geeks Watching Hockey', email.subject
     assert_includes email.body.to_s, '<title>You have been invited to join Geeks Watching Hockey</title>'
