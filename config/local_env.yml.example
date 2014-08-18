@@ -10,7 +10,7 @@
 SEATSHARE_S3_KEY: 'the_s3_key'
 SEATSHARE_S3_SECRET: 'the_s3_secret'
 SEATSHARE_S3_BUCKET: 'lockbox.seatsha.re'
-SEATSHARE_S3_PUBLIC: 'https://lockbox.seatsha.re'
+SEATSHARE_S3_PUBLIC: 'https://lockbox.myseatshare.com'
 
 MAILCHIMP_API_KEY: 'the_api_key'
 MAILCHIMP_LIST_ID: 'the_list_id'

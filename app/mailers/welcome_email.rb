@@ -1,5 +1,5 @@
 class WelcomeEmail < ActionMailer::Base
-  default from: "no-reply@seatsha.re"
+  default from: "no-reply@myseatshare.com"
   layout 'email'
 
   def welcome(user=nil)

@@ -1,5 +1,5 @@
 class TicketNotifier < ActionMailer::Base
-  default from: "no-reply@seatsha.re"
+  default from: "no-reply@myseatshare.com"
   layout 'email'
 
   def assign(ticket=nil, user=nil)

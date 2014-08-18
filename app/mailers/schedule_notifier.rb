@@ -1,5 +1,5 @@
 class ScheduleNotifier < ActionMailer::Base
-  default from: "no-reply@seatsha.re"
+  default from: "no-reply@myseatshare.com"
   layout 'email'
 
   def daily_schedule(events, group, user)

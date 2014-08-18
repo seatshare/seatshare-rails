@@ -40,7 +40,7 @@ SeatShare::Application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Set to :debug to see everything in the log.
   config.log_level = :info
@@ -83,11 +83,11 @@ SeatShare::Application.configure do
   config.action_mailer.smtp_settings = {
     address:              ENV['MANDRILL_SMTP_HOST'],
     port:                 587,
-    domain:               'seatsha.re',
+    domain:               'myeatshare.com',
     user_name:            ENV['MANDRILL_SMTP_USER'],
     password:             ENV['MANDRILL_SMTP_PASS'],
     authentication:       'plain',
     enable_starttls_auto: true  }
-  config.action_mailer.default_url_options = { :host => 'http://seatsha.re' }
+  config.action_mailer.default_url_options = { :host => 'https://myseatshare.com' }
 
 end
