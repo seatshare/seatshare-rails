@@ -8,5 +8,9 @@
   ga('create', '<%= ENV['GOOGLE_ANALYTICS_ID'] %>', 'myseatshare.com');
   ga('send', 'pageview');
 
+  <% if user_signed_in? %>
+  ga('set', '&uid', '<%= current_user.id %>');
+  <% end %>
+
 </script>
 <% end %>
