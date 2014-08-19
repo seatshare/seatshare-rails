@@ -3,10 +3,13 @@ require 'capistrano/setup'
 
 # Includes default deployment tasks
 require 'capistrano/deploy'
-
 require 'capistrano/rails'
 
+# Bower (for assets)
 require 'capistrano/bower'
+
+# Whenever (for scheduled jobs)
+require 'whenever/capistrano'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
