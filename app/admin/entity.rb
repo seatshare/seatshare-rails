@@ -17,4 +17,12 @@ ActiveAdmin.register Entity do
     actions
   end
 
+  sidebar 'Entity Groups', :only => :show do
+    ul do
+      Entity.find(resource.id).groups.order_by_name.collect do |group|
+        li auto_link(group)
+      end
+    end
+  end
+
 end

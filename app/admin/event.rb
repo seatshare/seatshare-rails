@@ -121,4 +121,12 @@ ActiveAdmin.register Event do
 
   end
 
+  sidebar 'Tickets', :only => :show do
+    ul do
+      Event.find(resource.id).tickets.collect do |ticket|
+        li auto_link(ticket)
+      end
+    end
+  end
+
 end
