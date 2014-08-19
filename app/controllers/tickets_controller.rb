@@ -10,9 +10,9 @@ class TicketsController < ApplicationController
       :user_id => current_user.id
     })
 
-    @members = @group.members.collect {|p| [ p.full_name, p.id ] }
+    @members = @group.users.order_by_name.collect {|p| [ p.full_name, p.id ] }
     @members.unshift(['Unassigned', 0])
-    @user_aliases = current_user.user_aliases.collect {|p| [ p.full_name, p.id ] }
+    @user_aliases = current_user.user_aliases.order_by_name.collect {|p| [ p.full_name, p.id ] }
     @user_aliases.unshift(['Not Set', 0])
 
     if params[:event_id]
@@ -79,7 +79,7 @@ class TicketsController < ApplicationController
     end
 
     @ticket_stats = @event.ticket_stats(@group, current_user)
-    @members = @group.members.collect {|p| [ p.full_name, p.id ] }
+    @members = @group.users.order_by_name.order_by_name.collect {|p| [ p.full_name, p.id ] }
     @members.unshift(['Unassigned', 0])
     @user_aliases = current_user.user_aliases.collect {|p| [ p.full_name, p.id ] }
     @user_aliases.unshift(['Unassigned', 0])

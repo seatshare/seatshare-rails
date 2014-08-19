@@ -10,4 +10,8 @@ class GroupUser < ActiveRecord::Base
     super(attr_with_defaults)
   end
 
+  def display_name
+    "#{user} - #{group}"
+  end
+
 end

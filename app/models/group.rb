@@ -2,7 +2,13 @@ class Group < ActiveRecord::Base
   belongs_to :entity
   belongs_to :creator, :class_name => 'User'
 
+  has_many :group_users
+  has_many :users, through: :group_users
+
   validates :entity_id, :group_name, :creator_id, :invitation_code, :presence => true
+
+  scope :order_by_name, -> { order('LOWER(group_name) ASC') }
+  scope :active, -> { where('status = 1') }
 
   def initialize(attributes={})
     attr_with_defaults = {
@@ -20,30 +26,14 @@ class Group < ActiveRecord::Base
     Event.where("entity_id = #{self.entity.id}")
   end
 
-  def members
-    User.get_users_by_group_id(self.id)
-  end
-
   def administrators
-    User.get_users_by_group_id(self.id, 'admin')
+    User.joins(:groups).where(group_users: { role: 'admin' })
   end
 
   def self.get_by_ticket_id(ticket_id=nil)
     ticket = Ticket.find(ticket_id)
     group = Group.find(ticket.group_id)
     return group
-  end
-
-  def self.get_groups_by_user_id(user_id=nil)
-    user_groups = GroupUser.where("user_id = #{user_id}")
-    groups = Array.new
-    user_groups.map do |user_group|
-      group = Group.find(user_group.group_id)
-      if group.status === 1
-        groups.push group
-      end
-    end
-    return groups
   end
 
   def is_member(user=nil)

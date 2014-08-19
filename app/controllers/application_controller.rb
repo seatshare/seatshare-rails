@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def load_shared_interface_variables
-    @group_selector = Group.get_groups_by_user_id(current_user.id).collect {|p| [ p.group_name, p.id ] }
+    @group_selector = current_user.groups.order_by_name.active.collect {|p| [ p.group_name, p.id ] }
   end
 
   def configure_devise_permitted_parameters

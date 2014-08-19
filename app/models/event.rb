@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
 
   validates :entity_id, :event_name, :start_time, :presence => true
 
+  scope :order_by_date, -> { order('start_time ASC') }
+
   @ticket_stats = nil
 
   def initialize(attributes={})
@@ -39,7 +41,7 @@ class Event < ActiveRecord::Base
       raise "NoGroupSpecified"
     end
     if user.nil?
-      railse "NoUserSpecified"
+      raise "NoUserSpecified"
     end
 
     tickets = self.tickets(group)
@@ -75,11 +77,6 @@ class Event < ActiveRecord::Base
       out += self.start_time.strftime('%-I:%M %P')
     end
     return out
-  end
-
-  def self.get_by_group_id(group_id=nil)
-    entity = Entity.get_by_group_id(group_id)
-    Event.where("entity_id = #{entity.id}")
   end
 
   def self.get_by_ticket_id(ticket_id=nil)

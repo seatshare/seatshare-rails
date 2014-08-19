@@ -21,7 +21,7 @@ class GroupTest < ActiveSupport::TestCase
     assert group.group_name === 'Geeks Watching Hockey', 'group name matches fixture'
     assert group.entity_id === 1, 'group entity ID matches fixture'
     assert group.entity.entity_name === 'Nashville Predators', 'entity name matches fixture'
-    assert group.members.count === 3, 'group member count matches'
+    assert group.users.count === 3, 'group member count matches'
   end
 
   test "get group by ticket ID" do
@@ -32,7 +32,7 @@ class GroupTest < ActiveSupport::TestCase
   end
 
   test "gets groups by user ID" do
-    groups = Group.get_groups_by_user_id(2)
+    groups = User.find(2).groups
 
     assert groups.count === 2, 'fixture group count matches'
   end

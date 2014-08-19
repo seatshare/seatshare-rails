@@ -19,7 +19,7 @@ class EntityTest < ActiveSupport::TestCase
   end
 
   test "gets entity by group ID" do
-    entity = Entity.get_by_group_id(2)
+    entity = Group.find(2).entity
 
     assert entity.id === 6, 'fixture entity ID matches'
     assert entity.entity_name === 'Nashville Sportsball', 'fixture entity name matches'
@@ -27,7 +27,7 @@ class EntityTest < ActiveSupport::TestCase
   end
 
   test "get all active entities" do
-    entities = Entity.get_active_entities()
+    entities = Entity.active
 
     assert entities.count() === 5, 'count of fixture entities matches'
     assert entities[0].class.to_s === 'Entity', 'class of fixture entity matches'

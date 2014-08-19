@@ -13,7 +13,7 @@ class GroupInvitation < ActiveRecord::Base
   end
 
   def display_name
-    "#{invitation_code}"
+    "#{group_name}"
   end
 
   def self.get_by_invitation_code(invitation_code=nil)
