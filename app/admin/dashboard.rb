@@ -53,7 +53,7 @@ ActiveAdmin.register_page "Dashboard" do
 
         panel "Upcoming's Events" do
           ul do
-            Event.where("start_time > '#{Date.today}'").first(5).map do |event|
+            Event.order_by_date.where("start_time > '#{Date.today}'").first(5).map do |event|
               li link_to(event.display_name, admin_event_path(event))
             end
           end

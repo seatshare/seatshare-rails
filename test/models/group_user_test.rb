@@ -13,7 +13,7 @@ class GroupUserTest < ActiveSupport::TestCase
   end
 
   test "group users match group ID" do
-    users = User.get_users_by_group_id(1)
+    users = Group.find(1).users
 
     assert users.count === 3, 'fixture user count matches'
     assert users[0].first_name?, 'fixture first name is set'
@@ -21,7 +21,7 @@ class GroupUserTest < ActiveSupport::TestCase
   end
 
   test "groups match user match user ID" do
-    groups = Group.get_groups_by_user_id(2)
+    groups = User.find(2).groups
 
     assert groups.count === 2, 'fixture group count matches'
     assert groups[0].group_name?, 'fixture group name is set'

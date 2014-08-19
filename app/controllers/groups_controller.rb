@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
 
   def index
     @page_title = "Groups"
-    @groups = Group.get_groups_by_user_id(current_user.id)
+    @groups = current_user.groups
     if @groups.blank?
       render 'groups/welcome'
     end
@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
 
   def new
     @page_title = "Create a Group"
-    @entities = Entity.get_active_entities.inject({}) do |options, entity|
+    @entities = Entity.order_by_name.active.inject({}) do |options, entity|
       (options[entity.entity_type] ||= []) << [entity.entity_name, entity.id]
       options
     end
@@ -37,6 +37,7 @@ class GroupsController < ApplicationController
   def edit
     @page_title = "Edit Group"
     @group = Group.find_by_id(params[:id]) || not_found
+    @members = @group.users.order_by_name
     @group_user = GroupUser.where("user_id = #{current_user.id} AND group_id = #{@group.id}").first
   end
 
@@ -57,7 +58,7 @@ class GroupsController < ApplicationController
     else
 
       if !group.is_member(current_user)
-        raise "NotGroupAdmin"
+        raise "NotGroupMember"
       end
       daily_reminder = params[:group_user][:daily_reminder].to_i
       weekly_reminder = params[:group_user][:weekly_reminder].to_i
@@ -80,6 +81,7 @@ class GroupsController < ApplicationController
       redirect_to :action => 'index' and return
     end
     @events = @group.events.order('start_time ASC').where("start_time > '#{Date.today}'")
+    @members = @group.users.order_by_name
     session[:current_group_id] = @group.id
     @page_title = @group.group_name
   end

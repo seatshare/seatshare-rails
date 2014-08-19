@@ -8,8 +8,8 @@ class PublicController < ApplicationController
       if session[:current_group_id].is_a? Numeric
         redirect_to :controller => 'groups', :action => 'show', :id => session[:current_group_id], :status => 302 and return
       else
-        groups = Group.get_groups_by_user_id(current_user.id)
-        if groups.blank?
+        groups = current_user.groups.active
+        if groups.count == 0
           redirect_to :controller => 'groups', :action => 'index', :status => 302 and return
         else
           redirect_to :controller => 'groups', :action => 'show', :id => groups.first.id, :status => 302 and return

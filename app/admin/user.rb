@@ -29,5 +29,13 @@ ActiveAdmin.register User do
     end
     f.actions
   end
+ 
+  sidebar 'User Groups', :only => :show do
+    ul do
+      User.find(resource.id).groups.order_by_name.collect do |group|
+        li auto_link(group)
+      end
+    end
+  end
 
 end

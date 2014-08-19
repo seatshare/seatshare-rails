@@ -6,6 +6,9 @@ class Entity < ActiveRecord::Base
   validates :entity_name, :presence => true
   validates_uniqueness_of :entity_name, scope: :entity_type
 
+  scope :order_by_name, -> { order('LOWER(entity_type) ASC, LOWER(entity_name) ASC') }
+  scope :active, -> { where('status = 1') }
+
   def initialize(attributes={})
     attr_with_defaults = {
       :status => 0,
@@ -16,19 +19,6 @@ class Entity < ActiveRecord::Base
 
   def display_name
     "#{entity_name} (#{entity_type})"
-  end
-
-  def self.get_by_group_id(group_id=nil)
-    group = Group.find(group_id)
-    Entity.find(group.entity_id)
-  end
-
-  def self.get_by_entity_type(entity_type=nil)
-    Entity.where("entity_type = '#{entity_type}'").order('entity_name ASC')
-  end
-
-  def self.get_active_entities
-    Entity.where("status = 1").order('entity_type ASC, entity_name ASC')
   end
 
   private

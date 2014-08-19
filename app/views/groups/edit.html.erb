@@ -59,7 +59,7 @@
       </tr>
     </thead>
     <tbody>
-      <% for member in @group.members %>
+      <% for member in @members %>
       <tr>
         <td><%= image_tag member.gravatar %></td>
         <td><%= link_to member.full_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></td>

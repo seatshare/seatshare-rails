@@ -6,8 +6,12 @@ class User < ActiveRecord::Base
   has_many :groups
   has_many :tickets
   has_many :user_aliases
-  
+  has_many :group_users
+  has_many :groups, through: :group_users
+
   validates :first_name, :last_name, :email, :presence => true
+
+  scope :order_by_name, -> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') }
 
   attr_accessor :newsletter_signup
   attr_accessor :invite_code
@@ -36,18 +40,6 @@ class User < ActiveRecord::Base
     email_address = self.email.downcase
     hash = Digest::MD5.hexdigest(email_address)
     "https://www.gravatar.com/avatar/#{hash}?s=#{dimensions}&d=mm"
-  end
-
-  def self.get_users_by_group_id(group_id=nil, role=nil)
-    user_users = GroupUser.where("group_id = #{group_id}")
-    users = Array.new
-    user_users.map do |user_group|
-      user = User.find(user_group.user_id)
-      next if !role.nil? && user_group.role != role
-      next if user.status != 1
-      users.push user
-    end
-    users
   end
 
 end
