@@ -10,7 +10,7 @@ class TicketNotifier < ActionMailer::Base
     @user = user
 
     mail(
-      to: "#{@recipient.full_name} <#{@recipient.email}>",
+      to: "#{@recipient.display_name} <#{@recipient.email}>",
       subject: "#{@user.first_name} has assigned you a ticket via #{@group.group_name}"
     )
   end
@@ -24,7 +24,7 @@ class TicketNotifier < ActionMailer::Base
     @message = message
 
     mail(
-      to: "#{@recipient.full_name} <#{@recipient.email}>",
+      to: "#{@recipient.display_name} <#{@recipient.email}>",
       subject: "#{@user.first_name} has requested your ticket via #{@group.group_name}"
     )
   end

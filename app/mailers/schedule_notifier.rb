@@ -8,7 +8,7 @@ class ScheduleNotifier < ActionMailer::Base
     @user = user
 
     mail(
-      to: "#{user.full_name} <#{@user.email}>",
+      to: "#{user.display_name} <#{@user.email}>",
       subject: "Today's events for #{@group.group_name}"
     )
   end
@@ -29,7 +29,7 @@ class ScheduleNotifier < ActionMailer::Base
     @user = user
 
     mail(
-      to: "#{user.full_name} <#{@user.email}>",
+      to: "#{user.display_name} <#{@user.email}>",
       subject: "The week ahead for #{@group.group_name}"
     )
   end

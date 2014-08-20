@@ -16,9 +16,9 @@ class TicketTest < ActiveSupport::TestCase
     ticket.save!
 
     assert ticket.cost === 45.00
-    assert ticket.section_row_seat === '301 Q 3'
-    assert ticket.owner.full_name === 'Jim Stone'
-    assert ticket.assigned.full_name === 'Jill Smith'
+    assert ticket.display_name === '301 Q 3'
+    assert ticket.owner.display_name === 'Jim Stone'
+    assert ticket.assigned.display_name === 'Jill Smith'
     assert ticket.group.group_name === 'Geeks Watching Hockey'
     assert ticket.event.event_name === 'Nashville Predators vs. St. Louis Blues'
   end
@@ -26,13 +26,13 @@ class TicketTest < ActiveSupport::TestCase
   test "owner property is set" do
     ticket = Ticket.find(1)
 
-    assert ticket.owner.full_name === 'Jim Stone'
+    assert ticket.owner.display_name === 'Jim Stone'
   end
 
   test "assigned property is set" do
     ticket = Ticket.find(1)
 
-    assert ticket.assigned.full_name === 'Jim Stone'
+    assert ticket.assigned.display_name === 'Jim Stone'
 
     ticket = Ticket.find(2)
 
@@ -42,7 +42,7 @@ class TicketTest < ActiveSupport::TestCase
   test "alias property is set" do
     ticket = Ticket.find(4)
 
-    assert ticket.alias.full_name === 'Jennifer Newton'
+    assert ticket.alias.display_name === 'Jennifer Newton'
 
     ticket = Ticket.find(1)
 
@@ -55,14 +55,14 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket.group.group_name === 'Geeks Watching Hockey'
   end
 
-  test "section_row_seat property is set" do
+  test "display_name property is set" do
     ticket = Ticket.find(1)
 
-    assert ticket.section_row_seat === '326 K 9'
+    assert ticket.display_name === '326 K 9'
 
     ticket = Ticket.find(5)
 
-    assert ticket.section_row_seat === 'VIP'
+    assert ticket.display_name === 'VIP'
   end
 
   test "is_available? check" do

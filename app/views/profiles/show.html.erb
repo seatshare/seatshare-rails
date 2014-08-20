@@ -13,7 +13,7 @@
       <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span> Edit Profile'), { :action => 'edit' }, :class => 'btn btn-default' %>
     </p>
     <% end %>
-    <h2><%= @user.full_name %></h2>
+    <h2><%= @user.display_name %></h2>
     <ul class="list-unstyled">
       <li><span class="glyphicon glyphicon-envelope"></span> <%= mail_to @user.email, @user.email %></li>
     </ul>

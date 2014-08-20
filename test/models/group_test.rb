@@ -25,7 +25,7 @@ class GroupTest < ActiveSupport::TestCase
   end
 
   test "get group by ticket ID" do
-    group = Group.get_by_ticket_id(1)
+    group = Ticket.find(1).group
 
     assert group.id === 1, 'fixture group ID matches'
     assert group.group_name === 'Geeks Watching Hockey', 'fixture group name matches'

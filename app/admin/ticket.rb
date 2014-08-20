@@ -18,7 +18,7 @@ ActiveAdmin.register Ticket do
     column :owner
     column :user
     column :event
-    column :section_row_seat
+    column :display_name
     column :cost do |ticket|
       number_to_currency ticket.cost
     end

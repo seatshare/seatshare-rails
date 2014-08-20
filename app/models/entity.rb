@@ -14,6 +14,12 @@ class Entity < ActiveRecord::Base
       :status => 0,
       :import_key => generate_import_key(attributes)
     }.merge(attributes)
+
+    # Prevent empty import key
+    if attributes[:import_key] === ''
+      attr_with_defaults[:import_key] = generate_import_key(attributes)
+    end
+
     super(attr_with_defaults)
   end
 
