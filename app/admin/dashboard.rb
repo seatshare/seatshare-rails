@@ -38,7 +38,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent Users" do
           ul do
             User.last(5).map do |user|
-              li link_to(user.full_name, admin_user_path(user))
+              li link_to(user.display_name, admin_user_path(user)) + " <small>joined #{user.created_at.strftime('%-m/%-d/%Y')}</small>".html_safe
             end
           end
         end
@@ -46,7 +46,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent Groups" do
           ul do
             Group.last(5).map do |group|
-              li link_to(group.group_name, admin_group_path(group))
+              li link_to(group.group_name, admin_group_path(group)) + " <small>created #{group.created_at.strftime('%-m/%-d/%Y')}</small>".html_safe
             end
           end
         end

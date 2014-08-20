@@ -35,9 +35,9 @@
     <tr>
       <td>
         <% if ticket.assigned && ticket.owner.id != current_user.id && ticket.assigned.id != current_user.id %>
-        <%= link_to ticket.section_row_seat, { :controller => 'tickets', :action => 'request_ticket', :group_id => @group.id, :event_id => @event.id, :id => ticket.id } %>
+        <%= link_to ticket.display_name, { :controller => 'tickets', :action => 'request_ticket', :group_id => @group.id, :event_id => @event.id, :id => ticket.id } %>
         <% else %>
-        <%= link_to ticket.section_row_seat, { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => @event.id } %>
+        <%= link_to ticket.display_name, { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => @event.id } %>
         <% end %>
         <% if !ticket.note.nil? && ticket.note.length > 0 %>
         <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
@@ -47,13 +47,13 @@
         <% end %>
       </td>
       <td>
-        <%= link_to ticket.owner.full_name, :controller => 'profiles', :action => 'show', :id => ticket.owner.id %>
+        <%= link_to ticket.owner.display_name, :controller => 'profiles', :action => 'show', :id => ticket.owner.id %>
       </td>
       <td>
         <% if ticket.assigned %>
-        <%= link_to ticket.assigned.full_name, :controller => 'profiles', :action => 'show', :id => ticket.assigned.id %>
+        <%= link_to ticket.assigned.display_name, :controller => 'profiles', :action => 'show', :id => ticket.assigned.id %>
         <% if ticket.alias %>
-        <br />(for <%= ticket.alias.full_name %>)
+        <br />(for <%= ticket.alias.display_name %>)
         <% end %>
         <% else %>
         <%= link_to raw('<span class="badge badge-lg">Available!</span>'), { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => @event.id }, { :data => { :toggle => 'tooltip'}, :title => 'Request Ticket' } %>

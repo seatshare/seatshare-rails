@@ -6,7 +6,7 @@
 
 <p>Hi!</p>
  
-<p><%= @user.full_name %> has invited you to join our <strong><%= @group.entity.entity_name %></strong> group on <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %>, a service that helps manage our season tickets.</p>
+<p><%= @user.display_name %> has invited you to join our <strong><%= @group.entity.entity_name %></strong> group on <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %>, a service that helps manage our season tickets.</p>
 
 <table cellpadding="10px">
   <tr>
@@ -44,6 +44,6 @@
 <p>
   ---<br />
   <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %>, on behalf of
-  <%= @user.full_name %><br />
+  <%= @user.display_name %><br />
   <%= mail_to @user.email, @user.email %>
 </p>

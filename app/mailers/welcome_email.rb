@@ -6,7 +6,7 @@ class WelcomeEmail < ActionMailer::Base
     @recipient = user
 
     mail(
-      to: "#{@recipient.full_name} <#{@recipient.email}>",
+      to: "#{@recipient.display_name} <#{@recipient.email}>",
       subject: "Welcome to SeatShare, #{@recipient.first_name}!"
     )
   end

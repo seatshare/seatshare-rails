@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    Your <strong><%= @group.entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.full_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
+    Your <strong><%= @group.entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.display_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
     <div class="pull-right">
       <%= link_to raw('<span class="glyphicon glyphicon-cog"></span>'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
     </div>
@@ -43,7 +43,7 @@
         <% next if ticket.is_assigned? %>
         <tr>
           <td>
-            <%= link_to ticket.section_row_seat, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
+            <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
             <% if ticket.note? %>
             <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
             <% end %>
@@ -51,7 +51,7 @@
             <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
             <% end %>
           </td>
-          <td>via <%= ticket.owner.full_name %></td>
+          <td>via <%= ticket.owner.display_name %></td>
           <td class="text-right">
             <%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id }, :class => 'btn btn-primary', :data => {:toggle => 'tooltip' }, :title => 'Request Ticket' %>
           </td>
@@ -100,7 +100,7 @@
           <% next if ticket.is_assigned? %>
           <tr>
             <td>
-              <%= link_to ticket.section_row_seat, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
+              <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
               <% if ticket.note? %>
               <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
               <% end %>
@@ -108,7 +108,7 @@
               <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
               <% end %>
             </td>
-            <td>via <%= ticket.owner.full_name %></td>
+            <td>via <%= ticket.owner.display_name %></td>
             <td class="text-right">
               <%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id }, :class => 'btn btn-primary', :data => {:toggle => 'tooltip' }, :title => 'Request Ticket' %>
             </td>
@@ -175,7 +175,7 @@
 
 <ul class="list-unstyled group-members">
   <% for member in @members %>
-  <li><%= image_tag member.gravatar %> <%= link_to member.full_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></li>
+  <li><%= image_tag member.gravatar %> <%= link_to member.display_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></li>
   <% end %>
   <li class="text-right"><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
 </ul>

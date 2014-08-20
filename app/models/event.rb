@@ -25,7 +25,7 @@ class Event < ActiveRecord::Base
   end
 
   def display_name
-    "#{entity.entity_name}: #{event_name} #{date_time}"
+    "#{entity.entity_name}: #{event_name} - #{date_time}"
   end
 
   def tickets(group=nil)
@@ -77,11 +77,6 @@ class Event < ActiveRecord::Base
       out += self.start_time.strftime('%-I:%M %P')
     end
     return out
-  end
-
-  def self.get_by_ticket_id(ticket_id=nil)
-    ticket = Ticket.find(ticket_id)
-    Event.find(ticket.event_id)
   end
 
   def self.import(row=nil)

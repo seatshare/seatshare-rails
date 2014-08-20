@@ -31,10 +31,6 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def full_name
-    "#{first_name} #{last_name}"
-  end
-
   def gravatar(dimensions='30x30')
     require 'digest/md5'
     email_address = self.email.downcase

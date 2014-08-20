@@ -30,12 +30,6 @@ class Group < ActiveRecord::Base
     User.joins(:groups).where(group_users: { role: 'admin' })
   end
 
-  def self.get_by_ticket_id(ticket_id=nil)
-    ticket = Ticket.find(ticket_id)
-    group = Group.find(ticket.group_id)
-    return group
-  end
-
   def is_member(user=nil)
     group_user = GroupUser.where("group_id = #{self.id} AND user_id = #{user.id}").first
     if group_user.nil?

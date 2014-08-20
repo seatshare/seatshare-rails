@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id]) || not_found
-    @page_title = "#{@user.full_name}"
+    @page_title = "#{@user.display_name}"
   end
 
   def edit

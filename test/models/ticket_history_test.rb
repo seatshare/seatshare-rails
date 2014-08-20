@@ -22,7 +22,7 @@ class TicketHistoryTest < ActiveSupport::TestCase
   test "ticket property is set" do
     ticket_history = TicketHistory.find(1)
 
-    assert ticket_history.ticket.section_row_seat === '326 K 9'
+    assert ticket_history.ticket.display_name === '326 K 9'
   end
 
   test "event property is set" do
@@ -40,7 +40,7 @@ class TicketHistoryTest < ActiveSupport::TestCase
   test "user property is set" do
     ticket_history = TicketHistory.find(1)
 
-    assert ticket_history.user.full_name === 'Jim Stone'
+    assert ticket_history.user.display_name === 'Jim Stone'
   end
 
 end

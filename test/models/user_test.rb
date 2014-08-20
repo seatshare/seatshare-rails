@@ -26,7 +26,7 @@ class UserTest < ActiveSupport::TestCase
   test "get full name of user" do
     user = User.find(2)
 
-    assert user.full_name === 'Jill Smith'
+    assert user.display_name === 'Jill Smith'
   end
 
   test "group users match group ID" do

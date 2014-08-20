@@ -11,7 +11,7 @@ namespace :send_reminders do
         for group_user in group.group_users
           if group_user.daily_reminder === 1
             user = User.find(group_user.user_id)
-            puts "- Sending #{user.full_name} for #{group.group_name}"
+            puts "- Sending #{user.display_name} for #{group.group_name}"
             ScheduleNotifier.daily_schedule(events, group, user).deliver
           end
         end
@@ -34,7 +34,7 @@ namespace :send_reminders do
         for group_user in group.group_users
           if group_user.weekly_reminder === 1
             user = User.find(group_user.user_id)
-            puts "- Sending #{user.full_name} for #{group.group_name}"
+            puts "- Sending #{user.display_name} for #{group.group_name}"
             ScheduleNotifier.daily_schedule(events, group, user).deliver
           end
         end

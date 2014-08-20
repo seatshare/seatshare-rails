@@ -11,15 +11,11 @@ class Ticket < ActiveRecord::Base
   validates :cost, :numericality => { :greater_than_or_equal_to => 0 }
 
   def display_name
-    "#{section_row_seat}"
+    [self.section, self.row, self.seat].join(" ").strip
   end
 
   def assigned
     User.find_by_id(self.user_id)
-  end
-
-  def section_row_seat
-    [self.section, self.row, self.seat].join(" ").strip
   end
 
   def is_available?

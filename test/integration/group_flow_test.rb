@@ -39,4 +39,17 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     assert_equal 'You have left Geeks Watching Hockey', flash[:success]
   end
 
+  test "invite a user" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+
+    get '/groups/1/invite'
+    assert_response :success
+
+    post_via_redirect '/groups/1/invite', {:group_invitation => { :email => 'rick@example.net', :message => 'Join us!'}}
+    assert_response :success
+    assert_equal '/groups/1', path
+    assert_equal 'Group invitation sent!', flash[:success]
+
+  end
+
 end

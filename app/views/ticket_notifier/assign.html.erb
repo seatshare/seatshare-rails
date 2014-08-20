@@ -1,6 +1,6 @@
 <p><%= @recipient.first_name %>,</p>
 
-<p><%= @user.full_name %> (<%= mail_to @user.email, @user.email %>) has assigned a ticket to you for the following event in your group <%= @group.group_name %>.</p>
+<p><%= @user.display_name %> (<%= mail_to @user.email, @user.email %>) has assigned a ticket to you for the following event in your group <%= @group.group_name %>.</p>
 
 <table cellpadding="10px">
   <tr>
@@ -13,7 +13,7 @@
   </tr>
   <tr>
     <th>Ticket</th>
-    <td><%= link_to @ticket.section_row_seat, { :controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id, :only_path => false } %></td>
+    <td><%= link_to @ticket.display_name, { :controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id, :only_path => false } %></td>
   </tr>
 </table>
 
@@ -36,6 +36,6 @@
  
 <p>
   ---<br />
-  <%= link_to 'SeatShare', { :controller => 'public', :action => 'index', :only_path => false } %>  on behalf of <%= @user.full_name %><br />
+  <%= link_to 'SeatShare', { :controller => 'public', :action => 'index', :only_path => false } %>  on behalf of <%= @user.display_name %><br />
   <%= mail_to @user.email, @user.email %></a>
 </p>
