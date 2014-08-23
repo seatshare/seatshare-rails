@@ -1,11 +1,18 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation
+  permit_params :first_name, :last_name, :email, :password, :password_confirmation, :status
 
   index do
     selectable_column
     id_column
     column :display_name
     column :email
+    column :status do |entity|
+      if entity.status == 1
+        status_tag('active', :ok)
+      else
+        status_tag('inactive')
+      end
+    end
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -24,8 +31,7 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :email
-      f.input :password
-      f.input :password_confirmation
+      f.input :status
     end
     f.actions
   end

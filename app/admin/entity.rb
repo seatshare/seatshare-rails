@@ -11,7 +11,13 @@ ActiveAdmin.register Entity do
     selectable_column
     id_column
     column :entity_name
-    column :status
+    column :status do |entity|
+      if entity.status == 1
+        status_tag('active', :ok)
+      else
+        status_tag('inactive')
+      end
+    end
     column :import_key
     column :entity_type
     actions

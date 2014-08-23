@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, :presence => true
 
   scope :order_by_name, -> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') }
+  scope :active, -> { where('status = 1') }
 
   attr_accessor :newsletter_signup
   attr_accessor :invite_code
