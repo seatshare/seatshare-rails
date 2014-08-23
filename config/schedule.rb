@@ -7,6 +7,6 @@ every 1.day, :at => '4:30 am' do
 end
 
 # Weekly schedule
-every :sunday, :at => '4:00 am' do
+every :monday, :at => '4:00 am' do
   rake "send_reminders:weekly"
 end
