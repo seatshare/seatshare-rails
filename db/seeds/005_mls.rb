@@ -49,7 +49,7 @@ Entity.create([
     id: 517, entity_name: 'Real Salt Lake', entity_type: 'MLS', status: 1, import_key: 'l.mlsnet.com-t.985'
   },
   {
-    id: 518, entity_name: 'San Jose Earthquakes', entity_type: 'MLS', status: 1, import_key: 'l.mlsnet.com-t.997'
+    id: 518, entity_name: 'San Jose Earthquakes', entity_type: 'MLS', status: 1, import_key: 'l.mlsnet.com-t.979'
   },
   {
     id: 519, entity_name: 'Seattle Sounders FC', entity_type: 'MLS', status: 1, import_key: 'l.mlsnet.com-t.AA0'
