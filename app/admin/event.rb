@@ -35,8 +35,8 @@ ActiveAdmin.register Event do
       @entities[entity_type] << entity
     end
 
-    @start_datetime = params[:start_datetime] || Time.new
-    @end_datetime = params[:end_datetime] || Time.new + 60*60*24*365
+    @start_datetime = params[:start_datetime] || Time.new - 60*60*24*30
+    @end_datetime = params[:end_datetime] || Time.new
     @force_update = params[:force_update] || false
 
     if !params[:team_id].nil?
