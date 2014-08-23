@@ -313,7 +313,7 @@ Entity.create([
     id: 2104, import_key: 'l.ncaa.org.mfoot-t.544', entity_name: 'Mississippi Rebels', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2105, import_key: 'l.ncaa.org.mfoot-t.610', entity_name: 'Texas A&amp;M Aggies', status: 1, entity_type: 'NCAAF'
+    id: 2105, import_key: 'l.ncaa.org.mfoot-t.610', entity_name: 'Texas A&M Aggies', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2106, import_key: 'l.ncaa.org.mfoot-t.460', entity_name: 'Arkansas St. Red Wolves', status: 1, entity_type: 'NCAAF'
@@ -523,7 +523,7 @@ Entity.create([
     id: 2174, import_key: 'l.ncaa.org.mfoot-t.643', entity_name: 'Villanova Wildcats', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2175, import_key: 'l.ncaa.org.mfoot-t.637', entity_name: 'William &amp; Mary Tribe', status: 1, entity_type: 'NCAAF'
+    id: 2175, import_key: 'l.ncaa.org.mfoot-t.637', entity_name: 'William & Mary Tribe', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2176, import_key: 'l.ncaa.org.mfoot-t.777', entity_name: 'Presbyterian Blue Hose', status: 1, entity_type: 'NCAAF'
@@ -577,7 +577,7 @@ Entity.create([
     id: 2192, import_key: 'l.ncaa.org.mfoot-t.488', entity_name: 'Delaware St. Hornets', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2193, import_key: 'l.ncaa.org.mfoot-t.497', entity_name: 'Florida A&amp;M Rattlers', status: 1, entity_type: 'NCAAF'
+    id: 2193, import_key: 'l.ncaa.org.mfoot-t.497', entity_name: 'Florida A&M Rattlers', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2194, import_key: 'l.ncaa.org.mfoot-t.528', entity_name: 'Hampton Pirates', status: 1, entity_type: 'NCAAF'
@@ -589,7 +589,7 @@ Entity.create([
     id: 2196, import_key: 'l.ncaa.org.mfoot-t.642', entity_name: 'Morgan St. Bears', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2197, import_key: 'l.ncaa.org.mfoot-t.561', entity_name: 'N.C. A&amp;T Aggies', status: 1, entity_type: 'NCAAF'
+    id: 2197, import_key: 'l.ncaa.org.mfoot-t.561', entity_name: 'N.C. A&T Aggies', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2198, import_key: 'l.ncaa.org.mfoot-t.578', entity_name: 'Norfolk St. Spartans', status: 1, entity_type: 'NCAAF'
@@ -784,7 +784,7 @@ Entity.create([
     id: 2261, import_key: 'l.ncaa.org.mfoot-t.YX4', entity_name: 'Lamar Cardinals', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2262, import_key: 'l.ncaa.org.mfoot-t.670', entity_name: 'Alabama A&amp;M Bulldogs', status: 1, entity_type: 'NCAAF'
+    id: 2262, import_key: 'l.ncaa.org.mfoot-t.670', entity_name: 'Alabama A&M Bulldogs', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2263, import_key: 'l.ncaa.org.mfoot-t.454', entity_name: 'Alabama St. Hornets', status: 1, entity_type: 'NCAAF'
@@ -1309,10 +1309,10 @@ Entity.create([
     id: 2436, import_key: 'l.ncaa.org.mfoot-t.711', entity_name: 'Tuskegee Golden Tigers', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2437, import_key: 'l.ncaa.org.mfoot-t.813', entity_name: 'Texas A&amp;M Commerce Lions', status: 1, entity_type: 'NCAAF'
+    id: 2437, import_key: 'l.ncaa.org.mfoot-t.813', entity_name: 'Texas A&M Commerce Lions', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2438, import_key: 'l.ncaa.org.mfoot-t.753', entity_name: 'Texas A&amp;M-Kingsville Javelines', status: 1, entity_type: 'NCAAF'
+    id: 2438, import_key: 'l.ncaa.org.mfoot-t.753', entity_name: 'Texas A&M-Kingsville Javelines', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2439, import_key: 'l.ncaa.org.mfoot-t.818', entity_name: 'UNC-Pembroke Braves', status: 1, entity_type: 'NCAAF'
@@ -1363,7 +1363,7 @@ Entity.create([
     id: 2454, import_key: 'l.ncaa.org.mfoot-t.827', entity_name: 'West Liberty Hilltoppers', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2455, import_key: 'l.ncaa.org.mfoot-t.V49', entity_name: 'West Texas A&amp;M Buffs', status: 1, entity_type: 'NCAAF'
+    id: 2455, import_key: 'l.ncaa.org.mfoot-t.V49', entity_name: 'West Texas A&M Buffs', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2456, import_key: 'l.ncaa.org.mfoot-t.785', entity_name: 'West Virginia St. Yellow Jackets', status: 1, entity_type: 'NCAAF'
@@ -1624,7 +1624,7 @@ Entity.create([
     id: 2541, import_key: 'l.ncaa.org.mfoot-t.W17', entity_name: 'Elmhurst Blue Jays', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2542, import_key: 'l.ncaa.org.mfoot-t.794', entity_name: 'Emory &amp; Henry Wasps', status: 1, entity_type: 'NCAAF'
+    id: 2542, import_key: 'l.ncaa.org.mfoot-t.794', entity_name: 'Emory & Henry Wasps', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2543, import_key: 'l.ncaa.org.mfoot-t.X51', entity_name: 'Endicott Gulls', status: 1, entity_type: 'NCAAF'
@@ -1642,7 +1642,7 @@ Entity.create([
     id: 2547, import_key: 'l.ncaa.org.mfoot-t.X43', entity_name: 'Framingham St. Rams', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2548, import_key: 'l.ncaa.org.mfoot-t.V84', entity_name: 'Franklin &amp; Marshall Diplomats', status: 1, entity_type: 'NCAAF'
+    id: 2548, import_key: 'l.ncaa.org.mfoot-t.V84', entity_name: 'Franklin & Marshall Diplomats', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2549, import_key: 'l.ncaa.org.mfoot-t.W39', entity_name: 'Franklin Grizzlies', status: 1, entity_type: 'NCAAF'
@@ -1771,7 +1771,7 @@ Entity.create([
     id: 2590, import_key: 'l.ncaa.org.mfoot-t.V97', entity_name: 'Lebanon Valley Flying Dutchmen', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2591, import_key: 'l.ncaa.org.mfoot-t.X36', entity_name: 'Lewis &amp; Clark Pioneers', status: 1, entity_type: 'NCAAF'
+    id: 2591, import_key: 'l.ncaa.org.mfoot-t.X36', entity_name: 'Lewis & Clark Pioneers', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2592, import_key: 'l.ncaa.org.mfoot-t.X32', entity_name: 'Linfield Wildcats', status: 1, entity_type: 'NCAAF'
@@ -2110,10 +2110,10 @@ Entity.create([
     id: 2703, import_key: 'l.ncaa.org.mfoot-t.V66', entity_name: 'Wartburg Knights', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2704, import_key: 'l.ncaa.org.mfoot-t.X27', entity_name: 'Washington &amp; Jefferson Presidents', status: 1, entity_type: 'NCAAF'
+    id: 2704, import_key: 'l.ncaa.org.mfoot-t.X27', entity_name: 'Washington & Jefferson Presidents', status: 1, entity_type: 'NCAAF'
   },
   {
-    id: 2705, import_key: 'l.ncaa.org.mfoot-t.W69', entity_name: 'Washington &amp; Lee Generals', status: 1, entity_type: 'NCAAF'
+    id: 2705, import_key: 'l.ncaa.org.mfoot-t.W69', entity_name: 'Washington & Lee Generals', status: 1, entity_type: 'NCAAF'
   },
   {
     id: 2706, import_key: 'l.ncaa.org.mfoot-t.X22', entity_name: 'Washington, Mo. Bears', status: 1, entity_type: 'NCAAF'

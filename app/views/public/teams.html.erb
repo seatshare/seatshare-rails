@@ -90,6 +90,34 @@
 
 <div class="row">
   <div class="col-md-12">
+    <h3 id="cfl">Canadian Football League</h3>
+    <hr />
+    <div class="row">
+      <% for team in @teams_cfl %>
+      <div class="col-md-6">
+        <div class="well well-sm"><%= team.entity_name %></div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3 id="mls">Major League Soccer</h3>
+    <hr />
+    <div class="row">
+      <% for team in @teams_mls %>
+      <div class="col-md-6">
+        <div class="well well-sm"><%= team.entity_name %></div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
     <h3 id="wftda">Women's Flat Track Derby Association</h3>
     <hr />
     <div class="row">
@@ -130,6 +158,14 @@
     <a href="#ncaamb" class="list-group-item">
       <span class="badge"><%= @teams_ncaamb.count %></span>
       NCAA Men's Basketball (NCAAMB)
+    </a>
+    <a href="#cfl" class="list-group-item">
+      <span class="badge"><%= @teams_cfl.count %></span>
+      Canadian Football League (CFL)
+    </a>
+    <a href="#mls" class="list-group-item">
+      <span class="badge"><%= @teams_mls.count %></span>
+      Major League Soccer (MLS)
     </a>
     <a href="#wftda" class="list-group-item">
       <span class="badge"><%= @teams_wftda.count %></span>

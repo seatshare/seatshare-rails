@@ -388,7 +388,7 @@ Entity.create([
     id: 2894, import_key: 'l.ncaa.org.mbasket-t.C01', entity_name: 'UNC-Wilmington Seahawks', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 2895, import_key: 'l.ncaa.org.mbasket-t.D20', entity_name: 'William &amp; Mary Tribe', status: 1, entity_type: 'NCAAMB'
+    id: 2895, import_key: 'l.ncaa.org.mbasket-t.D20', entity_name: 'William & Mary Tribe', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 2896, import_key: 'l.ncaa.org.mbasket-t.A51', entity_name: 'Charlotte 49ers', status: 1, entity_type: 'NCAAMB'
@@ -571,7 +571,7 @@ Entity.create([
     id: 2955, import_key: 'l.ncaa.org.mbasket-t.A71', entity_name: 'Delaware St. Hornets', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 2956, import_key: 'l.ncaa.org.mbasket-t.A90', entity_name: 'Florida A&amp;M Rattlers', status: 1, entity_type: 'NCAAMB'
+    id: 2956, import_key: 'l.ncaa.org.mbasket-t.A90', entity_name: 'Florida A&M Rattlers', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 2957, import_key: 'l.ncaa.org.mbasket-t.B08', entity_name: 'Hampton Pirates', status: 1, entity_type: 'NCAAMB'
@@ -586,7 +586,7 @@ Entity.create([
     id: 2960, import_key: 'l.ncaa.org.mbasket-t.B80', entity_name: 'Morgan St. Bears', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 2961, import_key: 'l.ncaa.org.mbasket-t.B96', entity_name: 'N.C. A&amp;T Aggies', status: 1, entity_type: 'NCAAMB'
+    id: 2961, import_key: 'l.ncaa.org.mbasket-t.B96', entity_name: 'N.C. A&T Aggies', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 2962, import_key: 'l.ncaa.org.mbasket-t.E17', entity_name: 'N.C. Central Eagles', status: 1, entity_type: 'NCAAMB'
@@ -832,7 +832,7 @@ Entity.create([
     id: 3042, import_key: 'l.ncaa.org.mbasket-t.C78', entity_name: 'Tennessee Volunteers', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3043, import_key: 'l.ncaa.org.mbasket-t.C83', entity_name: 'Texas A&amp;M Aggies', status: 1, entity_type: 'NCAAMB'
+    id: 3043, import_key: 'l.ncaa.org.mbasket-t.C83', entity_name: 'Texas A&M Aggies', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3044, import_key: 'l.ncaa.org.mbasket-t.D02', entity_name: 'Vanderbilt Commodores', status: 1, entity_type: 'NCAAMB'
@@ -910,10 +910,10 @@ Entity.create([
     id: 3068, import_key: 'l.ncaa.org.mbasket-t.C73', entity_name: 'Stephen F. Austin Lumberjacks', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3069, import_key: 'l.ncaa.org.mbasket-t.C88', entity_name: 'Texas A&amp;M-Corpus Christi Islanders', status: 1, entity_type: 'NCAAMB'
+    id: 3069, import_key: 'l.ncaa.org.mbasket-t.C88', entity_name: 'Texas A&M-Corpus Christi Islanders', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3070, import_key: 'l.ncaa.org.mbasket-t.A04', entity_name: 'Alabama A&amp;M Bulldogs', status: 1, entity_type: 'NCAAMB'
+    id: 3070, import_key: 'l.ncaa.org.mbasket-t.A04', entity_name: 'Alabama A&M Bulldogs', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3071, import_key: 'l.ncaa.org.mbasket-t.A05', entity_name: 'Alabama St. Hornets', status: 1, entity_type: 'NCAAMB'
@@ -1309,10 +1309,10 @@ Entity.create([
     id: 3201, import_key: 'l.ncaa.org.mbasket-t.I34', entity_name: 'Tarleton St. Texans', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3202, import_key: 'l.ncaa.org.mbasket-t.F85', entity_name: 'Texas A&amp;M Commerce Lions', status: 1, entity_type: 'NCAAMB'
+    id: 3202, import_key: 'l.ncaa.org.mbasket-t.F85', entity_name: 'Texas A&M Commerce Lions', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3203, import_key: 'l.ncaa.org.mbasket-t.E54', entity_name: 'Texas A&amp;M-Kingsville Javelines', status: 1, entity_type: 'NCAAMB'
+    id: 3203, import_key: 'l.ncaa.org.mbasket-t.E54', entity_name: 'Texas A&M-Kingsville Javelines', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3204, import_key: 'l.ncaa.org.mbasket-t.F98', entity_name: 'Cent. Missouri Mules', status: 1, entity_type: 'NCAAMB'
@@ -1642,7 +1642,7 @@ Entity.create([
     id: 3312, import_key: 'l.ncaa.org.mbasket-t.I95', entity_name: 'Daniel Webster', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3313, import_key: 'l.ncaa.org.mbasket-t.JW7', entity_name: 'Davis &amp; Elkins', status: 1, entity_type: 'NCAAMB'
+    id: 3313, import_key: 'l.ncaa.org.mbasket-t.JW7', entity_name: 'Davis & Elkins', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3314, import_key: 'l.ncaa.org.mbasket-t.H14', entity_name: 'Eugene College', status: 1, entity_type: 'NCAAMB'
@@ -1708,7 +1708,7 @@ Entity.create([
     id: 3334, import_key: 'l.ncaa.org.mbasket-t.JN4', entity_name: 'IU East', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3335, import_key: 'l.ncaa.org.mbasket-t.I90', entity_name: 'J&amp;W-North Miami', status: 1, entity_type: 'NCAAMB'
+    id: 3335, import_key: 'l.ncaa.org.mbasket-t.I90', entity_name: 'J&W-North Miami', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3336, import_key: 'l.ncaa.org.mbasket-t.JV7', entity_name: 'Kean', status: 1, entity_type: 'NCAAMB'
@@ -1843,7 +1843,7 @@ Entity.create([
     id: 3379, import_key: 'l.ncaa.org.mbasket-t.JU5', entity_name: 'Salem Int', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3380, import_key: 'l.ncaa.org.mbasket-t.JT5', entity_name: 'Science &amp; Arts (OK)', status: 1, entity_type: 'NCAAMB'
+    id: 3380, import_key: 'l.ncaa.org.mbasket-t.JT5', entity_name: 'Science & Arts (OK)', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3381, import_key: 'l.ncaa.org.mbasket-t.F72', entity_name: 'SE College', status: 1, entity_type: 'NCAAMB'
@@ -1915,7 +1915,7 @@ Entity.create([
     id: 3403, import_key: 'l.ncaa.org.mbasket-t.JR1', entity_name: 'West Georgia', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3404, import_key: 'l.ncaa.org.mbasket-t.JR5', entity_name: 'West Texas A&amp;M', status: 1, entity_type: 'NCAAMB'
+    id: 3404, import_key: 'l.ncaa.org.mbasket-t.JR5', entity_name: 'West Texas A&M', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3405, import_key: 'l.ncaa.org.mbasket-t.E80', entity_name: 'Western Colorado', status: 1, entity_type: 'NCAAMB'
@@ -2281,7 +2281,7 @@ Entity.create([
     id: 3525, import_key: 'l.ncaa.org.mbasket-t.D44', entity_name: 'Benedictine,Ill. Eagles', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3526, import_key: 'l.ncaa.org.mbasket-t.D99', entity_name: 'Lewis &amp; Clark', status: 1, entity_type: 'NCAAMB'
+    id: 3526, import_key: 'l.ncaa.org.mbasket-t.D99', entity_name: 'Lewis & Clark', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3527, import_key: 'l.ncaa.org.mbasket-t.F37', entity_name: 'Linfield', status: 1, entity_type: 'NCAAMB'
@@ -2326,7 +2326,7 @@ Entity.create([
     id: 3540, import_key: 'l.ncaa.org.mbasket-t.D72', entity_name: 'E. Mennonite', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3541, import_key: 'l.ncaa.org.mbasket-t.JJ1', entity_name: 'Emory &amp; Henry', status: 1, entity_type: 'NCAAMB'
+    id: 3541, import_key: 'l.ncaa.org.mbasket-t.JJ1', entity_name: 'Emory & Henry', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3542, import_key: 'l.ncaa.org.mbasket-t.D85', entity_name: 'Guilford', status: 1, entity_type: 'NCAAMB'
@@ -2344,7 +2344,7 @@ Entity.create([
     id: 3546, import_key: 'l.ncaa.org.mbasket-t.F40', entity_name: 'Roanoke', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3547, import_key: 'l.ncaa.org.mbasket-t.E75', entity_name: 'Washington &amp; Lee', status: 1, entity_type: 'NCAAMB'
+    id: 3547, import_key: 'l.ncaa.org.mbasket-t.E75', entity_name: 'Washington & Lee', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3548, import_key: 'l.ncaa.org.mbasket-t.I28', entity_name: 'Alvernia Crusaders', status: 1, entity_type: 'NCAAMB'
@@ -2359,7 +2359,7 @@ Entity.create([
     id: 3551, import_key: 'l.ncaa.org.mbasket-t.H50', entity_name: 'Thiel', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3552, import_key: 'l.ncaa.org.mbasket-t.E74', entity_name: 'Washington &amp; Jefferson', status: 1, entity_type: 'NCAAMB'
+    id: 3552, import_key: 'l.ncaa.org.mbasket-t.E74', entity_name: 'Washington & Jefferson', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3553, import_key: 'l.ncaa.org.mbasket-t.G18', entity_name: 'Westminster (MO)', status: 1, entity_type: 'NCAAMB'
@@ -2584,7 +2584,7 @@ Entity.create([
     id: 3626, import_key: 'l.ncaa.org.mbasket-t.KC3', entity_name: 'Indiana-Kokomo', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3627, import_key: 'l.ncaa.org.mbasket-t.KC4', entity_name: 'J&amp;W-Providence', status: 1, entity_type: 'NCAAMB'
+    id: 3627, import_key: 'l.ncaa.org.mbasket-t.KC4', entity_name: 'J&W-Providence', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3628, import_key: 'l.ncaa.org.mbasket-t.KK5', entity_name: 'Johnson (TN)', status: 1, entity_type: 'NCAAMB'
@@ -2809,7 +2809,7 @@ Entity.create([
     id: 3701, import_key: 'l.ncaa.org.mbasket-t.KA9', entity_name: 'Hiwassee', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3702, import_key: 'l.ncaa.org.mbasket-t.KA5', entity_name: 'J&amp;W-Charlotte', status: 1, entity_type: 'NCAAMB'
+    id: 3702, import_key: 'l.ncaa.org.mbasket-t.KA5', entity_name: 'J&W-Charlotte', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3703, import_key: 'l.ncaa.org.mbasket-t.KA7', entity_name: 'Judson', status: 1, entity_type: 'NCAAMB'
@@ -2821,7 +2821,7 @@ Entity.create([
     id: 3705, import_key: 'l.ncaa.org.mbasket-t.KA8', entity_name: 'Philadelphia Bible', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3706, import_key: 'l.ncaa.org.mbasket-t.JZ9', entity_name: 'SD Mines &amp; Tech', status: 1, entity_type: 'NCAAMB'
+    id: 3706, import_key: 'l.ncaa.org.mbasket-t.JZ9', entity_name: 'SD Mines & Tech', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3707, import_key: 'l.ncaa.org.mbasket-t.H49', entity_name: 'Harris-Stowe', status: 1, entity_type: 'NCAAMB'
@@ -2971,7 +2971,7 @@ Entity.create([
     id: 3755, import_key: 'l.ncaa.org.mbasket-t.F86', entity_name: 'Texas Wesleyan', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3756, import_key: 'l.ncaa.org.mbasket-t.G51', entity_name: 'TX A&amp;M-Int', status: 1, entity_type: 'NCAAMB'
+    id: 3756, import_key: 'l.ncaa.org.mbasket-t.G51', entity_name: 'TX A&M-Int', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3757, import_key: 'l.ncaa.org.mbasket-t.E92', entity_name: 'Wiley', status: 1, entity_type: 'NCAAMB'
@@ -3070,7 +3070,7 @@ Entity.create([
     id: 3788, import_key: 'l.ncaa.org.mbasket-t.I25', entity_name: 'Humboldt St', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3789, import_key: 'l.naia.org.mbasket-t.I90', entity_name: 'J&amp;W-North Miami', status: 1, entity_type: 'NCAAMB'
+    id: 3789, import_key: 'l.naia.org.mbasket-t.I90', entity_name: 'J&W-North Miami', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3790, import_key: 'l.ncaa.org.mbasket-t.I97', entity_name: 'Minot State', status: 1, entity_type: 'NCAAMB'
@@ -3313,7 +3313,7 @@ Entity.create([
     id: 3869, import_key: 'l.ncaa.org.mbasket-t.H55', entity_name: 'Indiana-Southeast', status: 1, entity_type: 'NCAAMB'
   },
   {
-    id: 3870, import_key: 'l.ncaa.org.mbasket-t.H01', entity_name: 'J&amp;W-Denver', status: 1, entity_type: 'NCAAMB'
+    id: 3870, import_key: 'l.ncaa.org.mbasket-t.H01', entity_name: 'J&W-Denver', status: 1, entity_type: 'NCAAMB'
   },
   {
     id: 3871, import_key: 'l.ncaa.org.mbasket-t.F97', entity_name: 'Knoxville', status: 1, entity_type: 'NCAAMB'
