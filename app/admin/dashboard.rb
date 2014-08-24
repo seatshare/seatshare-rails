@@ -22,7 +22,7 @@ ActiveAdmin.register_page "Dashboard" do
                 hr
               end
             else
-              div "No messages available."
+              div "No recent messages. Messages sent through the contact form appear here."
               hr
             end
           end
@@ -32,17 +32,27 @@ ActiveAdmin.register_page "Dashboard" do
         end
 
         panel "System Stats" do
-          h4 "Records"
-          ul do
-            li "#{Entity.all.count} entities, #{Entity.active.count} active"
-            li "#{User.all.count} users, #{User.active.count} active"
-            li "#{Event.all.count} events"
-            li "#{Ticket.all.count} tickets"
+          attributes_table_for :stats do
+            row "Entities" do
+              Entity.all.count
+            end
+            row "Active Entities" do
+              Entity.active.count
+            end
+            row "Users" do
+              User.all.count
+            end
+            row "Active Users" do
+              User.active.count
+            end
+            row "Events" do
+              Event.all.count
+            end
+            row "Tickets" do
+              Ticket.all.count
+            end
           end
-          para "Running from #{Rails.root}"
-          para %(#{`git status | sed -n 1p`} - #{link_to(`git rev-parse --short HEAD`, "https://github.com/stephenyeargin/seatshare-rails/commit/#{`git rev-parse HEAD`}")}).html_safe
         end
-
       end
 
       column do
@@ -51,12 +61,14 @@ ActiveAdmin.register_page "Dashboard" do
           table do
             thead do
               th "User"
+              th "Email"
               th "Joined"
             end
             tbody do
               User.last(5).map do |user|
                 tr :class => cycle('even', 'odd') do
                   td link_to(user.display_name, admin_user_path(user))
+                  td mail_to(user.email, user.email)
                   td user.created_at.strftime('%-m/%-d/%Y')
                 end
               end
@@ -90,7 +102,7 @@ ActiveAdmin.register_page "Dashboard" do
             thead do
               th "Group"
               th "Entity"
-              th "Time"
+              th "Date & Time"
             end
             tbody do
               Event.order_by_date.where("start_time > '#{Date.today}'").first(5).map do |event|

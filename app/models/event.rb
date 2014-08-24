@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   has_many :tickets
 
   validates :entity_id, :event_name, :start_time, :presence => true
+  before_save :clean_import_key
 
   scope :order_by_date, -> { order('start_time ASC') }
 
@@ -15,12 +16,6 @@ class Event < ActiveRecord::Base
       :description => '',
       :import_key => generate_import_key(attributes)
     }.merge(attributes)
-
-    # Prevent empty import key
-    if attributes[:import_key] === ''
-      attr_with_defaults[:import_key] = generate_import_key(attributes)
-    end
-
     super(attr_with_defaults)
   end
 
@@ -100,6 +95,10 @@ class Event < ActiveRecord::Base
     "#{attributes[:entity_id]}: #{attributes[:event_name]} #{attributes[:start_time]}".parameterize
   end
 
-
+  def clean_import_key
+    if self.import_key.blank?
+      self.import_key = generate_import_key(self)
+    end
+  end
 
 end

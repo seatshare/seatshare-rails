@@ -5,6 +5,7 @@ class Entity < ActiveRecord::Base
 
   validates :entity_name, :presence => true
   validates_uniqueness_of :entity_name, scope: :entity_type
+  before_save :clean_import_key
 
   scope :order_by_name, -> { order('LOWER(entity_type) ASC, LOWER(entity_name) ASC') }
   scope :active, -> { where('status = 1') }
@@ -14,12 +15,6 @@ class Entity < ActiveRecord::Base
       :status => 0,
       :import_key => generate_import_key(attributes)
     }.merge(attributes)
-
-    # Prevent empty import key
-    if attributes[:import_key] === ''
-      attr_with_defaults[:import_key] = generate_import_key(attributes)
-    end
-
     super(attr_with_defaults)
   end
 
@@ -31,6 +26,12 @@ class Entity < ActiveRecord::Base
 
   def generate_import_key(attributes)
     "#{attributes[:entity_type]}: #{attributes[:entity_name]}".parameterize
+  end
+
+  def clean_import_key
+    if self.import_key.blank?
+      self.import_key = generate_import_key(self)
+    end
   end
 
 end
