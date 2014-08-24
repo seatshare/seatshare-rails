@@ -31,7 +31,7 @@ preds_20131026:
   event_name: Nashville Predators vs. St. Louis Blues
   start_time: 2013-10-26 19:00:00
   date_tba: false
-  time_tba: true
+  time_tba: false
   import_key: preds_20131026
 
 preds_20131024:
@@ -40,7 +40,7 @@ preds_20131024:
   event_name: Nashville Predators vs. Winnipeg Jets
   start_time: 2013-10-24 19:00:00
   date_tba: false
-  time_tba: true
+  time_tba: false
   import_key: preds_20131024
 
 preds_20131017:
@@ -49,7 +49,7 @@ preds_20131017:
   event_name: Nashville Predators vs. Los Angeles Kings
   start_time: 2013-10-17 19:00:00
   date_tba: false
-  time_tba: true
+  time_tba: false
   import_key: preds_20131017
 
 preds_20131015:
@@ -58,7 +58,7 @@ preds_20131015:
   event_name: Nashville Predators vs. Florida Panthers
   start_time: 2013-10-15 19:00:00
   date_tba: false
-  time_tba: true
+  time_tba: false
   import_key: preds_20131015
 
 preds_20131012:
@@ -67,7 +67,7 @@ preds_20131012:
   event_name: Nashville Predators vs. New York Islanders
   start_time: 2013-10-12 19:00:00
   date_tba: false
-  time_tba: true
+  time_tba: false
   import_key: preds_20131012
 
 preds_20131010:
@@ -76,7 +76,7 @@ preds_20131010:
   event_name: Nashville Predators vs. Toronto Maple Leafs
   start_time: 2013-10-10 19:00:00
   date_tba: false
-  time_tba: true
+  time_tba: false
   import_key: preds_20131010
 
 preds_20131008:
@@ -85,5 +85,5 @@ preds_20131008:
   event_name: Nashville Predators vs. Minnesota Wild
   start_time: 2013-10-08 19:00:00
   date_tba: false
-  time_tba: true
+  time_tba: false
   import_key: preds_20131008
