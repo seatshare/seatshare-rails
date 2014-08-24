@@ -3,7 +3,7 @@
 <%= form_for :group, html: {class: "form-horizontal", role: "form"} do |f| %>
 
 <fieldset>
-  <legend>Group details</legend>
+  <legend>Group Details</legend>
 
   <div class="form-group">
     <%= f.label :group_name, :class => 'col-md-3 control-label' %>
@@ -33,7 +33,7 @@
 <% else %>
 
 <fieldset>
-  <legend>Group details</legend>
+  <legend>Group Details</legend>
 
   <p class="lead">You are a member of <strong><%= @group.group_name %></strong>, a <strong><%= @group.entity.entity_name %></strong> group. You can choose to receive reminders when there is an upcoming event for this group.</p>
 
@@ -49,7 +49,7 @@
 <% end %>
 
 <fieldset>
-  <legend>Group members</legend>
+  <legend>Group Members</legend>
   <table class="table table-striped table-bordered">
     <thead>
       <tr>

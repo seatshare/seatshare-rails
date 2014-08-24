@@ -28,7 +28,7 @@ ActiveAdmin.register Event do
 
     # Build entity list
     @entities = {}
-    Entity.where("import_key LIKE 'l.%'").where("status = 1").group_by(&:entity_type).each do |entity_type, entity|
+    Entity.where("import_key LIKE 'l.%'").active.group_by(&:entity_type).each do |entity_type, entity|
       if @entities[entity_type].nil?
         @entities[entity_type] = []
       end

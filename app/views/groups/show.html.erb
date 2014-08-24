@@ -123,12 +123,18 @@
 
 <% end %>
 
+<%= render 'layouts/data_credit' %>
+
 <% else %>
 
-<div class="alert alert-info">
-  <p>
-    There are no events on the schedule. Please <%= mail_to "contact@myseatshare.com", "contact us", { subject: "Schedule for #{@group.entity.entity_name}", body: "Please let me know when the schedule is released!", class: "alert-link" } %> and we will let you know as soon as it is available. 
-  </p>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <p class="panel-title">We are getting your group's <%= @group.entity.entity_name %> schedule</p>
+  </div>
+  <div class="panel-body">
+    <p class="lead">Your group is the first one to request the schedule for the upcoming season! SeatShare still needs to import the schedule from our data provider. We can let you know as soon as it is available.</p>
+    <p class="text-right"><%= mail_to "contact@myseatshare.com", "Notify Me", { subject: "Schedule for #{@group.entity.display_name}", body: "Please let me know when the schedule is released!", class: "btn btn-primary btn-lg" } %></p>
+  </div>
 </div>
 
 <% end %>
@@ -137,7 +143,7 @@
 
 <% if @events.count > 0 %>
 
-<div class="well text-center">
+<div class="well well-sm text-center">
   <ul class="list-inline" style="margin-bottom:0;">
     <li>Have tickets to share?</li>
     <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Add Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
@@ -171,7 +177,7 @@
 <% end %>
 
 <fieldset>
-  <legend>Group members</legend>
+  <legend>Group Members</legend>
 
 <ul class="list-unstyled group-members">
   <% for member in @members %>
