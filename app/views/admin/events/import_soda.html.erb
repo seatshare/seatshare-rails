@@ -67,7 +67,7 @@
       <ol class="fragments-group">
       <% for entity_list in entities %>
       <%for entity in entity_list %>
-      <li><label><%= check_box_tag "team_id[]", entity.import_key, false, :class=>"team_id_#{entity_type}" %> <%= entity.entity_name %></label><li>
+      <li class="<%= entity.groups.count > 0 ? 'highlight' : '' %>"><label><%= check_box_tag "team_id[]", entity.import_key, false, :class=>"team_id_#{entity_type}" %> <%= entity.entity_name %></label><li>
       <% end %>
       <% end %>
       </ol>
@@ -84,3 +84,7 @@
 </ul>
 
 <% end %>
+
+<style>
+.highlight label { background-color: yellow; }
+</style>
