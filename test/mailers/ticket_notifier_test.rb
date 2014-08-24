@@ -31,7 +31,7 @@ class TicketNotifierTest < ActionMailer::TestCase
     assert_equal email.subject, 'Jill has requested your ticket via Geeks Watching Hockey'
     assert_includes email.body.to_s, '<p>Jim,</p>'
     assert_includes email.body.to_s, '<p>Jill Smith (<a href="mailto:jillsmith83@us.example.org">jillsmith83@us.example.org</a>) has requested your ticket for the following event in your group Geeks Watching Hockey.</p>'
-    assert_includes email.body.to_s, '<td>Nashville Predators vs. St. Louis Blues : Saturday, October 26, 2013</td>'
+    assert_includes email.body.to_s, '<td>Nashville Predators vs. St. Louis Blues : Saturday, October 26, 2013 - 2:00 pm CDT</td>'
     assert_includes email.body.to_s, '<td><a href="http://localhost:3000/groups/1/event-4/ticket-2">326 K 10</a></td>'
   end
 end

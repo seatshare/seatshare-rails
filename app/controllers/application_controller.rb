@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
   before_filter :load_shared_interface_variables, if: :user_signed_in?
+  before_filter :set_timezone, if: :user_signed_in?
 
   layout :layout_by_resource
 
@@ -43,6 +44,13 @@ class ApplicationController < ActionController::Base
     else
       "application"
     end
+  end
+
+  private
+
+  def set_timezone
+    tz = current_user ? current_user.timezone : nil
+    Time.zone = tz || ActiveSupport::TimeZone["Central Time (US & Canada)"]
   end
 
 end

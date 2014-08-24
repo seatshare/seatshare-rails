@@ -12,6 +12,7 @@ jill:
   last_name: Smith
   email: jillsmith83@us.example.org
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
+  timezone: "Eastern Time (US & Canada)"
   status: 1
 
 rick:

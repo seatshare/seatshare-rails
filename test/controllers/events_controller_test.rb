@@ -19,4 +19,14 @@ class EventsControllerTest < ActionController::TestCase
     assert_select 'table', 1, 'there is a table for tickets'
   end
 
+  test "should see localized timezone" do
+    @user = User.find(2)
+    sign_in :user, @user
+
+    get :show, :id => 4, :group_id => 1
+
+    assert_response :success, 'received a 200 status'
+    assert_select 'div.panel-heading', 'Saturday, October 26, 2013 - 3:00 pm EDT'
+  end
+
 end
