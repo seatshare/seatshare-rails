@@ -50,7 +50,11 @@ class ApplicationController < ActionController::Base
 
   def set_timezone
     tz = current_user ? current_user.timezone : nil
-    Time.zone = tz || ActiveSupport::TimeZone["Central Time (US & Canada)"]
+    if tz.blank?
+      Time.zone = ActiveSupport::TimeZone["Central Time (US & Canada)"]
+    else
+      Time.zone = tz
+    end
   end
 
 end
