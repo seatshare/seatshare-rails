@@ -17,7 +17,7 @@ class EventTest < ActiveSupport::TestCase
     assert event.start_time.day == 1, 'new event day matches'
     assert event.date_tba? === false, 'new event date is not TBA'
     assert event.time_tba? === false, 'new event time is not TBA'
-    assert event.date_time === 'Tuesday, January 1, 2013 - 6:00 pm', 'new event date/time string matches'
+    assert event.date_time === 'Tuesday, January 1, 2013 - 6:00 pm CST', 'new event date/time string matches'
   end
 
   test "fixture event has attributes" do

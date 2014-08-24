@@ -5,7 +5,9 @@ ActiveAdmin.register Event do
     id_column
     column :event_name
     column :description
-    column :start_time
+    column :start_time do |event|
+      event.date_time
+    end
     column :entity
     column :import_key
     actions

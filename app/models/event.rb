@@ -62,14 +62,13 @@ class Event < ActiveRecord::Base
   end
 
   def date_time
-    Time.zone = 'Central Time (US & Canada)' 
     out = ''
     if self.date_tba === 0
       out += self.start_time.strftime('%A, %B %-d, %Y')
     end
     if self.time_tba === 0
       out += ' - '
-      out += self.start_time.strftime('%-I:%M %P')
+      out += self.start_time.strftime('%-I:%M %P %Z')
     end
     return out
   end
