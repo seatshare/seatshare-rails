@@ -83,6 +83,9 @@ class Event < ActiveRecord::Base
     event.event_name = "#{row[:away_team]} vs. #{row[:home_team]}"
     event.start_time = row[:start_date_time]
     event.import_key = row[:event_key]
+    if !row[:time_certainty].blank? && row[:time_certainty] != 'certain'
+      event.time_tba = 1
+    end
     event.save!
 
     return event
