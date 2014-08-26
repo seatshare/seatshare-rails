@@ -81,4 +81,31 @@ class EventTest < ActiveSupport::TestCase
 
   end
 
+  test "imported row matches output" do
+    row1 = {
+      entity_id: 1,
+      home_team: 'Nashville Predators',
+      away_team: 'Colorado Avalanche',
+      start_date_time: '20091008T200000-0400',
+      time_certainty: 'not certain'
+    }
+    record = Event.import row1
+    assert record[:event_name] === 'Colorado Avalanche vs. Nashville Predators'
+    assert record[:start_time] === DateTime.parse('October 8, 2009 7:00 PM CDT')
+    assert record[:date_tba] === 0
+    assert record[:time_tba] === 1
+
+    row2 = {
+      entity_id: 1,
+      home_team: 'Nashville Predators',
+      away_team: 'San Jose Sharks',
+      start_date_time: '20091022T200000-0400',
+      time_certainty: 'certain'
+    }
+    record = Event.import row2
+    assert record[:event_name] === 'San Jose Sharks vs. Nashville Predators'
+    assert record[:start_time] === DateTime.parse('October 22, 2009 7:00 PM CDT')
+    assert record[:date_tba] === 0
+    assert record[:time_tba] === 0
+  end
 end
