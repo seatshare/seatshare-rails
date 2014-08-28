@@ -20,9 +20,9 @@
           <div class="progress-bar progress-bar-success" role="progressbar" style="width:<%= @ticket_stats[:percent_full] %>%"></div>
         </div>
         <ul class="list-unstyled">
-          <li><span class="badge"><%= @ticket_stats[:available] %></span> available in the group</li>
-          <li><span class="badge"><%= @ticket_stats[:total] %></span> total in the group</li>
-          <li><span class="badge"><%= @ticket_stats[:held] %></span> held by you</li>
+          <li class="available-ticket-count"><span class="badge"><%= @ticket_stats[:available] %></span> available in the group</li>
+          <li class="total-ticket-count"><span class="badge"><%= @ticket_stats[:total] %></span> total in the group</li>
+          <li class="held-ticket-count"><span class="badge"><%= @ticket_stats[:held] %></span> held by you</li>
         </ul>
       </div>
     </div>

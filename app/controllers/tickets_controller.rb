@@ -22,7 +22,7 @@ class TicketsController < ApplicationController
       @events = @group.events.order('start_time ASC').where("start_time > '#{Date.today}'")
     end
 
-    @page_title = "Add Tickets"   
+    @page_title = "Add Tickets"
   end
 
   def create

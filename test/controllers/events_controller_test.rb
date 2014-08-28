@@ -29,4 +29,16 @@ class EventsControllerTest < ActionController::TestCase
     assert_select 'div.panel-heading', 'Saturday, October 26, 2013 - 3:00 pm EDT'
   end
 
+  test "should get the correct ticket counts" do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :show, :id => 4, :group_id => 1
+
+    assert_response :success, 'received a 200 status'
+    assert_select "li.available-ticket-count", '1 available in the group'
+    assert_select "li.total-ticket-count", '2 total in the group'
+    assert_select "li.held-ticket-count", '1 held by you'
+  end
+
 end
