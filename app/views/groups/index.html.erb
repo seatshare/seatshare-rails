@@ -9,9 +9,13 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="pull-right">
-					<% if group.is_admin(current_user) %><span class="label label-default">Administrator</span><% end %>
+					<% if group.is_admin(current_user) %>
+					<%= link_to raw('<span class="label label-primary">Administrator</span>'), :action => 'edit', :id => group.id %>
+					<% else %>
+					<%= link_to raw('<span class="label label-default">Member</span>'), :action => 'edit', :id => group.id %>
+					<% end %>
 				</div>
-				<strong class="group_name"><%= link_to group.group_name, {:action => 'show', :id => group.id } %></strong>
+				<strong class="group_name"><%= link_to group.group_name, :action => 'show', :id => group.id %></strong>
 			</div>
 			<div class="panel-body">
 				<ul class="list-unstyled text-center">

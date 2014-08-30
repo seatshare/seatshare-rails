@@ -1,10 +1,7 @@
 <div class="row">
   <div class="col-md-3">
     <p>
-      <%= image_tag @user.gravatar('250x250'), :class => 'img-thumbnail img-responsive' %>
-    </p>
-    <p>
-      <small>Joined <%= @user.created_at.strftime('%B %-d, %Y') %></small>
+      <%= image_tag @user.gravatar('250x250'), :class => 'img-thumbnail img-responsive', :alt => @user.display_name, :title => @user.display_name %>
     </p>
   </div>
   <div class="col-md-9">
@@ -16,6 +13,7 @@
     <h2><%= @user.display_name %></h2>
     <ul class="list-unstyled">
       <li><span class="glyphicon glyphicon-envelope"></span> <%= mail_to @user.email, @user.email %></li>
+      <li><span class="glyphicon glyphicon-user"></span> Joined <%= @user.created_at.strftime('%B %-d, %Y') %></li>
     </ul>
   </div>
 </div>

@@ -181,7 +181,7 @@
 
 <ul class="list-unstyled group-members">
   <% for member in @members %>
-  <li><%= image_tag member.gravatar %> <%= link_to member.display_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></li>
+  <li><%= image_tag member.gravatar, :alt => member.display_name, :title => member.display_name %> <%= link_to member.display_name, :controller => 'profiles', :action => 'show', :id => member.id %></li>
   <% end %>
   <li class="text-right"><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
 </ul>

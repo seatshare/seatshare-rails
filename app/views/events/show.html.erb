@@ -34,11 +34,7 @@
   <% for ticket in @tickets %>
     <tr>
       <td>
-        <% if ticket.assigned && ticket.owner.id != current_user.id && ticket.assigned.id != current_user.id %>
-        <%= link_to ticket.display_name, { :controller => 'tickets', :action => 'request_ticket', :group_id => @group.id, :event_id => @event.id, :id => ticket.id } %>
-        <% else %>
-        <%= link_to ticket.display_name, { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => @event.id } %>
-        <% end %>
+        <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => @event.id, :id => ticket.id %>
         <% if !ticket.note.nil? && ticket.note.length > 0 %>
         <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
         <% end %>

@@ -10,6 +10,7 @@ class Ticket < ActiveRecord::Base
   validates :group_id, :event_id, :owner_id, :user_id, :presence => true
   validates :cost, :numericality => { :greater_than_or_equal_to => 0 }
 
+  scope :order_by_date, -> { order('start_time ASC') }
   scope :order_by_seat, -> { order('section ASC').order('row ASC').order('seat ASC') }
 
   def display_name

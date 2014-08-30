@@ -38,13 +38,13 @@ class TicketsControllerTest < ActionController::TestCase
     assert_redirected_to '/groups/1/event-1'
   end
 
-  test "should get edit denied" do
+  test "should be redirected to request" do
     @user = User.find(2)
     sign_in :user, @user
 
-    assert_raise RuntimeError do
-      get :edit, :group_id => 1, :event_id => 1, :id => 2
-    end
+    get :edit, :group_id => 1, :event_id => 1, :id => 2
+
+    assert_redirected_to '/groups/1/event-1/ticket-2/request'
   end
 
   test "should get request" do

@@ -75,7 +75,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find_by_id(params[:id]) || not_found
 
     if @ticket.assigned != current_user && @ticket.owner != current_user
-      raise "NotAllowedToEditTicket"
+      redirect_to :action => 'request_ticket', :id => @ticket.id
     end
 
     @ticket_stats = @event.ticket_stats(@group, current_user)
@@ -156,6 +156,10 @@ class TicketsController < ApplicationController
     @event = Event.find_by_id(params[:event_id]) || not_found
     @ticket = Ticket.find_by_id(params[:id]) || not_found
 
+    if !@group.is_member(current_user)
+      raise "NotGroupMember"
+    end
+
     @ticket_stats = @event.ticket_stats(@group, current_user)
 
     @page_title = "#{@event.event_name} - #{@ticket.display_name}"
@@ -165,6 +169,10 @@ class TicketsController < ApplicationController
     group = Group.find_by_id(params[:group_id]) || not_found
     event = Event.find_by_id(params[:event_id]) || not_found
     ticket = Ticket.find_by_id(params[:id]) || not_found
+
+    if !group.is_member(current_user)
+      raise "NotGroupMember"
+    end
 
     message = params[:message][:personalization]
 

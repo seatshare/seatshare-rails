@@ -61,7 +61,7 @@
     <tbody>
       <% for member in @members %>
       <tr>
-        <td><%= image_tag member.gravatar %></td>
+        <td><%= image_tag member.gravatar, :alt => member.display_name, :title => member.display_name %></td>
         <td><%= link_to member.display_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></td>
         <td><%= mail_to member.email %></td>
       </tr>
@@ -99,7 +99,7 @@
 <div class="row">
   <div class="text-right col-md-12">
     <%= f.hidden_field :form_type, :value => 'reminders' %>
-    <%= f.submit 'Update Settings', :class => 'btn btn-secondary' %>
+    <%= f.submit 'Update Settings', :class => 'btn btn-default' %>
   </div>
 </div>
 
