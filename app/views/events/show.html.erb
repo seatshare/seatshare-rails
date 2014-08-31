@@ -13,7 +13,7 @@
 
 <div class="pull-right">
   <ul class="list-inline">
-    <li><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Add Ticket for this Event'), { :controller => 'tickets', :action => 'new', :group_id => @group.id, :event_id => @event.id }, :class => 'btn btn-default btn-sm' %></li>
+    <li><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Add Single Ticket'), { :controller => 'tickets', :action => 'new', :group_id => @group.id, :event_id => @event.id }, :class => 'btn btn-default btn-sm' %></li>
     <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Add Season Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
   </ul>
 </div>
