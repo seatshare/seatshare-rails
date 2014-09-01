@@ -52,4 +52,16 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
 
   end
 
+  test "remove a user from a group" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+
+    get '/groups/1/edit'
+    assert_response :success
+
+    post_via_redirect '/groups/1/leave', {:user => 2, :id => 1}
+    assert_response :success
+    assert_equal '/groups/1/edit', path
+    assert_equal 'Jill Smith has been removed', flash[:success]
+  end
+
 end

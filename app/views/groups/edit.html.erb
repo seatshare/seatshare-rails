@@ -41,7 +41,7 @@
 
 <div class="row">
   <div class="text-right col-md-12">
-    <%= link_to raw('<span class="glyphicon glyphicon-remove"></span> Leave Group'), { :action => 'leave', :id => @group.id }, :class => 'btn btn-large btn-danger' %> 
+    <%= link_to raw('<span class="glyphicon glyphicon-remove"></span> Leave Group'), { :action => 'leave', :id => @group.id }, :class => 'btn btn-large btn-danger' %>
   </div>
 
 </div>
@@ -56,6 +56,9 @@
         <th class="action"></th>
         <th>Name</th>
         <th>Email</th>
+        <% if @group.is_admin(current_user) %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -64,6 +67,13 @@
         <td><%= image_tag member.gravatar, :alt => member.display_name, :title => member.display_name %></td>
         <td><%= link_to member.display_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></td>
         <td><%= mail_to member.email %></td>
+        <% if @group.is_admin(current_user) %>
+          <td class="remove-user">
+            <% if member != current_user %>
+              <%= link_to raw('<span class="glyphicon glyphicon-remove"></span> Remove User'), { :action => 'leave', :user => @member, :id => @group.id }, :class => 'btn btn-large btn-danger' %>
+            <% end %>
+          </td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>

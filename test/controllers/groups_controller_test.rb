@@ -84,4 +84,68 @@ class GroupsControllerTest < ActionController::TestCase
     assert_redirected_to :controller => 'groups', :action => 'index'
   end
 
+  test "should see remove user option" do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :edit, {:id => 1}
+    assert_response :success, 'got a 200 status'
+    remove_user_column = css_select('.remove-user')
+    assert remove_user_column, 'Remove User'
+  end
+
+  test "should not see remove user option" do
+    @user = User.find(2)
+    sign_in :user, @user
+
+    get :edit, {:id => 1}
+    remove_user_column = css_select('.remove-user')
+    !assert remove_user_column, 'Remove User'
+    assert remove_user_column.length, 0
+  end
+
+  test "should remove user - admin" do
+    @user = User.find(1)
+    @removed = User.find(2)
+    @group = Group.find(1)
+    sign_in :user, @user
+
+    post :do_leave, {:user => @removed, :id => @group.id}
+    assert_response :redirect, 'got a 304 status'
+    assert_equal flash[:success], 'Jill Smith has been removed'
+  end
+
+  test "should remove user - not admin" do
+    @user = User.find(3)
+    @removed = User.find(3)
+    @group = Group.find(1)
+    sign_in :user, @user
+
+    post :do_leave, {:user => @removed, :id => @group.id}
+    assert_response :redirect, 'got a 304 status'
+    assert_equal flash[:success], 'You have left Geeks Watching Hockey'
+  end
+
+  test "should not remove user - administrator" do
+    assert_raise RuntimeError do
+      @user = User.find(1)
+      @removed = User.find(1)
+      @group = Group.find(1)
+      sign_in :user, @user
+
+      post :do_leave, {:user => @removed, :id => @group.id}
+    end
+  end
+
+  test "should not remove user - insufficient permission" do
+    @user = User.find(3)
+    @removed = User.find(2)
+    @group = Group.find(1)
+    sign_in :user, @user
+
+    post :do_leave, {:user => @removed, :id => @group.id}
+    assert_response :redirect, 'got a 304 status'
+    assert_equal flash[:error], 'You do not have permission to remove other users.'
+  end
+
 end
