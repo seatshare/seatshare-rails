@@ -70,7 +70,7 @@
   </table>
 
 <div class="text-right">
-  <%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default btn-sm' %>
+  <%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %>
 </div>
 
 
@@ -99,7 +99,7 @@
 <div class="row">
   <div class="text-right col-md-12">
     <%= f.hidden_field :form_type, :value => 'reminders' %>
-    <%= f.submit 'Update Settings', :class => 'btn btn-default' %>
+    <%= f.submit 'Update Settings', :class => 'btn btn-default btn-sm' %>
   </div>
 </div>
 
