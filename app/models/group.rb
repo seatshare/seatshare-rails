@@ -27,7 +27,7 @@ class Group < ActiveRecord::Base
   end
 
   def administrators
-    User.joins(:groups).where(group_users: { role: 'admin' })
+    users.where(group_users: { role: 'admin' })
   end
 
   def is_member(user=nil)
