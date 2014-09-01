@@ -87,6 +87,14 @@ class GroupTest < ActiveSupport::TestCase
     assert group.is_admin(user) === true, 'user is an admin'
   end
 
+  test "gets correct list of administrators" do
+    group = Group.find(2)
+
+    assert group.administrators.count === 1
+    assert group.administrators.first.first_name === 'Rick'
+    assert group.administrators.first.last_name === 'Taylor'
+  end
+
   test "leave a group" do
     user = User.find(2)
     group = Group.find(1)
