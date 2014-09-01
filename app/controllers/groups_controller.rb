@@ -147,12 +147,30 @@ class GroupsController < ApplicationController
   end
 
   def do_leave
+    if params[:user_id]
+      user = User.find(params[:user_id])
+    else
+      user = current_user
+    end
     group = Group.find_by_id(params[:id]) || not_found
+    if user != current_user && !group.is_admin(current_user)
+      flash[:error] = "You do not have permission to remove other users."
+      redirect_to :action => 'show', :id => group.id and return
+    end
 
-    group.leave_group(current_user)
+    group.leave_group(user)
 
-    flash[:success] = "You have left #{group.group_name}"
-    redirect_to :controller => 'groups', :action => 'index' and return
+    if user == current_user
+      flash[:success] = "You have left #{group.group_name}"
+    else
+      flash[:success] = "#{user.display_name} has been removed"
+    end
+
+    if group.is_admin(current_user)
+      redirect_to :action => 'edit', :id => group.id and return
+    else
+      redirect_to :controller => 'groups', :action => 'index' and return
+    end
   end
 
   def invite
