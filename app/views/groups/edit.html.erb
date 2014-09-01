@@ -70,7 +70,7 @@
         <% if @group.is_admin(current_user) %>
           <td class="remove-user">
             <% if member != current_user %>
-              <%= link_to raw('<span class="glyphicon glyphicon-remove"></span> Remove User'), { :action => 'leave', :user => @member, :id => @group.id }, :class => 'btn btn-large btn-danger confirm' %>
+              <%= link_to raw('<span class="glyphicon glyphicon-remove"></span> Remove User'), { :action => 'leave', :user_id => member.id, :id => @group.id }, :class => 'btn btn-large btn-danger confirm', :method => 'post' %>
             <% end %>
           </td>
         <% end %>

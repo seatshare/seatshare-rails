@@ -110,7 +110,7 @@ class GroupsControllerTest < ActionController::TestCase
     @group = Group.find(1)
     sign_in :user, @user
 
-    post :do_leave, {:user => @removed, :id => @group.id}
+    post :do_leave, {:user_id => @removed, :id => @group.id}
     assert_response :redirect, 'got a 304 status'
     assert_equal flash[:success], 'Jill Smith has been removed'
   end
@@ -121,7 +121,7 @@ class GroupsControllerTest < ActionController::TestCase
     @group = Group.find(1)
     sign_in :user, @user
 
-    post :do_leave, {:user => @removed, :id => @group.id}
+    post :do_leave, {:user_id => @removed, :id => @group.id}
     assert_response :redirect, 'got a 304 status'
     assert_equal flash[:success], 'You have left Geeks Watching Hockey'
   end
@@ -133,7 +133,7 @@ class GroupsControllerTest < ActionController::TestCase
       @group = Group.find(1)
       sign_in :user, @user
 
-      post :do_leave, {:user => @removed, :id => @group.id}
+      post :do_leave, {:user_id => @removed, :id => @group.id}
     end
   end
 
@@ -143,7 +143,7 @@ class GroupsControllerTest < ActionController::TestCase
     @group = Group.find(1)
     sign_in :user, @user
 
-    post :do_leave, {:user => @removed, :id => @group.id}
+    post :do_leave, {:user_id => @removed, :id => @group.id}
     assert_response :redirect, 'got a 304 status'
     assert_equal flash[:error], 'You do not have permission to remove other users.'
   end

@@ -147,8 +147,8 @@ class GroupsController < ApplicationController
   end
 
   def do_leave
-    if params[:user]
-      user = User.find(params[:user])
+    if params[:user_id]
+      user = User.find(params[:user_id])
     else
       user = current_user
     end
