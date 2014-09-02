@@ -19,7 +19,7 @@
       <div class="form-group">
         <%= f.label :recipients, :class => 'col-md-3 control-label' %>
         <div class="col-md-9">
-        	<% for member in @group.users %>
+        	<% for member in @members %>
         	<div class="checkbox">
 			  <label>
 			    <%= f.check_box :recipients, { :multiple => true, :checked => (member.id != current_user.id)}, member.id, nil %>

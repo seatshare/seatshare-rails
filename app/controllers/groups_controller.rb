@@ -201,6 +201,7 @@ class GroupsController < ApplicationController
 
   def message
     @group = Group.find(params[:id]) || not_found
+    @members = @group.users.order_by_name
     @page_title = "Send a Group Message to #{@group.group_name}"
   end
 
