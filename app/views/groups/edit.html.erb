@@ -80,7 +80,10 @@
   </table>
 
 <div class="text-right">
-  <%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %>
+  <ul class="list-inline">
+    <li><%= link_to raw('<span class="glyphicon glyphicon-envelope"></span> Group Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default' %></li>
+    <li><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %></li>
+  </ul>
 </div>
 
 

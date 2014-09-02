@@ -148,4 +148,16 @@ class GroupsControllerTest < ActionController::TestCase
     assert_equal flash[:error], 'You do not have permission to remove other users.'
   end
 
+  test "should see group message window" do
+    @user = User.find(1)
+    @group = Group.find(1)
+
+    sign_in :user, @user
+
+    get :message, { :id => @group.id }
+
+    assert_response :success, 'got a 200 status'
+    assert_select 'title', 'Send a Group Message to Geeks Watching Hockey'
+  end
+
 end
