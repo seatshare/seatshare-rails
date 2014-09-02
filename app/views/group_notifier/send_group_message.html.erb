@@ -1,0 +1,8 @@
+<%= simple_format(@message) %>
+ 
+<p>
+  ---<br />
+  <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %>, on behalf of
+  <%= @sender.display_name %><br />
+  <%= mail_to @sender.email, @sender.email %>
+</p>

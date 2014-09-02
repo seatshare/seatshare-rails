@@ -145,8 +145,9 @@
 
 <div class="well well-sm text-center">
   <ul class="list-inline" style="margin-bottom:0;">
-    <li>Have tickets to share?</li>
     <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Add Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
+    <li><%= link_to raw('<span class="glyphicon glyphicon-envelope"></span> Group Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
+
   </ul>
 </div>
 

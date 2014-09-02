@@ -15,4 +15,35 @@ class GroupNotifier < ActionMailer::Base
     )
   end
 
+  def send_group_message(group, sender, recipients, subject=nil, message=nil)
+
+    if group.blank? || sender.blank? || recipients.blank? || message.blank?
+      return false
+    end
+
+    if subject.blank?
+      subject = "[#{group.display_name}] A message from #{sender.display_name}"
+    else
+      subject = "[#{group.display_name}] #{subject}"
+    end
+
+    @group = group
+    @sender = sender
+    @recipients = recipients
+    @subject = subject
+    @message = message
+
+    @email_recipients = []
+    for recipient in recipients
+      @email_recipients << "#{recipient.display_name} <#{recipient.email}>"
+    end
+
+    mail(
+      from: "#{sender.display_name} <#{sender.email}>",
+      to: @email_recipients.join(', '),
+      subject: subject
+    )
+
+  end
+
 end

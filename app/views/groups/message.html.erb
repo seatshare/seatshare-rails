@@ -1,0 +1,48 @@
+<%= form_for :message, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'message', :id => @group.id } do |f| %>
+
+<div class="row">
+  <div class="col-md-12">
+    <fieldset>
+      <legend>Send a Group Message</legend>
+      <div class="form-group">
+        <%= f.label :subject, :class => 'col-md-3 control-label' %>
+        <div class="col-md-9">
+          <%= f.text_field :subject, :class => 'form-control', :placeholder => 'Your message subject (optional)' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :message, :class => 'col-md-3 control-label' %>
+        <div class="col-md-9">
+          <%= f.text_area :message, :class => 'form-control', :placeholder => 'Write a short message to be sent to the recipients below.', :rows => 10 %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :recipients, :class => 'col-md-3 control-label' %>
+        <div class="col-md-9">
+        	<% for member in @group.users %>
+        	<div class="checkbox">
+			  <label>
+			    <%= f.check_box :recipients, { :multiple => true, :checked => (member.id != current_user.id)}, member.id, nil %>
+			    <%= image_tag member.gravatar, :alt => member.display_name, :title => member.display_name %> <%= member.display_name %>
+			  </label>
+			</div>
+        	<% end %>
+        </div>
+    </div>
+    </fieldset>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <p class="text-right">
+      <%= f.submit 'Send Message', :class => 'btn btn-primary' %>
+    </p>
+  </div>
+</div>
+
+<% end %>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View group message"); }</script>
+<% end %>

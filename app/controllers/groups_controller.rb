@@ -178,7 +178,6 @@ class GroupsController < ApplicationController
     @page_title = "Invite Member to #{@group.group_name}"
   end
 
-
   def do_invite
     group = Group.find(params[:id]) || not_found
 
@@ -198,6 +197,34 @@ class GroupsController < ApplicationController
     end
 
     redirect_to :action => 'show', :id => group.id and return
+  end
+
+  def message
+    @group = Group.find(params[:id]) || not_found
+    @page_title = "Send a Group Message to #{@group.group_name}"
+  end
+
+  def do_message
+    group = Group.find(params[:id]) || not_found
+
+    if params[:message][:recipients].nil?
+      flash[:error] = "You must select at least one recipient."
+      redirect_to :action => 'message', :id => group.id and return
+    end
+
+    subject = params[:message][:subject]
+    message = params[:message][:message]
+    recipients = User.find(params[:message][:recipients])
+
+    email = GroupNotifier.send_group_message(group, current_user, recipients, subject, message).deliver
+    if email
+      flash[:success] = "Message sent!"
+      redirect_to :action => 'show', :id => group.id and return
+    else
+      flash[:error] = "Message delivery failed."
+      redirect_to :action => 'message', :id => group.id and return
+    end
+
   end
 
   private
