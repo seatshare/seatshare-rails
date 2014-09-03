@@ -199,6 +199,22 @@ class GroupsController < ApplicationController
     redirect_to :action => 'show', :id => group.id and return
   end
 
+  def do_reset_invite
+    group = Group.find(params[:id]) || not_found
+
+    if !group.is_admin(current_user)
+      raise "AccessDenied"
+    end
+
+    # Invoke default behavior if invitation_code is not set
+    group.invitation_code = nil;
+    group.save!
+
+    flash[:success] = 'Invitation code reset!'
+
+    redirect_to :action => 'edit', :id => group.id and return
+  end
+
   def message
     @group = Group.find(params[:id]) || not_found
     @members = @group.users.order_by_name

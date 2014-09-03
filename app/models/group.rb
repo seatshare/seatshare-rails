@@ -5,7 +5,8 @@ class Group < ActiveRecord::Base
   has_many :group_users
   has_many :users, through: :group_users
 
-  validates :entity_id, :group_name, :creator_id, :invitation_code, :presence => true
+  validates :entity_id, :group_name, :creator_id, :presence => true
+  before_save :clean_invitation_code
 
   scope :order_by_name, -> { order('LOWER(group_name) ASC') }
   scope :active, -> { where('status = 1') }
@@ -78,8 +79,14 @@ class Group < ActiveRecord::Base
 
   end
 
-
   private
+
+  def clean_invitation_code
+    if self.invitation_code.blank?
+      self.invitation_code = generate_invite_code(10)
+      puts self.invitation_code
+    end
+  end
 
   def generate_invite_code(size = 10)
     charset = %w{ 2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z}
