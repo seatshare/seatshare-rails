@@ -15,7 +15,10 @@
   <div class="form-group">
     <%= f.label :invitation_code, :class => 'col-md-3 control-label' %>
     <div class="col-md-9">
-      <p class="form-control-static"><%= @group.invitation_code %></p>
+      <p class="form-control-static">
+        <%= @group.invitation_code %><br />
+        <small><%= link_to 'Reset invitation code', { :controller => 'groups', :action => 'do_reset_invite', :id => @group.id }, :class => 'text-muted confirm', :method => 'post' %>
+      </p></small>
     </div>
   </div>
 
