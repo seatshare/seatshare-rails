@@ -74,6 +74,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find_by_id(params[:id]) || not_found
+    @entity = @group.entity
     if @group.status != 1
       not_found
     end

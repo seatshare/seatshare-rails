@@ -1,2 +1,4 @@
+<% if @entity.import_key.match /l\..*/i %>
 <p class="text-muted text-center"><small>Team schedule content Copyright <%= Date.today.year %> <%= link_to 'The Sports Network', 'http://www.sportsnetwork.com', :target => '_blank' %>. Distributed by <%= link_to 'XML Team Solutions', 'http://www.xmlteam.com', :target => '_blank' %>.</small>
 </p>
+<% end %>

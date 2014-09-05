@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    Your <strong><%= @group.entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.display_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
+    Your <strong><%= @entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.display_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
     <div class="pull-right">
       <%= link_to raw('<span class="glyphicon glyphicon-cog"></span>'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
     </div>
@@ -129,11 +129,11 @@
 
 <div class="panel panel-info">
   <div class="panel-heading">
-    <p class="panel-title">We are getting your group's <%= @group.entity.entity_name %> schedule</p>
+    <p class="panel-title">We are getting your group's <%= @entity.entity_name %> schedule</p>
   </div>
   <div class="panel-body">
     <p class="lead">Your group is the first one to request the schedule for the upcoming season! SeatShare still needs to import the schedule from our data provider. We can let you know as soon as it is available.</p>
-    <p class="text-right"><%= mail_to "contact@myseatshare.com", "Notify Me", { subject: "Schedule for #{@group.entity.display_name}", body: "Please let me know when the schedule is released!", class: "btn btn-primary btn-lg" } %></p>
+    <p class="text-right"><%= mail_to "contact@myseatshare.com", "Notify Me", { subject: "Schedule for #{@entity.display_name}", body: "Please let me know when the schedule is released!", class: "btn btn-primary btn-lg" } %></p>
   </div>
 </div>
 
