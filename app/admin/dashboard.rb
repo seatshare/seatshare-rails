@@ -65,7 +65,7 @@ ActiveAdmin.register_page "Dashboard" do
               th "Joined"
             end
             tbody do
-              User.last(5).map do |user|
+              User.all.order('created_at DESC').first(5).map do |user|
                 tr :class => cycle('even', 'odd') do
                   td link_to(user.display_name, admin_user_path(user))
                   td mail_to(user.email, user.email)
@@ -85,7 +85,7 @@ ActiveAdmin.register_page "Dashboard" do
               th "Created"
             end
             tbody do
-              Group.last(5).map do |group|
+              Group.all.order('created_at DESC').limit(5).map do |group|
                 tr :class => cycle('even', 'odd') do
                   td link_to(group.group_name, admin_group_path(group))
                   td group.users.count
@@ -105,7 +105,7 @@ ActiveAdmin.register_page "Dashboard" do
               th "Date & Time"
             end
             tbody do
-              Event.order_by_date.where("start_time > '#{Date.today}'").first(5).map do |event|
+              Event.order_by_date.where("start_time > '#{Date.today}'").limit(5).map do |event|
                 tr :class => cycle('even', 'odd') do
                   td link_to(event.event_name, admin_event_path(event))
                   td auto_link(event.entity)
