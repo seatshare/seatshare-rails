@@ -42,7 +42,7 @@
   <% if !@ticket.ticket_files.blank? %>
   <div class="row">
     <div class="col-md-offset-3 col-md-9">
-      <p class="form-control-static">This ticket has <strong><%= ticket.ticket_files.count %> file(s)</strong> attached. Only the owner or ticket assignee can download attachments.</p>
+      <p class="form-control-static">This ticket has <strong><%= @ticket.ticket_files.count %> file(s)</strong> attached. Only the owner or ticket assignee can download attachments.</p>
     </div>
   </div>
   <% end %>
