@@ -4,14 +4,45 @@
 
 <p>You have successfully created your <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %> account. We are glad to have you on board!</p>
 
-<p>Your next steps:</p>
+<p><strong>Your next steps:</strong></p>
 
 <ul>
   <li>If you have not already, you will want to <%= link_to 'join', :controller => 'groups', :action => 'join', :only_path => false %> or <%= link_to 'create a group', :controller => 'groups', :action => 'new', :only_path => false %>.</li>
   <li>Add your season tickets and make sure you assign one to yourself.</li>
 </ul>
 
-<p>Now you can manage your tickets! If you have any questions, be sure to <%= mail_to 'let us know', 'contact@myseatshare.com' %>!
+<p>Read on for our full guide.</p>
+
+<hr />
+
+<br />
+
+<h2 style="text-align:center;">Getting Started</h2>
+
+<h3>Groups</h3>
+
+<p>Everything in SeatShare is organized around the idea of a group. A group is a collection of users (like you!) that often purchased season tickets or receive them from a friend. Generally, a group consists of folks that you know and trust already.</p>
+
+<h3>Events</h3>
+
+<p>When you join or create a group, you will see a list of 'Events' for that team or venue. In most cases, these are individual games in the season ticket package. These are pre-loaded in the system for each team and venue available.</p>
+
+<h3>Tickets</h3>
+
+<p>This is where the most of the action with SeatShare takes place. If you hold season tickets, your first step is to add them. You can do this one of two ways:</p>
+
+<ul>
+  <li>From the dashboard, click <strong>Add Season Tickets</strong></li>
+  <li>From an event, click <strong>Add Single Ticket</strong></li>
+</ul>
+
+<p>You will be able to set the section, row and seat number. You will also be able to set a cost for each ticket and set who the ticket is "Assigned" to -- you will likely assign at least one ticket to yourself.</p>
+
+<p>If you want to attend a game, find an available ticket and use the dropdown menu to "Request" the ticket. This will send a message to the ticket holder saying that you want to attend that event. Ticketholders can then update the ticket's assignee. Any action with the ticket shows up in the "History" sidebar.</p>
+
+<hr />
+
+<p>Now you know how to manage your tickets! If you have any questions, be sure to <%= mail_to 'contact@myseatshare.com', 'let us know' %>!
 
 <p>
   ---<br />
