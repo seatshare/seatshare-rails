@@ -37,7 +37,7 @@ class EventsControllerTest < ActionController::TestCase
 
     assert_response :success, 'received a 200 status'
     assert_select "li.available-ticket-count", '1 available in the group'
-    assert_select "li.total-ticket-count", '2 total in the group'
+    assert_select "li.total-ticket-count", '4 total in the group'
     assert_select "li.held-ticket-count", '1 held by you'
   end
 

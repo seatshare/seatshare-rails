@@ -2,12 +2,12 @@ class TicketNotifier < ActionMailer::Base
   default from: "no-reply@myseatshare.com"
   layout 'email'
 
-  def assign(ticket=nil, user=nil)
+  def assign(ticket=nil, acting_user=nil)
     @ticket = ticket
     @event = ticket.event
     @recipient = ticket.assigned
     @group = ticket.group
-    @user = user
+    @user = acting_user
 
     mail(
       to: "#{@recipient.display_name} <#{@recipient.email}>",
