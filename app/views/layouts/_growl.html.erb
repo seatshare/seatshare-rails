@@ -1,3 +1,4 @@
+<% if !flash.empty? %>
 <script>
   <% if flash[:notice] %>
   $.growl("<%= flash[:notice] %>", { type: 'success' });
@@ -9,3 +10,4 @@
   $.growl("<%= flash[:error] %>", { type: 'danger' });
   <% end %>
 </script>
+<% end %>
