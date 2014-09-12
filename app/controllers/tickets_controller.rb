@@ -139,7 +139,7 @@ class TicketsController < ApplicationController
         if !group.is_member(ticket.assigned)
           raise "NotGroupMember"
         end
-        TicketNotifier.assign(ticket, ticket.assigned).deliver
+        TicketNotifier.assign(ticket, current_user).deliver
 
         log_ticket_history ticket, 'assigned'
       else
