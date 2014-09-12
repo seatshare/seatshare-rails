@@ -3,20 +3,19 @@ require 'test_helper'
 class TicketNotifierTest < ActionMailer::TestCase
 
   test "ticket assigned to user" do
-    ticket = Ticket.find(3)
-    user = User.find(1)
+    ticket = Ticket.find(7)
+    user = User.find(3)
 
     email = TicketNotifier.assign(ticket, user).deliver
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal email.from, ['no-reply@myseatshare.com']
     assert_equal email.to, ['jillsmith83@us.example.org']
-    assert_equal email.subject, 'Jim has assigned you a ticket via Nashville Fans of Ballsports'
+    assert_equal email.subject, 'Rick has assigned you a ticket via Geeks Watching Hockey'
     assert_includes email.body.to_s, '<p>Jill,</p>'
-    assert_includes email.body.to_s, '<p>Jim Stone (<a href="mailto:stonej@example.net">stonej@example.net</a>) has assigned a ticket to you for the following event in your group Nashville Fans of Ballsports.</p>'
-    assert_includes email.body.to_s, '<td>Belmont Bruins vs. Lipscomb : Wednesday, November 20, 2013</td>'
-    assert_includes email.body.to_s, '<td><a href="http://localhost:3000/groups/2/event-2/ticket-3">201 P 13</a></td>'
-    assert_includes email.body.to_s, '<td><a href="https://lockbox.myseatshare.com/abcdefg7890.pdf">ABCDEFG-7890.pdf</a></td>'
+    assert_includes email.body.to_s, '<p>Rick Taylor (<a href="mailto:rick.taylor@example.net">rick.taylor@example.net</a>) has assigned a ticket to you for the following event in your group Geeks Watching Hockey.</p>'
+    assert_includes email.body.to_s, '<td>Nashville Predators vs. St. Louis Blues : Saturday, October 26, 2013 - 2:00 pm CDT</td>'
+    assert_includes email.body.to_s, '<td><a href="http://localhost:3000/groups/1/event-4/ticket-7">326 K 13</a></td>'
   end
 
   test "ticket requested from user" do

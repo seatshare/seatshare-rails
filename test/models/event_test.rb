@@ -57,9 +57,9 @@ class EventTest < ActiveSupport::TestCase
 
     assert stats.is_a? Hash
     assert stats[:available] === 1
-    assert stats[:total] === 2
+    assert stats[:total] === 4
     assert stats[:held] === 1
-    assert stats[:percent_full] === 50
+    assert stats[:percent_full] === 75
   end
 
   test "two created events do not share an import key" do

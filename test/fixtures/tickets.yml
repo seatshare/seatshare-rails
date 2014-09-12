@@ -69,3 +69,29 @@ jill_3:
   note: 
   alias_id: 0
   cost: 44.00
+
+rick_1:
+  id: 6
+  group_id: 1
+  event_id: 4
+  section: 326
+  row: K
+  seat: 12
+  owner_id: 3
+  user_id: 3
+  note:
+  alias_id: 0
+  cost: 32.00
+
+rick_2:
+  id: 7
+  group_id: 1
+  event_id: 4
+  section: 326
+  row: K
+  seat: 13
+  owner_id: 3
+  user_id: 2
+  note: For Jill
+  alias_id: 0
+  cost: 32.00
