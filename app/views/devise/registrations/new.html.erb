@@ -65,6 +65,7 @@
         <%= f.hidden_field :invite_code, :value => params[:invite_code] %>
         <% end %>
         <p class="text-right">
+          <%= hidden_field_tag 'ga_client_id', '', :class => 'ga-client-id' %>
           <%= f.submit 'Create Account', :class => 'btn btn-primary' %>
         </p>
     </div>
@@ -111,5 +112,11 @@
 <% end %>
 
 <% content_for :page_footer do %>
+<script>
+ga(function(tracker) {
+  var clientId = tracker.get('clientId');
+  $('.ga-client-id').val(clientId);
+});
+</script>
 <script>if (typeof mixpanel != 'undefined') { mixpanel.track("View registration"); }</script>
 <% end %>

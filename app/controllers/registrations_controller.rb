@@ -29,6 +29,9 @@ class RegistrationsController < Devise::RegistrationsController
         end
       end
 
+      # Measure in Google Analytics
+      GoogleAnalyticsApi.new.event('user', 'signup', params[:ga_client_id])
+
       yield resource if block_given?
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
@@ -44,6 +47,7 @@ class RegistrationsController < Devise::RegistrationsController
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
+      flash[:alert] = 'There were errors with your registration.'
       clean_up_passwords resource
       respond_with resource
     end

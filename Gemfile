@@ -85,3 +85,6 @@ gem 'capistrano-bower', '~> 1.0'
 
 # Whenever
 gem 'whenever', :require => false
+
+# REST Client
+gem 'rest_client'
