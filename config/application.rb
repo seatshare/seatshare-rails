@@ -46,5 +46,8 @@ module SeatShare
       ]
     end)
 
+    # Autoload additional classes
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
   end
 end
