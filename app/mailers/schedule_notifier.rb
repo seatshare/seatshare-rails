@@ -11,6 +11,10 @@ class ScheduleNotifier < ActionMailer::Base
       to: "#{user.display_name} <#{@user.email}>",
       subject: "Today's events for #{@group.group_name}"
     )
+
+    headers['X-MC-Tags'] = 'DailyReminder'
+    headers['X-MC-Subaccount'] = 'SeatShare'
+    headers['X-MC-SigningDomain'] = 'myseatshare.com'
   end
 
   def weekly_schedule(events, group, user)
@@ -32,6 +36,10 @@ class ScheduleNotifier < ActionMailer::Base
       to: "#{user.display_name} <#{@user.email}>",
       subject: "The week ahead for #{@group.group_name}"
     )
+
+    headers['X-MC-Tags'] = 'WeeklyReminder'
+    headers['X-MC-Subaccount'] = 'SeatShare'
+    headers['X-MC-SigningDomain'] = 'myseatshare.com'
   end
 
 end

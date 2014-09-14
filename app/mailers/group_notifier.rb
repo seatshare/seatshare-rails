@@ -13,6 +13,11 @@ class GroupNotifier < ActionMailer::Base
       to: @recipient,
       subject: "You have been invited to join #{@group.group_name}"
     )
+
+    headers['X-MC-Tags'] = 'InviteUser'
+    headers['X-MC-Subaccount'] = 'SeatShare'
+    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+
   end
 
   def send_group_message(group, sender, recipients, subject=nil, message=nil)
@@ -43,6 +48,10 @@ class GroupNotifier < ActionMailer::Base
       to: @email_recipients.join(', '),
       subject: subject
     )
+
+    headers['X-MC-Tags'] = 'GroupMessage'
+    headers['X-MC-Subaccount'] = 'SeatShare'
+    headers['X-MC-SigningDomain'] = 'myseatshare.com'
 
   end
 

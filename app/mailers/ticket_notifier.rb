@@ -13,6 +13,10 @@ class TicketNotifier < ActionMailer::Base
       to: "#{@recipient.display_name} <#{@recipient.email}>",
       subject: "#{@user.first_name} has assigned you a ticket via #{@group.group_name}"
     )
+
+    headers['X-MC-Tags'] = 'AssignTicket'
+    headers['X-MC-Subaccount'] = 'SeatShare'
+    headers['X-MC-SigningDomain'] = 'myseatshare.com'
   end
 
   def request_ticket(ticket=nil, user=nil, message=nil)
@@ -27,5 +31,9 @@ class TicketNotifier < ActionMailer::Base
       to: "#{@recipient.display_name} <#{@recipient.email}>",
       subject: "#{@user.first_name} has requested your ticket via #{@group.group_name}"
     )
+
+    headers['X-MC-Tags'] = 'RequestTicket'
+    headers['X-MC-Subaccount'] = 'SeatShare'
+    headers['X-MC-SigningDomain'] = 'myseatshare.com'
   end
 end
