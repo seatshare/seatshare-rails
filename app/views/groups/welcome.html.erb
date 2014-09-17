@@ -32,15 +32,6 @@
 
 <% content_for :page_footer do %>
 
-<% if current_user.created_at.today? && !ENV['GOOGLE_ANALYTICS_ID'].nil? %>
-<script>
-ga('send', 'pageview', {
-  'page': '/groups/welcome',
-  'title': '<%= @page_title %>'
-});
-</script>
-<% end %>
-
 <script>if (typeof mixpanel != 'undefined') { mixpanel.track("View welcome"); }</script>
 
 <% end %>
