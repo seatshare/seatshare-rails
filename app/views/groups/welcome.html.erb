@@ -34,9 +34,9 @@
 
 <% if current_user.created_at.today? && !ENV['GOOGLE_ANALYTICS_ID'].nil? %>
 <script>
-ga('send', 'pageview', {
-  'page': '/groups/welcome',
-  'title': '<%= @page_title %>'
+ga('send', 'event', {
+  'category': 'user',
+  'action': 'signup'
 });
 </script>
 <% end %>
