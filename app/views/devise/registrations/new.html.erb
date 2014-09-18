@@ -61,8 +61,10 @@
 
   <div class="row">
     <div class="col-md-12">
-        <% if params[:invite_code] %>
-        <%= f.hidden_field :invite_code, :value => params[:invite_code] %>
+        <% if @invite %>
+        <%= f.hidden_field :invite_code, :value => @invite.invitation_code %>
+        <% elsif @entity %>
+        <%= f.hidden_field :entity_id, :value => @entity.id %>
         <% end %>
         <p class="text-right">
           <%= hidden_field_tag 'ga_client_id', '', :class => 'ga-client-id' %>
@@ -77,12 +79,17 @@
 
 <% content_for :sidebar do %>
 
-<% if params[:invite_code] %>
+<% if @invite %>
 <div class="alert alert-success">
   <h4>You've been invited join a group!</h4>
-  <p>You are registering with an invitation code, so you will be ready to go here in just a bit!</p>
+  <p><%= @invite.user.display_name %> invited you to join <%= @invite.group.group_name %>, so you will be ready to go here in just a bit!</p>
   <br />
-  <p class="text-lg">Invitation code: <strong class="invite_code"><%= params[:invite_code] %></strong></p>
+  <p class="text-lg">Invitation code: <strong class="invite_code"><%= @invite.invitation_code %></strong></p>
+</div>
+<% elsif @entity %>
+<div class="alert alert-success">
+  <h4>Create a <%= @entity.entity_name %> group!</h4>
+  <p>After sign up, you will be ready to invite people to your new season ticket group!</p>
 </div>
 <% else %>
 <div class="alert alert-info">

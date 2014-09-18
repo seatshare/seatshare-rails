@@ -12,6 +12,7 @@ class GroupsController < ApplicationController
   end
 
   def new
+    @entity = Entity.find_by_id(params[:entity_id])
     @page_title = "Create a Group"
     @entities = Entity.order_by_name.active.inject({}) do |options, entity|
       (options[entity.entity_type] ||= []) << [entity.entity_name, entity.id]

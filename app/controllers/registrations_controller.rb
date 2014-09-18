@@ -1,5 +1,16 @@
 class RegistrationsController < Devise::RegistrationsController
   def new
+    if (params[:invite_code])
+      @invite = GroupInvitation.find_by_invitation_code(params[:invite_code])
+    else
+      @invite = nil
+    end
+    if (params[:entity_id])
+      @entity = Entity.find_by_id(params[:entity_id])
+    else
+      @entity = nil
+    end
+
     @page_title = "Create Your SeatShare Account"
     @meta_description = %q{Register for an account with SeatShare to start managing your season tickets.}
     super
@@ -38,6 +49,8 @@ class RegistrationsController < Devise::RegistrationsController
         sign_up(resource_name, resource)
         if params[:user][:invite_code]
           respond_with resource, location: groups_join_path + "?invite_code=" + params[:user][:invite_code]
+        elsif params[:user][:entity_id]
+          respond_with resource, location: groups_new_path + "?entity_id=" + params[:user][:entity_id]
         else
           respond_with resource, location: after_sign_up_path_for(resource)
         end
