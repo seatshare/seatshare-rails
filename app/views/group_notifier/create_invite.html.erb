@@ -1,3 +1,19 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "EmailMessage",
+  "action": {
+    "@type": "ConfirmAction",
+    "name": "View Invitation",
+    "handler": {
+      "@type": "HttpActionHandler",
+      "url": "<%= url_for :controller => 'registrations', :action => 'new', :invite_code => @invite.invitation_code, :only_path => false %>"
+    }
+  },
+  "description": "<%= @user_display_name %> has invited you to join a group."
+}
+</script>
+
 <% if !@personalized.blank? %>
 <p><%= @personalized %></p>
 

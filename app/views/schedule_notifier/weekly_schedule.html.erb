@@ -1,3 +1,19 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "EmailMessage",
+  "action": {
+    "@type": "ConfirmAction",
+    "name": "View Tickets",
+    "handler": {
+      "@type": "HttpActionHandler",
+      "url": "<%= url_for :controller => 'groups', :action => 'show', :id => @group.id, :only_path => false %>"
+    }
+  },
+  "description": "<%= @group.group_name %> has upcoming events."
+}
+</script>
+
 <p><%= @user.first_name; %>,</p>
 
 <p>This is your week ahead for <%= link_to @group.group_name, :controller => 'groups', :action => 'show', :id => @group.id, :only_path => false %>. We send these every every Monday morning if there are events that week. You can update your reminder settings on <%= link_to 'the group page', :controller => 'groups', :action => 'edit', :id => @group.id, :only_path => false %>.</p>
