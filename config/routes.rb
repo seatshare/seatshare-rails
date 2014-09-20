@@ -12,6 +12,10 @@ SeatShare::Application.routes.draw do
   get 'privacy' => 'public#privacy'
   get 'contact' => 'public#contact'
 
+  devise_scope :user do
+    get "register/:entity_slug/:entity_id", to: "registrations#new", as: 'register_with_entity_id'
+  end
+
   get 'groups' => 'groups#index'
   get 'groups/new' => 'groups#new'
   post 'groups/new' => 'groups#create'
