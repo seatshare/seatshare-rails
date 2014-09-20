@@ -26,10 +26,10 @@ class RegistrationsControllerTest < ActionController::TestCase
   test "get register route with team id" do
     @request.env["devise.mapping"] = Devise.mappings[:user]
 
-    get :new, :entity_id => '1'
+    get :new, :entity_id => '1', :entity_slug => 'nashville-predators-nhl'
 
     assert_response :success
-    assert_select "title", "Create Your SeatShare Account"
+    assert_select "title", "Create Your SeatShare Account - Nashville Predators (NHL)"
     assert_select "h4", "Create a Nashville Predators group!"
   end
 

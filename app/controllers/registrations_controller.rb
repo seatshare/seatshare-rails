@@ -11,8 +11,14 @@ class RegistrationsController < Devise::RegistrationsController
       @entity = nil
     end
 
-    @page_title = "Create Your SeatShare Account"
-    @meta_description = %q{Register for an account with SeatShare to start managing your season tickets.}
+    if @entity
+      @page_title = "Create Your SeatShare Account - #{@entity.display_name}"
+      @meta_description = "Register for an account with SeatShare to start managing your season tickets for your #{@entity.display_name} group."
+    else
+      @page_title = "Create Your SeatShare Account"
+      @meta_description = %q{Register for an account with SeatShare to start managing your season tickets.}
+    end
+
     super
   end
 
