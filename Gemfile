@@ -66,6 +66,9 @@ gem 'pg'
 # 12factor
 gem 'rails_12factor', group: :production
 
+# New Relic
+gem 'newrelic_rpm', group: :production
+
 # Select2
 gem 'select2-rails'
 
