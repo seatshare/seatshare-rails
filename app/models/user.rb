@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   scope :order_by_name, -> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') }
   scope :active, -> { where('status = 1') }
 
+  attr_accessor :entity_id
   attr_accessor :newsletter_signup
   attr_accessor :invite_code
 
