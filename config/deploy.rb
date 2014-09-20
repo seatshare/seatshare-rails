@@ -29,16 +29,7 @@ set :keep_releases, 5
 # Whenever (for scheduled jobs)
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
-# New Relic
-after "deploy:updated", "newrelic:notice_deployment"
-
 namespace :deploy do
-
-  desc "Symlink application config files."
-  task :symlink do
-    # New Relic
-    run "ln -s {#{shared_path},#{release_path}}/config/newrelic.yml"  
-  end
 
   desc 'Restart application'
   task :restart do
@@ -47,7 +38,6 @@ namespace :deploy do
     end
   end
 
-  after :publishing, :symlink
   after :publishing, :restart
 
 end

@@ -5,9 +5,6 @@ require 'capistrano/setup'
 require 'capistrano/deploy'
 require 'capistrano/rails'
 
-# New Relic
-require 'new_relic/recipes'
-
 # Bower (for assets)
 require 'capistrano/bower'
 
