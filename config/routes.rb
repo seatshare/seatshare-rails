@@ -17,7 +17,7 @@ SeatShare::Application.routes.draw do
     get "register/:entity_slug/:entity_id", to: "registrations#new", as: 'register_with_entity_id'
   end
 
-  get 'groups' => 'groups#index'
+  get 'groups/' => 'groups#index'
   get 'groups/new' => 'groups#new', as: 'new_group'
   post 'groups/new' => 'groups#create'
   get 'groups/join' => 'groups#join', as: 'join_group'

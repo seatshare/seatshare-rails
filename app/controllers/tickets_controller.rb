@@ -116,11 +116,9 @@ class TicketsController < ApplicationController
       end
       File.open(Rails.root.join('tmp', 'uploads', uploaded_io.original_filename), 'rb') do |file|
         file_s3_key = "#{params[:id]}-#{SecureRandom.hex}/#{uploaded_io.original_filename}"
-        AWS::S3::S3Object.store(
-          file_s3_key,
-          open(file),
-          ENV['SEATSHARE_S3_BUCKET']
-        )
+        s3 = AWS::S3.new
+        object = s3.buckets[ENV['SEATSHARE_S3_BUCKET']].objects[file_s3_key]
+        object.write(open(file))
         ticket_file = TicketFile.new({
           file_name: uploaded_io.original_filename,
           user_id: ticket.owner_id,
