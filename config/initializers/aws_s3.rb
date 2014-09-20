@@ -4,7 +4,7 @@ if ENV['SEATSHARE_S3_BUCKET'].nil? || ENV['SEATSHARE_S3_BUCKET'].nil? || ENV['SE
   raise "MissingConfigurationForS3"
 end
 
-AWS::S3::Base.establish_connection!(
-  :access_key_id     => ENV['SEATSHARE_S3_KEY'],
-  :secret_access_key => ENV['SEATSHARE_S3_SECRET']
+AWS.config(
+  access_key_id:     ENV['SEATSHARE_S3_KEY'],
+  secret_access_key: ENV['SEATSHARE_S3_SECRET']
 )
