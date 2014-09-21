@@ -11,7 +11,7 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
 
     post_via_redirect '/groups/new', {:group => { :group_name => 'A Test Group', :entity_id => '5'}}
     assert_response :success
-    assert_equal '/groups/4', path
+    assert_select 'title', 'A Test Group'
     assert_equal 'Group created!', flash[:success]
   end
 

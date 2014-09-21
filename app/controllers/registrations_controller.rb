@@ -11,6 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
     else
       @entity = nil
     end
+    @link_canonical = 'https://myseatshare.com/register'
     if @entity
       @page_title = "Create Your SeatShare Account - #{@entity.display_name}".truncate(65, omission: '...')
       @meta_description = "Register for an account with SeatShare to start managing your season tickets for your #{@entity.display_name} group."

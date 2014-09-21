@@ -2,6 +2,12 @@
 
 <p class="text-muted">Your SeatShare account lets you join an existing group or create your own.</p>
 
+<% if @entity %>
+<div class="alert alert-info">
+  <p class="lead text-center">SeatShare salutes <%= @entity.entity_name %> fans!</p>
+</div>
+<% end %>
+
 <%= form_for(resource, html: {class: "form-horizontal", role: "form"}, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
 <fieldset>
@@ -53,7 +59,7 @@
   <div class="form-group">
     <div class="col-md-offset-3 col-md-9">
       <div class="alert alert-info alert-sm">
-        <strong>Just a heads up!</strong> By clicking "Create Account", you are accepting SeatShare's <%= link_to 'Terms of Service', '/tos' %>.
+        <strong>Just a heads up!</strong> By clicking "Create Account", you are accepting SeatShare's <%= link_to 'Terms of Service', '/tos' %>. It's a short read, take a look.
       </div>
     </div>
   </div>
@@ -76,7 +82,15 @@
 
 <% end %>
 
-<p class="text-muted">SeatShare is not a ticket broker or marketplace, and we do not process payment for tickets that may be sold through the platform. More importantly, SeatShare is the easiest way to manage your season tickets online and share them with a group of other fans. Ticket groups can be created for more than 2,200 teams for which we are able to maintain up-to-date schedules -- including professional, college and amateur teams. Create your free account today!</p>
+<% if @entity %>
+
+<% end %>
+
+<p class="text-muted">SeatShare is not a ticket broker or marketplace, and we do not process payment for tickets that may be sold through the platform. More importantly, SeatShare is the easiest way to manage your season tickets online and share them with a group of other fans. Ticket groups can be created for more than 2,200 teams for which we are able to maintain up-to-date schedules -- including professional, college and amateur teams.</p>
+<% if @entity %>
+<p class="text-muted">Yep, that means we are ready for the <%= @entity.entity_name %> season!</p>
+<% end %>
+<p class="text-muted">Create your free account today!</p>
 
 <% content_for :sidebar do %>
 
@@ -95,7 +109,7 @@
 <% else %>
 <div class="alert alert-info">
   <h4>Joining a group?</h4>
-  <p>You will be asked to either create a group or join an existing group after your account is created.</p>
+  <p>You will be asked to either create a group or join an existing group after your account is created. If you have an invitation code, you can provide it to join the group.</p>
 </div>
 <% end %>
 
