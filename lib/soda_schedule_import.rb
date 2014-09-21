@@ -36,7 +36,8 @@ class SodaScheduleImport
     document_id = CGI.parse(latest.query)['doc-ids'].first
 
     # Check to see if you already have this document ID in S3
-    if AWS::S3::S3Object.exists? "soda/#{document_id}", ENV['SEATSHARE_S3_BUCKET']
+    s3 = AWS::S3.new
+    if s3.buckets[ENV['SEATSHARE_S3_BUCKET']].objects["soda/#{document_id}"].exists?
       if !options[:force_update]
         self.messages << "The latest schedule for #{entity.entity_name} (#{document_id}) has already been processed."
         return
@@ -56,7 +57,9 @@ class SodaScheduleImport
 
     # Store this file in S3
     File.open File.join(Rails.root, 'tmp', 'soda', document_id), 'rb' do |file|
-      AWS::S3::S3Object.store "soda/#{document_id}", open(file), ENV['SEATSHARE_S3_BUCKET']
+      s3 = AWS::S3.new
+      object = s3.buckets[ENV['SEATSHARE_S3_BUCKET']].objects["soda/#{document_id}"]
+      object.write(open(file))
     end
 
     # Parse the schedule and create the events

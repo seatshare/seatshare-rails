@@ -17,20 +17,20 @@ SeatShare::Application.routes.draw do
     get "register/:entity_slug/:entity_id", to: "registrations#new", as: 'register_with_entity_id'
   end
 
-  get 'groups' => 'groups#index'
-  get 'groups/new' => 'groups#new'
+  get 'groups/' => 'groups#index'
+  get 'groups/new' => 'groups#new', as: 'new_group'
   post 'groups/new' => 'groups#create'
-  get 'groups/join' => 'groups#join'
+  get 'groups/join' => 'groups#join', as: 'join_group'
   post 'groups/join' => 'groups#do_join'
-  get 'groups/:id' => 'groups#show'
-  get 'groups/:id/edit' => 'groups#edit'
+  get 'groups/:id' => 'groups#show', as: 'group'
+  get 'groups/:id/edit' => 'groups#edit', as: 'edit_group'
   post 'groups/:id/edit' => 'groups#update'
-  get 'groups/:id/leave' => 'groups#leave'
+  get 'groups/:id/leave' => 'groups#leave', as: 'leave_group'
   post 'groups/:id/leave' => 'groups#do_leave'
-  get 'groups/:id/invite' => 'groups#invite'
+  get 'groups/:id/invite' => 'groups#invite', as: 'invite_group'
   post 'groups/:id/invite' => 'groups#do_invite'
   post 'groups/:id/reset_invite' => 'groups#do_reset_invite'
-  get 'groups/:id/message' => 'groups#message'
+  get 'groups/:id/message' => 'groups#message', as: 'message_group'
   post 'groups/:id/message' => 'groups#do_message'
   get 'groups/:id/events_feed' => 'groups#events_feed'
 
@@ -51,10 +51,10 @@ SeatShare::Application.routes.draw do
   get 'profile' => 'profiles#edit'
   post 'profile' => 'profiles#update'
 
-  get 'profile/aliases/new' => 'user_aliases#new'
+  get 'profile/aliases/new' => 'user_aliases#new', as: 'new_user_alias'
   post 'profile/aliases/new' => 'user_aliases#create'
-  get 'profile/aliases/:id/edit' => 'user_aliases#edit'
+  get 'profile/aliases/:id/edit' => 'user_aliases#edit', as: 'edit_user_alias'
   post 'profile/aliases/:id/edit' => 'user_aliases#update'
-  get 'profile/aliases/:id/delete' => 'user_aliases#delete'
+  get 'profile/aliases/:id/delete' => 'user_aliases#delete', as: 'delete_user_alias'
 
 end

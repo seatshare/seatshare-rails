@@ -12,12 +12,12 @@
     </div>
     <div class="navbar-collapse collapse">
       <% if user_signed_in? %>
-        <% if !@group_selector.blank? %>
-        <%= form_for :group, html: {class: "navbar-form navbar-left", role: "form", id: 'group_switcher'}, :url => groups_path, :method => 'get' do |f| %>
-        <div class="form-group">
-          <%= f.select :id, @group_selector, {}, { :class => 'form-control' } %>
-        </div>
-        <% end %>
+        <% if !@group_selector.blank? && !@group.nil? %>
+        <form class="navbar-form navbar-left" role="form" id="group_switcher" method="get">
+          <div class="form-group">
+            <%= select_tag 'group_selector', options_for_select(@group_selector, @group.id), { :class => 'form-control' } %>
+          </div>
+        </form>
       <% end %>
       <ul class="nav navbar-nav">
         <li class=""><%= link_to "Dashboard", :root %></li>

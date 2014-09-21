@@ -1,4 +1,4 @@
-<%= form_for :group, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'leave', :id => @group.id } do |f| %>
+<%= form_for @group, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'leave', :id => @group.id } do |f| %>
 
 <div class="alert alert-danger alert-block">
 	<h3>Are you sure you want to leave "<strong><%= @group.group_name %></strong>?"</h3>

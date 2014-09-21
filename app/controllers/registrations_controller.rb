@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   def new
+    @user = User.new
     if (params[:invite_code])
       @invite = GroupInvitation.find_by_invitation_code(params[:invite_code])
     else
@@ -10,7 +11,6 @@ class RegistrationsController < Devise::RegistrationsController
     else
       @entity = nil
     end
-
     if @entity
       @page_title = "Create Your SeatShare Account - #{@entity.display_name}"
       @meta_description = "Register for an account with SeatShare to start managing your season tickets for your #{@entity.display_name} group."
@@ -18,7 +18,6 @@ class RegistrationsController < Devise::RegistrationsController
       @page_title = "Create Your SeatShare Account"
       @meta_description = %q{Register for an account with SeatShare to start managing your season tickets.}
     end
-
     super
   end
 

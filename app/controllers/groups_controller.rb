@@ -177,6 +177,7 @@ class GroupsController < ApplicationController
 
   def invite
     @group = Group.find(params[:id]) || not_found
+    @group_invitation = GroupInvitation.new
     @page_title = "Invite Member to #{@group.group_name}"
   end
 

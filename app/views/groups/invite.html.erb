@@ -1,4 +1,4 @@
-<%= form_for :group_invitation, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'invite', :id => @group.id } do |f| %>
+<%= form_for @group_invitation, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'invite', :id => @group.id } do |f| %>
 
 <div class="row">
   <div class="col-md-12">

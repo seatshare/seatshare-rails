@@ -2,7 +2,7 @@
 seatshareReady = ->
 
   # Navbar group switching
-  $('#group_switcher select#group_id').change (e) ->
+  $('#group_switcher select#group_selector').change (e) ->
   	window.location = '/groups/' + $(this).val()
 
   # Confirm actions
