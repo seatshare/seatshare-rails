@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
       @entity = nil
     end
     if @entity
-      @page_title = "Create Your SeatShare Account - #{@entity.display_name}"
+      @page_title = "Create Your SeatShare Account - #{@entity.display_name}".truncate(65, omission: '...')
       @meta_description = "Register for an account with SeatShare to start managing your season tickets for your #{@entity.display_name} group."
     else
       @page_title = "Create Your SeatShare Account"
