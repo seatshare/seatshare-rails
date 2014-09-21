@@ -1,6 +1,12 @@
-<h1>Have questions or comments?</h1>
+<h1>Let's talk!</h1>
+
+<p class="lead">Got an idea for a new feature? Cannot find your team in our list of more than 2,200? For any of these reasons and more, let's get in touch!</p>
+
+<h2>Have questions or comments?</h2>
 
 <p class="text-muted">We value your feedback on how we can improve SeatShare to better serve your season ticket management needs. The form below will send an email to our team. If you come across a bug, please be sure to note what page what browser you are using so we can address those as quickly as possible. We really do like to hear from you, so get in touch often!</p>
+
+<br />
 
 <% if params[:thank_you] %>
 <div class="alert alert-success">
@@ -45,6 +51,8 @@
   <%= hidden_field_tag :redirect_to, url_for({:controller => 'public', :action => 'contact', :host => 'myseatshare.com', :thank_you => 1}) %>
 
 <% end %>
+
+<p class="text-muted">We hate spam email as much as you do. We will only use the provided contact information to discuss your message. We will not to sign you up for any email lists or share with a third party. See our <%= link_to "privacy policy", privacy_path %> for more details.</p>
 
 <% content_for :sidebar do %>
 
