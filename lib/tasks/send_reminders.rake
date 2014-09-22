@@ -1,6 +1,9 @@
 namespace :send_reminders do
   desc "Sends Daily Reminders"
   task daily: :environment do
+
+    Time.zone = ActiveSupport::TimeZone["Central Time (US & Canada)"]
+
     puts "[START] #{DateTime.now}"
     groups = Group.all
     start_time = Date.today.beginning_of_day
@@ -26,6 +29,9 @@ namespace :send_reminders do
 
   desc "Sends Weekly Reminders"
   task weekly: :environment do
+
+    Time.zone = ActiveSupport::TimeZone["Central Time (US & Canada)"]
+
     puts "[START] #{DateTime.now}"
     groups = Group.all
     start_time = Date.today.beginning_of_week

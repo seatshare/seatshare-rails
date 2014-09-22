@@ -52,10 +52,10 @@
 					<% for ticket in tickets %>
 					<% next if ticket.is_assigned? %>
 					<tr>
-						<td><%= link_to ticket.display_name, { :controller => 'tickets', :action => 'show', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %></td>
+						<td><%= link_to ticket.display_name, { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %></td>
 						<td>via <%= ticket.owner.display_name; %></td>
 						<td>
-							<%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'show', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %>
+							<%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %>
 						</td>
 					</tr>
 					<% end %>

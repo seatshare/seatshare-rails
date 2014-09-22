@@ -3,6 +3,9 @@ class ScheduleNotifier < ActionMailer::Base
   layout 'email'
 
   def daily_schedule(events, group, user)
+
+    set_timezone user
+
     @events = events
     @group = group
     @user = user
@@ -28,6 +31,8 @@ class ScheduleNotifier < ActionMailer::Base
       end
     end
 
+    set_timezone user
+
     @events_day_of_week = events_day_of_week
     @group = group
     @user = user
@@ -40,6 +45,17 @@ class ScheduleNotifier < ActionMailer::Base
     headers['X-MC-Tags'] = 'WeeklyReminder'
     headers['X-MC-Subaccount'] = 'SeatShare'
     headers['X-MC-SigningDomain'] = 'myseatshare.com'
+  end
+
+  private
+
+  def set_timezone(user)
+    tz = user ? user.timezone : nil
+    if tz.blank?
+      Time.zone = ActiveSupport::TimeZone["Central Time (US & Canada)"]
+    else
+      Time.zone = tz
+    end
   end
 
 end

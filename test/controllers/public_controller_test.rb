@@ -44,7 +44,7 @@ class PublicControllerTest < ActionController::TestCase
     get :contact
     assert_response :success, 'loaded page with a 200'
     assert_select 'title', 'Contact - SeatShare', 'title matches expected'
-    assert_select 'h1', 'Have questions or comments?', 'page heading matches'
+    assert_select 'h1', 'Let\'s talk!', 'page heading matches'
   end
 
 
