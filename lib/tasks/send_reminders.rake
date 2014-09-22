@@ -38,7 +38,7 @@ namespace :send_reminders do
     end_time = Date.today.sunday + 7
     puts "Sending Weekly Reminders for events between #{start_time} and #{end_time}"
     for group in groups
-      events = group.events.where("start_time >= '#{start_time}' AND start_time <= '#{end_time}'").order_by_date
+    events = group.events.where("start_time >= '#{start_time}' AND start_time <= '#{end_time}'").order_by_date
       if events.count > 0
         for group_user in group.group_users
           if group_user.weekly_reminder === 1
