@@ -83,7 +83,7 @@ SeatShare::Application.configure do
   config.action_mailer.smtp_settings = {
     address:              ENV['MANDRILL_SMTP_HOST'],
     port:                 587,
-    domain:               'myeatshare.com',
+    domain:               'myseatshare.com',
     user_name:            ENV['MANDRILL_SMTP_USER'],
     password:             ENV['MANDRILL_SMTP_PASS'],
     authentication:       'plain',
