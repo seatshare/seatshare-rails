@@ -21,11 +21,10 @@ class ScheduleNotifier < ActionMailer::Base
   end
 
   def weekly_schedule(events, group, user)
-
     events_day_of_week = []
     for day_of_week, index in Date::DAYNAMES.each_with_index.to_a.rotate(1)
+      events_day_of_week[index] = []
       for event in events
-        events_day_of_week[index] = []
         next if event.start_time.wday != index
         events_day_of_week[index] << event
       end
