@@ -1,19 +1,3 @@
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "EmailMessage",
-  "action": {
-    "@type": "ConfirmAction",
-    "name": "View Tickets",
-    "handler": {
-      "@type": "HttpActionHandler",
-      "url": "<%= url_for :controller => 'groups', :action => 'show', :id => @group.id, :only_path => false %>"
-    }
-  },
-  "description": "<%= @group.group_name %> has upcoming events."
-}
-</script>
-
 <p><%= @user.first_name; %>,</p>
 
 <p>This is your daily summary for <%= link_to @group.group_name, :controller => 'groups', :action => 'show', :id => @group.id, :only_path => false %>. We send these every morning if there are events that day. You can update your reminder settings on <%= link_to 'the group page', { :controller => 'groups', :action => 'edit', :id => @group.id, :only_path => false } %>.</p>
@@ -21,51 +5,53 @@
 <% for event in @events %>
 <hr />
 <table cellpadding="10px">
-	<tr>
-		<th style="width:100px">Event</th>
-		<td><%= link_to event.event_name, { :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id, :only_path => false } %></td>
-	</tr>
-	<tr>
-		<th>Starts</th>
-		<td><%= event.date_time %></td>
-	</tr>
-	<% if !event.description.blank? %>
-	<tr>
-		<th>Description</th>
-		<td><%= event.description %></td>
-	</tr>
-	<% end %>
+  <tr>
+    <th style="width:100px">Event</th>
+    <td><%= link_to event.event_name, { :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id, :only_path => false } %></td>
+  </tr>
+  <tr>
+    <th>Starts</th>
+    <td><%= event.date_time %></td>
+  </tr>
+  <% if !event.description.blank? %>
+  <tr>
+    <th>Description</th>
+    <td><%= event.description %></td>
+  </tr>
+  <% end %>
 
-	<% tickets = event.tickets(@group) %>
-	<% ticket_stats = event.ticket_stats(@group, @user) %>
+  <% tickets = event.tickets(@group) %>
+  <% ticket_stats = event.ticket_stats(@group, @user) %>
 
-	<tr>
-		<th>Tickets</th>
-		<td>
-			<ul>
-				<li><span style="font-weight:bold;"><%= ticket_stats[:available] %></span> available in the group</li>
-				<li><span style="font-weight:bold;"><%= ticket_stats[:total] %></span> total in the group</li>
-				<li><span style="font-weight:bold;"><%= ticket_stats[:held] %></span> held by you</li>
-			</ul>
-			<table width="100%" cellpadding="10px">
-				<tbody>
-					<% for ticket in tickets %>
-					<% next if ticket.is_assigned? %>
-					<tr>
-						<td><%= link_to ticket.display_name, { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %></td>
-						<td>via <%= ticket.owner.display_name; %></td>
-						<td>
-							<%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %>
-						</td>
-					</tr>
-					<% end %>
-				</tbody>
-			</table>
-		</td>
-	</tr>
+  <tr>
+    <th>Tickets</th>
+    <td>
+      <ul>
+        <li><span style="font-weight:bold;"><%= ticket_stats[:available] %></span> available in the group</li>
+        <li><span style="font-weight:bold;"><%= ticket_stats[:total] %></span> total in the group</li>
+        <li><span style="font-weight:bold;"><%= ticket_stats[:held] %></span> held by you</li>
+      </ul>
+      <table width="100%" cellpadding="10px">
+        <tbody>
+          <% for ticket in tickets %>
+          <% next if ticket.is_assigned? %>
+          <tr>
+            <td>
+              <%= link_to ticket.display_name, { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %>
+            </td>
+            <td>via <%= ticket.owner.display_name; %></td>
+            <td>
+              <%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </td>
+  </tr>
 </table>
 <% end %>
 
 <% content_for :footer do %>
-	<%= link_to 'Manage My Reminders', { :controller => 'groups', :action => 'edit', :id => @group.id, :only_path => false } %>
+  <%= link_to 'Manage My Reminders', { :controller => 'groups', :action => 'edit', :id => @group.id, :only_path => false } %>
 <% end %>
