@@ -6,7 +6,7 @@ class EventTest < ActiveSupport::TestCase
       event_name: 'A New Event',
       description: 'This describes the event',
       entity_id: 1,
-      start_time: '2013-01-01 18:00:00'
+      start_time: '2013-01-01 18:00:00 CST'
     })
     event.save!
 

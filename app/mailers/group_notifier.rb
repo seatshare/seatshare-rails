@@ -8,6 +8,11 @@ class GroupNotifier < ActionMailer::Base
     @user = invite.user
     @group = invite.group
     @personalized = message
+    @view_action = {
+      url: url_for(:controller => 'registrations', :action => 'new', :invite_code => @invite.invitation_code, :only_path => false),
+      action: 'Accept Invitation',
+      description: 'You have received an invitation.'
+    }
 
     mail(
       to: @recipient,
@@ -37,6 +42,12 @@ class GroupNotifier < ActionMailer::Base
     @recipients = recipients
     @subject = subject
     @message = message
+
+    @view_action = {
+      url: url_for(:controller => 'groups', :id => @group.id, :only_path => false),
+      action: 'View Group',
+      description: 'You have received a message.'
+    }
 
     @email_recipients = []
     for recipient in recipients
