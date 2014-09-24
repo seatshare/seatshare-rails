@@ -1,19 +1,3 @@
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "EmailMessage",
-  "action": {
-    "@type": "ConfirmAction",
-    "name": "View Ticket",
-    "handler": {
-      "@type": "HttpActionHandler",
-      "url": "<%= url_for :controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id, :only_path => false %>"
-    }
-  },
-  "description": "<%= @user_display_name %> has assigned you a ticket."
-}
-</script>
-
 <p><%= @recipient.first_name %>,</p>
 
 <p><%= @user.display_name %> (<%= mail_to @user.email, @user.email %>) has assigned a ticket to you for the following event in your group <%= @group.group_name %>.</p>

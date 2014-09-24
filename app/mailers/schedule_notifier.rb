@@ -10,6 +10,12 @@ class ScheduleNotifier < ActionMailer::Base
     @group = group
     @user = user
 
+    @view_action = {
+      url: url_for(:controller => 'groups', :action => 'show', :id => @group.id, :only_path => false),
+      action: 'View Tickets',
+      description: 'See available tickets.'
+    }
+
     mail(
       to: "#{user.display_name} <#{@user.email}>",
       subject: "Today's events for #{@group.group_name}"
@@ -35,6 +41,12 @@ class ScheduleNotifier < ActionMailer::Base
     @events_day_of_week = events_day_of_week
     @group = group
     @user = user
+
+    @view_action = {
+      url: url_for(:controller => 'groups', :action => 'show', :id => @group.id, :only_path => false),
+      action: 'View Tickets',
+      description: 'See available tickets.'
+    }
 
     mail(
       to: "#{user.display_name} <#{@user.email}>",

@@ -9,6 +9,12 @@ class TicketNotifier < ActionMailer::Base
     @group = ticket.group
     @user = acting_user
 
+    @view_action = {
+      url: url_for(:controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id, :only_path => false),
+      action: 'View Ticket',
+      description: 'You have been assigned a ticket.'
+    }
+
     mail(
       to: "#{@recipient.display_name} <#{@recipient.email}>",
       subject: "#{@user.first_name} has assigned you a ticket via #{@group.group_name}"
@@ -26,6 +32,12 @@ class TicketNotifier < ActionMailer::Base
     @group = ticket.group
     @user = user
     @message = message
+
+    @view_action = {
+      url: url_for(:controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id, :only_path => false),
+      action: 'Assign Ticket',
+      description: 'Your ticket has been requested.'
+    }
 
     mail(
       to: "#{@recipient.display_name} <#{@recipient.email}>",
