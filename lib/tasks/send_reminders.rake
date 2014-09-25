@@ -6,8 +6,8 @@ namespace :send_reminders do
 
     puts "[START] #{DateTime.now}"
     groups = Group.all
-    start_time = Date.today.beginning_of_day
-    end_time = Date.today.end_of_day
+    start_time = Date.today.beginning_of_day.utc
+    end_time = Date.today.end_of_day.utc
     puts "Sending Daily Reminders for events between #{start_time} and #{end_time}"
     for group in groups
       events = group.events.where("start_time >= '#{start_time}' AND start_time <= '#{end_time}'").order_by_date
@@ -34,8 +34,8 @@ namespace :send_reminders do
 
     puts "[START] #{DateTime.now}"
     groups = Group.all
-    start_time = Date.today
-    end_time = Date.today + 6
+    start_time = Date.today.beginning_of_day.utc
+    end_time = Date.today.end_of_day.utc + 6
     puts "Sending Weekly Reminders for events between #{start_time} and #{end_time}"
     for group in groups
     events = group.events.where("start_time >= '#{start_time}' AND start_time <= '#{end_time}'").order_by_date
