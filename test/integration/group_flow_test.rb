@@ -15,6 +15,18 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     assert_equal 'Group created!', flash[:success]
   end
 
+  test "edit a group" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+
+    get '/groups/1/edit'
+    assert_response :success
+
+    patch_via_redirect '/groups/1/edit', {:group => { :group_name => 'Group Name Changed'}}
+    assert_response :success
+    assert_select 'title', 'Group Name Changed'
+    assert_equal 'Group updated!', flash[:success]
+  end
+
   test "join a group" do
     post_via_redirect "/login", {:user => { :email => users(:jane).email, :password => "testing123" }}
 
