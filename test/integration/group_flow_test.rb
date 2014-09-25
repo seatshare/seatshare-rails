@@ -24,7 +24,7 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     patch_via_redirect '/groups/1/edit', {:group => { :group_name => 'Group Name Changed'}}
     assert_response :success
     assert_select 'title', 'Group Name Changed'
-    assert_equal 'Group updated!', flash[:success]
+    assert_equal 'Group updated!', flash[:notice]
   end
 
   test "join a group" do

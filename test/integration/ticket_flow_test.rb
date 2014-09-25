@@ -23,7 +23,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'title', 'Nashville Predators vs. St. Louis Blues - 326 K 9'
 
-    post_via_redirect '/groups/1/event-4/ticket-1/request', {:message => { :personalization => 'requesting a ticket'}}
+    patch_via_redirect '/groups/1/event-4/ticket-1/request', {:message => { :personalization => 'requesting a ticket'}}
     assert_response :success
     assert_equal '/groups/1/event-4', path
     assert_equal 'Ticket request sent!', flash[:notice]
