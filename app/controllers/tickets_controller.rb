@@ -30,7 +30,6 @@ class TicketsController < ApplicationController
     if !group.is_member(current_user)
       raise "NotGroupMember"
     end
-
     ticket = Ticket.new({
       :group_id => params[:group_id],
       :section => ticket_params[:section],
@@ -40,31 +39,26 @@ class TicketsController < ApplicationController
       :user_id => ticket_params[:user_id].to_i,
       :owner_id => current_user.id
     })
-
     if !ticket_params[:alias_id].nil? && ticket_params[:user_id].to_i == current_user.id
       ticket.alias_id = ticket_params[:alias_id].to_i
     else
       ticket.alias_id = 0
     end
-
+    flash.keep
     if ticket_params[:event_id].is_a? String
       ticket.event_id = ticket_params[:event_id]
       ticket.save!
-
       log_ticket_history ticket, 'created'
-
-      flash[:success] = "Ticket added!"
+      flash[:notice] = "Ticket added!"
       redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
     else
       for event_id in params[:ticket][:event_id]
         season_ticket = ticket.dup
         season_ticket.event_id = event_id
         season_ticket.save!
-
         log_ticket_history season_ticket, 'created'
-
       end
-      flash[:success] = "Tickets added!"
+      flash[:notice] = "Tickets added!"
       redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
     end
   end
@@ -73,17 +67,14 @@ class TicketsController < ApplicationController
     @group = Group.find_by_id(params[:group_id]) || not_found
     @event = Event.find_by_id(params[:event_id]) || not_found
     @ticket = Ticket.find_by_id(params[:id]) || not_found
-
     if @ticket.assigned != current_user && @ticket.owner != current_user
       redirect_to :action => 'request_ticket', :id => @ticket.id
     end
-
     @ticket_stats = @event.ticket_stats(@group, current_user)
     @members = @group.users.order_by_name.order_by_name.collect {|p| [ p.display_name, p.id ] }
     @members.unshift(['Unassigned', 0])
     @user_aliases = current_user.user_aliases.collect {|p| [ p.display_name, p.id ] }
     @user_aliases.unshift(['Unassigned', 0])
-
     @page_title = "#{@event.event_name} - #{@ticket.display_name}"
   end
 
@@ -92,20 +83,16 @@ class TicketsController < ApplicationController
     if !group.is_member(current_user)
       raise "NotGroupMember"
     end
-
     ticket = Ticket.find(params[:id])
     original_ticket = ticket.dup
-
     ticket.cost = ticket_params[:cost].gsub(/[^0-9\.]/,'').to_f
     ticket.user_id = ticket_params[:user_id].to_i
     ticket.note = ticket_params[:note]
-
     if !ticket_params[:alias_id].nil? && ticket_params[:user_id].to_i == current_user.id
       ticket.alias_id = ticket_params[:alias_id].to_i
     else
       ticket.alias_id = 0
     end
-
     if !ticket_params[:ticket_file].nil?
       uploaded_io = ticket_params[:ticket_file]
       File.open(Rails.root.join('tmp', 'uploads', uploaded_io.original_filename), 'wb') do |file|
@@ -128,11 +115,9 @@ class TicketsController < ApplicationController
         ticket_file.save!
       end
     end
-
+    flash.keep
     if ticket.save
-
-      flash[:success] = 'Ticket updated!'
-
+      flash[:notice] = 'Ticket updated!'
       if ticket.user_id != current_user.id && ticket.user_id != 0 && original_ticket.user_id != ticket.user_id
         if !group.is_member(ticket.assigned)
           raise "NotGroupMember"
@@ -153,13 +138,10 @@ class TicketsController < ApplicationController
     @group = Group.find_by_id(params[:group_id]) || not_found
     @event = Event.find_by_id(params[:event_id]) || not_found
     @ticket = Ticket.find_by_id(params[:id]) || not_found
-
     if !@group.is_member(current_user)
       raise "NotGroupMember"
     end
-
     @ticket_stats = @event.ticket_stats(@group, current_user)
-
     @page_title = "#{@event.event_name} - #{@ticket.display_name}"
   end
 
@@ -167,18 +149,14 @@ class TicketsController < ApplicationController
     group = Group.find_by_id(params[:group_id]) || not_found
     event = Event.find_by_id(params[:event_id]) || not_found
     ticket = Ticket.find_by_id(params[:id]) || not_found
-
     if !group.is_member(current_user)
       raise "NotGroupMember"
     end
-
     message = params[:message][:personalization]
-
     TicketNotifier.request_ticket(ticket, current_user, message).deliver
-
     log_ticket_history ticket, 'requested'
-
-    flash[:success] = 'Ticket request sent!'
+    flash.keep
+    flash[:notice] = 'Ticket request sent!'
     redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
   end
 
@@ -186,17 +164,14 @@ class TicketsController < ApplicationController
     group = Group.find_by_id(params[:group_id]) || not_found
     event = Event.find_by_id(params[:event_id]) || not_found
     ticket = Ticket.find_by_id(params[:id]) || not_found
-
     if ticket.owner_id != current_user.id && !ticket.assigned.nil? && ticket.assigned.id != current_user.id
       raise 'AccessDenied'
     end
-
     ticket.user_id = 0
     ticket.save!
-
     log_ticket_history ticket, 'unassigned'
-
-    flash[:success] = 'Ticket unassigned!'
+    flash.keep
+    flash[:notice] = 'Ticket unassigned!'
     redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
   end
 
@@ -204,14 +179,12 @@ class TicketsController < ApplicationController
     group = Group.find_by_id(params[:group_id]) || not_found
     event = Event.find_by_id(params[:event_id]) || not_found
     ticket = Ticket.find_by_id(params[:id]) || not_found
-
     if ticket.owner_id != current_user.id
       raise 'AccessDenied'
     end
-
     ticket.destroy!
-
-    flash[:success] = 'Ticket deleted!'
+    flash.keep
+    flash[:notice] = 'Ticket deleted!'
     redirect_to :controller => 'events', :action => 'show', :group_id => group.id, :id => event.id and return
   end
 
@@ -224,7 +197,6 @@ class TicketsController < ApplicationController
     else
       user_record = nil
     end
-
     ticket_history = TicketHistory.new({
       :event_id => ticket.event_id,
       :user_id => current_user.id,

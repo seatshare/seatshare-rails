@@ -112,7 +112,7 @@ class GroupsControllerTest < ActionController::TestCase
 
     post :do_leave, {:user_id => @removed, :id => @group.id}
     assert_response :redirect, 'got a 304 status'
-    assert_equal flash[:success], 'Jill Smith has been removed'
+    assert_equal flash[:notice], 'Jill Smith has been removed'
   end
 
   test "should remove user - not admin" do
@@ -123,7 +123,7 @@ class GroupsControllerTest < ActionController::TestCase
 
     post :do_leave, {:user_id => @removed, :id => @group.id}
     assert_response :redirect, 'got a 304 status'
-    assert_equal flash[:success], 'You have left Geeks Watching Hockey'
+    assert_equal flash[:notice], 'You have left Geeks Watching Hockey'
   end
 
   test "should not remove user - administrator" do

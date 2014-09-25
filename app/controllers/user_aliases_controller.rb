@@ -15,7 +15,8 @@ class UserAliasesController < ApplicationController
       user_id: current_user.id
     })
     user_alias.save!
-    flash[:success] = 'User Alias created!'
+    flash.keep
+    flash[:notice] = 'User alias created!'
     redirect_to :controller => 'profiles', :action => 'edit' and return
   end
 
@@ -32,7 +33,8 @@ class UserAliasesController < ApplicationController
     user_alias.first_name = user_alias_params[:first_name]
     user_alias.last_name = user_alias_params[:last_name]
     user_alias.save!
-    flash[:success] = 'User Alias updated!'
+    flash.keep
+    flash[:notice] = 'User Alias updated!'
     redirect_to :controller => 'profiles', :action => 'edit' and return
   end
 

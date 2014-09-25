@@ -13,7 +13,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     post_via_redirect '/groups/1/event-4/ticket-1', {:ticket => { :cost => '40.00', :note => 'added a note'}}
     assert_response :success
     assert_equal '/groups/1/event-4', path
-    assert_equal 'Ticket updated!', flash[:success]
+    assert_equal 'Ticket updated!', flash[:notice]
   end
 
   test "request a ticket" do
@@ -26,7 +26,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     post_via_redirect '/groups/1/event-4/ticket-1/request', {:message => { :personalization => 'requesting a ticket'}}
     assert_response :success
     assert_equal '/groups/1/event-4', path
-    assert_equal 'Ticket request sent!', flash[:success]
+    assert_equal 'Ticket request sent!', flash[:notice]
   end
 
   test "unassign a ticket" do
@@ -34,7 +34,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
 
     get '/groups/1/event-4/ticket-1/unassign'
     assert_response :redirect
-    assert_equal 'Ticket unassigned!', flash[:success]
+    assert_equal 'Ticket unassigned!', flash[:notice]
   end
 
   test "delete a ticket" do
@@ -42,7 +42,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
 
     get '/groups/1/event-4/ticket-1/delete'
     assert_response :redirect
-    assert_equal 'Ticket deleted!', flash[:success]
+    assert_equal 'Ticket deleted!', flash[:notice]
   end
 
 end

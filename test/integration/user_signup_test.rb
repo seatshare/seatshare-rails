@@ -49,4 +49,28 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_equal '/groups/new', path
   end
 
+  test "change profile information" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+
+    get "/profile/aliases/new"
+    assert_response :success
+
+    post_via_redirect "/profile/aliases/new", {:user_alias => {:first_name => "New", :last_name => 'Alias'}}
+
+    assert_response :success
+    assert_equal nil, flash[:alert]
+    assert_equal "User alias created!", flash[:notice]
+    assert_equal "/profile", path
+  end
+
+  test "add user alias" do
+
+
+  end
+
+  test "delete user alias" do
+
+
+  end
+
 end

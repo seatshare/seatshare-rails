@@ -12,7 +12,7 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     post_via_redirect '/groups/new', {:group => { :group_name => 'A Test Group', :entity_id => '5'}}
     assert_response :success
     assert_select 'title', 'A Test Group'
-    assert_equal 'Group created!', flash[:success]
+    assert_equal 'Group created!', flash[:notice]
   end
 
   test "join a group" do
@@ -24,7 +24,7 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     post_via_redirect '/groups/join', {:group => { :invitation_code => 'ABCDEFG123'}}
     assert_response :success
     assert_equal '/groups/1', path
-    assert_equal 'Group joined!', flash[:success]
+    assert_equal 'Group joined!', flash[:notice]
   end
 
   test "leave a group" do
@@ -36,7 +36,7 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     post_via_redirect '/groups/1/leave'
     assert_response :success
     assert_equal '/groups', path
-    assert_equal 'You have left Geeks Watching Hockey', flash[:success]
+    assert_equal 'You have left Geeks Watching Hockey', flash[:notice]
   end
 
   test "invite a user" do
@@ -48,7 +48,7 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     post_via_redirect '/groups/1/invite', {:group_invitation => { :email => 'rick@example.net', :message => 'Join us!'}}
     assert_response :success
     assert_equal '/groups/1', path
-    assert_equal 'Group invitation sent!', flash[:success]
+    assert_equal 'Group invitation sent!', flash[:notice]
 
   end
 
@@ -61,7 +61,7 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     post_via_redirect '/groups/1/leave', {:user_id => 2, :id => 1}
     assert_response :success
     assert_equal '/groups/1/edit', path
-    assert_equal 'Jill Smith has been removed', flash[:success]
+    assert_equal 'Jill Smith has been removed', flash[:notice]
   end
 
 end

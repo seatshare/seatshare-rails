@@ -27,10 +27,10 @@ class GroupsController < ApplicationController
       :entity_id => group_params[:entity_id],
       :creator_id => current_user.id
     })
-
     if @group.save
       @group.join_group current_user, 'admin'
-      flash[:success] = "Group created!"
+      flash.keep
+      flash[:notice] = "Group created!"
       redirect_to :action => 'show', :id => @group.id
     end
   end
@@ -44,32 +44,29 @@ class GroupsController < ApplicationController
 
   def update
     group = Group.find(params[:id])
-
     if params[:group_user].nil?
-
       if !group.is_admin(current_user)
         raise "NotGroupAdmin"
       end
       group.group_name = group_params[:group_name]
       if group.save
-        flash[:success] = 'Group updated!'
+        flash[:notice] = 'Group updated!'
       else
         flash[:error] = 'Group could not be updated.'
       end
     else
-
       if !group.is_member(current_user)
         raise "NotGroupMember"
       end
       daily_reminder = params[:group_user][:daily_reminder].to_i
       weekly_reminder = params[:group_user][:weekly_reminder].to_i
+      flash.keep
       if GroupUser.where("user_id = #{current_user.id} AND group_id = #{group.id}").update_all("daily_reminder = #{daily_reminder}, weekly_reminder = #{weekly_reminder}")
-        flash[:success] = 'Reminder settings updated!'
+        flash[:notice] = 'Reminder settings updated!'
       else
         flash[:error] = 'Reminder settings could not be updated.'
       end
     end
-
     redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
   end
 
@@ -107,7 +104,6 @@ class GroupsController < ApplicationController
         :url => event_link
       }
     end
-
     render json: feed
   end
 
@@ -117,11 +113,10 @@ class GroupsController < ApplicationController
   end
 
   def do_join
+    flash.keep
     begin
-
       # Use group invitation
       group = Group.find_by_invitation_code(params[:group][:invitation_code])
-
       # Fall back to normal user invitation
       if group.blank?
         invitation = GroupInvitation.get_by_invitation_code(params[:group][:invitation_code])
@@ -129,14 +124,12 @@ class GroupsController < ApplicationController
         group = invitation.group
       end
       group.join_group(current_user, 'member')
-      flash[:success] = 'Group joined!'
+      flash[:notice] = 'Group joined!'
       redirect_to :action => 'show', :id => group.id and return
-
     rescue InvitationAlreadyUsed
       flash[:error] = "The provided invitation code has already been used."
       redirect_to :action => 'join' and return
     end
-
   end
 
   def leave
@@ -149,6 +142,7 @@ class GroupsController < ApplicationController
   end
 
   def do_leave
+    flash.keep
     if params[:user_id]
       user = User.find(params[:user_id])
     else
@@ -159,15 +153,12 @@ class GroupsController < ApplicationController
       flash[:error] = "You do not have permission to remove other users."
       redirect_to :action => 'show', :id => group.id and return
     end
-
     group.leave_group(user)
-
     if user == current_user
-      flash[:success] = "You have left #{group.group_name}"
+      flash[:notice] = "You have left #{group.group_name}"
     else
-      flash[:success] = "#{user.display_name} has been removed"
+      flash[:notice] = "#{user.display_name} has been removed"
     end
-
     if group.is_admin(current_user)
       redirect_to :action => 'edit', :id => group.id and return
     else
@@ -183,38 +174,30 @@ class GroupsController < ApplicationController
 
   def do_invite
     group = Group.find(params[:id]) || not_found
-
     group_invitation = GroupInvitation.new({
       group_id: group.id,
       user_id: current_user.id,
       email: params[:group_invitation][:email]
     })
-
+    flash.keep
     if group_invitation.save!
-
       GroupNotifier.create_invite(group_invitation, params[:group_invitation][:message]).deliver
-      flash[:success] = 'Group invitation sent!'
-
+      flash[:notice] = 'Group invitation sent!'
     else
       flash[:error] = 'Unable to send group invitation.'
     end
-
     redirect_to :action => 'show', :id => group.id and return
   end
 
   def do_reset_invite
     group = Group.find(params[:id]) || not_found
-
     if !group.is_admin(current_user)
       raise "AccessDenied"
     end
-
-    # Invoke default behavior if invitation_code is not set
     group.invitation_code = nil;
     group.save!
-
-    flash[:success] = 'Invitation code reset!'
-
+    flash.keep
+    flash[:notice] = 'Invitation code reset!'
     redirect_to :action => 'edit', :id => group.id and return
   end
 
@@ -226,25 +209,23 @@ class GroupsController < ApplicationController
 
   def do_message
     group = Group.find(params[:id]) || not_found
-
+    flash.keep
     if params[:message][:recipients].nil?
       flash[:error] = "You must select at least one recipient."
       redirect_to :action => 'message', :id => group.id and return
     end
-
     subject = params[:message][:subject]
     message = params[:message][:message]
     recipients = User.find(params[:message][:recipients])
-
     email = GroupNotifier.send_group_message(group, current_user, recipients, subject, message).deliver
+    flash.keep
     if email
-      flash[:success] = "Message sent!"
+      flash[:notice] = "Message sent!"
       redirect_to :action => 'show', :id => group.id and return
     else
       flash[:error] = "Message delivery failed."
       redirect_to :action => 'message', :id => group.id and return
     end
-
   end
 
   private

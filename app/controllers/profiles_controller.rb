@@ -19,8 +19,8 @@ class ProfilesController < ApplicationController
     current_user.last_name = user_params[:last_name]
     current_user.timezone = user_params[:timezone]
     current_user.save!
-
-    flash[:success] = "Profile updated!"
+    flash.keep
+    flash[:notice] = "Profile updated!"
     redirect_to :action => 'show', :id => @current_user.id and return
   end
 
@@ -29,6 +29,5 @@ class ProfilesController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :timezone)
   end
-
 
 end
