@@ -7,7 +7,8 @@ class WelcomeEmail < ActionMailer::Base
 
     mail(
       to: "#{@recipient.display_name} <#{@recipient.email}>",
-      subject: "Welcome to SeatShare, #{@recipient.first_name}!"
+      subject: "Welcome to SeatShare, #{@recipient.first_name}!",
+      reply_to: "SeatShare Support <contact@myseatshare.com>"
     )
 
     headers['X-MC-Tags'] = 'NewUser'

@@ -8,6 +8,7 @@ class GroupNotifierTest < ActionMailer::TestCase
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal ["no-reply@myseatshare.com"], email.from
+    assert_equal ["sarahb@example.org"], email.reply_to
     assert_equal ["bob@example.com"], email.to
     assert_equal "You have been invited to join Geeks Watching Hockey", email.subject
     assert_includes email.body.to_s, "<title>You have been invited to join Geeks Watching Hockey</title>"
@@ -23,7 +24,8 @@ class GroupNotifierTest < ActionMailer::TestCase
     email = GroupNotifier.send_group_message(group, sending_user, recipient_users, 'Anyone want to go to the game on Friday?', "I'll have an extra ticket to spare.\n\nFree to a good home.").deliver
 
     assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal ["stonej@example.net"], email.from
+    assert_equal ["no-reply@myseatshare.com"], email.from
+    assert_equal ["stonej@example.net"], email.reply_to
     assert_equal ["stonej@example.net", "jillsmith83@us.example.org", "rick.taylor@example.net"], email.to
     assert_equal "[Geeks Watching Hockey] Anyone want to go to the game on Friday?", email.subject
     assert_includes email.body.to_s, "<title>[Geeks Watching Hockey] Anyone want to go to the game on Friday?</title>"

@@ -17,7 +17,8 @@ class TicketNotifier < ActionMailer::Base
 
     mail(
       to: "#{@recipient.display_name} <#{@recipient.email}>",
-      subject: "#{@user.first_name} has assigned you a ticket via #{@group.group_name}"
+      subject: "#{@user.first_name} has assigned you a ticket via #{@group.group_name}",
+      reply_to: "#{@user.display_name} <#{@user.email}>"
     )
 
     headers['X-MC-Tags'] = 'AssignTicket'
@@ -41,7 +42,8 @@ class TicketNotifier < ActionMailer::Base
 
     mail(
       to: "#{@recipient.display_name} <#{@recipient.email}>",
-      subject: "#{@user.first_name} has requested your ticket via #{@group.group_name}"
+      subject: "#{@user.first_name} has requested your ticket via #{@group.group_name}",
+      reply_to: "#{@user.display_name} <#{@user.email}>"
     )
 
     headers['X-MC-Tags'] = 'RequestTicket'

@@ -16,7 +16,8 @@ class GroupNotifier < ActionMailer::Base
 
     mail(
       to: @recipient,
-      subject: "You have been invited to join #{@group.group_name}"
+      subject: "You have been invited to join #{@group.group_name}",
+      reply_to: "#{@user.display_name} <#{@user.email}>"
     )
 
     headers['X-MC-Tags'] = 'InviteUser'
@@ -55,9 +56,9 @@ class GroupNotifier < ActionMailer::Base
     end
 
     mail(
-      from: "#{sender.display_name} <#{sender.email}>",
       to: @email_recipients.join(', '),
-      subject: subject
+      subject: subject,
+      reply_to: "#{sender.display_name} <#{sender.email}>"
     )
 
     headers['X-MC-Tags'] = 'GroupMessage'
