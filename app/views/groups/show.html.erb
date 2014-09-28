@@ -154,25 +154,6 @@
 <fieldset>
   <legend>Calendar</legend>
   <div id="sidebar_calendar"></div>
-  <script>
-    $.get('/groups/<%= @group.id %>/events_feed', function(result) {
-      $('#sidebar_calendar').clndr({
-        daysOfTheWeek: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-        numberOfRows: 5,
-        events: result,
-        clickEvents: {
-          click: function(target) {
-            if (!_.isObject(target.events) || _.isEmpty(target.events[0])) {
-              return false;
-            }
-            window.location = target.events[0].url;
-          }
-        },
-        showAdjacentMonths: true,
-        adjacentDaysChangeMonth: true
-      });
-    });
-  </script>
 </fieldset>
 
 <% end %>
