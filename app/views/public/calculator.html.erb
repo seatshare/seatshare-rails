@@ -1,0 +1,121 @@
+<h1>Season Ticket Calculator</h1>
+
+<p class="lead">Ready to buy into a season ticket pool? Use this calculator to figure out what each person's share of the available tickets would be based on their investment.</p>
+
+<form class="form-horizontal" role="form" id="calculator">
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Number of Events/Games</label>
+		<div class="col-sm-8">
+		  <input class="form-control ticket_details" id="number_of_games" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Number of Seats</label>
+		<div class="col-sm-8">
+			<input class="form-control ticket_details" id="number_of_seats" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Cost Per Seat</label>
+		<div class="col-sm-8">
+			<div class="input-group">
+				<span class="input-group-addon">$</span>
+				<input class="form-control ticket_details" id="cost_per_seat" />
+			</div>
+		</div>
+	</div>
+
+	<hr />
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Total Cost of Tickets </label>
+		<div class="col-sm-8">
+			<div class="input-group">
+				<span class="input-group-addon">$</span>
+				<input class="form-control" id="total_cost" />
+				<span class="input-group-btn"><a class="btn btn-default" id="calculate_totals">Calculate</a></span>
+			</div>
+		</div>
+	</div>
+	<hr />
+
+	<table class="table" id="people">
+		<thead>
+			<tr>
+				<th>Person</th>
+				<th>Paying</th>
+				<th class="text-center">Number of Seats</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for index in 1...5 %>
+			<tr data-person="<%= index %>">
+				<td><input class="form-control" id="person_name_<%= index %>" /></td>
+				<td>
+					<div class="input-group">
+						<span class="input-group-addon">$</span>
+						<input class="form-control" id="person_investment_<%= index %>" value="0.00"/>
+					</div>
+				</td>
+				<td class="text-center" id="person_seats_<%= index %>">0</td>
+				<td class="text-right"><a id="person_delete_<%= index %>" class="btn btn-danger delete_row"><span class="glyphicon glyphicon-trash"></span></a></td>
+			</tr>
+			<% end %>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td class="text-right"><strong>Remaining</strong></td>
+				<td class="text-center">$0.00</td>
+				<td class="text-center">0</td>
+				<td class="text-right"><a class="btn btn-default" id="add_row"><span class="glyphicon glyphicon-plus"></span></a></td>
+			</tr>
+		</tfoot>
+	</table>
+</form>
+
+<% content_for :sidebar do %>
+
+<h3>How it works</h3>
+<p>
+	This calculator will help you determine how many tickets each person would receive based on how much money they put into the ticket pool.
+</p>
+
+<h3>How many games?</h3>
+<p>
+	Each sport or performing arts venue has a varying number of events in a season. Below is a reference guide for the major sports leagues.
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>League</th>
+			<th class="text-center">Home Games</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>NFL</td>
+			<td class="text-center">8</td>
+		</tr>
+		<tr>
+			<td>MLB</td>
+			<td class="text-center">82</td>
+		</tr>
+		<tr>
+			<td>NBA</td>
+			<td class="text-center">41</td>
+		</tr>	
+		<tr>
+			<td>NHL</td>
+			<td class="text-center">41</td>
+		</tr>
+		<tr>
+			<td>College Football</td>
+			<td class="text-center">~6</td>
+		</tr>
+		<tr>
+			<td>College Basketball</td>
+			<td class="text-center">~9</td>
+		</tr>
+	</tbody>
+</table>
+<% end %>

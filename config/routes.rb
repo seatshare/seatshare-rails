@@ -11,6 +11,7 @@ SeatShare::Application.routes.draw do
   get 'tos' => 'public#tos'
   get 'privacy' => 'public#privacy'
   get 'contact' => 'public#contact'
+  get 'calculator' => 'public#calculator'
 
   devise_scope :user do
     get "register/invite/:invite_code", to: "registrations#new", as: 'register_with_invite_code'

@@ -50,6 +50,11 @@ class PublicController < ApplicationController
     @meta_description = %q{Have questions or comments about SeatShare? We are here to help.}
   end
 
+  def calculator
+    @page_title = %q{SeatShare Calculator}
+    @meta_description = %q{Calculate how many seats your season ticket investment would be worth}
+  end
+
   private
 
   def layout_by_resource
