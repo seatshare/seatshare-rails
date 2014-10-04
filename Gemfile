@@ -89,5 +89,8 @@ gem 'capistrano-bower', '~> 1.0'
 # Whenever
 gem 'whenever', :require => false
 
-# REST Client
+# REST Client (for Google Analytics goal tracking)
 gem 'rest_client'
+
+# Readline support (for remote console)
+gem 'rb-readline'
