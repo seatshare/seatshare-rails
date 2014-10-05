@@ -27,7 +27,7 @@ SeatShare::Application.routes.draw do
   patch 'groups/:id/edit' => 'groups#update'
   post 'groups/:id/edit' => 'groups#update'
   get 'groups/:id/leave' => 'groups#leave', as: 'leave_group'
-  post 'groups/:id/leave' => 'groups#do_leave'
+  patch 'groups/:id/leave' => 'groups#do_leave'
   get 'groups/:id/invite' => 'groups#invite', as: 'invite_group'
   post 'groups/:id/invite' => 'groups#do_invite'
   post 'groups/:id/reset_invite' => 'groups#do_reset_invite'
