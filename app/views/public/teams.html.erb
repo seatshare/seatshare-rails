@@ -1,8 +1,11 @@
-<div class="jumbotron">
+<% content_for :page_header do %>
+<div class="jumbotron teams-header">
   <h1>Take home field advantage</h1>
   <p>With more than 2,200 pro and college team schedules available, SeatShare has your seats covered.</p>
   <%= link_to "Create Your SeatShare Account", new_user_registration_path, :class=>'btn btn-primary btn-lg' %>
 </div>
+
+<% end %>
 
 <div class="row">
   <div class="col-md-12">
@@ -11,7 +14,7 @@
     <div class="row">
       <% for team in @teams_nfl %>
       <div class="col-md-4">
-        <div class="well well-sm"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></div>
+        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
       <% end %>
     </div>
@@ -25,7 +28,7 @@
     <div class="row">
       <% for team in @teams_mlb %>
       <div class="col-md-4">
-        <div class="well well-sm"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></div>
+        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
       <% end %>
     </div>
@@ -39,7 +42,7 @@
     <div class="row">
       <% for team in @teams_nba %>
       <div class="col-md-4">
-        <div class="well well-sm"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></div>
+        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
       <% end %>
     </div>
@@ -53,7 +56,7 @@
     <div class="row">
       <% for team in @teams_nhl %>
       <div class="col-md-4">
-        <div class="well well-sm"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></div>
+        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
       <% end %>
     </div>
@@ -67,7 +70,7 @@
     <div class="row">
       <% for team in @teams_ncaaf %>
       <div class="col-md-6">
-        <div class="well well-sm"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></div>
+        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
       <% end %>
     </div>
@@ -81,7 +84,7 @@
     <div class="row">
       <% for team in @teams_ncaamb %>
       <div class="col-md-6">
-        <div class="well well-sm"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></div>
+        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
       <% end %>
     </div>
@@ -95,7 +98,7 @@
     <div class="row">
       <% for team in @teams_cfl %>
       <div class="col-md-6">
-        <div class="well well-sm"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></div>
+        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
       <% end %>
     </div>
@@ -109,7 +112,7 @@
     <div class="row">
       <% for team in @teams_mls %>
       <div class="col-md-6">
-        <div class="well well-sm"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></div>
+        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
       <% end %>
     </div>
@@ -123,7 +126,7 @@
     <div class="row">
       <% for team in @teams_wftda %>
       <div class="col-md-6">
-        <div class="well well-sm"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></div>
+        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
       <% end %>
     </div>
@@ -132,7 +135,7 @@
 
 <% content_for :sidebar do %>
 
-<div data-spy="affix">
+<div>
 
   <div class="list-group col-md-12 team-list">
     <a href="#nfl" class="list-group-item">
