@@ -79,7 +79,7 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'mailchimp-api', '~> 2.0.5'
 
 # SeatShare's own SODA gem
-gem 'soda_xml_team', '~> 1.0.8'
+gem 'soda_xml_team', '~> 1.3.0'
 
 # Capistrano
 gem 'capistrano', '~> 3.2.1'

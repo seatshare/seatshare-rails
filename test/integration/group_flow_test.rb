@@ -45,7 +45,7 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     get '/groups/1/leave'
     assert_response :success
 
-    post_via_redirect '/groups/1/leave'
+    patch_via_redirect '/groups/1/leave'
     assert_response :success
     assert_equal '/groups', path
     assert_equal 'You have left Geeks Watching Hockey', flash[:notice]
@@ -70,7 +70,7 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     get '/groups/1/edit'
     assert_response :success
 
-    post_via_redirect '/groups/1/leave', {:user_id => 2, :id => 1}
+    patch_via_redirect '/groups/1/leave', {:user_id => 2, :id => 1}
     assert_response :success
     assert_equal '/groups/1/edit', path
     assert_equal 'Jill Smith has been removed', flash[:notice]
