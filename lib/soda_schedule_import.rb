@@ -16,7 +16,7 @@ class SodaScheduleImport
     end
 
     # Get listing for desired league
-    listing = self.soda_client.get_listing({
+    documents = self.soda_client.content_finder({
       sandbox: ENV['SODA_ENVIRONMENT'] != 'production',
       league_id: options[:team_id].split("-")[0],
       team_id: options[:team_id],
@@ -26,14 +26,13 @@ class SodaScheduleImport
     })
 
     # See if there were any documents at all
-    if listing.css('item link').length === 0
+    if documents.length === 0 || !documents[0][:document_id]
       self.messages << "No events were available for #{entity.entity_name}."
       return
     end
 
-    # Grab the latest URI available
-    latest = URI.parse(listing.css('item link').first)
-    document_id = CGI.parse(latest.query)['doc-ids'].first
+    # Get the latest document
+    document_id = documents[0][:document_id]
 
     # Check to see if you already have this document ID in S3
     s3 = AWS::S3.new
