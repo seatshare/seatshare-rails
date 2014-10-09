@@ -97,7 +97,7 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
 
-        panel "Upcoming's Events" do
+        panel "Upcoming Events" do
           table do
             thead do
               th "Group"
