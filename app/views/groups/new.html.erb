@@ -3,24 +3,25 @@
 <fieldset>
   <legend>Group Details</legend>
 
-  <p class="lead">Groups of users exchange tickets among its membership. You can assign tickets to other users, or request their available tickets.</p> 
+  <p class="lead">A ticket group exchanges tickets among its membership. You can assign tickets to other users, or request their available tickets.</p> 
 
   <div class="form-group">
-    <%= f.label :group_name, :class => 'col-md-3 control-label' %>
-    <div class="col-md-9">
-      <%= f.text_field :group_name, :class => 'form-control', :placeholder => 'Cellblock 303' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :entity_id, :class => 'col-md-3 control-label'  %>
+    <%= f.label 'Your team', :class => 'col-md-3 control-label'  %>
     <div class="col-md-9">
       <% if @entity %>
       <p class="form-control-static"><%= @entity.display_name %></p>
       <%= f.hidden_field :entity_id, :value => @entity.id %>
       <% else %>
-      <%= select_tag 'group[entity_id]', grouped_options_for_select(@entities), { :class => 'form-control' } %>
+      <%= select_tag 'group[entity_id]', grouped_options_for_select(@entities), { :class => 'form-control', :prompt => '' } %>
       <p class="help-block"><strong>Choose carefully!</strong> You cannot change your team / venue after the group is created.</p>
       <% end %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :group_name, :class => 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :group_name, :class => 'form-control input-lg', :placeholder => 'e.g. Your Team Super Fans' %>
     </div>
   </div>
 
@@ -30,6 +31,27 @@
   <div class="text-right col-md-12">
     <%= f.submit 'Create Group', :class => 'btn btn-primary' %>
   </div>
+</div>
+
+<br />
+
+<% end %>
+
+<% content_for :sidebar do %>
+
+<div class="well hidden-xs">
+  <h3>All of your favorite teams</h3>
+  <ul>
+    <li>National Football League</li>
+    <li>Major League Baseball</li>
+    <li>National Basketball Association</li>
+    <li>National Hockey League</li>
+    <li>College Football</li>
+    <li>College Basketball</li>
+    <li>Major League Soccer</li>
+    <li>Canadian Football League</li>
+    <li>Women's Flat Track Roller Derby</li>
+  </ul>
 </div>
 
 <% end %>
