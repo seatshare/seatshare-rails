@@ -32,6 +32,10 @@ class GroupsController < ApplicationController
       flash.keep
       flash[:notice] = "Group created!"
       redirect_to :action => 'show', :id => @group.id
+    else
+      flash.keep
+      flash[:error] = "Group could not be created."
+      redirect_to :action => 'new', :entity_id => params[:entity_id]
     end
   end
 

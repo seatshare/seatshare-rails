@@ -6,7 +6,17 @@ groupsReady = ->
 
   # Create Group
   if $("#group_entity_id").length > 0
-    $("#group_entity_id").select2()
+    $("#group_entity_id").select2({
+      placeholder: "Click to search our 2,200 available teams",
+      alloweClear: true
+    })
+
+  # Change Placeholder Text
+  $("#group_entity_id").on "select2-selected", ->
+    data = $("#group_entity_id").select2 "data"
+    suffixes = ['Fans', 'Super Fans', 'Supporters', 'Backers', 'Crew', 'Pride']
+    suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+    $('#group_group_name').attr 'placeholder', "e.g. #{data.text} #{suffix}"
 
   # Calendar
   group_id = $('#group_selector').val()
