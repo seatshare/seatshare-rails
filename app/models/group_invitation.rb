@@ -4,6 +4,7 @@ class GroupInvitation < ActiveRecord::Base
 
   validates :email, :user_id, :group_id, :invitation_code, :presence => true
 
+  scope :accepted, -> { where('status = 0') }
   attr_accessor :message
 
   def initialize(attributes={})
