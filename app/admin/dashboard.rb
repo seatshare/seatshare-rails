@@ -100,7 +100,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Upcoming Events" do
           table do
             thead do
-              th "Group"
+              th "Event"
               th "Entity"
               th "Date & Time"
             end

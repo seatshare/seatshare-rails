@@ -58,4 +58,12 @@ SeatShare::Application.routes.draw do
   post 'profile/aliases/:id/edit' => 'user_aliases#update'
   get 'profile/aliases/:id/delete' => 'user_aliases#delete', as: 'delete_user_alias'
 
+
+  namespace :admin_api, defaults: {format: 'json'} do
+    namespace :v1 do
+      root 'admin_api#index'
+      get ':action' => 'admin_api#:action'
+    end
+  end
+
 end
