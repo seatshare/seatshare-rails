@@ -4,6 +4,7 @@ class Group < ActiveRecord::Base
 
   has_many :group_users
   has_many :users, through: :group_users
+  has_many :events, through: :entity
 
   validates :entity_id, :group_name, :creator_id, :presence => true
   before_save :clean_invitation_code
@@ -21,10 +22,6 @@ class Group < ActiveRecord::Base
 
   def display_name
     "#{group_name}"
-  end
-
-  def events
-    Event.where("entity_id = #{self.entity.id}")
   end
 
   def administrators

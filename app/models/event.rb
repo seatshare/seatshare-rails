@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 	belongs_to :entity
   has_many :tickets
+  has_many :groups, through: :entity
 
   validates :entity_id, :event_name, :start_time, :presence => true
   before_save :clean_import_key
