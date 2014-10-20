@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'seatshare'
-set :repo_url, 'git@github.com:stephenyeargin/seatshare-rails.git'
+set :repo_url, 'git@github.com:seatshare/seatshare-rails.git'
 
 # Default branch is :master
 # Uncomment the following line to have Capistrano ask which branch to deploy.
