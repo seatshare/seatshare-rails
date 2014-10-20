@@ -4,7 +4,7 @@ This project is a mock SaaS to allow a group of people to manage a pool of ticke
 
 ## Installation
 
-Please see the complete [installation instructions](https://github.com/stephenyeargin/seatshare-rails/wiki/Installation) in the wiki.
+Please see the complete [installation instructions](https://github.com/seatshare/seatshare-rails/wiki/Installation) in the wiki.
 
 ## Getting started with the application
 
