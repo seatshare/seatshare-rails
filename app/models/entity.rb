@@ -9,6 +9,7 @@ class Entity < ActiveRecord::Base
 
   scope :order_by_name, -> { order('LOWER(entity_type) ASC, LOWER(entity_name) ASC') }
   scope :active, -> { where('status = 1') }
+  scope :is_soda, -> { where("import_key LIKE 'l.%'") }
 
   def initialize(attributes={})
     attr_with_defaults = {
@@ -20,6 +21,17 @@ class Entity < ActiveRecord::Base
 
   def display_name
     "#{entity_name} (#{entity_type})"
+  end
+
+  def retrive_schedule
+    importer = SodaScheduleImport.new
+    importer.run({
+      team_id: import_key,
+      start_datetime: DateTime.now.beginning_of_day - 30.days,
+      end_datetime: DateTime.now.end_of_day,
+      force_update: false
+    })
+    return importer
   end
 
   private

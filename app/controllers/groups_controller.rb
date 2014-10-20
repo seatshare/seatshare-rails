@@ -31,6 +31,9 @@ class GroupsController < ApplicationController
       @group.join_group current_user, 'admin'
       flash.keep
       flash[:notice] = "Group created!"
+      if @group.entity.events.count === 0
+        status = @group.entity.retrive_schedule
+      end
       redirect_to :action => 'show', :id => @group.id
     else
       flash.keep
