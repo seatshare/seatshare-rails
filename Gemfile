@@ -94,3 +94,17 @@ gem 'rest_client'
 
 # Readline support (for remote console)
 gem 'rb-readline'
+
+# testing
+group :testing do
+  gem 'guard-minitest'
+  gem 'guard-spork'
+  gem 'spork-rails'
+  gem 'spork-minitest', github: 'dekart/spork-minitest'
+end
+
+group :development do
+  gem 'rack-livereload'
+  gem 'guard-livereload'
+  gem 'guard-bundler', :group => :development
+end
