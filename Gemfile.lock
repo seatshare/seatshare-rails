@@ -100,6 +100,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dotenv (1.0.2)
+    dotenv-rails (1.0.2)
+      dotenv (= 1.0.2)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -302,6 +305,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1)
   coffee-rails (~> 4.0.0)
   devise
+  dotenv-rails
   guard-bundler
   guard-livereload
   guard-minitest
