@@ -28,7 +28,7 @@ SeatShare::Application.configure do
   config.assets.debug = true
 
   # Configure the ActionMailer
-  if ENV.has_key? 'USE_MAILCATHER'
+  if ENV.has_key? 'USE_MAILCATCHER'
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = { :address => "127.0.0.1", :port => 1025 }
