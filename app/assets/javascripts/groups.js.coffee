@@ -8,7 +8,7 @@ groupsReady = ->
   if $("#group_entity_id").length > 0
     $("#group_entity_id").select2({
       placeholder: "Click to search our 2,200 available teams",
-      alloweClear: true
+      allowClear: true
     })
 
   # Change Placeholder Text
