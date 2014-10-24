@@ -1,7 +1,7 @@
 # Configure the S3 Gem
 # These are required for ticket file uploading.
 if ENV['SEATSHARE_S3_BUCKET'].nil? || ENV['SEATSHARE_S3_BUCKET'].nil? || ENV['SEATSHARE_S3_BUCKET'].nil? || ENV['SEATSHARE_S3_PUBLIC'].nil?
-  raise "MissingConfigurationForS3"
+  Rails.logger.warn "S3 configuration is not present!"
 end
 
 AWS.config(
