@@ -141,13 +141,12 @@
 
 <% content_for :sidebar do %>
 
-<% if @events.count > 0 %>
-
 <div class="well well-sm text-center">
   <ul class="list-inline" style="margin-bottom:0;">
+    <% if @events.count > 0 %>
     <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Add Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
+    <% end %>
     <li><%= link_to raw('<span class="glyphicon glyphicon-envelope"></span> Group Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
-
   </ul>
 </div>
 
@@ -155,8 +154,6 @@
   <legend>Calendar</legend>
   <div id="sidebar_calendar"></div>
 </fieldset>
-
-<% end %>
 
 <fieldset>
   <legend>Group Members</legend>
