@@ -47,19 +47,30 @@ class TicketsController < ApplicationController
     flash.keep
     if ticket_params[:event_id].is_a? String
       ticket.event_id = ticket_params[:event_id]
-      ticket.save!
-      log_ticket_history ticket, 'created'
-      flash[:notice] = "Ticket added!"
-      redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
-    else
+      if ticket.valid? && ticket.save
+        log_ticket_history ticket, 'created'
+        flash[:notice] = "Ticket added!"
+        redirect_to :controller => 'events', :action => 'show', :id => ticket_params[:event_id], :group_id => group.id and return
+      else
+        flash[:error] = "Could not create ticket."
+        redirect_to :controller => 'tickets', :action => 'new', :group_id => group.id and return
+      end
+    elsif params[:ticket][:event_id].is_a? Array
       for event_id in params[:ticket][:event_id]
         season_ticket = ticket.dup
         season_ticket.event_id = event_id
-        season_ticket.save!
-        log_ticket_history season_ticket, 'created'
+        if season_ticket.valid? && season_ticket.save
+          log_ticket_history season_ticket, 'created'
+        else
+          flash[:error] = "Could not create tickets."
+          redirect_to :controller => 'tickets', :action => 'new', :group_id => group.id and return
+        end
       end
       flash[:notice] = "Tickets added!"
       redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
+    else
+      flash[:error] = "No events selected."
+      redirect_to :controller => 'tickets', :action => 'new', :group_id => group.id and return
     end
   end
 

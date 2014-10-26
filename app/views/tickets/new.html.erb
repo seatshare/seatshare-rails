@@ -1,3 +1,13 @@
+<% if @events.nil? && @event.nil? %>
+
+  <div class="alert alert-info">
+    <p><strong class="alert-title">No Events.</strong> We do not yet have a schedule for future events in this group.</p>
+  </div>
+  <p class="text-right">
+    <%= link_to 'Back to Group', group_path(@group.id), :class => 'btn btn-default' %>
+  </p>
+<% else %>
+
 <%= form_for :ticket, html: {class: "form-horizontal", role: "form"} do |f| %>
 
 <fieldset>
@@ -98,6 +108,8 @@
     </p>
   </div>
 </div>
+
+<% end %>
 
 <% end %>
 
