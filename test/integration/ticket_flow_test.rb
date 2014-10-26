@@ -17,19 +17,19 @@ class TicketFlowTest < ActionDispatch::IntegrationTest
     assert_equal 'Ticket added!', flash[:notice]
   end
 
-  # test "add a single ticket - no section" do
-  #   post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+  test "add a single ticket - no section" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
 
-  #   get '/groups/1/event-4'
-  #   assert_response :success
-  #   assert_select 'title', 'Nashville Predators vs. St. Louis Blues'
+    get '/groups/1/event-4'
+    assert_response :success
+    assert_select 'title', 'Nashville Predators vs. St. Louis Blues'
 
-  #   post_via_redirect '/groups/1/event-4/add-ticket', {:ticket => { :event_id => 4, :cost => '40.00', :note => 'added a note'}}
+    post_via_redirect '/groups/1/event-4/add-ticket', {:ticket => { :event_id => 4, :cost => '40.00', :note => 'added a note'}}
 
-  #   assert_response :success
-  #   assert_equal '/groups/1/event-4/add-ticket', path
-  #   assert_equal 'Could not create ticket.', flash[:error]
-  # end
+    assert_response :success
+    assert_equal '/groups/1/event-4/add-ticket', path
+    assert_equal 'Could not create ticket.', flash[:error]
+  end
 
   test "add season tickets" do
     post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
@@ -45,19 +45,19 @@ class TicketFlowTest < ActionDispatch::IntegrationTest
     assert_equal 'Tickets added!', flash[:notice]
   end
 
-  # test "add season tickets - no section" do
-  #   post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+  test "add season tickets - no section" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
 
-  #   get '/groups/1/event-4'
-  #   assert_response :success
-  #   assert_select 'title', 'Nashville Predators vs. St. Louis Blues'
+    get '/groups/1/event-4'
+    assert_response :success
+    assert_select 'title', 'Nashville Predators vs. St. Louis Blues'
 
-  #   post_via_redirect '/groups/1/add-tickets', {:ticket => { :event_id => [3,4], :cost => '40.00', :note => 'added a note'}}
+    post_via_redirect '/groups/1/add-tickets', {:ticket => { :event_id => [3,4], :cost => '40.00', :note => 'added a note'}}
 
-  #   assert_response :success
-  #   assert_equal '/groups/1/add-tickets', path
-  #   assert_equal 'Could not create tickets.', flash[:error]
-  # end
+    assert_response :success
+    assert_equal '/groups/1/add-tickets', path
+    assert_equal 'Could not create tickets.', flash[:error]
+  end
 
   test "add season tickets - no events" do
     post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
