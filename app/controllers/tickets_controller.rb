@@ -5,10 +5,10 @@ class TicketsController < ApplicationController
 
   def index
     if params[:filter] == 'past'
-      @tickets = Ticket.where("owner_id = #{current_user.id}").joins(:event).where("start_time < '#{Date.today}'")
+      @tickets = Ticket.where("owner_id = #{current_user.id}").order_by_seat.joins(:event).where("start_time < '#{Date.today}'").order_by_date
       @page_title = "My Past Tickets"
     else
-      @tickets = Ticket.where("owner_id = #{current_user.id}").joins(:event).where("start_time > '#{Date.today}'")
+      @tickets = Ticket.where("owner_id = #{current_user.id}").order_by_seat.joins(:event).where("start_time > '#{Date.today}'").order_by_date
       @page_title = "My Tickets"
     end
     render :layout => 'single-column'
