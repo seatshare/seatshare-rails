@@ -3,6 +3,35 @@ class TicketsController < ApplicationController
   before_action :authenticate_user!
   layout 'two-column'
 
+  def index
+    if params[:filter] == 'past'
+      @tickets = Ticket.where("owner_id = #{current_user.id}").joins(:event).where("start_time < '#{Date.today}'")
+      @page_title = "My Past Tickets"
+    else
+      @tickets = Ticket.where("owner_id = #{current_user.id}").joins(:event).where("start_time > '#{Date.today}'")
+      @page_title = "My Tickets"
+    end
+    render :layout => 'single-column'
+  end
+
+  def bulk_update
+    if !params[:ticket_cost].nil?
+      for ticket_id, cost in params[:ticket_cost]
+        ticket = Ticket.find(ticket_id)
+        next if ticket.owner_id != current_user.id
+        next if ticket.cost.to_f == cost.to_f
+        ticket.cost = cost
+        if ticket.save
+          log_ticket_history ticket, 'updated'
+          flash[:notice] = "Tickets updated!"
+        else
+          flash[:error] = "Ticket cost could not be updated."
+        end
+      end
+    end
+    redirect_to :controller => 'tickets', :action => 'index', :filter => params[:tickets][:filter]
+  end
+
   def new
     @group = Group.find_by_id(params[:group_id]) || not_found
     @ticket = Ticket.new({

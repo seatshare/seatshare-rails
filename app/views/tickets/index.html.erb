@@ -1,0 +1,86 @@
+<div class="pull-right">
+  <div class="btn-group">
+    <% if params[:filter].nil? %>
+    <%= link_to 'Future Events', { :controller => 'tickets', :action => 'index', :filter => nil }, :class => "btn btn-default active" %>
+    <%= link_to 'Past Events', { :controller => 'tickets', :action => 'index', :filter => 'past' }, :class => "btn btn-default" %>
+    <% else %>
+    <%= link_to 'Future Events', { :controller => 'tickets', :action => 'index', :filter => nil }, :class => "btn btn-default" %>
+    <%= link_to 'Past Events', { :controller => 'tickets', :action => 'index', :filter => 'past' }, :class => "btn btn-default active" %>
+    <% end %>
+  </div>
+</div>
+
+<p class="lead">Here are all of the tickets from your ticket groups.</p>
+
+<%= form_tag tickets_path do %>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Group</th>
+        <th>Event</th>
+        <th>Location</th>
+        <th>Assigned</th>
+        <th class="cost">Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if @tickets.count > 0 %>
+    <% for ticket in @tickets %>
+      <tr>
+        <td>
+          <%= link_to ticket.group.group_name, :controller => 'groups', :action => 'show', :id => ticket.group_id %>
+        </td>
+        <td>
+          <%= link_to ticket.event.event_name, :controller => 'events', :action => 'show', :group_id => ticket.group_id, :id => ticket.event_id %><br />
+            <%= ticket.event.date_time %>
+        </td>
+        <td>
+          <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => ticket.group_id, :event_id => ticket.event_id, :id => ticket.id %>
+          <% if !ticket.note.nil? && ticket.note.length > 0 %>
+          <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
+          <% end %>
+          <% if ticket.ticket_files.count > 0 %>
+          <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
+          <% end %>
+        </td>
+        <td>
+          <% if ticket.assigned %>
+          <%= link_to ticket.assigned.display_name, :controller => 'profiles', :action => 'show', :id => ticket.assigned.id %>
+          <% if ticket.alias %>
+          <br />(for <%= ticket.alias.display_name %>)
+          <% end %>
+          <% else %>
+          <%= link_to raw('<span class="badge badge-lg">Available!</span>'), { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => ticket.event_id, :group_id => ticket.group_id }, { :data => { :toggle => 'tooltip'}, :title => 'Request Ticket' } %>
+          <% end %>
+        </td>
+        <td class="text-right">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <%= text_field :ticket_cost, ticket.id, { :class=>'form-control', :value=>number_to_currency(ticket.cost, :unit=>'') } %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    <% else %>
+      <tr>
+        <td colspan="5">
+          <div class="alert alert-info">
+              No tickets matched the selected criteria.
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @tickets.count > 0 %>
+<p class="text-right">
+  <%= hidden_field(:tickets, :filter, :value => params[:filter]) %>
+  <%= submit_tag 'Update Tickets', :class => 'btn btn-primary' %>
+</p>
+<% end %>
+
+<% end %>
