@@ -18,8 +18,11 @@ class TicketsController < ApplicationController
     if !params[:ticket_cost].nil?
       for ticket_id, cost in params[:ticket_cost]
         ticket = Ticket.find(ticket_id)
-        next if ticket.owner_id != current_user.id
         next if ticket.cost.to_f == cost.to_f
+        if ticket.owner_id != current_user.id
+          flash[:error] = "Ticket cost could not be updated."
+          next
+        end
         ticket.cost = cost
         if ticket.save
           log_ticket_history ticket, 'updated'
