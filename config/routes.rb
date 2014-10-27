@@ -48,6 +48,10 @@ SeatShare::Application.routes.draw do
   get 'groups/:group_id/event-:event_id/ticket-:id/request' => 'tickets#request_ticket'
   patch 'groups/:group_id/event-:event_id/ticket-:id/request' => 'tickets#do_request_ticket'
 
+  get 'tickets' => 'tickets#index'
+  get 'tickets/:filter' => 'tickets#index'
+  post 'tickets' => 'tickets#bulk_update'
+
   get 'profiles/:id' => 'profiles#show'
   get 'profile' => 'profiles#edit'
   post 'profile' => 'profiles#update'

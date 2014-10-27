@@ -20,8 +20,9 @@
         </form>
       <% end %>
       <ul class="nav navbar-nav">
-        <li class=""><%= link_to "Dashboard", :root %></li>
-        <li class=""><%= link_to "Groups", :groups %></li>
+        <li class=""><%= link_to "Dashboard", root_path %></li>
+        <li class=""><%= link_to "Groups", groups_path %></li>
+        <li class=""><%= link_to "Tickets", tickets_path %></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <li class=""><%= link_to current_user.display_name, profile_path %></li>

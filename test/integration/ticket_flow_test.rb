@@ -119,4 +119,31 @@ class TicketFlowTest < ActionDispatch::IntegrationTest
     assert_equal 'Ticket deleted!', flash[:notice]
   end
 
+  test "bulk edit tickets - future" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+
+    post_via_redirect '/tickets', {:ticket_cost => { "1" => "10.00", "2" => "15.00" }, :tickets => {:filter => nil}}
+
+    assert_response :success
+    assert_equal 'Tickets updated!', flash[:notice]
+  end
+
+  test "bulk edit tickets - past" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+
+    post_via_redirect '/tickets', {:ticket_cost => { "2" => "15.00" }, :tickets => {:filter => 'past'}}
+
+    assert_response :success
+    assert_equal 'Tickets updated!', flash[:notice]
+  end
+
+  test "bulk edit tickets - not owner" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+
+    post_via_redirect '/tickets', {:ticket_cost => { "4" => "15.00" }, :tickets => {:filter => nil}}
+
+    assert_response :success
+    assert_equal 'Ticket cost could not be updated.', flash[:error]
+  end
+
 end

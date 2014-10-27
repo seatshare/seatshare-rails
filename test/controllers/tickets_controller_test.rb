@@ -57,4 +57,24 @@ class TicketsControllerTest < ActionController::TestCase
     assert_select 'title', 'Belmont Bruins vs. Brescia - 326 K 10', 'ticket request title matches'
   end 
 
+  test "should get future tickets" do
+    @user = User.find(2)
+    sign_in :user, @user
+
+    get :index
+
+    assert_response :success, 'received 200 status'
+    assert_select 'title', 'My Tickets', 'ticket request title matches'
+  end
+
+  test "should get past tickets" do
+    @user = User.find(2)
+    sign_in :user, @user
+
+    get :index, :filter => 'past'
+
+    assert_response :success, 'received 200 status'
+    assert_select 'title', 'My Past Tickets', 'ticket request title matches'
+  end
+
 end
