@@ -1,6 +1,6 @@
-# SeatShare
+# SeatShare [![Build Status](https://semaphoreapp.com/api/v1/projects/783a68f9-6642-4fd4-8b1c-91aa44b7f5ca/271497/shields_badge.svg)](https://semaphoreapp.com/bval/seatshare-rails)
 
-This project is a mock SaaS to allow a group of people to manage a pool of tickets to events. The most common use case is to share season tickets to a sports team.
+This project allows a group of people to manage a pool of tickets to events. The most common use case is to share season tickets to a sports team.
 
 ## Installation
 
@@ -19,9 +19,4 @@ The group will not have any events yet. You need to use the `/admin` route to lo
 
 ## Using the automated test runner and livereload
 
-This project uses [Guard](https://github.com/guard/guard) to
-automatically run the test suite as you develop. It also watches views
-and assets and will trigger livereload in your browser as you develop
-the app's front-end. All you need to do to use these features is run
-`guard` from the project root once you have completed the installation
-instructions linked above.
+This project uses [Guard](https://github.com/guard/guard) to automatically run the test suite as you develop. It also watches views and assets and will trigger livereload in your browser as you develop the app's front-end. All you need to do to use these features is run `guard` from the project root once you have completed the installation instructions linked above.
