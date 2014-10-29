@@ -18,7 +18,7 @@ class EventTest < ActiveSupport::TestCase
     assert event.date_tba? === false, 'new event date is not TBA'
     assert event.time_tba? === false, 'new event time is not TBA'
     fails_intermittently('https://github.com/seatshare/seatshare-rails/issues/109',
-      'Rails.configuration.time_zone' => Rails.configuration.time_zone, 'Time.zone.name' => Time.zone.name, 'user.timezone' => user.timezone) do
+      'Rails.configuration.time_zone' => Rails.configuration.time_zone, 'Time.zone.name' => Time.zone.name) do
       assert event.date_time === 'Tuesday, January 1, 2013 - 6:00 pm CST', 'new event date/time string matches'
     end
   end
