@@ -19,7 +19,7 @@
     <ul class="list-group">
       <li class="list-group-item profile-email"><span class="glyphicon glyphicon-envelope"></span> <%= mail_to @user.email, @user.email %></li>
       <li class="list-group-item profile-joined"><span class="glyphicon glyphicon-user"></span> Joined <%= @user.created_at.strftime('%B %-d, %Y') %></li>
-      <li class="list-group-item profile-mobile"><span class="glyphicon glyphicon-phone"></span> <%= number_to_phone @user.profile.mobile || '<em>Not Provided</em>'.html_safe %></li>
+      <li class="list-group-item profile-mobile"><span class="glyphicon glyphicon-phone"></span> <%= number_to_phone @user.profile.mobile || 'Not Provided' %></li>
     </ul>
   </div>
 </div>

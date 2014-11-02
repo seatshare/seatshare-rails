@@ -14,7 +14,6 @@ class ProfileFlowTest < ActionDispatch::IntegrationTest
     assert_select 'title', 'Jim Stone'
     assert_equal 'Profile updated!', flash[:notice]
     assert_select '.profile-email', 'stonej@example.net'
-    assert_select '.profile-joined', "Joined #{Date.today.strftime('%B %-d, %Y')}"
     assert_select '.profile-mobile', '555-555-4567'
   end
 
@@ -25,6 +24,13 @@ class ProfileFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_equal users(:rick).profile.nil?, false
+  end
+
+  test "view user without profile" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+
+    get '/profiles/3'
+    assert_response :success
   end
 
 end

@@ -76,7 +76,7 @@ gem 'newrelic_rpm', group: :production
 gem 'select2-rails'
 
 # ActiveAdmin
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin', github: 'activeadmin'
 
 # Mailchimp API
 gem 'mailchimp-api', '~> 2.0.5'
