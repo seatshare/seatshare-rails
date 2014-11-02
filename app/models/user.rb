@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :user_aliases
   has_many :group_users
   has_many :groups, through: :group_users
+  has_one :profile
+  accepts_nested_attributes_for :profile
 
   validates :first_name, :last_name, :email, :presence => true
 
