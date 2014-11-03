@@ -30,6 +30,29 @@
       </div>
     </div>
 
+    <hr />
+
+    <div class="form-group">
+      <%= f.label :bio, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_area :bio, :class => 'form-control', :placeholder => 'Who is your favorite team?', :value => current_user.profile.bio %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :location, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :location, :class => 'form-control', :placeholder => 'Any Town, USA', :value => current_user.profile.location %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :mobile, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :mobile, :class => 'form-control', :placeholder => '(555) 555-1234', :value => current_user.profile.mobile %>
+      </div>
+    </div>
+
   </fieldset>
 
   <div class="row">

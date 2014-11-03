@@ -6,14 +6,20 @@
   </div>
   <div class="col-md-9">
     <% if current_user === @user %>
-    <p class="text-right">
+    <p class="pull-right">
       <%= link_to raw('<span class="fa fa-pencil"></span> Edit Profile'), { :action => 'edit' }, :class => 'btn btn-default' %>
     </p>
     <% end %>
     <h2><%= @user.display_name %></h2>
-    <ul class="list-unstyled">
-      <li><span class="fa fa-envelope"></span> <%= mail_to @user.email, @user.email %></li>
-      <li><span class="fa fa-user"></span> Joined <%= @user.created_at.strftime('%B %-d, %Y') %></li>
+    <p><small class="text-muted"> <%= @user.profile.location || '<em>No Location Set</em>'.html_safe %> <span class="fa fa-map-marker"></span></small></p>
+
+    <%= simple_format @user.profile.bio, :class => 'lead' %>
+
+    <br />
+    <ul class="list-group">
+      <li class="list-group-item profile-email"><span class="fa fa-envelope"></span> <%= mail_to @user.email, @user.email %></li>
+      <li class="list-group-item profile-joined"><span class="fa fa-user"></span> Joined <%= @user.created_at.strftime('%B %-d, %Y') %></li>
+      <li class="list-group-item profile-mobile"><span class="fa fa-phone"></span> <%= number_to_phone @user.profile.mobile || 'Not Provided' %></li>
     </ul>
   </div>
 </div>

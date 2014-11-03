@@ -1,6 +1,6 @@
 ActiveAdmin.register GroupInvitation do
   
-    menu :parent => 'Groups'
+  menu :parent => 'Groups'
 
   index do
     selectable_column
