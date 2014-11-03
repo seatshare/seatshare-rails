@@ -44,7 +44,7 @@
 
 <div class="row">
   <div class="text-right col-md-12">
-    <%= link_to raw('<span class="glyphicon glyphicon-remove"></span> Leave Group'), { :action => 'leave', :id => @group.id }, :class => 'btn btn-large btn-danger' %>
+    <%= link_to raw('<span class="fa fa-eject"></span> Leave Group'), { :action => 'leave', :id => @group.id }, :class => 'btn btn-large btn-danger' %>
   </div>
 
 </div>
@@ -74,7 +74,7 @@
           <% if @group.is_admin(current_user) %>
             <td class="remove-user">
               <% if member != current_user %>
-                <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), { :action => 'leave', :user_id => member.id, :id => @group.id }, :class => 'btn btn-sm btn-danger confirm', :method => 'post' %>
+                <%= link_to raw('<span class="fa fa-trash"></span>'), { :action => 'leave', :user_id => member.id, :id => @group.id }, :class => 'btn btn-sm btn-danger confirm', :method => 'post' %>
               <% end %>
             </td>
           <% end %>
@@ -86,8 +86,8 @@
 
   <div class="text-right">
     <ul class="list-inline">
-      <li><%= link_to raw('<span class="glyphicon glyphicon-envelope"></span> Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default' %></li>
-      <li><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %></li>
+      <li><%= link_to raw('<span class="fa fa-envelope"></span> Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default' %></li>
+      <li><%= link_to raw('<span class="fa fa-plus"></span> Invite'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %></li>
     </ul>
   </div>
 

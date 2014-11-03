@@ -73,7 +73,7 @@
           <label>
             <%= @event.event_name %>
             <%= f.hidden_field :event_id, :value => @event.id %>
-            <div class="help-block"><span class="glyphicon glyphicon-calendar"></span> <%= @event.date_time %></div>
+            <div class="help-block"><span class="fa fa-calendar"></span> <%= @event.date_time %></div>
           </label>
         </div>
     </div>
@@ -93,7 +93,7 @@
         <div class="checkbox">
           <label>
             <%= check_box_tag 'ticket[event_id][]', event.id, :checked => true %> <%= event.event_name %>
-            <div class="help-block"><span class="glyphicon glyphicon-calendar"></span> <%= event.date_time %></div>
+            <div class="help-block"><span class="fa fa-calendar"></span> <%= event.date_time %></div>
           </label>
         </div>
       <% end %>

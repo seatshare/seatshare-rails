@@ -53,6 +53,9 @@ gem 'thin'
 # Use Bootstrap
 gem 'bootstrap-sass', '~> 3.1.1'
 
+# Use Font Awesome
+gem "font-awesome-rails"
+
 # Use Devise
 gem 'devise'
 

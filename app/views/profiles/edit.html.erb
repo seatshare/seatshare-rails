@@ -83,7 +83,7 @@
       <% for user_alias in @user_aliases %>
       <tr>
         <td><%= link_to user_alias.display_name, :controller => 'user_aliases', :action => 'edit', :id => user_alias.id %></td>
-        <td><%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), { :controller => 'user_aliases', :action => 'delete', :id => user_alias.id }, :class => 'btn btn-sm btn-danger confirm' %></td>
+        <td><%= link_to raw('<span class="fa fa-trash"></span>'), { :controller => 'user_aliases', :action => 'delete', :id => user_alias.id }, :class => 'btn btn-sm btn-danger confirm' %></td>
       </tr>
       <% end %>
     </tbody>
@@ -91,7 +91,7 @@
   <% end %>
 
   <p class="text-right">
-    <%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Add Alias'), { :controller => 'user_aliases', :action => 'new' }, :class => 'btn btn-default' %>
+    <%= link_to raw('<span class="fa fa-plus"></span> Add Alias'), { :controller => 'user_aliases', :action => 'new' }, :class => 'btn btn-default' %>
   </p>
 
 </fieldset>
