@@ -13,8 +13,8 @@
 
 <div class="pull-right">
   <ul class="list-inline">
-    <li><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Add Ticket'), { :controller => 'tickets', :action => 'new', :group_id => @group.id, :event_id => @event.id }, :class => 'btn btn-default' %></li>
-    <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Season Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default' %></li>
+    <li><%= link_to raw('<span class="fa fa-plus"></span> Add Ticket'), { :controller => 'tickets', :action => 'new', :group_id => @group.id, :event_id => @event.id }, :class => 'btn btn-default' %></li>
+    <li><%= link_to raw('<span class="fa fa-calendar"></span> Season Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default' %></li>
   </ul>
 </div>
 
@@ -37,10 +37,10 @@
         <td>
           <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => @event.id, :id => ticket.id %>
           <% if !ticket.note.nil? && ticket.note.length > 0 %>
-          <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
+          <span data-toggle="tooltip" title="<%= ticket.note %>" class="fa fa-comment"></span>
           <% end %>
           <% if ticket.ticket_files.count > 0 %>
-          <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
+          <span data-toggle="tooltip" title="Attachments" class="fa fa-paperclip"></span>
           <% end %>
         </td>
         <td>
@@ -61,7 +61,7 @@
         </td>
         <td>
           <div class="dropdown">
-            <a data-toggle="dropdown" href="#" class="btn btn-default" id="ticket"><span class="glyphicon glyphicon-wrench"></span></a>
+            <a data-toggle="dropdown" href="#" class="btn btn-default" id="ticket"><span class="fa fa-wrench"></span></a>
             <ul class="dropdown-menu pull-right" role="menu">
               <% if ticket.owner.id != current_user.id %>
               <li role="presentation"><%= link_to 'Request', { :controller => 'tickets', :action => 'request_ticket', :group_id => @group.id, :event_id => @event.id, :id => ticket.id }, {:role => 'menuitem', :tabindex => '-1'} %></li>

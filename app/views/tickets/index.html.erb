@@ -39,10 +39,10 @@
         <td>
           <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => ticket.group_id, :event_id => ticket.event_id, :id => ticket.id %>
           <% if !ticket.note.nil? && ticket.note.length > 0 %>
-          <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
+          <span data-toggle="tooltip" title="<%= ticket.note %>" class="fa fa-comment"></span>
           <% end %>
           <% if ticket.ticket_files.count > 0 %>
-          <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
+          <span data-toggle="tooltip" title="Attachments" class="fa fa-paperclip"></span>
           <% end %>
         </td>
         <td>

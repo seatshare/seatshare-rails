@@ -52,10 +52,10 @@
         <% for file in @ticket.ticket_files %>
         <tr>
           <td>
-            <%= link_to raw('<span class="glyphicon glyphicon-save"></span> ') + file.file_name, file.download_link %>
+            <%= link_to raw('<span class="fa fa-save"></span> ') + file.file_name, file.download_link %>
             <br /><small>Uploaded <%= file.created_at %></small>
           </td>
-          <td><a href="#" class="btn btn-sm btn-danger confirm"><span class="glyphicon glyphicon-trash"></span></a></td>
+          <td><a href="#" class="btn btn-sm btn-danger confirm"><span class="fa fa-trash"></span></a></td>
         </tr>
         <% end %>
       </table>
