@@ -111,6 +111,8 @@ GEM
     excon (0.40.0)
     execjs (2.2.1)
     ffi (1.9.6)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     formtastic (3.0.0)
       actionpack (>= 3.2.13)
@@ -306,6 +308,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   dotenv-rails
+  font-awesome-rails
   guard-bundler
   guard-livereload
   guard-minitest

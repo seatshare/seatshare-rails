@@ -2,7 +2,7 @@
   <div class="panel-heading">
     Your <strong><%= @entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.display_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
     <div class="pull-right">
-      <%= link_to raw('<span class="glyphicon glyphicon-cog"></span>'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
+      <%= link_to raw('<span class="fa fa-cog"></span>'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
     </div>
   </div>
   <div id="collapseOne" class="panel-collapse collapse">
@@ -21,7 +21,7 @@
 <% if @events.first === event %>
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <span class="glyphicon glyphicon-calendar"></span> <%= event.date_time %>
+    <span class="fa fa-calendar"></span> <%= event.date_time %>
   </div>
   <div class="panel-body">
     <h2><%= link_to event.event_name, :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id %></h2>
@@ -45,10 +45,10 @@
           <td>
             <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
             <% if ticket.note? %>
-            <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
+            <span data-toggle="tooltip" title="<%= ticket.note %>" class="fa fa-comment"></span>
             <% end %>
             <% if ticket.ticket_files.count > 0 %>
-            <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
+            <span data-toggle="tooltip" title="Attachments" class="fa fa-paperclip"></span>
             <% end %>
           </td>
           <td>via <%= ticket.owner.display_name %></td>
@@ -70,10 +70,10 @@
   <div class="panel-heading">
       <% if ticket_stats[:available] > 0 %>
       <div class="pull-right">
-        <a href="javascript:void(0)" onclick="$('#tickets-<%= event.id %>').collapse('toggle')" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-list"></span></a>
+        <a href="javascript:void(0)" onclick="$('#tickets-<%= event.id %>').collapse('toggle')" class="btn btn-default btn-xs"><span class="fa fa-list"></span></a>
       </div>
       <% end %>
-    <span class="glyphicon glyphicon-calendar"></span> <%= event.date_time %>
+    <span class="fa fa-calendar"></span> <%= event.date_time %>
   </div>
   <div class="panel-body">
     <div class="row">
@@ -102,10 +102,10 @@
             <td>
               <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
               <% if ticket.note? %>
-              <span data-toggle="tooltip" title="<%= ticket.note %>" class="glyphicon glyphicon-comment"></span>
+              <span data-toggle="tooltip" title="<%= ticket.note %>" class="fa fa-comment"></span>
               <% end %>
               <% if ticket.ticket_files.count > 0 %>
-              <span data-toggle="tooltip" title="Attachments" class="glyphicon glyphicon-paperclip"></span>
+              <span data-toggle="tooltip" title="Attachments" class="fa fa-paperclip"></span>
               <% end %>
             </td>
             <td>via <%= ticket.owner.display_name %></td>
@@ -144,9 +144,9 @@
 <div class="well well-sm text-center">
   <ul class="list-inline" style="margin-bottom:0;">
     <% if @events.count > 0 %>
-    <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span> Add Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
+    <li><%= link_to raw('<span class="fa fa-calendar"></span> Add Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
     <% end %>
-    <li><%= link_to raw('<span class="glyphicon glyphicon-envelope"></span> Group Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
+    <li><%= link_to raw('<span class="fa fa-envelope"></span> Group Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
   </ul>
 </div>
 
@@ -162,7 +162,7 @@
   <% for member in @members %>
   <li><%= image_tag member.gravatar, :alt => member.display_name, :title => member.display_name %> <%= link_to member.display_name, :controller => 'profiles', :action => 'show', :id => member.id %></li>
   <% end %>
-  <li class="text-right"><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %></li>
+  <li class="text-right"><%= link_to raw('<span class="fa fa-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %></li>
 </ul>
 
 </fieldset>
