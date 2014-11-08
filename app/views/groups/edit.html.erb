@@ -25,6 +25,11 @@
   <div class="form-group">
     <%= f.label :avatar, :class => 'col-md-3 control-label' %>
     <div class="col-md-9">
+      <% if !@group.avatar.nil? %>
+      <%= image_tag @group.avatar.url(:thumb), :class => "img-thumbnail" %><br />
+      <label><%= check_box_tag 'group[remove_avatar]', 1 %> Remove?</label>
+      <br />
+      <% end %>
       <%= f.file_field :avatar %>
     </div>
   </div>

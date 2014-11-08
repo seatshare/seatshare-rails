@@ -1,12 +1,12 @@
-<div class="panel panel-default hidden-xs hidden-sm">
+<div class="panel panel-default">
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-2 hidden-xs hidden-sm">
         <%= image_tag @group.avatar.url(:medium), :class => "img-responsive" %>
       </div>
       <div class="col-md-10">
         <div class="pull-right">
-          <%= link_to raw('<span class="fa fa-cog"></span> Group Settings'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
+          <%= link_to raw('<span class="fa fa-cog"></span><span class="hidden-xs hidden-sm" Group Settings</span>'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
         </div>
         <p class="lead" style="margin-bottom:0">
           Your <strong><%= @entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.display_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>

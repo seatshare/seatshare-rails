@@ -20,7 +20,8 @@ class Group < ActiveRecord::Base
                     },
                     :url => ':s3_alias_url',
                     :s3_host_alias => ENV['SEATSHARE_S3_PUBLIC'].gsub("http://",""),
-                    :path => ":class-avatars/:id.:style.:extension"
+                    :path => ":class-avatars/:id-:style-:hash.:extension",
+                    :hash_secret => "obfusticateOurAvatarUrlsPlz"
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 

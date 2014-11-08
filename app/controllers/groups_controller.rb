@@ -43,10 +43,13 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @page_title = "Edit Group"
     @group = Group.find_by_id(params[:id]) || not_found
+    if !@group.is_member(current_user)
+      redirect_to :action => 'index' and return
+    end
     @members = @group.users.order_by_name
     @group_user = GroupUser.where("user_id = #{current_user.id} AND group_id = #{@group.id}").first
+    @page_title = "Edit Group"
   end
 
   def update
@@ -58,6 +61,9 @@ class GroupsController < ApplicationController
       group.group_name = group_params[:group_name]
       if !group_params[:avatar].nil?
         group.avatar = group_params[:avatar]
+      end
+      if group_params[:remove_avatar] == "1"
+        group.avatar = nil
       end
       if group.save
         flash[:notice] = 'Group updated!'
@@ -87,7 +93,7 @@ class GroupsController < ApplicationController
     if @group.status != 1
       not_found
     end
-    if !@group.is_member(@current_user)
+    if !@group.is_member(current_user)
       redirect_to :action => 'index' and return
     end
     @events = @group.events.order('start_time ASC').where("start_time > '#{Date.today}'")
@@ -101,7 +107,7 @@ class GroupsController < ApplicationController
     if @group.status != 1
       not_found
     end
-    if !@group.is_member(@current_user)
+    if !@group.is_member(current_user)
       raise "NotGroupMember"
     end
     @events = @group.events
@@ -242,7 +248,7 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:group_name, :entity_id, :form_type, :avatar)
+    params.require(:group).permit(:group_name, :entity_id, :form_type, :avatar, :remove_avatar)
   end
 
 end
