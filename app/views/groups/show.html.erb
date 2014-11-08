@@ -1,12 +1,17 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    Your <strong><%= @entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.display_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
-    <div class="pull-right">
-      <%= link_to raw('<span class="fa fa-cog"></span>'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
-    </div>
-  </div>
-  <div id="collapseOne" class="panel-collapse collapse">
-    <div class="panel-body">
+<div class="panel panel-default hidden-xs hidden-sm">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-2">
+        <%= image_tag @group.avatar.url(:medium), :class => "img-responsive" %>
+      </div>
+      <div class="col-md-10">
+        <div class="pull-right">
+          <%= link_to raw('<span class="fa fa-cog"></span> Group Settings'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
+        </div>
+        <p class="lead" style="margin-bottom:0">
+          Your <strong><%= @entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.display_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
+        </p>
+      </div>
     </div>
   </div>
 </div>

@@ -9,6 +9,21 @@ class Group < ActiveRecord::Base
   validates :entity_id, :group_name, :creator_id, :presence => true
   before_save :clean_invitation_code
 
+  has_attached_file :avatar,
+                    :styles => { :medium => "300x300>", :thumb => "100x100>" },
+                    :default_url => "/assets/group-:style-missing.png",
+                    :storage => :s3,
+                    :s3_credentials => {
+                      :bucket => ENV['SEATSHARE_S3_BUCKET'],
+                      :access_key_id => ENV['SEATSHARE_S3_KEY'],
+                      :secret_access_key => ENV['SEATSHARE_S3_SECRET']
+                    },
+                    :url => ':s3_alias_url',
+                    :s3_host_alias => ENV['SEATSHARE_S3_PUBLIC'].gsub("http://",""),
+                    :path => ":class-avatars/:id.:style.:extension"
+
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
   scope :order_by_name, -> { order('LOWER(group_name) ASC') }
   scope :active, -> { where('status = 1') }
 

@@ -1,6 +1,6 @@
 <% if @group.is_admin(current_user) %>
 
-<%= form_for @group, url: edit_group_path, html: {class: "form-horizontal", role: "form"} do |f| %>
+<%= form_for @group, url: edit_group_path, html: { class: "form-horizontal", role: "form", multipart: true } do |f| %>
 
 <fieldset>
   <legend>Group Details</legend>
@@ -19,6 +19,13 @@
         <%= @group.invitation_code %><br />
         <small><%= link_to 'Reset invitation code', { :controller => 'groups', :action => 'do_reset_invite', :id => @group.id }, :class => 'text-muted confirm', :method => 'post' %></small>
       </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :avatar, :class => 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <%= f.file_field :avatar %>
     </div>
   </div>
 

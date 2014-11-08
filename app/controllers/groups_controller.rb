@@ -56,6 +56,9 @@ class GroupsController < ApplicationController
         raise "NotGroupAdmin"
       end
       group.group_name = group_params[:group_name]
+      if !group_params[:avatar].nil?
+        group.avatar = group_params[:avatar]
+      end
       if group.save
         flash[:notice] = 'Group updated!'
       else
@@ -72,6 +75,7 @@ class GroupsController < ApplicationController
         flash[:notice] = 'Reminder settings updated!'
       else
         flash[:error] = 'Reminder settings could not be updated.'
+        redirect_to :controller => 'groups', :action => 'edit', :id => group.id and return
       end
     end
     redirect_to :controller => 'groups', :action => 'show', :id => group.id and return
@@ -238,7 +242,7 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:group_name, :entity_id, :form_type)
+    params.require(:group).permit(:group_name, :entity_id, :form_type, :avatar)
   end
 
 end
