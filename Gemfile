@@ -101,6 +101,9 @@ gem 'rest_client'
 # Readline support (for remote console)
 gem 'rb-readline'
 
+# Paperclip
+gem "paperclip", "~> 4.2"
+
 # testing
 group :testing do
   gem 'guard-minitest'
