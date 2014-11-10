@@ -11,7 +11,7 @@ class Group < ActiveRecord::Base
 
   has_attached_file :avatar,
                     :styles => { :medium => "300x300>", :thumb => "100x100>" },
-                    :default_url => ActionController::Base.helpers.asset_path("assets/group-:style-missing.png"),
+                    :default_url => ':placeholder_group',
                     :storage => :s3,
                     :s3_credentials => {
                       :bucket => ENV['SEATSHARE_S3_BUCKET'],
