@@ -104,6 +104,10 @@ gem 'rb-readline'
 # Paperclip
 gem "paperclip", "~> 4.2"
 
+# Twilio / SMS related
+gem "twilio-ruby", '~> 3.12'
+gem "global_phone", "~> 1.0.1"
+
 # testing
 group :testing do
   gem 'guard-minitest'

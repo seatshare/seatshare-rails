@@ -21,13 +21,9 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    current_user.first_name = user_params[:first_name]
-    current_user.last_name = user_params[:last_name]
-    current_user.timezone = user_params[:timezone]
-    current_user.profile.bio = user_params[:bio]
-    current_user.profile.location = user_params[:location]
-    current_user.profile.mobile = user_params[:mobile].gsub /[^0-9]/, ""
-    current_user.save!
+    user = current_user
+    user.update_attributes!(user_params)
+
     flash.keep
     flash[:notice] = "Profile updated!"
     redirect_to :action => 'show', :id => @current_user.id and return
@@ -36,7 +32,7 @@ class ProfilesController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :timezone, :bio, :location, :mobile)
+    params.require(:user).permit(:first_name, :last_name, :timezone, profile_attributes: [:bio, :location, :mobile, :sms_notify])
   end
 
 end

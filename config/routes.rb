@@ -54,7 +54,7 @@ SeatShare::Application.routes.draw do
 
   get 'profiles/:id' => 'profiles#show'
   get 'profile' => 'profiles#edit'
-  post 'profile' => 'profiles#update'
+  patch 'profile' => 'profiles#update'
 
   get 'profile/aliases/new' => 'user_aliases#new', as: 'new_user_alias'
   post 'profile/aliases/new' => 'user_aliases#create'
