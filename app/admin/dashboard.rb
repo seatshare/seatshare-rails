@@ -31,6 +31,42 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
 
+        panel "Twilio" do
+          client = TwilioSMS.new
+
+          attributes_table_for :usage do
+            usage = client.get_sms_usage
+            if usage.is_a? String
+              row "Error" do
+                usage
+              end
+            else
+              usage.each do |record|
+                puts usage.inspect
+                row record.description do
+                  text_node "#{record.count} #{record.usage_unit} / #{record.price} #{record.price_unit.upcase}"
+                end
+              end
+            end
+          end
+
+          attributes_table_for :messages do
+            usage = client.recent_messages
+            if usage.is_a? String
+              row "Error" do
+                usage
+              end
+            else
+              usage.each do |record|
+                row "To: #{record.to} ; From: #{record.from}".html_safe do
+                  text_node "#{record.body}"
+                end
+              end
+            end
+          end
+
+        end
+
         panel "System Stats" do
           attributes_table_for :stats do
             row "Entities" do

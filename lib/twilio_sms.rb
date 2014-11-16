@@ -33,4 +33,20 @@ class TwilioSMS
     )
   end
 
+  def recent_messages
+    begin
+      self.twilio_client.account.messages.list || []
+    rescue Exception => e  
+      e.message
+    end
+  end
+
+  def get_sms_usage
+    begin
+      self.twilio_client.account.usage.records.last_month.list({:category => 'sms'}) || []
+    rescue Exception => e  
+      e.message
+    end
+  end
+
 end
