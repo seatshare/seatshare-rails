@@ -101,6 +101,20 @@ class TicketFlowTest < ActionDispatch::IntegrationTest
     assert_equal 'Ticket request sent!', flash[:notice]
   end
 
+  test "assign a ticket" do
+    post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
+
+    get '/groups/1/event-4/ticket-1'
+    assert_response :success
+    assert_select 'title', 'Nashville Predators vs. St. Louis Blues - 326 K 9'
+
+    post_via_redirect '/groups/1/event-4/ticket-1', {:ticket => { :user_id => 2, :cost => '40.00', :note => 'added a note'}}
+
+    assert_response :success
+    assert_equal '/groups/1/event-4', path
+    assert_equal 'Ticket updated!', flash[:notice]
+  end
+
   test "unassign a ticket" do
     post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
 

@@ -1,4 +1,4 @@
-<%= form_for :user, html: {class: "form-horizontal", role: "form"} do |f| %>
+<%= form_for @user, :url => profile_path, html: {class: "form-horizontal", role: "form"} do |f| %>
 
   <fieldset>
     <legend>Your Details</legend>
@@ -6,14 +6,14 @@
     <div class="form-group">
       <%= f.label :first_name, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
-        <%= f.text_field :first_name, :class => 'form-control', :placeholder => 'John', :value => current_user.first_name %>
+        <%= f.text_field :first_name, :class => 'form-control', :placeholder => 'John' %>
       </div>
     </div>
 
     <div class="form-group">
       <%= f.label :last_name, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
-        <%= f.text_field :last_name, :class => 'form-control', :placeholder => 'Doe', :value => current_user.last_name %>
+        <%= f.text_field :last_name, :class => 'form-control', :placeholder => 'Doe' %>
       </div>
     </div>
 
@@ -32,26 +32,37 @@
 
     <hr />
 
+    <%= f.fields_for :profile do |ff| %>
+
     <div class="form-group">
-      <%= f.label :bio, :class => 'col-md-3 control-label' %>
+      <%= ff.label :bio, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
-        <%= f.text_area :bio, :class => 'form-control', :placeholder => 'Who is your favorite team?', :value => current_user.profile.bio %>
+        <%= ff.text_area :bio, :class => 'form-control', :placeholder => 'Who is your favorite team?' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :location, :class => 'col-md-3 control-label' %>
+      <%= ff.label :location, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
-        <%= f.text_field :location, :class => 'form-control', :placeholder => 'Any Town, USA', :value => current_user.profile.location %>
+        <%= ff.text_field :location, :class => 'form-control', :placeholder => 'Any Town, USA' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :mobile, :class => 'col-md-3 control-label' %>
+      <%= ff.label :mobile, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
-        <%= f.text_field :mobile, :class => 'form-control', :placeholder => '(555) 555-1234', :value => current_user.profile.mobile %>
+        <%= ff.text_field :mobile, :class => 'form-control', :placeholder => '(555) 555-1234' %>
       </div>
     </div>
+
+    <div class="form-group">
+      <%= ff.label :sms_notify, 'SMS Notifications', :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <label><%= ff.check_box :sms_notify %> Receive notifications when tickets are assigned or requested.</label>
+      </div>
+    </div>
+
+    <% end %>
 
   </fieldset>
 

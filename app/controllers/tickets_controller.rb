@@ -166,7 +166,7 @@ class TicketsController < ApplicationController
           raise "NotGroupMember"
         end
         TicketNotifier.assign(ticket, current_user).deliver
-
+        TwilioSMS.new.assign_ticket(ticket, current_user)
         log_ticket_history ticket, 'assigned'
       else
         log_ticket_history ticket, 'updated'
@@ -197,6 +197,7 @@ class TicketsController < ApplicationController
     end
     message = params[:message][:personalization]
     TicketNotifier.request_ticket(ticket, current_user, message).deliver
+    TwilioSMS.new.request_ticket(ticket, current_user)
     log_ticket_history ticket, 'requested'
     flash.keep
     flash[:notice] = 'Ticket request sent!'
