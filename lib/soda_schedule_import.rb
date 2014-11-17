@@ -16,14 +16,18 @@ class SodaScheduleImport
     end
 
     # Get listing for desired league
-    documents = self.soda_client.content_finder({
-      sandbox: ENV['SODA_ENVIRONMENT'] != 'production',
-      league_id: options[:team_id].split("-")[0],
-      team_id: options[:team_id],
-      type: 'schedule-single-team',
-      start_datetime: options[:start_datetime].is_a?(String) ? DateTime.parse(options[:start_datetime]) : options[:start_datetime],
-      end_datetime: options[:end_datetime].is_a?(String) ? DateTime.parse(options[:end_datetime]) : options[:start_datetime]
-    })
+    begin
+      documents = self.soda_client.content_finder({
+        sandbox: ENV['SODA_ENVIRONMENT'] != 'production',
+        league_id: options[:team_id].split("-")[0],
+        team_id: options[:team_id],
+        type: 'schedule-single-team',
+        start_datetime: options[:start_datetime].is_a?(String) ? DateTime.parse(options[:start_datetime]) : options[:start_datetime],
+        end_datetime: options[:end_datetime].is_a?(String) ? DateTime.parse(options[:end_datetime]) : options[:start_datetime]
+      })
+    rescue
+      documents = []
+    end
 
     # See if there were any documents at all
     if documents.length === 0 || !documents[0][:document_id]

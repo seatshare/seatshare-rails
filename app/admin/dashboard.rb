@@ -1,7 +1,5 @@
 ActiveAdmin.register_page "Dashboard" do
 
-  contact_form_messages = HTTParty.get("http://getsimpleform.com/messages.json?api_token=#{ENV['SIMPLE_FORM_API_TOKEN']}").first(5) || []
-
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
@@ -11,6 +9,9 @@ ActiveAdmin.register_page "Dashboard" do
       column do
 
         panel "Recent Contact Messages" do
+
+          contact_form_messages = HTTParty.get("http://getsimpleform.com/messages.json?api_token=#{ENV['SIMPLE_FORM_API_TOKEN']}").first(5) || []
+
           div do
             if !contact_form_messages.nil? && contact_form_messages.count > 0
               for message in contact_form_messages
