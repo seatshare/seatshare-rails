@@ -10,24 +10,29 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def not_found
-    raise ActionController::RoutingError.new('Not Found')
+    raise ActionController::RoutingError.new("Not Found")
   end
 
   protected
 
   def load_shared_interface_variables
-    @group_selector = current_user.groups.order_by_name.active.collect {|p| [ p.group_name, p.id ] }
+    @group_selector = current_user.groups.order_by_name.active.collect {|p|
+      [ p.group_name, p.id ]
+    }
   end
 
   def configure_devise_permitted_parameters
 
-    registration_params = [:first_name, :last_name, :email, :password, :password_confirmation, :newsletter_signup, :invite_code, :entity_id]
+    registration_params = [
+      :first_name, :last_name, :email, :password, :password_confirmation,
+      :newsletter_signup, :invite_code, :entity_id
+    ]
 
-    if params[:action] == 'update'
+    if params[:action] == "update"
       devise_parameter_sanitizer.for(:account_update) { 
         |u| u.permit(registration_params << :current_password)
       }
-    elsif params[:action] == 'create'
+    elsif params[:action] == "create"
       devise_parameter_sanitizer.for(:sign_up) { 
         |u| u.permit(registration_params) 
       }
@@ -36,7 +41,7 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     if devise_controller?
-      if params[:controller] === 'devise/sessions' || params[:controller] === 'devise/passwords'
+      if ["devise/sessions", "devise/sessions"].include? params[:controller]
         "login"
       else
         "two-column"

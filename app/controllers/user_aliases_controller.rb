@@ -5,7 +5,6 @@ class UserAliasesController < ApplicationController
 
   def new
     @user_alias = UserAlias.new
-    @page_title = 'Add User Alias'
   end
 
   def create
@@ -25,7 +24,6 @@ class UserAliasesController < ApplicationController
     if @user_alias.user_id != current_user.id
       redirect_to :controller => 'profiles', :action => 'edit' and return
     end
-    @page_title = 'Edit User Alias'
   end
 
   def update
@@ -44,6 +42,8 @@ class UserAliasesController < ApplicationController
       redirect_to :controller => 'profiles', :action => 'edit' and return
     end
     user_alias.destroy
+    flash.keep
+    flash[:notice] = 'User Alias deleted.'
     redirect_to :controller => 'profiles', :action => 'edit' and return
   end
 

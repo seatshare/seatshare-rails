@@ -8,7 +8,6 @@ class ProfilesController < ApplicationController
     if @user.profile.nil?
       @user.profile = Profile.new
     end
-    @page_title = "#{@user.display_name}"
   end
 
   def edit
@@ -17,7 +16,6 @@ class ProfilesController < ApplicationController
       @user.profile = Profile.new
     end
     @user_aliases = current_user.user_aliases
-    @page_title = "Edit Profile"
   end
 
   def update
@@ -32,7 +30,10 @@ class ProfilesController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :timezone, profile_attributes: [:bio, :location, :mobile, :sms_notify])
+    params.require(:user).permit(
+      :first_name, :last_name, :timezone,
+      profile_attributes: [:bio, :location, :mobile, :sms_notify]
+    )
   end
 
 end

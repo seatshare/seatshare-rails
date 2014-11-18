@@ -1,3 +1,5 @@
+<% content_for :page_title do %><%= @event.event_name %><% end %>
+
 <%= render 'tickets/event.html.erb' %>
 <% if @event.start_time > Date.today %>
 <% if @ticket_stats[:available] > 0 %>
