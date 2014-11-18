@@ -30,7 +30,7 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_select "title", "Create Your SeatShare Account - Nashville Predators (NHL)"
-    assert_select "h4", "Create a Nashville Predators group!"
+    assert_select "h4", "Create a Nashville Predators group"
   end
 
 end
