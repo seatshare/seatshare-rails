@@ -1,3 +1,5 @@
+<% content_for :page_title do %><%= "Send a Group Message to #{@group.group_name}" %><% end %>
+
 <%= form_for :message, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'message', :id => @group.id } do |f| %>
 
 <div class="row">

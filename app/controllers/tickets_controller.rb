@@ -50,11 +50,11 @@ class TicketsController < ApplicationController
     if params[:event_id]
       @event = Event.find_by_id(params[:event_id]) || not_found
       @ticket_stats = @event.ticket_stats(@group, current_user)
+      @page_title = "#{@event.event_name}"
     else
       @events = @group.events.order('start_time ASC').where("start_time > '#{Date.today}'")
+      @page_title = "Add Tickets"
     end
-
-    @page_title = "Add Tickets"
   end
 
   def create
@@ -118,7 +118,6 @@ class TicketsController < ApplicationController
     @members.unshift(['Unassigned', 0])
     @user_aliases = current_user.user_aliases.collect {|p| [ p.display_name, p.id ] }
     @user_aliases.unshift(['Unassigned', 0])
-    @page_title = "#{@event.event_name} - #{@ticket.display_name}"
   end
 
   def update
@@ -185,7 +184,6 @@ class TicketsController < ApplicationController
       raise "NotGroupMember"
     end
     @ticket_stats = @event.ticket_stats(@group, current_user)
-    @page_title = "#{@event.event_name} - #{@ticket.display_name}"
   end
 
   def do_request_ticket

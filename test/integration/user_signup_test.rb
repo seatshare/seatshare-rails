@@ -26,8 +26,9 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   end
 
   test "signup for an account with an invite code" do
-    get "/register"
+    get "/register/invite/ABCDEFG123"
     assert_response :success
+    assert_select "h4", "You've been invited join a group!"
 
     post_via_redirect "/", {:user => { :first_name => 'New', :last_name => 'User', :email => 'newuser@example.com', :password => 'testing123', :password_confirm => 'testing123', :invite_code => 'ABCDEFG123' }}
 
@@ -38,8 +39,9 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   end
 
   test "signup for an account with an team ID" do
-    get "/register"
+    get "/register/nashville-predators-nhl/1"
     assert_response :success
+    assert_select "h4", "Create a Nashville Predators group"
 
     post_via_redirect "/", {:user => { :first_name => 'New', :last_name => 'User', :email => 'newuser@example.com', :password => 'testing123', :password_confirm => 'testing123', :entity_id => 1 }}
 
@@ -49,7 +51,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_equal '/groups/new', path
   end
 
-  test "change profile information" do
+  test "add user alias" do
     post_via_redirect "/login", {:user => { :email => users(:jim).email, :password => "testing123" }}
 
     get "/profile/aliases/new"
@@ -63,14 +65,18 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_equal "/profile", path
   end
 
-  test "add user alias" do
-
-
-  end
-
   test "delete user alias" do
+    post_via_redirect "/login", {:user => { :email => users(:jill).email, :password => "testing123" }}
 
+    get "/profile"
+    assert_response :success
 
+    get_via_redirect "/profile/aliases/2/delete"
+
+    assert_response :success
+    assert_equal nil, flash[:alert]
+    assert_equal "User Alias deleted.", flash[:notice]
+    assert_equal "/profile", path
   end
 
 end

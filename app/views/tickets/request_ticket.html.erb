@@ -1,3 +1,5 @@
+<% content_for :page_title do %><%= "#{@event.event_name} - #{@ticket.display_name}" %><% end %>
+
 <%= render 'event' %>
 
 <%= form_for @ticket, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'tickets', :action => 'request_ticket', :group_id => @group.id, :id => @ticket.id } do |f| %>

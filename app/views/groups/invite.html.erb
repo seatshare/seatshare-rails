@@ -1,3 +1,5 @@
+<% content_for :page_title do %><%= "Invite Member to #{@group.group_name}" %><% end %>
+
 <%= form_for @group_invitation, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'invite', :id => @group.id } do |f| %>
 
 <div class="row">
