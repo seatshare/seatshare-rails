@@ -1,5 +1,4 @@
 class PublicController < ApplicationController
-
   layout :layout_by_resource
   before_action :authenticate_user!, only: :token
 
@@ -7,20 +6,20 @@ class PublicController < ApplicationController
     if user_signed_in?
       if session[:current_group_id].is_a? Numeric
         redirect_to(
-          :controller => 'groups', :action => 'show',
-          :id => session[:current_group_id], :status => 302
-        ) and return
+          controller: 'groups', action: 'show',
+          id: session[:current_group_id], status: 302
+        ) && return
       else
         groups = current_user.groups.active
         if groups.count == 0
           redirect_to(
-            :controller => 'groups', :action => 'index', :status => 302
-          ) and return
+            controller: 'groups', action: 'index', status: 302
+          ) && return
         else
           redirect_to(
-            :controller => 'groups', :action => 'show', :id => groups.first.id,
-            :status => 302
-          ) and return
+            controller: 'groups', action: 'show', id: groups.first.id,
+            status: 302
+          ) && return
         end
       end
     end
@@ -51,10 +50,9 @@ class PublicController < ApplicationController
 
   def layout_by_resource
     if params[:action] === 'index'
-      "home"
+      'home'
     else
-      "two-column"
+      'two-column'
     end
   end
-
 end

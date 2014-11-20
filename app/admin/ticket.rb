@@ -11,7 +11,7 @@ ActiveAdmin.register Ticket do
   filter :seat
   filter :cost
   filter :note
- 
+
   index do
     selectable_column
     id_column

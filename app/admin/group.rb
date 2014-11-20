@@ -25,7 +25,7 @@ ActiveAdmin.register Group do
   filter :invitation_code
   filter :status
 
-  sidebar 'Group Members', :only => :show do
+  sidebar 'Group Members', only: :show do
     ul do
       Group.find(resource.id).users.order_by_name.collect do |user|
         li auto_link(user)

@@ -27,14 +27,14 @@ ActiveAdmin.register User do
   filter :created_at
 
   form do |f|
-    f.inputs "Admin Details" do
+    f.inputs 'Admin Details' do
       f.input :first_name
       f.input :last_name
       f.input :email
       f.input :timezone
       f.input :status
       f.inputs do
-        f.has_many :profile, :allow_destroy => false, :new_record => false do |pf|
+        f.has_many :profile, allow_destroy: false, new_record: false do |pf|
           pf.input :bio
           pf.input :location
           pf.input :mobile
@@ -43,8 +43,8 @@ ActiveAdmin.register User do
     end
     f.actions
   end
- 
-  sidebar 'User Groups', :only => :show do
+
+  sidebar 'User Groups', only: :show do
     ul do
       User.find(resource.id).groups.order_by_name.collect do |group|
         li auto_link(group)

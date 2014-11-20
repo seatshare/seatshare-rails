@@ -1,13 +1,10 @@
 class GroupsController < ApplicationController
-
   before_action :authenticate_user!
-  layout "two-column", except: [:index]
+  layout 'two-column', except: [:index]
 
   def index
     @groups = current_user.groups
-    if @groups.blank?
-      render "groups/welcome"
-    end
+    render 'groups/welcome' if @groups.blank?
   end
 
   def new
@@ -20,31 +17,27 @@ class GroupsController < ApplicationController
   end
 
   def create
-    group = Group.new({
-      :group_name => group_params[:group_name],
-      :entity_id => group_params[:entity_id],
-      :creator_id => current_user.id
-    })
+    group = Group.new(
+      group_name: group_params[:group_name],
+      entity_id: group_params[:entity_id],
+      creator_id: current_user.id
+    )
     if group.save
-      group.join_group current_user, "admin"
+      group.join_group current_user, 'admin'
       flash.keep
-      flash[:notice] = "Group created!"
-      if group.entity.events.count === 0
-        status = group.entity.retrive_schedule
-      end
-      redirect_to :action => "show", :id => group.id
+      flash[:notice] = 'Group created!'
+      group.entity.retrive_schedule if group.entity.events.count == 0
+      redirect_to action: 'show', id: group.id
     else
       flash.keep
-      flash[:error] = "Group could not be created."
-      redirect_to :action => "new", :entity_id => params[:entity_id]
+      flash[:error] = 'Group could not be created.'
+      redirect_to action: 'new', entity_id: params[:entity_id]
     end
   end
 
   def edit
     @group = Group.find_by_id(params[:id]) || not_found
-    if !@group.is_member(current_user)
-      redirect_to :action => "index" and return
-    end
+    redirect_to(action: 'index') && return unless @group.member?(current_user)
     @members = @group.users.order_by_name
     @group_user = GroupUser.where(
       "user_id = #{current_user.id} AND group_id = #{@group.id}"
@@ -54,81 +47,65 @@ class GroupsController < ApplicationController
   def update
     group = Group.find(params[:id])
     if params[:group_user].nil?
-      if !group.is_admin(current_user)
-        raise "NotGroupAdmin"
-      end
+      fail 'NotGroupAdmin' unless group.admin?(current_user)
       group.group_name = group_params[:group_name]
-      if !group_params[:avatar].nil?
-        group.avatar = group_params[:avatar]
-      end
-      if group_params[:remove_avatar] == "1"
-        group.avatar = nil
-      end
+      group.avatar = group_params[:avatar] unless group_params[:avatar].nil?
+      group.avatar = nil if group_params[:remove_avatar] == '1'
       if group.save
-        flash[:notice] = "Group updated!"
+        flash[:notice] = 'Group updated!'
       else
-        flash[:error] = "Group could not be updated."
+        flash[:error] = 'Group could not be updated.'
       end
     else
-      if !group.is_member(current_user)
-        raise "NotGroupMember"
-      end
+      fail 'NotGroupMember' unless group.member?(current_user)
       daily = params[:group_user][:daily_reminder].to_i
       weekly = params[:group_user][:weekly_reminder].to_i
       flash.keep
       status = GroupUser
-        .where("user_id = #{current_user.id} AND group_id = #{group.id}")
-        .update_all("daily_reminder = #{daily}, weekly_reminder = #{weekly}")
+               .where("user_id = #{current_user.id} AND group_id = #{group.id}")
+               .update_all("daily_reminder=#{daily}, weekly_reminder=#{weekly}")
       if status
-        flash[:notice] = "Reminder settings updated!"
+        flash[:notice] = 'Reminder settings updated!'
       else
-        flash[:error] = "Reminder settings could not be updated."
+        flash[:error] = 'Reminder settings could not be updated.'
         redirect_to(
-          :controller => "groups", :action => "edit", :id => group.id
-        ) and return
+          controller: 'groups', action: 'edit', id: group.id
+        ) && return
       end
     end
     redirect_to(
-      :controller => "groups", :action => "show", :id => group.id
-    ) and return
+      controller: 'groups', action: 'show', id: group.id
+    ) && return
   end
 
   def show
     @group = Group.find_by_id(params[:id]) || not_found
     @entity = @group.entity
-    if @group.status != 1
-      not_found
-    end
-    if !@group.is_member(current_user)
-      redirect_to :action => "index" and return
-    end
+    not_found if @group.status != 1
+    redirect_to(action: 'index') && return unless @group.member?(current_user)
     @events = @group.events
-      .order("start_time ASC")
-      .where("start_time > '#{Date.today}'")
+              .order('start_time ASC')
+              .where("start_time > '#{Date.today}'")
     @members = @group.users.order_by_name
     session[:current_group_id] = @group.id
   end
 
   def events_feed
     @group = Group.find_by_id(params[:id]) || not_found
-    if @group.status != 1
-      not_found
-    end
-    if !@group.is_member(current_user)
-      raise "NotGroupMember"
-    end
+    not_found if @group.status != 1
+    fail 'NotGroupMember' unless @group.member?(current_user)
     @events = @group.events
 
     feed = []
-    for event in @events
+    @events.each do |event|
       event_link = url_for(
-        :controller => "events", :action => "show", :group_id => @group.id,
-        :id => event.id
+        controller: 'events', action: 'show', group_id: @group.id,
+        id: event.id
       )
       feed << {
-        :date => event.start_time.strftime("%Y-%m-%d"),
-        :title => event.event_name,
-        :url => event_link
+        date: event.start_time.strftime('%Y-%m-%d'),
+        title: event.event_name,
+        url: event_link
       }
     end
     render json: feed
@@ -151,20 +128,20 @@ class GroupsController < ApplicationController
         invitation.use_invitation
         group = invitation.group
       end
-      group.join_group(current_user, "member")
-      flash[:notice] = "Group joined!"
-      redirect_to :action => "show", :id => group.id and return
+      group.join_group(current_user, 'member')
+      flash[:notice] = 'Group joined!'
+      redirect_to(action: 'show', id: group.id) && return
     rescue InvitationAlreadyUsed
-      flash[:error] = "The provided invitation code has already been used."
-      redirect_to :action => "join" and return
+      flash[:error] = 'The provided invitation code has already been used.'
+      redirect_to(action: 'join') && return
     end
   end
 
   def leave
     @group = Group.find_by_id(params[:id]) || not_found
-    if @group.is_admin(current_user)
-      flash[:error] = "Administrator cannot leave group."
-      redirect_to :action => "show", :id => @group.id and return
+    if @group.admin?(current_user)
+      flash[:error] = 'Administrator cannot leave group.'
+      redirect_to(action: 'show', id: @group.id) && return
     end
   end
 
@@ -176,9 +153,9 @@ class GroupsController < ApplicationController
       user = current_user
     end
     group = Group.find_by_id(params[:id]) || not_found
-    if user != current_user && !group.is_admin(current_user)
-      flash[:error] = "You do not have permission to remove other users."
-      redirect_to :action => "show", :id => group.id and return
+    if user != current_user && !group.admin?(current_user)
+      flash[:error] = 'You do not have permission to remove other users.'
+      redirect_to(action: 'show', id: group.id) && return
     end
     group.leave_group(user)
     if user == current_user
@@ -186,10 +163,10 @@ class GroupsController < ApplicationController
     else
       flash[:notice] = "#{user.display_name} has been removed"
     end
-    if group.is_admin(current_user)
-      redirect_to :action => "edit", :id => group.id and return
+    if group.admin?(current_user)
+      redirect_to(action: 'edit', id: group.id) && return
     else
-      redirect_to :controller => "groups", :action => "index" and return
+      redirect_to(controller: 'groups', action: 'index') && return
     end
   end
 
@@ -200,34 +177,32 @@ class GroupsController < ApplicationController
 
   def do_invite
     group = Group.find(params[:id]) || not_found
-    group_invitation = GroupInvitation.new({
+    group_invitation = GroupInvitation.new(
       group_id: group.id,
       user_id: current_user.id,
       email: params[:group_invitation][:email]
-    })
+    )
     flash.keep
     if group_invitation.save!
       GroupNotifier.create_invite(
         group_invitation,
         params[:group_invitation][:message]
       ).deliver
-      flash[:notice] = "Group invitation sent!"
+      flash[:notice] = 'Group invitation sent!'
     else
-      flash[:error] = "Unable to send group invitation."
+      flash[:error] = 'Unable to send group invitation.'
     end
-    redirect_to :action => "show", :id => group.id and return
+    redirect_to(action: 'show', id: group.id) && return
   end
 
   def do_reset_invite
     group = Group.find(params[:id]) || not_found
-    if !group.is_admin(current_user)
-      raise "AccessDenied"
-    end
-    group.invitation_code = nil;
+    fail 'AccessDenied' unless group.admin?(current_user)
+    group.invitation_code = nil
     group.save!
     flash.keep
-    flash[:notice] = "Invitation code reset!"
-    redirect_to :action => "edit", :id => group.id and return
+    flash[:notice] = 'Invitation code reset!'
+    redirect_to(action: 'edit', id: group.id) && return
   end
 
   def message
@@ -239,8 +214,8 @@ class GroupsController < ApplicationController
     group = Group.find(params[:id]) || not_found
     flash.keep
     if params[:message][:recipients].nil?
-      flash[:error] = "You must select at least one recipient."
-      redirect_to :action => "message", :id => group.id and return
+      flash[:error] = 'You must select at least one recipient.'
+      redirect_to(action: 'message', id: group.id) && return
     end
     subject = params[:message][:subject]
     message = params[:message][:message]
@@ -250,11 +225,11 @@ class GroupsController < ApplicationController
     ).deliver
     flash.keep
     if email
-      flash[:notice] = "Message sent!"
-      redirect_to :action => "show", :id => group.id and return
+      flash[:notice] = 'Message sent!'
+      redirect_to(action: 'show', id: group.id) && return
     else
-      flash[:error] = "Message delivery failed."
-      redirect_to :action => "message", :id => group.id and return
+      flash[:error] = 'Message delivery failed.'
+      redirect_to(action: 'message', id: group.id) && return
     end
   end
 
@@ -265,5 +240,4 @@ class GroupsController < ApplicationController
       :group_name, :entity_id, :form_type, :avatar, :remove_avatar
     )
   end
-
 end

@@ -1,5 +1,5 @@
 ActiveAdmin.register UserAlias do
-  
-  menu :parent => 'Users'
+
+  menu parent: 'Users'
 
 end

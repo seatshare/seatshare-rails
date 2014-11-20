@@ -4,6 +4,7 @@ AllCops:
     - '**/config.ru'
   Exclude:
     - '.bundle/**/*'
+    - 'app/admin/**/*'
     - 'bin/**/*'
     - 'config/**/*'
     - 'config/**/*'

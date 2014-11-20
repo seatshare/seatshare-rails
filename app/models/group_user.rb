@@ -2,10 +2,10 @@ class GroupUser < ActiveRecord::Base
   belongs_to :group
   belongs_to :user
 
-  def initialize(attributes={})
+  def initialize(attributes = {})
     attr_with_defaults = {
-      :daily_reminder => 1,
-      :weekly_reminder => 1
+      daily_reminder: 1,
+      weekly_reminder: 1
     }.merge(attributes)
     super(attr_with_defaults)
   end
@@ -13,5 +13,4 @@ class GroupUser < ActiveRecord::Base
   def display_name
     "#{user} - #{group}"
   end
-
 end
