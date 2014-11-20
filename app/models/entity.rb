@@ -3,18 +3,18 @@ class Entity < ActiveRecord::Base
   has_many :groups
   has_many :events
 
-  validates :entity_name, :presence => true
+  validates :entity_name, presence: true
   validates_uniqueness_of :entity_name, scope: :entity_type
   before_save :clean_import_key
 
-  scope :order_by_name, -> { order('LOWER(entity_type) ASC, LOWER(entity_name) ASC') }
+  scope :order_by_name, -> { order_by_name }
   scope :active, -> { where('status = 1') }
   scope :is_soda, -> { where("import_key LIKE 'l.%'") }
 
-  def initialize(attributes={})
+  def initialize(attributes = {})
     attr_with_defaults = {
-      :status => 0,
-      :import_key => generate_import_key(attributes)
+      status: 0,
+      import_key: generate_import_key(attributes)
     }.merge(attributes)
     super(attr_with_defaults)
   end
@@ -25,13 +25,13 @@ class Entity < ActiveRecord::Base
 
   def retrive_schedule
     importer = SodaScheduleImport.new
-    importer.run({
+    importer.run(
       team_id: import_key,
       start_datetime: DateTime.now.beginning_of_day - 30.days,
       end_datetime: DateTime.now.end_of_day,
       force_update: false
-    })
-    return importer
+    )
+    importer
   end
 
   private
@@ -41,9 +41,10 @@ class Entity < ActiveRecord::Base
   end
 
   def clean_import_key
-    if self.import_key.blank?
-      self.import_key = generate_import_key(self)
-    end
+    self.import_key = generate_import_key(self) if import_key.blank?
   end
 
+  def self.order_by_name
+    order('LOWER(entity_type) ASC, LOWER(entity_name) ASC')
+  end
 end

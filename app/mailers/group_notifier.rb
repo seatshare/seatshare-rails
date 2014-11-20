@@ -1,15 +1,18 @@
 class GroupNotifier < ActionMailer::Base
-  default from: "no-reply@myseatshare.com"
+  default from: 'no-reply@myseatshare.com'
   layout 'email'
 
-  def create_invite(invite, message=nil)
+  def create_invite(invite, message = nil)
     @invite = invite
     @recipient = invite.email
     @user = invite.user
     @group = invite.group
     @personalized = message
     @view_action = {
-      url: url_for(:controller => 'registrations', :action => 'new', :invite_code => @invite.invitation_code, :only_path => false),
+      url: url_for(
+        controller: 'registrations', action: 'new',
+        invite_code: @invite.invitation_code, only_path: false
+      ),
       action: 'Accept Invitation',
       description: 'You have received an invitation.'
     }
@@ -23,11 +26,9 @@ class GroupNotifier < ActionMailer::Base
     headers['X-MC-Tags'] = 'InviteUser'
     headers['X-MC-Subaccount'] = 'SeatShare'
     headers['X-MC-SigningDomain'] = 'myseatshare.com'
-
   end
 
-  def send_group_message(group, sender, recipients, subject=nil, message=nil)
-
+  def send_group_message(group, sender, recipients, subject, message)
     if group.blank? || sender.blank? || recipients.blank? || message.blank?
       return false
     end
@@ -45,13 +46,13 @@ class GroupNotifier < ActionMailer::Base
     @message = message
 
     @view_action = {
-      url: url_for(:controller => 'groups', :id => @group.id, :only_path => false),
+      url: url_for(controller: 'groups', id: @group.id, only_path: false),
       action: 'View Group',
       description: 'You have received a message.'
     }
 
     @email_recipients = []
-    for recipient in recipients
+    recipients.each do |recipient|
       @email_recipients << "#{recipient.display_name} <#{recipient.email}>"
     end
 
@@ -64,7 +65,5 @@ class GroupNotifier < ActionMailer::Base
     headers['X-MC-Tags'] = 'GroupMessage'
     headers['X-MC-Subaccount'] = 'SeatShare'
     headers['X-MC-SigningDomain'] = 'myseatshare.com'
-
   end
-
 end

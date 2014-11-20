@@ -11,7 +11,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="pull-right">
-					<% if group.is_admin(current_user) %>
+					<% if group.admin?(current_user) %>
 					<%= link_to raw('<span class="label label-primary">Administrator</span>'), :action => 'edit', :id => group.id %>
 					<% else %>
 					<%= link_to raw('<span class="label label-default">Member</span>'), :action => 'edit', :id => group.id %>
@@ -29,7 +29,7 @@
 				<hr />
 				<ul class="list-inline text-center">
 					<li><%= link_to 'Switch to Group', {:action => 'show', :id => group.id }, :class => 'btn btn-default' %></li>
-					<% if !group.is_admin(current_user) %>
+					<% if !group.admin?(current_user) %>
 					<li><%= link_to 'Leave Group', {:action => 'leave', :id => group.id }, :class => 'btn btn-default' %></li>
 					<% end %>
 				</ul>

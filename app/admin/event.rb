@@ -21,12 +21,12 @@ ActiveAdmin.register Event do
   filter :start_time
   filter :import_key
 
-  action_item :only => :index do
-    link_to 'Import from SODA', :action => 'import_soda'
+  action_item only: :index do
+    link_to 'Import from SODA', action: 'import_soda'
   end
 
-  collection_action :import_soda, :method => :get
-  collection_action :import_soda, :method => :post do
+  collection_action :import_soda, method: :get
+  collection_action :import_soda, method: :post do
 
     @page_title = 'Import from SODA'
 
@@ -39,11 +39,11 @@ ActiveAdmin.register Event do
       @entities[entity_type] << entity
     end
 
-    @start_datetime = params[:start_datetime] || Time.new - 60*60*24*30
+    @start_datetime = params[:start_datetime] || Time.new - 60 * 60 * 24 * 30
     @end_datetime = params[:end_datetime] || Time.new
     @force_update = params[:force_update] || false
 
-    if !params[:team_id].nil?
+    unless params[:team_id].nil?
 
       # Used to display the list back upon completion
       @events_list = []
@@ -55,12 +55,12 @@ ActiveAdmin.register Event do
       for team_id in params[:team_id]
 
         importer = SodaScheduleImport.new
-        importer.run({
+        importer.run(
           team_id: team_id,
           start_datetime: params[:start_datetime],
           end_datetime: params[:end_datetime],
           force_update: params[:force_update]
-        })
+        )
 
         @events_list += importer.events_list
         @messages += importer.messages
@@ -71,7 +71,7 @@ ActiveAdmin.register Event do
 
   end
 
-  sidebar 'Tickets', :only => :show do
+  sidebar 'Tickets', only: :show do
     ul do
       Event.find(resource.id).tickets.collect do |ticket|
         li auto_link(ticket)

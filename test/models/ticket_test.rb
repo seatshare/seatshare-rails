@@ -1,18 +1,17 @@
 require 'test_helper'
 
 class TicketTest < ActiveSupport::TestCase
-
-  test "new ticket has attributes" do
-    ticket = Ticket.new({
-      :group_id => 1,
-      :event_id => 4,
-      :section => '301',
-      :row => 'Q',
-      :seat => '3',
-      :cost => 45.00,
-      :owner_id => 1,
-      :user_id => 2
-    })
+  test 'new ticket has attributes' do
+    ticket = Ticket.new(
+      group_id: 1,
+      event_id: 4,
+      section: '301',
+      row: 'Q',
+      seat: '3',
+      cost: 45.00,
+      owner_id: 1,
+      user_id: 2
+    )
     ticket.save!
 
     assert ticket.cost === 45.00
@@ -23,13 +22,13 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket.event.event_name === 'Nashville Predators vs. St. Louis Blues'
   end
 
-  test "owner property is set" do
+  test 'owner property is set' do
     ticket = Ticket.find(1)
 
     assert ticket.owner.display_name === 'Jim Stone'
   end
 
-  test "assigned property is set" do
+  test 'assigned property is set' do
     ticket = Ticket.find(1)
 
     assert ticket.assigned.display_name === 'Jim Stone'
@@ -39,7 +38,7 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket.assigned.nil? === true
   end
 
-  test "alias property is set" do
+  test 'alias property is set' do
     ticket = Ticket.find(4)
 
     assert ticket.alias.display_name === 'Jennifer Newton'
@@ -49,13 +48,13 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket.alias.nil? === true
   end
 
-  test "group property is set" do
+  test 'group property is set' do
     ticket = Ticket.find(1)
 
     assert ticket.group.group_name === 'Geeks Watching Hockey'
   end
 
-  test "display_name property is set" do
+  test 'display_name property is set' do
     ticket = Ticket.find(1)
 
     assert ticket.display_name === '326 K 9'
@@ -65,24 +64,23 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket.display_name === 'VIP'
   end
 
-  test "is_available? check" do
+  test 'available? check' do
     ticket = Ticket.find(1)
 
-    assert ticket.is_available? === false
+    assert ticket.available? === false
 
     ticket = Ticket.find(2)
 
-    assert ticket.is_available? === true
+    assert ticket.available? === true
   end
 
-  test "is_assigned? check" do
+  test 'assigned? check' do
     ticket = Ticket.find(1)
 
-    assert ticket.is_assigned? === true
+    assert ticket.assigned? === true
 
     ticket = Ticket.find(2)
 
-    assert ticket.is_assigned? === false
+    assert ticket.assigned? === false
   end
-
 end

@@ -1,13 +1,13 @@
 require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
-  test "new event has attributes" do
-    event = Event.new({
+  test 'new event has attributes' do
+    event = Event.new(
       event_name: 'A New Event',
       description: 'This describes the event',
       entity_id: 1,
       start_time: '2013-01-01 18:00:00 CST'
-    })
+    )
     event.save!
 
     assert event.id > 0, 'new event ID is set'
@@ -18,12 +18,12 @@ class EventTest < ActiveSupport::TestCase
     assert event.date_tba? === false, 'new event date is not TBA'
     assert event.time_tba? === false, 'new event time is not TBA'
     fails_intermittently('https://github.com/seatshare/seatshare-rails/issues/109',
-      'Rails.configuration.time_zone' => Rails.configuration.time_zone, 'Time.zone.name' => Time.zone.name) do
+                         'Rails.configuration.time_zone' => Rails.configuration.time_zone, 'Time.zone.name' => Time.zone.name) do
       assert event.date_time === 'Tuesday, January 1, 2013 - 6:00 pm CST', 'new event date/time string matches'
     end
   end
 
-  test "fixture event has attributes" do
+  test 'fixture event has attributes' do
     event = Event.find(1)
 
     assert event.event_name === 'Belmont Bruins vs. Brescia', 'fixture event name matches'
@@ -35,15 +35,15 @@ class EventTest < ActiveSupport::TestCase
     assert event.date_time === 'Tuesday, November 26, 2013', 'new event date/time string matches'
   end
 
-  test "get events by group ID" do
+  test 'get events by group ID' do
     events = Group.find(1).events.order('start_time ASC')
 
     assert events[0].class.to_s === 'Event', 'returned item is an event'
-    assert events[0].event_name === "Nashville Predators vs. Minnesota Wild", 'event title matches'
+    assert events[0].event_name === 'Nashville Predators vs. Minnesota Wild', 'event title matches'
     assert events.count === 7, 'event count equals seven'
   end
 
-  test "get event by ticket ID" do
+  test 'get event by ticket ID' do
     event = Ticket.find(2).event
 
     assert event.id === 4, 'event ID matches'
@@ -51,7 +51,7 @@ class EventTest < ActiveSupport::TestCase
     assert event.event_name === 'Nashville Predators vs. St. Louis Blues', 'event name matches'
   end
 
-  test "get ticket status counts" do
+  test 'get ticket status counts' do
     event = Event.find(4)
     user = User.find(1)
     group = Group.find(1)
@@ -65,26 +65,26 @@ class EventTest < ActiveSupport::TestCase
     assert stats[:percent_full] === 75
   end
 
-  test "two created events do not share an import key" do
-    event1 = Event.create({
+  test 'two created events do not share an import key' do
+    event1 = Event.create(
         event_name: 'Event 1',
         entity_id: 1,
         start_time: '2014-01-01 12:00',
         import_key: ''
-    })
-    event2 = Event.create({
+    )
+    event2 = Event.create(
         event_name: 'Event 2',
         entity_id: 1,
         start_time: '2014-01-01 12:00',
         import_key: ''
-    })
+    )
 
     assert event1[:event_name] === 'Event 1'
     assert event2[:event_name] === 'Event 2'
 
   end
 
-  test "imported row matches output" do
+  test 'imported row matches output' do
     row1 = {
       entity_id: 1,
       home_team: 'Nashville Predators',

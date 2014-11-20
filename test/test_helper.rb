@@ -1,14 +1,14 @@
 $LOAD_PATH << 'test'
 require 'rubygems'
 require 'spork'
-#uncomment the following line to use spork with the debugger
-#require 'spork/ext/ruby-debug'
+# uncomment the following line to use spork with the debugger
+# require 'spork/ext/ruby-debug'
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
-  ENV["RAILS_ENV"] ||= "test"
+  ENV['RAILS_ENV'] ||= 'test'
 
   require 'rails/application'
   Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
@@ -89,15 +89,15 @@ end
 # Re-raises any MiniTest::Assertion from a failing test assertion in the block.
 #
 # Returns the value of the yielded block when no test assertion fails.
-def fails_intermittently(issue_link, args = {}, &block)
-  raise ArgumentError, "provide a GitHub issue link" unless issue_link
-  raise ArgumentError, "a block is required" unless block_given?
+def fails_intermittently(issue_link, args = {}, &_block)
+  fail ArgumentError, 'provide a GitHub issue link' unless issue_link
+  fail ArgumentError, 'a block is required' unless block_given?
   yield
 rescue MiniTest::Assertion, StandardError => boom # we have a test failure!
   STDERR.puts "\n\nIntermittent test failure! See: #{issue_link}"
 
   if args.empty?
-    STDERR.puts "No further debugging information available."
+    STDERR.puts 'No further debugging information available.'
   else
     STDERR.puts "Debugging information:\n"
     args.keys.sort.each do |key|

@@ -1,21 +1,16 @@
 class ProfilesController < ApplicationController
-
   before_action :authenticate_user!
   layout 'two-column'
 
   def show
     @user = User.find_by_id(params[:id]) || not_found
-    if @user.profile.nil?
-      @user.profile = Profile.new
-    end
+    @user.profile = Profile.new if @user.profile.nil?
   end
 
   def edit
     @user = current_user
-    if @user.profile.nil?
-      @user.profile = Profile.new
-    end
-    @user_aliases = current_user.user_aliases
+    @user.profile = Profile.new if @user.profile.nil?
+    @user_aliases = current_user.user_aliases.order_by_name
   end
 
   def update
@@ -23,8 +18,8 @@ class ProfilesController < ApplicationController
     user.update_attributes!(user_params)
 
     flash.keep
-    flash[:notice] = "Profile updated!"
-    redirect_to :action => 'show', :id => @current_user.id and return
+    flash[:notice] = 'Profile updated!'
+    redirect_to(action: 'show', id: @current_user.id) && return
   end
 
   private
@@ -35,5 +30,4 @@ class ProfilesController < ApplicationController
       profile_attributes: [:bio, :location, :mobile, :sms_notify]
     )
   end
-
 end

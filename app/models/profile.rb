@@ -4,5 +4,4 @@ class Profile < ActiveRecord::Base
   def mobile_e164
     GlobalPhone.normalize(mobile)
   end
-
 end

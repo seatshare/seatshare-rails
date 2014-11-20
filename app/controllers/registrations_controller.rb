@@ -1,12 +1,12 @@
 class RegistrationsController < Devise::RegistrationsController
   def new
     @user = User.new
-    if (params[:invite_code])
+    if params[:invite_code]
       @invite = GroupInvitation.find_by_invitation_code(params[:invite_code])
     else
       @invite = nil
     end
-    if (params[:entity_id])
+    if params[:entity_id]
       @entity = Entity.find_by_id(params[:entity_id])
     else
       @entity = nil
@@ -23,15 +23,24 @@ class RegistrationsController < Devise::RegistrationsController
       WelcomeEmail.welcome(resource).deliver
 
       # Newsletter signup
-      if params[:newsletter_signup] === '1' && !ENV['MAILCHIMP_LIST_ID'].nil?
+      if params[:newsletter_signup] == '1' && !ENV['MAILCHIMP_LIST_ID'].nil?
         begin
           require 'mailchimp'
           mailchimp = Mailchimp::API.new(ENV['MAILCHIMP_API_KEY'])
           merge_vars = {
-              'FNAME' => sign_up_params[:first_name],
-              'LNAME' => sign_up_params[:last_name]
+            'FNAME' => sign_up_params[:first_name],
+            'LNAME' => sign_up_params[:last_name]
           }
-          mailchimp.lists.subscribe ENV['MAILCHIMP_LIST_ID'], { 'email' => sign_up_params[:email] }, merge_vars, 'html', false, true, false, false
+          mailchimp.lists.subscribe(
+            ENV['MAILCHIMP_LIST_ID'],
+            { 'email' => sign_up_params[:email] },
+            merge_vars,
+            'html',
+            false,
+            true,
+            false,
+            false
+          )
         rescue Mailchimp::Error => e
           puts e.message
           puts e.backtrace.inspect
@@ -46,16 +55,29 @@ class RegistrationsController < Devise::RegistrationsController
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         if params[:user][:invite_code]
-          respond_with resource, location: groups_join_path + "?invite_code=" + params[:user][:invite_code]
+          invite_code = params[:user][:invite_code]
+          respond_with(
+            resource,
+            location: groups_join_path + '?invite_code=' + invite_code
+          )
         elsif params[:user][:entity_id]
-          respond_with resource, location: groups_new_path + "?entity_id=" + params[:user][:entity_id]
+          entity_id = params[:user][:entity_id]
+          respond_with(
+            resource,
+            location: groups_new_path + '?entity_id=' + entity_id
+          )
         else
           respond_with resource, location: after_sign_up_path_for(resource)
         end
       else
-        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+        set_flash_message(
+          :notice, :"signed_up_but_#{resource.inactive_message}"
+        ) if is_flashing_format?
         expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        respond_with(
+          resource,
+          location: after_inactive_sign_up_path_for(resource)
+        )
       end
     else
       flash[:alert] = 'There were errors with your registration.'
@@ -67,4 +89,4 @@ class RegistrationsController < Devise::RegistrationsController
   def update
     super
   end
-end 
+end

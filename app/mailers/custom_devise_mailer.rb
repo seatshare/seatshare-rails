@@ -1,12 +1,11 @@
 class CustomDeviseMailer < Devise::Mailer
-  default from: "no-reply@myseatshare.com"
+  default from: 'no-reply@myseatshare.com'
   layout 'email'
 
-  helper :application # gives access to all helpers defined within `application_helper`.
-  include Devise::Controllers::UrlHelpers # Optional. eg. `confirmation_url`
+  helper :application
+  include Devise::Controllers::UrlHelpers
 
-  def confirmation_instructions(record, token, opts={})
-
+  def confirmation_instructions(record, token, opts = {})
     @view_action = {
       url: url_for(confirmation_url(record, confirmation_token: @token)),
       action: 'Confirm Account',
@@ -19,8 +18,7 @@ class CustomDeviseMailer < Devise::Mailer
     super
   end
 
-  def reset_password_instructions(record, token, opts={})
-
+  def reset_password_instructions(record, token, opts = {})
     @view_action = {
       url: url_for(edit_password_url(record, reset_password_token: @token)),
       action: 'Reset Password',
@@ -33,8 +31,7 @@ class CustomDeviseMailer < Devise::Mailer
     super
   end
 
-  def unlock_instructions(record, token, opts={})
-
+  def unlock_instructions(record, token, opts = {})
     @view_action = {
       url: url_for(unlock_url(record, unlock_token: @token)),
       action: 'Unlock Account',
@@ -46,5 +43,4 @@ class CustomDeviseMailer < Devise::Mailer
     headers['X-MC-SigningDomain'] = 'myseatshare.com'
     super
   end
-
 end

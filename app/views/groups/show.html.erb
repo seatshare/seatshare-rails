@@ -47,7 +47,7 @@
     <table class="table">
       <tbody>
         <% for ticket in tickets %>
-        <% next if ticket.is_assigned? %>
+        <% next if ticket.assigned? %>
         <tr>
           <td>
             <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
@@ -104,7 +104,7 @@
       <table class="table">
         <tbody>
           <% for ticket in tickets %>
-          <% next if ticket.is_assigned? %>
+          <% next if ticket.assigned? %>
           <tr>
             <td>
               <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => event.id, :id => ticket.id %>
