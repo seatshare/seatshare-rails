@@ -120,4 +120,5 @@ group :development do
   gem 'rack-livereload'
   gem 'guard-livereload'
   gem 'guard-bundler', :group => :development
+  gem 'guard-rubocop'
 end
