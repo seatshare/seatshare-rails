@@ -1,0 +1,17 @@
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - '.bundle/**/*'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'log/**/*'
+    - 'public/**/*'
+    - 'test/**/*'
+    - 'vendor/**/*'
+
+Documentation:
+  Enabled: false
