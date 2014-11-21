@@ -29,14 +29,22 @@ class PublicControllerTest < ActionController::TestCase
   test 'gets terms of service page' do
     get :tos
     assert_response :success, 'loaded page with a 200'
-    assert_select 'title', 'Terms of Service - SeatShare', 'title matches expected'
+    assert_select(
+      'title',
+      'Terms of Service - SeatShare',
+      'title matches expected'
+    )
     assert_select 'h1', 'Terms of Service', 'page heading matches'
   end
 
   test 'gets privacy policy page' do
     get :privacy
     assert_response :success, 'loaded page with a 200'
-    assert_select 'title', 'Privacy Policy - SeatShare', 'title matches expected'
+    assert_select(
+      'title',
+      'Privacy Policy - SeatShare',
+      'title matches expected'
+    )
     assert_select 'h1', 'Privacy Policy', 'page heading matches'
   end
 
@@ -50,7 +58,11 @@ class PublicControllerTest < ActionController::TestCase
   test 'gets teams page' do
     get :teams
     assert_response :success, 'loaded page with a 200'
-    assert_select 'title', 'Manage Season Tickets for Your Favorite Team - SeatShare', 'title matches expected'
+    assert_select(
+      'title',
+      'Manage Season Tickets for Your Favorite Team - SeatShare',
+      'title matches expected'
+    )
     assert_select 'h1', 'Take home field advantage', 'page heading matches'
   end
 end

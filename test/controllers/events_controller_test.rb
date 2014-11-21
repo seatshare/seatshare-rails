@@ -26,7 +26,10 @@ class EventsControllerTest < ActionController::TestCase
     get :show, id: 4, group_id: 1
 
     assert_response :success, 'received a 200 status'
-    assert_select 'div.panel-heading', 'Saturday, October 26, 2013 - 3:00 pm EDT'
+    assert_select(
+      'div.panel-heading',
+      'Saturday, October 26, 2013 - 3:00 pm EDT'
+    )
   end
 
   test 'should get the correct ticket counts' do

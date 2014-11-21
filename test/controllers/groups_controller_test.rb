@@ -25,8 +25,16 @@ class GroupsControllerTest < ActionController::TestCase
     get :new
     assert_response :success, 'got a 200 status'
     assert_select 'title', 'Create a Group', 'page title matches'
-    assert_select "form input[name='group[group_name]']", 1, 'group name field exists'
-    assert_select "form select[name='group[entity_id]'] option", 6, 'select on page has six items'
+    assert_select(
+      "form input[name='group[group_name]']",
+      1,
+      'group name field exists'
+    )
+    assert_select(
+      "form select[name='group[entity_id]'] option",
+      6,
+      'select on page has six items'
+    )
   end
 
   test 'should see join page' do
@@ -45,7 +53,10 @@ class GroupsControllerTest < ActionController::TestCase
     get :join, invite_code: 'ABC123'
     assert_response :success, 'got a 200 status'
     assert_select 'title', 'Join a Group', 'page title matches'
-    assert_tag tag: 'input', attributes: { id: 'group_invitation_code', value: 'ABC123' }
+    assert_tag(
+      tag: 'input',
+      attributes: { id: 'group_invitation_code', value: 'ABC123' }
+    )
   end
 
   test 'should see invite page' do
@@ -145,7 +156,10 @@ class GroupsControllerTest < ActionController::TestCase
 
     post :do_leave, user_id: @removed, id: @group.id
     assert_response :redirect, 'got a 304 status'
-    assert_equal flash[:error], 'You do not have permission to remove other users.'
+    assert_equal(
+      flash[:error],
+      'You do not have permission to remove other users.'
+    )
   end
 
   test 'should see group message window' do

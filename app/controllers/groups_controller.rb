@@ -8,11 +8,13 @@ class GroupsController < ApplicationController
   end
 
   def new
+    active_entities = Entity.order_by_name.active
     @entity = Entity.find_by_id(params[:entity_id])
-    @entities = Entity.order_by_name.active.inject({}) do |options, entity|
+    options = {}
+    active_entities.each_with_object({}) do |entity|
       (options[entity.entity_type] ||= []) << [entity.entity_name, entity.id]
-      options
     end
+    @entities = options
     @group = Group.new
   end
 
@@ -139,10 +141,9 @@ class GroupsController < ApplicationController
 
   def leave
     @group = Group.find_by_id(params[:id]) || not_found
-    if @group.admin?(current_user)
-      flash[:error] = 'Administrator cannot leave group.'
-      redirect_to(action: 'show', id: @group.id) && return
-    end
+    redirect_to(
+      action: 'show', id: @group.id
+    ) && return if @group.admin?(current_user)
   end
 
   def do_leave
