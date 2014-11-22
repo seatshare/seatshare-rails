@@ -42,8 +42,15 @@ class CustomDeviseMailerTest < ActionMailer::TestCase
   end
 
   test 'body should have link to confirm the account' do
-    if mail.body.encoded =~ %r{<a href=\"http://localhost:3000/password/edit\?reset_password_token=([^"]+)">}
-      assert_equal Devise.token_generator.digest(user.class, :reset_password_token, Regexp.last_match[1]), user.reset_password_token
+    if mail.body.encoded =~ %r{/password/edit\?reset_password_token=([^"]+)">}
+      assert_equal(
+        Devise.token_generator.digest(
+          user.class,
+          :reset_password_token,
+          Regexp.last_match[1]
+        ),
+        user.reset_password_token
+      )
     else
       flunk 'expected reset password url regex to match'
     end

@@ -15,7 +15,10 @@ class TicketsControllerTest < ActionController::TestCase
     get :edit, group_id: 1, event_id: 1, id: 2
 
     assert_response :success, 'received 200 status'
-    assert_select 'title', 'Belmont Bruins vs. Brescia - 326 K 10', 'ticket edit title matches'
+    assert_select(
+      'title',
+      'Belmont Bruins vs. Brescia - 326 K 10', 'ticket edit title matches'
+    )
   end
 
   test 'should unassign ticket' do
@@ -54,7 +57,10 @@ class TicketsControllerTest < ActionController::TestCase
     get :request_ticket, group_id: 1, event_id: 1, id: 2
 
     assert_response :success, 'received 200 status'
-    assert_select 'title', 'Belmont Bruins vs. Brescia - 326 K 10', 'ticket request title matches'
+    assert_select(
+      'title',
+      'Belmont Bruins vs. Brescia - 326 K 10', 'ticket request title matches'
+    )
   end
 
   test 'should get future tickets' do

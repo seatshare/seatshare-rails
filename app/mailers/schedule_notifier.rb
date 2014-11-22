@@ -58,7 +58,7 @@ class ScheduleNotifier < ActionMailer::Base
 
   def events_day_of_week(events)
     events_day_of_week = []
-    for day_of_week, index in Date::DAYNAMES.each_with_index.to_a.rotate(1)
+    Date::DAYNAMES.each_with_index.to_a.rotate(1).each do |_, index|
       events_day_of_week[index] = []
       events.each do |event|
         next if event.start_time.wday != index

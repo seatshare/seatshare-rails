@@ -80,7 +80,8 @@ class TicketsController < ApplicationController
       user_id: ticket_params[:user_id].to_i,
       owner_id: current_user.id
     )
-    if !ticket_params[:alias_id].nil? && ticket_params[:user_id].to_i == current_user.id
+    if !ticket_params[:alias_id].nil? &&
+       ticket_params[:user_id].to_i == current_user.id
       ticket.alias_id = ticket_params[:alias_id].to_i
     else
       ticket.alias_id = 0
@@ -150,7 +151,8 @@ class TicketsController < ApplicationController
     ticket.cost = ticket_params[:cost].gsub(/[^0-9\.]/, '').to_f
     ticket.user_id = ticket_params[:user_id].to_i
     ticket.note = ticket_params[:note]
-    if !ticket_params[:alias_id].nil? && ticket_params[:user_id].to_i == current_user.id
+    if !ticket_params[:alias_id].nil? &&
+       ticket_params[:user_id].to_i == current_user.id
       ticket.alias_id = ticket_params[:alias_id].to_i
     else
       ticket.alias_id = 0
@@ -167,7 +169,8 @@ class TicketsController < ApplicationController
       )
       path = Rails.root.join('tmp', 'uploads', uploaded_io.original_filename)
       File.open(path, 'rb') do |file|
-        file_s3_key = "#{params[:id]}-#{SecureRandom.hex}/#{uploaded_io.original_filename}"
+        hex = SecureRandom.hex
+        file_s3_key = "#{params[:id]}-#{hex}/#{uploaded_io.original_filename}"
         s3 = AWS::S3.new
         object = s3.buckets[ENV['SEATSHARE_S3_BUCKET']].objects[file_s3_key]
         object.write(open(file))
@@ -183,7 +186,9 @@ class TicketsController < ApplicationController
     flash.keep
     if ticket.save
       flash[:notice] = 'Ticket updated!'
-      if ticket.user_id != current_user.id && ticket.user_id != 0 && original_ticket.user_id != ticket.user_id
+      if ticket.user_id != current_user.id &&
+         ticket.user_id != 0 &&
+         original_ticket.user_id != ticket.user_id
         fail 'NotGroupMember' unless group.member?(ticket.assigned)
         TicketNotifier.assign(ticket, current_user).deliver
         TwilioSMS.new.assign_ticket(ticket, current_user)
@@ -228,7 +233,9 @@ class TicketsController < ApplicationController
     group = Group.find_by_id(params[:group_id]) || not_found
     event = Event.find_by_id(params[:event_id]) || not_found
     ticket = Ticket.find_by_id(params[:id]) || not_found
-    fail 'AccessDenied' if ticket.owner_id != current_user.id && !ticket.assigned.nil? && ticket.assigned.id != current_user.id
+    fail 'AccessDenied' if ticket.owner_id != current_user.id &&
+                           !ticket.assigned.nil? &&
+                           ticket.assigned.id != current_user.id
     ticket.user_id = 0
     ticket.save!
     log_ticket_history ticket, 'unassigned'

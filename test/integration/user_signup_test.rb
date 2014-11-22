@@ -5,7 +5,16 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     get '/register'
     assert_response :success
 
-    post_via_redirect '/', user: { first_name: 'New', last_name: 'User', email: 'newuser@example.com', password: 'testing123', password_confirm: 'testing123' }
+    post_via_redirect(
+      '/',
+      user: {
+        first_name: 'New',
+        last_name: 'User',
+        email: 'newuser@example.com',
+        password: 'testing123',
+        password_confirm: 'testing123'
+      }
+    )
 
     assert_response :success
     assert_equal nil, flash[:alert]
@@ -17,7 +26,16 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     get '/register'
     assert_response :success
 
-    post_via_redirect '/', user: { first_name: 'New', last_name: 'User', email: 'stonej@example.net', password: 'testing123', password_confirm: 'testing123' }
+    post_via_redirect(
+      '/',
+      user: {
+        first_name: 'New',
+        last_name: 'User',
+        email: 'stonej@example.net',
+        password: 'testing123',
+        password_confirm: 'testing123'
+      }
+    )
 
     assert_response :success
     assert_equal 'There were errors with your registration.', flash[:alert]
@@ -29,7 +47,17 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'h4', "You've been invited join a group!"
 
-    post_via_redirect '/', user: { first_name: 'New', last_name: 'User', email: 'newuser@example.com', password: 'testing123', password_confirm: 'testing123', invite_code: 'ABCDEFG123' }
+    post_via_redirect(
+      '/',
+      user: {
+        first_name: 'New',
+        last_name: 'User',
+        email: 'newuser@example.com',
+        password: 'testing123',
+        password_confirm: 'testing123',
+        invite_code: 'ABCDEFG123'
+      }
+    )
 
     assert_response :success
     assert_equal nil, flash[:alert]
@@ -42,7 +70,17 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'h4', 'Create a Nashville Predators group'
 
-    post_via_redirect '/', user: { first_name: 'New', last_name: 'User', email: 'newuser@example.com', password: 'testing123', password_confirm: 'testing123', entity_id: 1 }
+    post_via_redirect(
+      '/',
+      user: {
+        first_name: 'New',
+        last_name: 'User',
+        email: 'newuser@example.com',
+        password: 'testing123',
+        password_confirm: 'testing123',
+        entity_id: 1
+      }
+    )
 
     assert_response :success
     assert_equal nil, flash[:alert]
@@ -51,12 +89,18 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   end
 
   test 'add user alias' do
-    post_via_redirect '/login', user: { email: users(:jim).email, password: 'testing123' }
+    post_via_redirect(
+      '/login',
+      user: { email: users(:jim).email, password: 'testing123' }
+    )
 
     get '/profile/aliases/new'
     assert_response :success
 
-    post_via_redirect '/profile/aliases/new', user_alias: { first_name: 'New', last_name: 'Alias' }
+    post_via_redirect(
+      '/profile/aliases/new',
+      user_alias: { first_name: 'New', last_name: 'Alias' }
+    )
 
     assert_response :success
     assert_equal nil, flash[:alert]
@@ -65,7 +109,10 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   end
 
   test 'delete user alias' do
-    post_via_redirect '/login', user: { email: users(:jill).email, password: 'testing123' }
+    post_via_redirect(
+      '/login',
+      user: { email: users(:jill).email, password: 'testing123' }
+    )
 
     get '/profile'
     assert_response :success

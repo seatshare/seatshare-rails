@@ -20,9 +20,9 @@ class UserAliasesController < ApplicationController
 
   def edit
     @user_alias = UserAlias.find_by_id(params[:id]) || not_found
-    if @user_alias.user_id != current_user.id
-      redirect_to(controller: 'profiles', action: 'edit') && return
-    end
+    redirect_to(
+      controller: 'profiles', action: 'edit'
+    ) && return if @user_alias.user_id != current_user.id
   end
 
   def update
