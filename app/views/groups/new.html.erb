@@ -8,7 +8,7 @@
   <p class="lead">A ticket group exchanges tickets among its membership. You can assign tickets to other users, or request their available tickets.</p> 
 
   <div class="form-group">
-    <%= f.label 'Your team', :class => 'col-md-3 control-label'  %>
+    <%= f.label :entity, 'Your team', :class => 'col-md-3 control-label'  %>
     <div class="col-md-9">
       <% if @entity %>
       <p class="form-control-static"><%= @entity.display_name %></p>

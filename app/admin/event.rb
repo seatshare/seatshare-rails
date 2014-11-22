@@ -21,7 +21,7 @@ ActiveAdmin.register Event do
   filter :start_time
   filter :import_key
 
-  action_item only: :index do
+  action_item 'import', only: :index do
     link_to 'Import from SODA', action: 'import_soda'
   end
 
@@ -33,9 +33,7 @@ ActiveAdmin.register Event do
     # Build entity list
     @entities = {}
     Entity.active.is_soda.group_by(&:entity_type).each do |entity_type, entity|
-      if @entities[entity_type].nil?
-        @entities[entity_type] = []
-      end
+      @entities[entity_type] = [] if @entities[entity_type].nil?
       @entities[entity_type] << entity
     end
 
@@ -52,7 +50,7 @@ ActiveAdmin.register Event do
       @messages = []
 
       # Loop through team ids and run importer
-      for team_id in params[:team_id]
+      params[:team_id].each do |team_id|
 
         importer = SodaScheduleImport.new
         importer.run(
