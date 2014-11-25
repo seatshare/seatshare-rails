@@ -14,8 +14,8 @@ class TwilioSMS
     return false unless !profile.mobile.blank? && profile.sms_notify
     twilio_client.messages.create(
       from: ENV['TWILIO_OUTBOUND_NUMBER'], to: profile.mobile_e164,
-      body: "#{acting_user.first_name} has assigned you"\
-        "#{ticket.display_name} for #{ticket.event.display_name}. Log in to"\
+      body: "#{acting_user.first_name} has assigned you "\
+        "#{ticket.display_name} for #{ticket.event.display_name}. Log in to "\
         'https://myseatshare.com to view.'
     )
   rescue StandardError => e
@@ -27,8 +27,8 @@ class TwilioSMS
     return false unless !profile.mobile.blank? && profile.sms_notify
     twilio_client.messages.create(
       from: ENV['TWILIO_OUTBOUND_NUMBER'], to: profile.mobile_e164,
-      body: "#{acting_user.first_name} has requested #{ticket.display_name}"\
-        "for #{ticket.event.display_name}. Log in to"\
+      body: "#{acting_user.first_name} has requested #{ticket.display_name} "\
+        "for #{ticket.event.display_name}. Log in to "\
         'https://myseatshare.com to assign.'
     )
   rescue StandardError => e

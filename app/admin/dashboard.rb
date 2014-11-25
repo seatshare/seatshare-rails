@@ -9,13 +9,18 @@ ActiveAdmin.register_page 'Dashboard' do
       column do
 
         panel 'Recent Contact Messages' do
-
-          contact_form_messages = HTTParty.get("http://getsimpleform.com/messages.json?api_token=#{ENV['SIMPLE_FORM_API_TOKEN']}").first(5) || []
+          token = ENV['SIMPLE_FORM_API_TOKEN']
+          contact_form_messages = HTTParty.get(
+            "http://getsimpleform.com/messages.json?api_token=#{token}"
+          ).first(5) || []
 
           div do
             if !contact_form_messages.nil? && contact_form_messages.count > 0
-              for message in contact_form_messages
-                h4 mail_to(message['data']['email'], message['data']['name'] + ' - ' + message['data']['email'])
+              contact_form_messages.each do |message|
+                h4 mail_to(
+                  message['data']['email'],
+                  message['data']['name'] + ' - ' + message['data']['email']
+                )
                 div do
                   simple_format "#{message['data']['message']}"
                 end
@@ -23,12 +28,18 @@ ActiveAdmin.register_page 'Dashboard' do
                 hr
               end
             else
-              div 'No recent messages. Messages sent through the contact form appear here.'
+              div 'No recent messages. '\
+                'Messages sent through the contact form appear here.'
               hr
             end
           end
           div style: 'text-align: right' do
-            link_to('Manage Messages', "http://getsimpleform.com/messages?api_token=#{ENV['SIMPLE_FORM_API_TOKEN']}", target: '_blank')
+            token = ENV['SIMPLE_FORM_API_TOKEN']
+            link_to(
+              'Manage Messages',
+              "http://getsimpleform.com/messages?api_token=#{token}",
+              target: '_blank'
+            )
           end
         end
 
@@ -45,7 +56,8 @@ ActiveAdmin.register_page 'Dashboard' do
               usage.each do |record|
                 puts usage.inspect
                 row record.description do
-                  text_node "#{record.count} #{record.usage_unit} / #{record.price} #{record.price_unit.upcase}"
+                  text_node "#{record.count} #{record.usage_unit} "\
+                    "/ #{record.price} #{record.price_unit.upcase}"
                 end
               end
             end
@@ -58,10 +70,11 @@ ActiveAdmin.register_page 'Dashboard' do
                 usage
               end
             else
-              usage.each do |record|
-                row "To: #{record.to} ; From: #{record.from}".html_safe do
-                  text_node "#{record.body}"
-                end
+              usage[0, 5].each do |record|
+                row "To: #{record.to} ; From: #{record.from} ;"\
+                  " #{record.date_sent}".html_safe do
+                    text_node "#{record.body}"
+                  end
               end
             end
           end
@@ -142,7 +155,9 @@ ActiveAdmin.register_page 'Dashboard' do
               th 'Date & Time'
             end
             tbody do
-              Event.order_by_date.where("start_time > '#{Date.today}'").limit(5).map do |event|
+              Event.order_by_date.where(
+                "start_time > '#{Date.today}'"
+              ).limit(5).map do |event|
                 tr class: cycle('even', 'odd') do
                   td link_to(event.event_name, admin_event_path(event))
                   td auto_link(event.entity)
