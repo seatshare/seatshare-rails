@@ -1,7 +1,9 @@
+<% content_for :page_title do %>SeatShare :: Reset Your Password<% end %>
+
 <%= form_for(resource, html: {class: "form-signin", role: "form", method: :post}, as: resource_name, url: password_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <%= f.email_field :email, autofocus: true, :class => 'form-control', :placeholder => 'Email address' %>
+  <%= f.email_field :email, autofocus: true, :class => 'form-control input-lg', :placeholder => 'Email address' %>
   <br />
   <%= f.submit "Retrieve Password", :class => 'btn btn-lg btn-primary btn-block' %>
 

@@ -1,3 +1,5 @@
+<% content_for :page_title do %>Edit Your Login<% end %>
+
 <%= form_for(resource, html: {class: "form-horizontal", role: "form", method: :put}, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 

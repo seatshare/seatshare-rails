@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     if devise_controller?
-      if ['devise/sessions', 'devise/sessions'].include? params[:controller]
+      if ['devise/sessions', 'devise/passwords'].include? params[:controller]
         'login'
       else
         'two-column'

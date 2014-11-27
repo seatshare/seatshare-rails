@@ -63,6 +63,6 @@ class PublicControllerTest < ActionController::TestCase
       'Manage Season Tickets for Your Favorite Team - SeatShare',
       'title matches expected'
     )
-    assert_select 'h1', 'Take home field advantage', 'page heading matches'
+    assert_select 'h1', 'You have home field advantage', 'page heading matches'
   end
 end

@@ -1,6 +1,6 @@
 <% content_for :page_title do %>Welcome to SeatShare<% end %>
 <% content_for :html_head do %>
-<meta name="description" content="SeatShare helps you manage your group's season tickets for sporting or performing arts events. Sign up for free." />
+<meta name="description" content="SeatShare helps you manage your group's season tickets for sports or performing arts events. Sign up for free." />
 <% end %>
 
 <h1>What is SeatShare?</h1>
@@ -20,6 +20,15 @@
         <%= link_to image_tag('screenshot-iphone.png', :class => "img-responsive visible-md visible-lg", :alt => "Screenshots", :title => "Simulated Mobile Screenshot"), new_user_registration_path %>
     </div>
     <div class="col-md-9">
+
+        <br />
+
+        <div class="well well-sm">
+            <div class="text-center">
+                <span class="fa fa-ticket"></span> <strong>SeatShare can manage group season tickets for <%= link_to "more than 2,200 professional and college sports teams", teams_path %>!</strong>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-4">
                 <h2>Groups</h2>
@@ -41,10 +50,10 @@
             </div>
             <div class="col-md-4">
                 <h2>Notifications</h2>
-                <p>Recieve an email when someone requests a ticket or assigns one to you. Respond quickly from your phone.</p>
+                <p>Recieve an SMS text message when someone requests a ticket or assigns one to you. Respond quickly from your phone.</p>
             </div>
             <div class="col-md-4">
-                <h2>&amp; more!</h2>
+                <h2>... and more!</h2>
                 <p>SeatShare is web-based software, so you get the latest features as soon as they are released.</p>
             </div>
         </div>
@@ -59,7 +68,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
         <br />
         <hr />
         <br />
