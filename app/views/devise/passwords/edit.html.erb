@@ -1,9 +1,11 @@
+<% content_for :page_title do %>SeatShare :: Set Your Password<% end %>
+
 <%= form_for(resource, html: {class: "form-signin", role: "form", method: :put}, as: resource_name, url: password_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <%= f.password_field :password, autofocus: true, autocomplete: "off", :class => 'form-control', :placeholder => 'New Password' %>
-  <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control', :placeholder => 'Confirm Password' %>
+  <%= f.password_field :password, autofocus: true, autocomplete: "off", :class => 'form-control input-lg', :placeholder => 'New Password' %>
+  <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control input-lg', :placeholder => 'Confirm Password' %>
 
   <%= f.submit "Change Password", :class => 'btn btn-lg btn-primary btn-block' %>
 
