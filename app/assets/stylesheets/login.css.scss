@@ -5,6 +5,7 @@ body.login {
 
   a {
     color: #fff;
+    text-decoration: underline;
   }
 
   .toggle-password {
@@ -18,8 +19,9 @@ body.login {
   padding-top: 40px;
   padding-bottom: 40px;
 
-  label {
+  .remember-me label {
     font-weight: normal;
+    font-size: 80%;
   }
 
   .help-block {

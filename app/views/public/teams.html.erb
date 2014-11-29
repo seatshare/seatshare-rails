@@ -6,179 +6,38 @@
 <% content_for :page_header do %>
 <div class="jumbotron teams-header">
   <h1>You have home field advantage</h1>
-  <p>With more than 2,200 pro and college team schedules available, SeatShare has your seats covered.</p>
+  <p>With more than 2,600 pro and college team schedules available, SeatShare has your seats covered.</p>
   <%= link_to "Create Your SeatShare Account", new_user_registration_path, :class=>'btn btn-primary btn-lg' %>
 </div>
 
 <% end %>
 
+<% @teams_list.each do |label, teams| %>
 <div class="row">
   <div class="col-md-12">
-    <h3 id="nfl">National Football League</h3>
+    <h3 id="<%= label.parameterize %>"><%= label %></h3>
     <hr />
     <div class="row">
-      <% for team in @teams_nfl %>
+      <% for team in teams %>
       <div class="col-md-4">
         <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
       </div>
-      <% end %>
+      <%  end %>
     </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 id="mlb">Major League Baseball</h3>
-    <hr />
-    <div class="row">
-      <% for team in @teams_mlb %>
-      <div class="col-md-4">
-        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
-      </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 id="nba">National Basketball Association</h3>
-    <hr />
-    <div class="row">
-      <% for team in @teams_nba %>
-      <div class="col-md-4">
-        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
-      </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 id="nhl">National Hockey League</h3>
-    <hr />
-    <div class="row">
-      <% for team in @teams_nhl %>
-      <div class="col-md-4">
-        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
-      </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 id="ncaaf">NCAA Football</h3>
-    <hr />
-    <div class="row">
-      <% for team in @teams_ncaaf %>
-      <div class="col-md-6">
-        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
-      </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 id="ncaamb">NCAA Men's Basketball</h3>
-    <hr />
-    <div class="row">
-      <% for team in @teams_ncaamb %>
-      <div class="col-md-6">
-        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
-      </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 id="cfl">Canadian Football League</h3>
-    <hr />
-    <div class="row">
-      <% for team in @teams_cfl %>
-      <div class="col-md-6">
-        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
-      </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 id="mls">Major League Soccer</h3>
-    <hr />
-    <div class="row">
-      <% for team in @teams_mls %>
-      <div class="col-md-6">
-        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
-      </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h3 id="wftda">Women's Flat Track Derby Association</h3>
-    <hr />
-    <div class="row">
-      <% for team in @teams_wftda %>
-      <div class="col-md-6">
-        <p class="lead"><%= link_to team.entity_name, register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}) %></p>
-      </div>
-      <% end %>
-    </div>
-  </div>
-</div>
+<% end %>
 
 <% content_for :sidebar do %>
 
 <div>
 
   <div class="list-group col-md-12 team-list">
-    <a href="#nfl" class="list-group-item">
-      <span class="badge"><%= @teams_nfl.count %></span>
-      National Football League (NFL)
-    </a>
-    <a href="#mlb" class="list-group-item">
-      <span class="badge"><%= @teams_nfl.count %></span>
-      Major League Baseball (MLB)
-    </a>
-    <a href="#nba" class="list-group-item">
-      <span class="badge"><%= @teams_nba.count %></span>
-      National Basketball Assoc. (NBA)
-    </a>
-    <a href="#nhl" class="list-group-item">
-      <span class="badge"><%= @teams_nhl.count %></span>
-      National Hockey League (NHL)
-    </a>
-    <a href="#ncaaf" class="list-group-item">
-      <span class="badge"><%= @teams_ncaaf.count %></span>
-      NCAA Football (NCAAF)
-    </a>
-    <a href="#ncaamb" class="list-group-item">
-      <span class="badge"><%= @teams_ncaamb.count %></span>
-      NCAA Men's Basketball (NCAAMB)
-    </a>
-    <a href="#cfl" class="list-group-item">
-      <span class="badge"><%= @teams_cfl.count %></span>
-      Canadian Football League (CFL)
-    </a>
-    <a href="#mls" class="list-group-item">
-      <span class="badge"><%= @teams_mls.count %></span>
-      Major League Soccer (MLS)
-    </a>
-    <a href="#wftda" class="list-group-item">
-      <span class="badge"><%= @teams_wftda.count %></span>
-      Women's Flat Track Derby Assoc. (WFTDA)
-    </a>
+
+    <% @entity_types.each do |entity_type| %>
+    <%= link_to "<span class=\"badge\">#{entity_type.entities.count}</span> #{entity_type.display_name}".html_safe, "##{entity_type.display_name.parameterize}", class: 'list-group-item' %>
+    <% end %>
+
   </div>
 
   <p><small><strong>Not seeing your team?</strong> Just <%= link_to 'contact us', contact_path %> and we will look into adding it!</small></p>

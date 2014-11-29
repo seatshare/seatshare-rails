@@ -18,9 +18,9 @@ ActiveAdmin.register EntityType do
 
   sidebar 'Entities', only: :show do
     ul do
-      Entity.where(
-        "entity_type_id = #{resource.id}"
-      ).order_by_name.collect do |entity|
+      EntityType.find_by_id(
+        resource.id
+      ).entities.order_by_name.collect do |entity|
         li auto_link(entity)
       end
     end

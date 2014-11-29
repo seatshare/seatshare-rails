@@ -15,15 +15,14 @@ class PublicController < ApplicationController
   end
 
   def teams
-    @teams_nfl = Entity.where('entity_type_id = 4').active.order_by_name
-    @teams_mlb = Entity.where('entity_type_id = 2').active.order_by_name
-    @teams_nba = Entity.where('entity_type_id = 3').active.order_by_name
-    @teams_nhl = Entity.where('entity_type_id = 1').active.order_by_name
-    @teams_ncaaf = Entity.where('entity_type_id = 7').active.order_by_name
-    @teams_ncaamb = Entity.where('entity_type_id = 8').active.order_by_name
-    @teams_cfl = Entity.where('entity_type_id = 6').active.order_by_name
-    @teams_mls = Entity.where('entity_type_id = 5').active.order_by_name
-    @teams_wftda = Entity.where('entity_type_id = 9').active.order_by_name
+    @entity_types = EntityType.order_by_sort
+    @teams_list = {}
+    @entity_types.each do |et|
+      label = "#{et.entity_type_name} (#{et.entity_type_abbreviation})"
+      @teams_list[label] = Entity.where(
+        "entity_type_id = #{et.id}"
+      ).active.order_by_name
+    end
   end
 
   def tos
