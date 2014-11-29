@@ -1,6 +1,6 @@
 ActiveAdmin.register Entity do
 
-  permit_params :entity_name, :entity_type, :import_key, :status
+  permit_params :entity_name, :entity_type_id, :import_key, :status
 
   filter :entity_name
   filter :entity_type

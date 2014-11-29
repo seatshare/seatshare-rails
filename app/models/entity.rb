@@ -2,6 +2,7 @@ class Entity < ActiveRecord::Base
   has_many :tickets, through: :events
   has_many :groups
   has_many :events
+  belongs_to :entity_type
 
   validates :entity_name, presence: true
   validates_uniqueness_of :entity_name, scope: :entity_type
@@ -20,7 +21,7 @@ class Entity < ActiveRecord::Base
   end
 
   def display_name
-    "#{entity_name} (#{entity_type})"
+    "#{entity_name} (#{entity_type.entity_type_abbreviation})"
   end
 
   def retrive_schedule
@@ -37,7 +38,12 @@ class Entity < ActiveRecord::Base
   private
 
   def generate_import_key(attributes)
-    "#{attributes[:entity_type]}: #{attributes[:entity_name]}".parameterize
+    et = EntityType.find(attributes[:entity_type_id]) || nil
+    if et.nil?
+      "#{attributes[:entity_type_id]}: #{attributes[:entity_name]}".parameterize
+    else
+      "#{et.entity_type_abbreviation}: #{attributes[:entity_name]}".parameterize
+    end
   end
 
   def clean_import_key
@@ -45,6 +51,6 @@ class Entity < ActiveRecord::Base
   end
 
   def self.order_by_name
-    order('LOWER(entity_type) ASC, LOWER(entity_name) ASC')
+    order('LOWER(entity_name) ASC')
   end
 end

@@ -24,9 +24,9 @@ class SodaScheduleImport
         team_id: options[:team_id],
         type: 'schedule-single-team',
         start_datetime: options[:start_datetime],
-        end_datetime: options[:start_datetime]
+        end_datetime: options[:end_datetime]
       )
-    rescue
+    rescue StandardError
       documents = []
     end
 

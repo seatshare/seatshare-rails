@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113161958) do
+ActiveRecord::Schema.define(version: 20141128180743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,15 +51,22 @@ ActiveRecord::Schema.define(version: 20141113161958) do
 
   create_table "entities", force: true do |t|
     t.string   "entity_name"
-    t.integer  "status",      default: 0,  null: false
+    t.integer  "status",         default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "import_key",  default: "", null: false
-    t.string   "entity_type", default: "", null: false
+    t.string   "import_key",     default: "", null: false
+    t.integer  "entity_type_id", default: 0
   end
 
-  add_index "entities", ["entity_name", "entity_type"], name: "index_entities_on_entity_name_and_entity_type", unique: true, using: :btree
   add_index "entities", ["import_key"], name: "index_entities_on_import_key", unique: true, using: :btree
+
+  create_table "entity_types", force: true do |t|
+    t.string   "entity_type_name"
+    t.string   "entity_type_abbreviation"
+    t.integer  "sort"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", force: true do |t|
     t.integer  "entity_id"
