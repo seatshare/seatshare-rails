@@ -7,7 +7,7 @@ groupsReady = ->
   # Create Group
   if $("#group_entity_id").length > 0
     $("#group_entity_id").select2({
-      placeholder: "Click to search our 2,200 available teams",
+      placeholder: "Click to search our more than 2,600 available teams",
       allowClear: true
     })
 
