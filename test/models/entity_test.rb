@@ -3,7 +3,8 @@ require 'test_helper'
 class EntityTest < ActiveSupport::TestCase
   test 'new entity has attributes' do
     entity = Entity.new(
-      entity_name: 'Nashville Sportsball (Inactive)'
+      entity_name: 'Nashville Sportsball (Inactive)',
+      entity_type_id: 5
     )
     entity.save!
 
@@ -21,8 +22,9 @@ class EntityTest < ActiveSupport::TestCase
   test 'gets entity by group ID' do
     entity = Group.find(2).entity
 
-    assert entity.id == 6, 'fixture entity ID matches'
+    assert entity.id == 5, 'fixture entity ID matches'
     assert entity.entity_name == 'Nashville Sportsball', 'fixture name matches'
+    assert entity.entity_type.display_name == 'Sportsball League (SBL)'
     assert entity.status == 1, 'fixture entity is active'
   end
 

@@ -11,7 +11,7 @@ ballsports:
   group_name: Nashville Fans of Ballsports
   invitation_code: ZXCVBN9876
   status: 1
-  entity_id: 6
+  entity_id: 5
   creator_id: 2
 
 abandoned:
@@ -19,5 +19,5 @@ abandoned:
   group_name: Abandoned Sportball Group
   invitation_code: ASDFG6789
   status: 0
-  entity_id: 6
+  entity_id: 5
   creator_id: 3

@@ -54,7 +54,6 @@ ActiveAdmin.register_page 'Dashboard' do
               end
             else
               usage.each do |record|
-                puts usage.inspect
                 row record.description do
                   text_node "#{record.count} #{record.usage_unit} "\
                     "/ #{record.price} #{record.price_unit.upcase}"

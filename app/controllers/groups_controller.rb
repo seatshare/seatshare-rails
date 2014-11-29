@@ -8,11 +8,13 @@ class GroupsController < ApplicationController
   end
 
   def new
-    active_entities = Entity.order_by_name.active
+    active_entities = Entity.active.includes(:entity_type).order(
+      'entity_types.sort ASC'
+    ).order_by_name
     @entity = Entity.find_by_id(params[:entity_id])
     options = {}
-    active_entities.each_with_object({}) do |entity|
-      (options[entity.entity_type] ||= []) << [entity.entity_name, entity.id]
+    active_entities.each_with_object({}) do |e|
+      (options[e.entity_type.display_name] ||= []) << [e.entity_name, e.id]
     end
     @entities = options
     @group = Group.new
