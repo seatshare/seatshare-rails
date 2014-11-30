@@ -88,8 +88,8 @@ class GroupsController < ApplicationController
     not_found if @group.status != 1
     redirect_to(action: 'index') && return unless @group.member?(current_user)
     @events = @group.events
-              .order('start_time ASC')
-              .where("start_time > '#{Date.today}'")
+              .future
+              .order_by_date
     @members = @group.users.order_by_name
     session[:current_group_id] = @group.id
   end

@@ -6,14 +6,14 @@ class TicketsController < ApplicationController
     if params[:filter] == 'past'
       @tickets = Ticket.where("owner_id = #{current_user.id}")
                  .joins(:event)
-                 .where("start_time < '#{Date.today}'")
+                 .where("start_time < '#{Time.now}'")
                  .order_by_date
                  .order_by_seat
       @page_title = 'My Past Tickets'
     else
       @tickets = Ticket.where("owner_id = #{current_user.id}")
                  .joins(:event)
-                 .where("start_time > '#{Date.today}'")
+                 .where("start_time > '#{Time.now}'")
                  .order_by_date
                  .order_by_seat
       @page_title = 'My Tickets'

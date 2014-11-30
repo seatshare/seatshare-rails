@@ -7,6 +7,8 @@ class Event < ActiveRecord::Base
   before_save :clean_import_key
 
   scope :order_by_date, -> { order('start_time ASC') }
+  scope :future, -> { where("start_time > '#{Time.now}'") }
+  scope :past, -> { where("start_time < '#{Time.now}'") }
 
   @ticket_stats = nil
 
