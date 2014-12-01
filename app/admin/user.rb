@@ -38,6 +38,7 @@ ActiveAdmin.register User do
           pf.input :bio
           pf.input :location
           pf.input :mobile
+          pf.input :sms_notify, :label => 'Notify SMS'
         end
       end
     end

@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class TicketTest < ActiveSupport::TestCase
+  def setup
+    Time.zone = 'Central Time (US & Canada)'
+  end
+
   test 'new ticket has attributes' do
     ticket = Ticket.new(
       group_id: 1,

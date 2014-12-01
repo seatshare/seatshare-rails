@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class TicketNotifierTest < ActionMailer::TestCase
+  def setup
+    Time.zone = 'Central Time (US & Canada)'
+  end
+
   test 'ticket assigned to user' do
     ticket = Ticket.find(7)
     user = User.find(3)
