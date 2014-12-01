@@ -3,6 +3,10 @@ require 'test_helper'
 class TicketFlowTest < ActionDispatch::IntegrationTest
   fixtures :users
 
+  def setup
+    Time.zone = 'Central Time (US & Canada)'
+  end
+
   test 'add a single ticket' do
     post_via_redirect(
       '/login',

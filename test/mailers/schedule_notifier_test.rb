@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class ScheduleNotifierTest < ActionMailer::TestCase
+  def setup
+    Time.zone = 'Central Time (US & Canada)'
+  end
+
   test 'send daily schedule' do
     events = Event.where('DATE(start_time) = \'2013-10-15\'').order_by_date
     group = Group.find(1)
