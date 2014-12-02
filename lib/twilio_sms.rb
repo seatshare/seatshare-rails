@@ -42,9 +42,7 @@ class TwilioSMS
   end
 
   def sms_usage
-    twilio_client.account.usage.records.last_month.list(
-      category: 'sms'
-    ) || []
+    twilio_client.account.usage.records.last_month.list || []
   rescue StandardError => e
     e.message
   end

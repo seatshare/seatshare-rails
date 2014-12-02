@@ -28,7 +28,7 @@ ActiveAdmin.register_page 'Dashboard' do
                 hr
               end
             else
-              div 'No recent messages. '\
+              h4 'No recent messages. '\
                 'Messages sent through the contact form appear here.'
               hr
             end
@@ -46,38 +46,48 @@ ActiveAdmin.register_page 'Dashboard' do
         panel 'Twilio' do
           client = TwilioSMS.new
 
-          attributes_table_for :usage do
-            usage = client.sms_usage
-            if usage.is_a? String
-              row 'Error' do
-                usage
-              end
-            else
+          h3 'Account Summary'
+
+          usage = client.sms_usage
+          if usage.is_a? String
+            h4 usage
+          else
+            attributes_table_for :usage do
               usage.each do |record|
+                next if record.price == '0'
                 row record.description do
-                  text_node "#{record.count} #{record.usage_unit} "\
-                    "/ #{record.price} #{record.price_unit.upcase}"
+                  if record.description != 'Total Price'
+                    text_node "#{record.count} #{record.usage_unit} / "
+                  end
+                  text_node "#{record.price.to_f} #{record.price_unit.upcase}"
                 end
               end
             end
           end
 
-          attributes_table_for :messages do
-            usage = client.recent_messages
-            if usage.is_a? String
-              row 'Error' do
-                usage
+          h3 'Recent Messages'
+
+          usage = client.recent_messages
+          if usage.is_a? String
+            h4 usage
+          else
+            table_for usage[0, 5] do
+              column 'Sender' do |message|
+                "#{message.from} via #{message.direction}"
               end
-            else
-              usage[0, 5].each do |record|
-                row "To: #{record.to} ; From: #{record.from} ;"\
-                  " #{record.date_sent}".html_safe do
-                    text_node "#{record.body}"
-                  end
+              column 'Recipient' do |message|
+                message.to
+              end
+              column 'Sent' do |message|
+                Time.parse(message.date_sent).strftime(
+                  '%B %-d, %Y %-I:%M %P %Z'
+                )
+              end
+              column 'Message' do |message|
+                message.body
               end
             end
           end
-
         end
 
         panel 'System Stats' do
@@ -88,11 +98,20 @@ ActiveAdmin.register_page 'Dashboard' do
             row 'Active Entities' do
               Entity.active.count
             end
+            row 'Entity Types' do
+              EntityType.all.count
+            end
             row 'Users' do
               User.all.count
             end
             row 'Active Users' do
               User.active.count
+            end
+            row 'Groups' do
+              Group.all.count
+            end
+            row 'Group Invitations' do
+              GroupInvitation.all.count
             end
             row 'Events' do
               Event.all.count
