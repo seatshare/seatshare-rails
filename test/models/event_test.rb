@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
+  def setup
+    Time.zone = 'Central Time (US & Canada)'
+  end
+
   test 'new event has attributes' do
     event = Event.new(
       event_name: 'A New Event',
