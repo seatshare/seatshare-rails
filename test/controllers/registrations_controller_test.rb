@@ -7,7 +7,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     get :new
 
     assert_response :success
-    assert_select 'title', 'Create Your SeatShare Account'
+    assert_select 'title', 'Create a SeatShare Account'
     assert_select 'h4', 'Joining a group?', 'invitation code block is empty'
   end
 
@@ -17,7 +17,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     get :new, invite_code: 'ABCDEFG123'
 
     assert_response :success
-    assert_select 'title', 'Create Your SeatShare Account'
+    assert_select 'title', 'Create a SeatShare Account'
     assert_select(
       'h4',
       "You've been invited join a group!",
@@ -34,7 +34,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_response :success
     assert_select(
       'title',
-      'Create Your SeatShare Account - Nashville Predators (NHL)'
+      'Create a SeatShare Account - Nashville Predators (NHL)'
     )
     assert_select 'h4', 'Create a Nashville Predators group'
   end
