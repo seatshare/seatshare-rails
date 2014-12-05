@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# User Signup test
 class UserSignupTest < ActionDispatch::IntegrationTest
   test 'signup for an account - success' do
     get '/register'

@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# User Login test
 class UserLoginTest < ActionDispatch::IntegrationTest
   fixtures :users
 

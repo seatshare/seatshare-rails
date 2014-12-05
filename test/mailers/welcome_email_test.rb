@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Welcome Email test
 class WelcomeEmailTest < ActionMailer::TestCase
   test 'send welcome email' do
     user = User.find(1)

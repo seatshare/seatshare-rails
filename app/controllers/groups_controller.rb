@@ -1,12 +1,18 @@
+##
+# Groups controller
 class GroupsController < ApplicationController
   before_action :authenticate_user!
   layout 'two-column', except: [:index]
 
+  ##
+  # Index view of groups or welcome page
   def index
     @groups = current_user.groups
     render 'groups/welcome' if @groups.blank?
   end
 
+  ##
+  # New group form
   def new
     active_entities = Entity.active.includes(:entity_type).order(
       'entity_types.sort ASC'
@@ -20,6 +26,8 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  ##
+  # Processes a new group
   def create
     group = Group.new(
       group_name: group_params[:group_name],
@@ -39,6 +47,8 @@ class GroupsController < ApplicationController
     end
   end
 
+  ##
+  # Edit group form
   def edit
     @group = Group.find_by_id(params[:id]) || not_found
     redirect_to(action: 'index') && return unless @group.member?(current_user)
@@ -48,6 +58,8 @@ class GroupsController < ApplicationController
     ).first
   end
 
+  ##
+  # Process group edits
   def update
     group = Group.find(params[:id])
     if params[:group_user].nil?
@@ -82,6 +94,8 @@ class GroupsController < ApplicationController
     ) && return
   end
 
+  ##
+  # Initial page after login for a group member
   def show
     @group = Group.find_by_id(params[:id]) || not_found
     @entity = @group.entity
@@ -94,6 +108,8 @@ class GroupsController < ApplicationController
     session[:current_group_id] = @group.id
   end
 
+  ##
+  # JSON feed for calendar widget
   def events_feed
     @group = Group.find_by_id(params[:id]) || not_found
     not_found if @group.status != 1
@@ -115,10 +131,14 @@ class GroupsController < ApplicationController
     render json: feed
   end
 
+  ##
+  # Join a group form
   def join
     @invite_code = params[:invite_code]
   end
 
+  ##
+  # Process a group join
   def do_join
     flash.keep
     begin
@@ -141,6 +161,8 @@ class GroupsController < ApplicationController
     end
   end
 
+  ##
+  # Leave a group form
   def leave
     @group = Group.find_by_id(params[:id]) || not_found
     redirect_to(
@@ -148,6 +170,8 @@ class GroupsController < ApplicationController
     ) && return if @group.admin?(current_user)
   end
 
+  ##
+  # Process leaving a group
   def do_leave
     flash.keep
     if params[:user_id]
@@ -173,11 +197,15 @@ class GroupsController < ApplicationController
     end
   end
 
+  ##
+  # Invite to a group form
   def invite
     @group = Group.find(params[:id]) || not_found
     @group_invitation = GroupInvitation.new
   end
 
+  ##
+  # Process a group invitation
   def do_invite
     group = Group.find(params[:id]) || not_found
     group_invitation = GroupInvitation.new(
@@ -198,6 +226,8 @@ class GroupsController < ApplicationController
     redirect_to(action: 'show', id: group.id) && return
   end
 
+  ##
+  # Process a group invitaiton code reset
   def do_reset_invite
     group = Group.find(params[:id]) || not_found
     fail 'AccessDenied' unless group.admin?(current_user)
@@ -208,11 +238,15 @@ class GroupsController < ApplicationController
     redirect_to(action: 'edit', id: group.id) && return
   end
 
+  ##
+  # Group message form
   def message
     @group = Group.find(params[:id]) || not_found
     @members = @group.users.order_by_name
   end
 
+  ##
+  # Process sending a group message
   def do_message
     group = Group.find(params[:id]) || not_found
     flash.keep
@@ -238,6 +272,8 @@ class GroupsController < ApplicationController
 
   private
 
+  ##
+  # Strong parameters for groups
   def group_params
     params.require(:group).permit(
       :group_name, :entity_id, :form_type, :avatar, :remove_avatar

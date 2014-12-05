@@ -1,4 +1,8 @@
+##
+# Registrations controller
 class RegistrationsController < Devise::RegistrationsController
+  ##
+  # New registration form
   def new
     @user = User.new
     if params[:invite_code]
@@ -14,6 +18,8 @@ class RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  ##
+  # Process new registration
   def create
     build_resource(sign_up_params)
 
@@ -86,6 +92,8 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  ##
+  # Process email and password updates
   def update
     super
   end

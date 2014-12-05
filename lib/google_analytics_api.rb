@@ -1,7 +1,14 @@
 require 'rest_client'
 
-# https://deveo.com/blog/2013/05/07/server-side-google-analytics-event-tracking-with-rails/
+##
+# Google Analytics API class
+# - Source: http://goo.gl/BXcbij
 class GoogleAnalyticsApi
+  ##
+  # Tracks an event
+  # - category: main grouping of an event
+  # - action: specific action taken
+  # - client_id: the Google Analytics-generated unique identifier
   def event(category, action, client_id = '555')
     return unless ENV['GOOGLE_ANALYTICS_ID'].present?
     params = {
@@ -17,7 +24,9 @@ class GoogleAnalyticsApi
 
   private
 
-  def send_event
+  ##
+  # Sends the event to Google Analytics
+  def send_event(params = {})
     RestClient.get(
       'http://www.google-analytics.com/collect',
       params: params,

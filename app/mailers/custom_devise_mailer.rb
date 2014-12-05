@@ -1,3 +1,5 @@
+##
+# Custom Devise Mailer class
 class CustomDeviseMailer < Devise::Mailer
   default from: 'no-reply@myseatshare.com'
   layout 'email'
@@ -5,6 +7,11 @@ class CustomDeviseMailer < Devise::Mailer
   helper :application
   include Devise::Controllers::UrlHelpers
 
+  ##
+  # Send confirmation instructions
+  # - record: User object
+  # - token: string of confirmation token
+  # - opts: object of options to pass to super
   def confirmation_instructions(record, token, opts = {})
     @view_action = {
       url: url_for(confirmation_url(record, confirmation_token: @token)),
@@ -18,6 +25,11 @@ class CustomDeviseMailer < Devise::Mailer
     super
   end
 
+  ##
+  # Send password reset instructions
+  # - record: User object
+  # - token: string of confirmation token
+  # - opts: object of options to pass to super
   def reset_password_instructions(record, token, opts = {})
     @view_action = {
       url: url_for(edit_password_url(record, reset_password_token: @token)),
@@ -31,6 +43,11 @@ class CustomDeviseMailer < Devise::Mailer
     super
   end
 
+  ##
+  # Send account unlock instructions
+  # - record: User object
+  # - token: string of confirmation token
+  # - opts: object of options to pass to super
   def unlock_instructions(record, token, opts = {})
     @view_action = {
       url: url_for(unlock_url(record, unlock_token: @token)),

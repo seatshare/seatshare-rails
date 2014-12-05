@@ -1,7 +1,13 @@
+##
+# Ticket Notifier class
 class TicketNotifier < ActionMailer::Base
   default from: 'no-reply@myseatshare.com'
   layout 'email'
 
+  ##
+  # Send ticket assignment email
+  # - ticket: Ticket object
+  # - acting_user: User object assigning the ticket
   def assign(ticket = nil, acting_user = nil)
     @ticket = ticket
     @event = ticket.event
@@ -31,12 +37,17 @@ class TicketNotifier < ActionMailer::Base
     headers['X-MC-SigningDomain'] = 'myseatshare.com'
   end
 
-  def request_ticket(ticket = nil, user = nil, message = nil)
+  ##
+  # Send ticket request email
+  # - ticket: Ticket object
+  # - acting_user: User object assigning the ticket
+  # - message: string of message body
+  def request_ticket(ticket = nil, acting_user = nil, message = nil)
     @ticket = ticket
     @event = ticket.event
     @recipient = ticket.owner
     @group = ticket.group
-    @user = user
+    @user = acting_user
     @message = message
 
     @view_action = {

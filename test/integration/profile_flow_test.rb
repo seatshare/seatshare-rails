@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Profile Flow test
 class ProfileFlowTest < ActionDispatch::IntegrationTest
   fixtures :users, :profiles
 

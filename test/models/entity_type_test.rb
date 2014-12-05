@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Entity Type test
 class EntityTypeTest < ActiveSupport::TestCase
   test 'display name matches' do
     entity_type = EntityType.find(1)

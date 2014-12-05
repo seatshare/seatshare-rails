@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Profile test
 class ProfileTest < ActiveSupport::TestCase
   test 'convert phone number to E.164 format' do
     user = User.find(1)

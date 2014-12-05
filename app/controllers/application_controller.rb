@@ -1,3 +1,5 @@
+##
+# Application Controller class
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -9,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
+  ##
+  # Returns a 404 page
   def not_found
     not_found_message = ActionController::RoutingError.new('Not Found')
     fail not_found_message
@@ -16,12 +20,16 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  ##
+  # Obtains data shared across all controllers
   def load_shared_interface_variables
     @group_selector = current_user.groups.order_by_name.active.collect do|p|
       [p.group_name, p.id]
     end
   end
 
+  ##
+  # Defines the Devise permitted parameters for registrations
   def configure_devise_permitted_parameters
     registration_params = [
       :first_name, :last_name, :email, :password, :password_confirmation,
@@ -39,6 +47,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  ##
+  # Switches the default layout by resource for Devise
   def layout_by_resource
     if devise_controller?
       if ['devise/sessions', 'devise/passwords'].include? params[:controller]
@@ -53,6 +63,8 @@ class ApplicationController < ActionController::Base
 
   private
 
+  ##
+  # Sets the Timezone based on the current user
   def set_timezone
     tz = current_user ? current_user.timezone : nil
     if tz.blank?

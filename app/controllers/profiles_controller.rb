@@ -1,18 +1,26 @@
+##
+# Profiles controller
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   layout 'two-column'
 
+  ##
+  # Show a user profile
   def show
     @user = User.find_by_id(params[:id]) || not_found
     @user.profile = Profile.new if @user.profile.nil?
   end
 
+  ##
+  # Edit the current user's profile
   def edit
     @user = current_user
     @user.profile = Profile.new if @user.profile.nil?
     @user_aliases = current_user.user_aliases.order_by_name
   end
 
+  ##
+  # Process the edits for current user's profile
   def update
     user = current_user
     user.update_attributes!(user_params)
@@ -24,6 +32,8 @@ class ProfilesController < ApplicationController
 
   private
 
+  ##
+  # Strong parameters for user profile
   def user_params
     params.require(:user).permit(
       :first_name, :last_name, :timezone,

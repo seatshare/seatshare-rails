@@ -1,3 +1,5 @@
+##
+# User Alias model
 class UserAlias < ActiveRecord::Base
   belongs_to :user
 
@@ -5,10 +7,14 @@ class UserAlias < ActiveRecord::Base
 
   scope :order_by_name, -> { order_by_name }
 
+  ##
+  # Display name for user alias
   def display_name
     "#{first_name} #{last_name}"
   end
 
+  ##
+  # Handle ticket unassignment on delete
   def destroy
     tickets = Ticket.where("alias_id = #{id}")
     tickets.each do |ticket|
@@ -18,6 +24,8 @@ class UserAlias < ActiveRecord::Base
     super
   end
 
+  ##
+  # Order user aliases by name
   def self.order_by_name
     order('LOWER(last_name) ASC, LOWER(first_name) ASC')
   end

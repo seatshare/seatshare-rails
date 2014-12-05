@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Entity test
 class EntityTest < ActiveSupport::TestCase
   test 'new entity has attributes' do
     entity = Entity.new(

@@ -1,7 +1,11 @@
+##
+# Tickets controller
 class TicketsController < ApplicationController
   before_action :authenticate_user!
   layout 'two-column'
 
+  ##
+  # View of user's future and past tickets
   def index
     if params[:filter] == 'past'
       @tickets = Ticket.where("owner_id = #{current_user.id}")
@@ -21,6 +25,8 @@ class TicketsController < ApplicationController
     render layout: 'single-column'
   end
 
+  ##
+  # Process cost updates from ticket index
   def bulk_update
     unless params[:ticket_cost].nil?
       params[:ticket_cost].each do |ticket_id, cost|
@@ -44,6 +50,8 @@ class TicketsController < ApplicationController
     )
   end
 
+  ##
+  # New ticket form
   def new
     @group = Group.find_by_id(params[:group_id]) || not_found
     @ticket = Ticket.new(
@@ -70,6 +78,8 @@ class TicketsController < ApplicationController
     end
   end
 
+  ##
+  # Process ticket creation
   def create
     group = Group.find(params[:group_id])
     fail 'NotGroupMember' unless group.member?(current_user)
@@ -127,6 +137,8 @@ class TicketsController < ApplicationController
     end
   end
 
+  ##
+  # Edit ticket properties if owner
   def edit
     @group = Group.find_by_id(params[:group_id]) || not_found
     @event = Event.find_by_id(params[:event_id]) || not_found
@@ -145,6 +157,8 @@ class TicketsController < ApplicationController
     @user_aliases.unshift(['Unassigned', 0])
   end
 
+  ##
+  # Process ticket updates
   def update
     group = Group.find(params[:group_id])
     fail 'NotGroupMember' unless group.member?(current_user)
@@ -207,14 +221,22 @@ class TicketsController < ApplicationController
     ) && return
   end
 
+  ##
+  # Request a ticket if not owner
   def request_ticket
     @group = Group.find_by_id(params[:group_id]) || not_found
     @event = Event.find_by_id(params[:event_id]) || not_found
     @ticket = Ticket.find_by_id(params[:id]) || not_found
     fail 'NotGroupMember' unless @group.member?(current_user)
     @ticket_stats = @event.ticket_stats(@group, current_user)
+    redirect_to(
+      action: 'edit',
+      id: @ticket.id
+    ) if @ticket.assigned == current_user || @ticket.owner == current_user
   end
 
+  ##
+  # Process a ticket request
   def do_request_ticket
     group = Group.find_by_id(params[:group_id]) || not_found
     event = Event.find_by_id(params[:event_id]) || not_found
@@ -231,6 +253,8 @@ class TicketsController < ApplicationController
     ) && return
   end
 
+  ##
+  # Process a ticket unassignment
   def unassign
     group = Group.find_by_id(params[:group_id]) || not_found
     event = Event.find_by_id(params[:event_id]) || not_found
@@ -248,6 +272,8 @@ class TicketsController < ApplicationController
     ) && return
   end
 
+  ##
+  # Process a ticket delete
   def delete
     group = Group.find_by_id(params[:group_id]) || not_found
     event = Event.find_by_id(params[:event_id]) || not_found
@@ -263,6 +289,10 @@ class TicketsController < ApplicationController
 
   private
 
+  ##
+  # Log a ticket history record
+  # - ticket: Ticket object
+  # - action: string of action
   def log_ticket_history(ticket = nil, action = nil)
     user = User.find_by_id(ticket.user_id)
     if !user.nil?
@@ -284,6 +314,8 @@ class TicketsController < ApplicationController
     ticket_history.save
   end
 
+  ##
+  # Strong parameters for tickets
   def ticket_params
     params.require(:ticket).permit(
       :section, :row, :seat, :cost, :user_id, :alias_id, :event_id, :note,

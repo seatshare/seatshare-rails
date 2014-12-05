@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Group Invitation test
 class GroupInvitationTest < ActiveSupport::TestCase
   test 'new group invitation has attributes' do
     invitation = GroupInvitation.new(

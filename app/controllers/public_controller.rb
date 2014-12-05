@@ -1,7 +1,11 @@
+##
+# Public controller
 class PublicController < ApplicationController
-  layout :layout_by_resource
+  layout :layout_by_action
   before_action :authenticate_user!, only: :token
 
+  ##
+  # Home page
   def index
     render 'index' && return unless user_signed_in?
     if session[:current_group_id].is_a? Numeric
@@ -14,6 +18,8 @@ class PublicController < ApplicationController
     end
   end
 
+  ##
+  # Teams page
   def teams
     @entity_types = EntityType.order_by_sort
     @teams_list = {}
@@ -25,18 +31,26 @@ class PublicController < ApplicationController
     end
   end
 
+  ##
+  # Terms of Service
   def tos
   end
 
+  ##
+  # Privacy policy
   def privacy
   end
 
+  ##
+  # Contact form
   def contact
   end
 
   private
 
-  def layout_by_resource
+  ##
+  # Select a layout by method
+  def layout_by_action
     if params[:action] == 'index'
       'home'
     else
@@ -44,6 +58,8 @@ class PublicController < ApplicationController
     end
   end
 
+  ##
+  # Redirect user to default group on index route
   def redirect_to_default_group
     groups = current_user.groups.active
     if groups.count == 0

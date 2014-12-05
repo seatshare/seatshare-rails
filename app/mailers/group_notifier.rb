@@ -1,7 +1,13 @@
+##
+# Group Notifier class
 class GroupNotifier < ActionMailer::Base
   default from: 'no-reply@myseatshare.com'
   layout 'email'
 
+  ##
+  # Send group invitation
+  # - invite: GroupInvitation object
+  # - message: string of optional message body
   def create_invite(invite, message = nil)
     @invite = invite
     @recipient = invite.email
@@ -28,6 +34,13 @@ class GroupNotifier < ActionMailer::Base
     headers['X-MC-SigningDomain'] = 'myseatshare.com'
   end
 
+  ##
+  # Send group message
+  # - group: Group object
+  # - sender: User object
+  # - recipients: array of User objects
+  # - subject: string of message subject
+  # - message: string of message body
   def send_group_message(group, sender, recipients, subject, message)
     if group.blank? || sender.blank? || recipients.blank? || message.blank?
       return false

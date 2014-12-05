@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# User Alias test
 class UserAliasTest < ActiveSupport::TestCase
   test 'new user alias has attributes' do
     user_alias = UserAlias.new(

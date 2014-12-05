@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Registrations controller test
 class RegistrationsControllerTest < ActionController::TestCase
   test 'get register route' do
     @request.env['devise.mapping'] = Devise.mappings[:user]

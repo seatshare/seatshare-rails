@@ -1,7 +1,11 @@
+##
+# Welcome email
 class WelcomeEmail < ActionMailer::Base
   default from: 'no-reply@myseatshare.com'
   layout 'email'
 
+  ##
+  # Send welcome email
   def welcome(user = nil)
     @recipient = user
 

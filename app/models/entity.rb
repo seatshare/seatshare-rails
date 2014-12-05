@@ -1,3 +1,5 @@
+##
+# Entity model
 class Entity < ActiveRecord::Base
   has_many :tickets, through: :events
   has_many :groups
@@ -12,6 +14,9 @@ class Entity < ActiveRecord::Base
   scope :active, -> { where('status = 1') }
   scope :is_soda, -> { where("import_key LIKE 'l.%'") }
 
+  ##
+  # New entity object
+  # - attributes: attributes for object
   def initialize(attributes = {})
     attr_with_defaults = {
       status: 0,
@@ -20,10 +25,14 @@ class Entity < ActiveRecord::Base
     super(attr_with_defaults)
   end
 
+  ##
+  # Display name for entity
   def display_name
     "#{entity_name} (#{entity_type.entity_type_abbreviation})"
   end
 
+  ##
+  # Retrieve schedule from SODA for entity
   def retrive_schedule
     importer = SodaScheduleImport.new
     importer.run(
@@ -37,6 +46,8 @@ class Entity < ActiveRecord::Base
 
   private
 
+  ##
+  # Generate a unique import key for new entities
   def generate_import_key(attributes)
     et = EntityType.find(attributes[:entity_type_id]) || nil
     if et.nil?
@@ -46,10 +57,14 @@ class Entity < ActiveRecord::Base
     end
   end
 
+  ##
+  # Run generate import key if empty
   def clean_import_key
     self.import_key = generate_import_key(self) if import_key.blank?
   end
 
+  ##
+  # Order list by entity name
   def self.order_by_name
     order('LOWER(entity_name) ASC')
   end

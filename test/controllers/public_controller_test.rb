@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Public controller test
 class PublicControllerTest < ActionController::TestCase
   test 'gets home page when not logged in' do
     get :index

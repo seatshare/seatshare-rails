@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Groups controller test
 class GroupsControllerTest < ActionController::TestCase
   test 'should be redirected' do
     get :index

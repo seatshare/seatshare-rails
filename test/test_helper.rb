@@ -1,8 +1,6 @@
 $LOAD_PATH << 'test'
 require 'rubygems'
 require 'spork'
-# uncomment the following line to use spork with the debugger
-# require 'spork/ext/ruby-debug'
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
@@ -17,6 +15,8 @@ Spork.prefork do
   require 'rails/test_help'
 
   module ActiveSupport
+    ##
+    # Test Case class
     class TestCase
       ActiveRecord::Migration.check_pending!
 
@@ -33,11 +33,15 @@ Spork.prefork do
   end
 
   module ActionController
+    ##
+    # Test Case class
     class TestCase
       include Devise::TestHelpers
     end
   end
 
+  ##
+  # Devise Controller class
   class DeviseController
     include DeviseHelper
     include ActionView::Helpers::TagHelper
