@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Ticket History test
 class TicketHistoryTest < ActiveSupport::TestCase
   test 'new ticket history' do
     ticket_history = TicketHistory.new(

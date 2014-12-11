@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# User test
 class UserTest < ActiveSupport::TestCase
   test 'create new user' do
     user = User.new(

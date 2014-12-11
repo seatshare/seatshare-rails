@@ -1,9 +1,17 @@
+##
+# Admin API module
 module AdminApi
+  ##
+  # Version 1
   module V1
+    ##
+    # Admin API Controller
     class AdminApiController < ApplicationController
       before_action :require_api_key
       respond_to :json
 
+      ##
+      # Default view that returns available methods
       def index
         respond_with json_response(
           'methods',
@@ -15,18 +23,26 @@ module AdminApi
         )
       end
 
+      ##
+      # Returns the user count
       def user_count
         respond_with json_response('user_count', User.active.count)
       end
 
+      ##
+      # Returns the group count
       def group_count
         respond_with json_response('group_count', Group.active.count)
       end
 
+      ##
+      # Returns the group invitation count
       def total_invites
         respond_with json_response('total_invites', GroupInvitation.count)
       end
 
+      ##
+      # Returns the accepted group invitation count
       def accepted_invites
         respond_with json_response(
           'accepted_invites',
@@ -34,6 +50,8 @@ module AdminApi
         )
       end
 
+      ##
+      # Returns a list of recent groups
       def recent_groups
         respond_with json_response(
           'recent_groups',
@@ -41,6 +59,8 @@ module AdminApi
         )
       end
 
+      ##
+      # Returns a list of recent users
       def recent_users
         respond_with json_response(
           'recent_users',
@@ -48,10 +68,14 @@ module AdminApi
         )
       end
 
+      ##
+      # Returns the total ticket count
       def total_tickets
         respond_with json_response('total_tickets', Ticket.count)
       end
 
+      ##
+      # Returns the transferred ticket count
       def tickets_transferred
         if params[:days]
           since = DateTime.now - params[:days].to_i.days
@@ -69,6 +93,8 @@ module AdminApi
         end
       end
 
+      ##
+      # Returns the unused ticket count
       def tickets_unused
         if params[:days]
           since = DateTime.now - params[:days].to_i.days
@@ -88,7 +114,11 @@ module AdminApi
 
       private
 
-      def json_response(method, value)
+      ##
+      # Wraps the response in a standard structure
+      # - method: string of API method
+      # - value: string of value
+      def json_response(method = '', value = '')
         response = {
           status: 'success',
           version: 1,
@@ -98,6 +128,8 @@ module AdminApi
         response
       end
 
+      ##
+      # Validates the API key
       def require_api_key
         api_key = params[:api_key]
         return true if !api_key || api_key != ENV['ADMIN_API_KEY']

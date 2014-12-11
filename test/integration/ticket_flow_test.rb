@@ -1,8 +1,12 @@
 require 'test_helper'
 
+##
+# Ticket Flow test
 class TicketFlowTest < ActionDispatch::IntegrationTest
   fixtures :users
 
+  ##
+  # Set up test
   def setup
     Time.zone = 'Central Time (US & Canada)'
   end

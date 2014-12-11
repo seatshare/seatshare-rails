@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Group User test
 class GroupUserTest < ActiveSupport::TestCase
   test 'add user to group' do
     group_users = GroupUser.new(

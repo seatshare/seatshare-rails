@@ -1,7 +1,14 @@
+##
+# Schedule Notifier class
 class ScheduleNotifier < ActionMailer::Base
   default from: 'no-reply@myseatshare.com'
   layout 'email'
 
+  ##
+  # Send a daily schedule
+  # - events: array of Event objects
+  # - group: Group object
+  # - user: recipient User object
   def daily_schedule(events, group, user)
     timezone user
 
@@ -28,6 +35,11 @@ class ScheduleNotifier < ActionMailer::Base
     headers['X-MC-SigningDomain'] = 'myseatshare.com'
   end
 
+  ##
+  # Send a weekly schedule
+  # - events: array of Event objects
+  # - group: Group object
+  # - user: recipient User object
   def weekly_schedule(events, group, user)
     timezone user
 
@@ -56,6 +68,9 @@ class ScheduleNotifier < ActionMailer::Base
 
   private
 
+  ##
+  # Format a list of events by week day
+  # - events: array of Event objects
   def events_day_of_week(events)
     events_day_of_week = []
     Date::DAYNAMES.each_with_index.to_a.rotate(1).each do |_, index|
@@ -68,6 +83,9 @@ class ScheduleNotifier < ActionMailer::Base
     events_day_of_week
   end
 
+  ##
+  # Set timezone based on user
+  # - user: recipient User object
   def timezone(user)
     tz = user ? user.timezone : nil
     if tz.blank?

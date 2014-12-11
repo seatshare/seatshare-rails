@@ -1,3 +1,5 @@
+##
+# User model
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -21,10 +23,15 @@ class User < ActiveRecord::Base
   attr_accessor :newsletter_signup
   attr_accessor :invite_code
 
+  ##
+  # Check if active for authentication
   def active_for_authentication?
     super && status == 1
   end
 
+  ##
+  # New user object
+  # - attributes: attributes for object
   def initialize(attributes = {})
     attr_with_defaults = {
       status: 1
@@ -32,10 +39,15 @@ class User < ActiveRecord::Base
     super(attr_with_defaults)
   end
 
+  ##
+  # Display name for user
   def display_name
     "#{first_name} #{last_name}"
   end
 
+  ##
+  # Default gravatar based on email
+  # - dimensions: string of avatar size in `NxN` format
   def gravatar(dimensions = '30x30')
     require 'digest/md5'
     email_address = email.downcase
@@ -43,6 +55,8 @@ class User < ActiveRecord::Base
     "https://www.gravatar.com/avatar/#{hash}?s=#{dimensions}&d=mm"
   end
 
+  ##
+  # Order user records by name
   def self.order_by_name
     order('LOWER(last_name) ASC, LOWER(first_name) ASC')
   end

@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
   Include:
     - '**/Rakefile'
@@ -12,31 +14,3 @@ AllCops:
     - 'log/**/*'
     - 'public/**/*'
     - 'vendor/**/*'
-
-## These should be reduced to their defaults,
-## but we'll start at these to make sure it
-## doesn't get any worse
-
-Metrics/AbcSize:
-  # Max: 15
-  Max: 110
-
-Metrics/CyclomaticComplexity:
-  # Max: 6
-  Max: 15
-
-Metrics/PerceivedComplexity:
-  # Max: 7
-  Max: 20
-
-Metrics/MethodLength:
-  # Max: 10
-  Max: 65
-
-Metrics/ClassLength:
-  # Max: 100
-  Max: 300
-
-Documentation:
-  # Enabled: true
-  Enabled: false

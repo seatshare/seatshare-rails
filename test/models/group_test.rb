@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Group test
 class GroupTest < ActiveSupport::TestCase
   test 'new group has attributes' do
     group = Group.new(

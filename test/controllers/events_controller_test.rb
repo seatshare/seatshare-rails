@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Events controller test
 class EventsControllerTest < ActionController::TestCase
   test 'should be redirected' do
     get :show, id: 1, group_id: 2

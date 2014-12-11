@@ -1,3 +1,5 @@
+##
+# Ticket model
 class Ticket < ActiveRecord::Base
   has_many :ticket_files
   has_many :ticket_histories
@@ -14,29 +16,41 @@ class Ticket < ActiveRecord::Base
   scope :order_by_date, -> { order('start_time ASC') }
   scope :order_by_seat, -> { order_by_seat }
 
+  ##
+  # Display name for ticket
   def display_name
     [section, row, seat].join(' ').strip
   end
 
+  ##
+  # Relation of assigned user
   def assigned
     User.find_by_id(user_id)
   end
 
+  ##
+  # True if ticket is available
   def available?
     user_id == 0
   end
 
+  ##
+  # True if ticket is assigned
   def assigned?
     user_id > 0
   end
 
   private
 
+  ##
+  # Validate that ticket has a seat location
   def seat_location?
     empty_error = 'Ticket must have a section, row or seat'
     errors[:base] << (empty_error) if display_name.blank?
   end
 
+  ##
+  # Order tickets by section/row/seat
   def self.order_by_seat
     order('section ASC').order('row ASC').order('seat ASC')
   end

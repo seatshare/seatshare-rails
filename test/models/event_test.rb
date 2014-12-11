@@ -1,6 +1,10 @@
 require 'test_helper'
 
+##
+# Event test
 class EventTest < ActiveSupport::TestCase
+  ##
+  # Setup test
   def setup
     Time.zone = 'Central Time (US & Canada)'
   end

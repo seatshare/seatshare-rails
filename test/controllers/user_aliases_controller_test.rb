@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# User Aliases controller test
 class UserAliasesControllerTest < ActionController::TestCase
   test 'should get redirected' do
     get :new

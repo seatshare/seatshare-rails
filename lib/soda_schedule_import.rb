@@ -1,6 +1,10 @@
+##
+# SODA Schedule Import class
 class SodaScheduleImport
   attr_accessor :soda_client, :messages, :events_list
 
+  ##
+  # Initialize new object
   def initialize
     self.soda_client = SodaXmlTeam::Client.new(
       ENV['SODA_USERNAME'], ENV['SODA_PASSWORD']
@@ -9,6 +13,8 @@ class SodaScheduleImport
     self.events_list = []
   end
 
+  ##
+  # Run the importer
   def run(options = {})
     entity = Entity.find_by_import_key(options[:team_id])
     if entity.blank?

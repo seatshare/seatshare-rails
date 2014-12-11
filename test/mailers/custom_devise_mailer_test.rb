@@ -1,11 +1,17 @@
 require 'test_helper'
 
+##
+# Custom Devise Mailer test
 class CustomDeviseMailerTest < ActionMailer::TestCase
+  ##
+  # Setup tests
   def setup
     ActionMailer::Base.deliveries = []
     Devise.mailer = 'CustomDeviseMailer'
   end
 
+  ##
+  # Get user
   def user
     @user ||= begin
       user = User.find(1)
@@ -14,6 +20,7 @@ class CustomDeviseMailerTest < ActionMailer::TestCase
     end
   end
 
+  ## Send mail
   def mail
     @mail ||= begin
       user

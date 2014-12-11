@@ -1,3 +1,5 @@
+##
+# Group model
 class Group < ActiveRecord::Base
   belongs_to :entity
   belongs_to :creator, class_name: 'User'
@@ -30,6 +32,9 @@ class Group < ActiveRecord::Base
   scope :order_by_name, -> { order('LOWER(group_name) ASC') }
   scope :active, -> { where('status = 1') }
 
+  ##
+  # New group object
+  # - attributes: object attributes
   def initialize(attributes = {})
     attr_with_defaults = {
       status: 1,
@@ -38,14 +43,21 @@ class Group < ActiveRecord::Base
     super(attr_with_defaults)
   end
 
+  ##
+  # Display name for group
   def display_name
     "#{group_name}"
   end
 
+  ##
+  # List of administrators for group
   def administrators
     users.where(group_users: { role: 'admin' })
   end
 
+  ##
+  # See if user is group member
+  # - user: User object
   def member?(user = nil)
     group_user = GroupUser.where(
       "group_id = #{id} AND user_id = #{user.id}"
@@ -54,6 +66,9 @@ class Group < ActiveRecord::Base
     group_user.user_id == user.id
   end
 
+  ##
+  # See if user is group admin
+  # - user: User object
   def admin?(user = nil)
     group_user = GroupUser.where(
       "group_id = #{id} AND user_id = #{user.id} AND role = 'admin'"
@@ -62,6 +77,10 @@ class Group < ActiveRecord::Base
     group_user.user_id == user.id
   end
 
+  ##
+  # Join a user to a group with a role
+  # - user: User object
+  # - role: string of role
   def join_group(user = nil, role = nil)
     role = 'member' if role != 'admin'
     fail 'NotValidGroup' if id.nil?
@@ -74,6 +93,9 @@ class Group < ActiveRecord::Base
     user_group
   end
 
+  ##
+  # Leave a group
+  # - user: User object
   def leave_group(user = nil)
     group_user = GroupUser.where(
       "user_id = #{user.id} AND group_id = #{id}"
@@ -93,10 +115,15 @@ class Group < ActiveRecord::Base
 
   private
 
+  ##
+  # Generate an invitation code if invitation code empty
   def clean_invitation_code
     self.invitation_code = generate_invite_code(10) if invitation_code.blank?
   end
 
+  ##
+  # Generate a generic invitation code for group
+  # - size: integer of generated string length
   def generate_invite_code(size = 10)
     charset = %w(2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z)
     (0...size).map { charset.to_a[rand(charset.size)] }.join

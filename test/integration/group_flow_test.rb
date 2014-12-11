@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Group Flow test
 class GroupFlowTest < ActionDispatch::IntegrationTest
   fixtures :users
 

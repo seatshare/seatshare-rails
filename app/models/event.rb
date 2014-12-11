@@ -1,3 +1,5 @@
+##
+# Event model
 class Event < ActiveRecord::Base
   belongs_to :entity
   has_many :tickets
@@ -12,6 +14,9 @@ class Event < ActiveRecord::Base
 
   @ticket_stats = nil
 
+  ##
+  # New event object
+  # - attributes: attributes for object
   def initialize(attributes = {})
     attr_with_defaults = {
       date_tba: 0,
@@ -22,10 +27,15 @@ class Event < ActiveRecord::Base
     super(attr_with_defaults)
   end
 
+  ##
+  # Display name for event
   def display_name
     "#{entity.entity_name}: #{event_name} - #{date_time}"
   end
 
+  ##
+  # Override the default tickets relationship
+  # - group: Group object
   def tickets(group = nil)
     if group.nil?
       Ticket.where("event_id = #{id}")
@@ -34,6 +44,10 @@ class Event < ActiveRecord::Base
     end
   end
 
+  ##
+  # Generate ticket stats for the group/user
+  # - group: Group object
+  # - user: User object
   def ticket_stats(group = nil, user = nil)
     fail 'NoGroupSpecified' if group.nil?
     fail 'NoUserSpecified' if user.nil?
@@ -58,6 +72,8 @@ class Event < ActiveRecord::Base
     stats
   end
 
+  ##
+  # Show the date/time of the start of the event based on TBA settings
   def date_time
     out = ''
     out += start_time.strftime('%A, %B %-d, %Y') if date_tba == 0
@@ -68,6 +84,9 @@ class Event < ActiveRecord::Base
     out
   end
 
+  ##
+  # Create a new event based on object passed from SODA importer
+  # - row: hash passed from importer
   def self.import(row = nil)
     event = find_by_import_key(row[:event_key]) || new
 
@@ -85,11 +104,16 @@ class Event < ActiveRecord::Base
 
   private
 
+  ##
+  # Generate an import key for new events
+  # - attrs: attributes for object
   def generate_import_key(attrs)
     "#{attrs[:entity_id]}: #{attrs[:event_name]} #{attrs[:start_time]}"
       .parameterize
   end
 
+  ##
+  # Run import key generator if not set
   def clean_import_key
     self.import_key = generate_import_key(self) if import_key.blank?
   end

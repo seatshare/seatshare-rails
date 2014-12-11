@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Group Notifier test
 class GroupNotifierTest < ActionMailer::TestCase
   test 'send group invitation' do
     invite = GroupInvitation.find(1)

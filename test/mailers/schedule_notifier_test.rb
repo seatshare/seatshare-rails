@@ -1,6 +1,10 @@
 require 'test_helper'
 
+##
+# Schedule Notifier test
 class ScheduleNotifierTest < ActionMailer::TestCase
+  ##
+  # Setup test
   def setup
     Time.zone = 'Central Time (US & Canada)'
   end

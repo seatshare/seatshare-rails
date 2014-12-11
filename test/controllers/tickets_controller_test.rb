@@ -1,5 +1,7 @@
 require 'test_helper'
 
+##
+# Tickets controller test
 class TicketsControllerTest < ActionController::TestCase
   test 'should be redirected' do
     get :edit, group_id: 1, event_id: 1, id: 2
