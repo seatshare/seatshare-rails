@@ -148,8 +148,8 @@
 
 <% content_for :sidebar do %>
 
-<div class="well well-sm text-center">
-  <ul class="list-inline" style="margin-bottom:0;">
+<div class="well well-sm well-actions text-center">
+  <ul class="list-inline">
     <% if @events.count > 0 %>
     <li><%= link_to raw('<span class="fa fa-calendar"></span> Add Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
     <% end %>
