@@ -38,7 +38,6 @@ class GroupsController < ApplicationController
       group.join_group current_user, 'admin'
       flash.keep
       flash[:notice] = 'Group created!'
-      group.entity.retrive_schedule if group.entity.events.count == 0
       redirect_to action: 'show', id: group.id
     else
       flash.keep
@@ -104,6 +103,7 @@ class GroupsController < ApplicationController
     @events = @group.events
               .future
               .order_by_date
+    @group.entity.retrive_schedule if @events.count == 0
     @members = @group.users.order_by_name
     session[:current_group_id] = @group.id
   end
