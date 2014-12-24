@@ -40,6 +40,14 @@ class Ticket < ActiveRecord::Base
     user_id > 0
   end
 
+  ##
+  # Remove ticket assignment
+  def unassign
+    self.user_id = 0
+    self.alias_id = 0
+    self.save!
+  end
+
   private
 
   ##

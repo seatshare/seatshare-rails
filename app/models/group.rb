@@ -103,10 +103,7 @@ class Group < ActiveRecord::Base
     fail 'AdminUserCannotLeave' if group_user.role == 'admin'
 
     Ticket.where("group_id = #{id} AND owner_id = #{user.id}").delete_all
-    Ticket.where("group_id = #{id} AND user_id = #{user.id}").update_all(
-      user_id: 0,
-      alias_id: 0
-    )
+    Ticket.where("group_id = #{id} AND user_id = #{user.id}").each(&:unassign)
 
     ActiveRecord::Base.connection.execute(
       "DELETE FROM group_users WHERE group_id = #{id} AND user_id = #{user.id}"

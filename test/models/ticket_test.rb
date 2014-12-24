@@ -91,4 +91,13 @@ class TicketTest < ActiveSupport::TestCase
 
     assert ticket.assigned? == false
   end
+
+  test 'unassign' do
+    ticket = Ticket.find(4)
+    ticket.unassign
+
+    assert ticket.assigned? == false
+    assert ticket.user_id == 0
+    assert ticket.alias_id == 0
+  end
 end
