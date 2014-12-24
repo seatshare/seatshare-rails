@@ -10,13 +10,16 @@ ActiveAdmin.register_page 'Dashboard' do
 
         panel 'Recent Contact Messages' do
           token = ENV['SIMPLE_FORM_API_TOKEN']
-          contact_form_messages = HTTParty.get(
-            "http://getsimpleform.com/messages.json?api_token=#{token}"
-          ).first(5) || []
-
+          begin
+            contact_form_messages = HTTParty.get(
+              "http://getsimpleform.com/messages.json?api_token=#{token}", no_follow: true
+            )
+          rescue
+            contact_form_messages = []
+          end
           div do
-            if !contact_form_messages.nil? && contact_form_messages.count > 0
-              contact_form_messages.each do |message|
+            if contact_form_messages.count > 0
+              contact_form_messages.first(5).each do |message|
                 h4 mail_to(
                   message['data']['email'],
                   message['data']['name'] + ' - ' + message['data']['email']
