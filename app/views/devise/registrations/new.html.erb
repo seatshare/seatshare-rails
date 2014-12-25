@@ -1,13 +1,13 @@
 <% if @entity.nil? %>
 <% content_for :page_title do %>Create a SeatShare Account<% end %>
+<% content_for :page_description do %>Register for an account with SeatShare to start managing your season tickets.<% end %>
 <% content_for :html_head do %>
-<meta name="description" content="Register for an account with SeatShare to start managing your season tickets." />
 <link rel="canonical" href="https://myseatshare.com/register" />
 <% end %>
 <% else %>
 <% content_for :page_title do %><%= "Create a SeatShare Account - #{@entity.display_name}".truncate(70, omission: '...') %><% end %>
+<% content_for :page_description do %><%= "Register for an account with SeatShare to start managing your season tickets for your #{@entity.display_name} group." %><% end %>
 <% content_for :html_head do %>
-<meta name="description" content="<%= "Register for an account with SeatShare to start managing your season tickets for your #{@entity.display_name} group." %>" />
 <link rel="canonical" href="https://myseatshare.com/register" />
 <% end %>
 <% end %>
