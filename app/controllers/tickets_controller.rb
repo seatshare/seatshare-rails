@@ -262,8 +262,7 @@ class TicketsController < ApplicationController
     fail 'AccessDenied' if ticket.owner_id != current_user.id &&
                            !ticket.assigned.nil? &&
                            ticket.assigned.id != current_user.id
-    ticket.user_id = 0
-    ticket.save!
+    ticket.unassign
     log_ticket_history ticket, 'unassigned'
     flash.keep
     flash[:notice] = 'Ticket unassigned!'
