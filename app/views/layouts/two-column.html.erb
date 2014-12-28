@@ -35,6 +35,8 @@
   <div class="row">
     <section class="col-md-8">
 
+    <%= render 'layouts/flash' %>
+
     <%= yield %>
 
     </section>
@@ -47,8 +49,6 @@
 <%= render 'layouts/footer' %>
 
 </div>
-
-<%= render 'layouts/growl' %>
 
 <%= yield :page_footer %>
 
