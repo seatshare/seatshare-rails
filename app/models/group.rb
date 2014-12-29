@@ -16,13 +16,14 @@ class Group < ActiveRecord::Base
     styles: { medium: '300x300>', thumb: '100x100>' },
     default_url: ':placeholder_group',
     storage: :s3,
+    s3_protocol: :https,
     s3_credentials: {
       bucket: ENV['SEATSHARE_S3_BUCKET'],
       access_key_id: ENV['SEATSHARE_S3_KEY'],
       secret_access_key: ENV['SEATSHARE_S3_SECRET']
     },
     url: ':s3_alias_url',
-    s3_host_alias: ENV['SEATSHARE_S3_PUBLIC'].gsub('http://', ''),
+    s3_host_alias: ENV['SEATSHARE_S3_PUBLIC'].gsub(%r{https?://}, ''),
     path: ':class-avatars/:id-:style-:hash.:extension',
     hash_secret: 'obfusticateOurAvatarUrlsPlz'
   )
