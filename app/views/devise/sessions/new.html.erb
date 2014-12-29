@@ -2,6 +2,8 @@
 
 <%= form_for(resource, html: {class: "form-signin", role: "form"}, as: resource_name, url: session_path(resource_name)) do |f| %>
 
+  <%= render 'layouts/flash' %>
+
   <div>
     <%= f.email_field :email, autofocus: true, :class => 'form-control input-lg', :placeholder => 'Email address', :autocapitalize => 'off', :autocorrect => 'off' %>
   </div>
