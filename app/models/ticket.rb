@@ -48,6 +48,14 @@ class Ticket < ActiveRecord::Base
     self.save!
   end
 
+  ##
+  # Can Edit
+  def can_edit?(user)
+    return true if user_id == user.id
+    return true if owner_id == user.id
+    false
+  end
+
   private
 
   ##

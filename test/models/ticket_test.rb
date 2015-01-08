@@ -100,4 +100,19 @@ class TicketTest < ActiveSupport::TestCase
     assert ticket.user_id == 0
     assert ticket.alias_id == 0
   end
+
+  test 'can_edit?' do
+    ticket = Ticket.find(3)
+    user = User.find(1)
+
+    assert ticket.can_edit?(user)
+
+    user = User.find(2)
+
+    assert ticket.can_edit?(user)
+
+    user = User.find(3)
+
+    assert !ticket.can_edit?(user)
+  end
 end
