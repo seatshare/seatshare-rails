@@ -160,9 +160,9 @@ class TicketsController < ApplicationController
   ##
   # Process ticket updates
   def update
-    group = Group.find(params[:group_id])
-    fail 'NotGroupMember' unless group.member?(current_user)
     ticket = Ticket.find(params[:id])
+    fail 'AccessDenied' unless ticket.can_edit?(current_user)
+    fail 'NotGroupMember' unless ticket.group.member?(current_user)
     original_ticket = ticket.dup
     ticket.cost = ticket_params[:cost].gsub(/[^0-9\.]/, '').to_f
     ticket.user_id = ticket_params[:user_id].to_i
@@ -174,30 +174,9 @@ class TicketsController < ApplicationController
       ticket.alias_id = 0
     end
     unless ticket_params[:ticket_file].nil?
-      uploaded_io = ticket_params[:ticket_file]
-      File.open(Rails.root.join(
-        'tmp', 'uploads', uploaded_io.original_filename), 'wb'
-      ) do |file|
-        file.write(uploaded_io.read)
-      end
-      fail 'TicketFileNotSaved' unless File.exist?(
-        Rails.root.join('tmp', 'uploads', uploaded_io.original_filename)
-      )
-      path = Rails.root.join('tmp', 'uploads', uploaded_io.original_filename)
-      File.open(path, 'rb') do |file|
-        hex = SecureRandom.hex
-        file_s3_key = "#{params[:id]}-#{hex}/#{uploaded_io.original_filename}"
-        s3 = AWS::S3.new
-        object = s3.buckets[ENV['SEATSHARE_S3_BUCKET']].objects[file_s3_key]
-        object.write(open(file))
-        ticket_file = TicketFile.new(
-          file_name: uploaded_io.original_filename,
-          user_id: ticket.owner_id,
-          ticket_id: ticket.id,
-          path: file_s3_key
-        )
-        ticket_file.save!
-      end
+      attrs = ticket_params
+      attrs[:ticket_id] = ticket.id
+      TicketFile.create_from_attrs(attrs)
     end
     flash.keep
     if ticket.save
@@ -205,7 +184,7 @@ class TicketsController < ApplicationController
       if ticket.user_id != current_user.id &&
          ticket.user_id != 0 &&
          original_ticket.user_id != ticket.user_id
-        fail 'NotGroupMember' unless group.member?(ticket.assigned)
+        fail 'NotGroupMember' unless ticket.group.member?(ticket.assigned)
         TicketNotifier.assign(ticket, current_user).deliver
         TwilioSMS.new.assign_ticket(ticket, current_user)
         log_ticket_history ticket, 'assigned'
@@ -216,7 +195,7 @@ class TicketsController < ApplicationController
       flash[:error] = 'Ticket could not be updated.'
     end
     redirect_to(
-      controller: 'events', action: 'show', group_id: group.id,
+      controller: 'events', action: 'show', group_id: ticket.group.id,
       id: ticket.event_id
     ) && return
   end
@@ -238,10 +217,8 @@ class TicketsController < ApplicationController
   ##
   # Process a ticket request
   def do_request_ticket
-    group = Group.find_by_id(params[:group_id]) || not_found
-    event = Event.find_by_id(params[:event_id]) || not_found
     ticket = Ticket.find_by_id(params[:id]) || not_found
-    fail 'NotGroupMember' unless group.member?(current_user)
+    fail 'NotGroupMember' unless ticket.group.member?(current_user)
     message = params[:message][:personalization]
     TicketNotifier.request_ticket(ticket, current_user, message).deliver
     TwilioSMS.new.request_ticket(ticket, current_user)
@@ -249,40 +226,50 @@ class TicketsController < ApplicationController
     flash.keep
     flash[:notice] = 'Ticket request sent!'
     redirect_to(
-      controller: 'events', action: 'show', group_id: group.id, id: event.id
+      controller: 'events', action: 'show', group_id: ticket.group.id,
+      id: ticket.event.id
     ) && return
   end
 
   ##
   # Process a ticket unassignment
   def unassign
-    group = Group.find_by_id(params[:group_id]) || not_found
-    event = Event.find_by_id(params[:event_id]) || not_found
     ticket = Ticket.find_by_id(params[:id]) || not_found
-    fail 'AccessDenied' if ticket.owner_id != current_user.id &&
-                           !ticket.assigned.nil? &&
-                           ticket.assigned.id != current_user.id
+    fail 'AccessDenied' unless ticket.can_edit?(current_user)
     ticket.unassign
     log_ticket_history ticket, 'unassigned'
     flash.keep
     flash[:notice] = 'Ticket unassigned!'
     redirect_to(
-      controller: 'events', action: 'show', group_id: group.id, id: event.id
+      controller: 'events', action: 'show', group_id: ticket.group.id,
+      id: ticket.event.id
     ) && return
   end
 
   ##
   # Process a ticket delete
   def delete
-    group = Group.find_by_id(params[:group_id]) || not_found
-    event = Event.find_by_id(params[:event_id]) || not_found
     ticket = Ticket.find_by_id(params[:id]) || not_found
-    fail 'AccessDenied' if ticket.owner_id != current_user.id
+    fail 'AccessDenied' unless ticket.can_edit?(current_user)
     ticket.destroy!
     flash.keep
     flash[:notice] = 'Ticket deleted!'
     redirect_to(
-      controller: 'events', action: 'show', group_id: group.id, id: event.id
+      controller: 'events', action: 'show', group_id: ticket.group.id,
+      id: ticket.event.id
+    ) && return
+  end
+
+  ##
+  # Delete ticket file
+  def delete_ticket_file
+    ticket_file = TicketFile.find(params[:id]) || not_found
+    ticket = ticket_file.ticket
+    fail 'AccessDenied' unless ticket.can_edit?(current_user)
+    ticket_file.destroy!
+    redirect_to(
+      controller: 'tickets', action: 'edit',
+      group_id: ticket.group.id, event_id: ticket.event.id, id: ticket.id
     ) && return
   end
 

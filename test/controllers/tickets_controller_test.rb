@@ -30,7 +30,7 @@ class TicketsControllerTest < ActionController::TestCase
     get :unassign, group_id: 1, event_id: 1, id: 2
 
     assert_response :redirect, 'received a redirect'
-    assert_redirected_to '/groups/1/event-1'
+    assert_redirected_to '/groups/1/event-4'
   end
 
   test 'should delete ticket' do
@@ -40,7 +40,17 @@ class TicketsControllerTest < ActionController::TestCase
     get :delete, group_id: 1, event_id: 1, id: 2
 
     assert_response :redirect, 'received a redirect'
-    assert_redirected_to '/groups/1/event-1'
+    assert_redirected_to '/groups/1/event-4'
+  end
+
+  test 'should delete ticket file' do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :delete_ticket_file, group_id: 1, event_id: 4, ticket_id: 1, id: 1
+
+    assert_response :redirect, 'received a redirect'
+    assert_redirected_to '/groups/1/event-4/ticket-1'
   end
 
   test 'should be redirected to request' do

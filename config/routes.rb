@@ -41,6 +41,7 @@ SeatShare::Application.routes.draw do
   post 'groups/:group_id/event-:event_id/ticket-:id' => 'tickets#update'
   get 'groups/:group_id/event-:event_id/ticket-:id/unassign' => 'tickets#unassign'
   get 'groups/:group_id/event-:event_id/ticket-:id/delete' => 'tickets#delete'
+  get 'groups/:group_id/event-:event_id/ticket-:ticket_id/ticket-file/:id/delete' => 'tickets#delete_ticket_file', as: 'delete_ticket_file'
   get 'groups/:group_id/add-tickets' => 'tickets#new'
   post 'groups/:group_id/add-tickets' => 'tickets#create'
   get 'groups/:group_id/event-:event_id/add-ticket' => 'tickets#new'

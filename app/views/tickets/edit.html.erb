@@ -57,7 +57,7 @@
             <%= link_to raw('<span class="fa fa-save"></span> ') + file.file_name, file.download_link %>
             <br /><small>Uploaded <%= file.created_at %></small>
           </td>
-          <td><a href="#" class="btn btn-sm btn-danger confirm"><span class="fa fa-trash"></span></a></td>
+          <td><%= link_to raw('<span class="fa fa-trash"></span>'), delete_ticket_file_path(ticket_id: @ticket.id, id: file.id), :class => 'btn btn-sm btn-danger confirm' %></td>
         </tr>
         <% end %>
       </table>
