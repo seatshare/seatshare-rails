@@ -9,7 +9,7 @@ class TicketFile < ActiveRecord::Base
   attr_accessor :ticket_file
 
   ##
-  # Create or Update from Attrs
+  # Create from Attrs
   def self.create_from_attrs(attrs = nil)
     file = TicketFile.upload_s3_file(attrs[:ticket_file], attrs)
     create(
