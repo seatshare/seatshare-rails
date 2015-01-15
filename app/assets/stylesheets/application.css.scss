@@ -23,86 +23,61 @@ body {
 }
 
 th.action {
-	width: 40px;
+  width: 40px;
 }
 
 th.cost {
-	width: 135px;
-	min-width: 120px;
+  width: 135px;
+  min-width: 120px;
 }
 
 ul.group-members li {
-	margin-bottom: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.sidebar-icon {
+  float:right;
+  opacity: 0.4;
+  font-size: 17em;
+  line-height: 0em;
+  margin-left:0.1em;
 }
 
 .navbar-inverse {
-    background-color: #4963AE;
-    border-color: #4963AE;
+  background-color: #4963AE;
+  border-color: #4963AE;
 }
 
 .navbar-inverse .navbar-nav > li > a {
-	color: #ffffff;
+  color: #ffffff;
 }
 
 .navbar-inverse .navbar-brand a {
-	color: #ffffff;
+  color: #ffffff;
 }
 
 .navbar-inverse .logo {
-	background-image: image-url('seatshare-inverted.svg');
-	background-size: 150px 50px;
-	background-repeat: no-repeat;
-	height: 50px;
-	width: 150px;
-	overflow: hidden;
+  background-image: image-url('seatshare-inverted.svg');
+  background-size: 150px 50px;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 150px;
+  overflow: hidden;
 }
 
 .navbar-inverse .logo a {
-	margin: 0;
-	display: block;
-	width: 165px;
-	padding-top: 50px;
-}
-
-.home {
-	padding-top: 0;
-}
-
-.home-navbar {
-	border-radius: 0;
-}
-
-.home-header {
-	margin-top: -20px;
-	background-color: #4963AE;
-    border-color: #4963AE;
-}
-
-.home-logo {
-	padding-top: 30px;
-	padding-bottom: 30px;
-}
-
-.home-topbar {
-	position: relative;
-	margin-bottom: -50px;
-	z-index: 1000;
-}
-
-.home-screenshot {
-	margin-bottom: -50px;
-}
-
-.home-cta {
-	margin-top: 2em;
+  margin: 0;
+  display: block;
+  width: 165px;
+  padding-top: 50px;
 }
 
 /* Action Well */
 .well-actions ul {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 /* Tooltips */
 [data-toggle="tooltip"] {
-	cursor: pointer;
+  cursor: pointer;
 }
