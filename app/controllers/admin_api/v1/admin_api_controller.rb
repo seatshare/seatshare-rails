@@ -38,16 +38,21 @@ module AdminApi
       ##
       # Returns the group invitation count
       def total_invites
-        respond_with json_response('total_invites', GroupInvitation.count)
+        since = DateTime.now - params[:days].to_i.days
+        count = GroupInvitation
+                .where("created_at > '#{since}'")
+                .count
+        respond_with json_response('total_invites', count)
       end
 
       ##
       # Returns the accepted group invitation count
       def accepted_invites
-        respond_with json_response(
-          'accepted_invites',
-          GroupInvitation.accepted.count
-        )
+        since = DateTime.now - params[:days].to_i.days
+        count = GroupInvitation.accepted
+                .where("created_at > '#{since}'")
+                .count
+        respond_with json_response('accepted_invites', count)
       end
 
       ##
@@ -80,11 +85,9 @@ module AdminApi
         if params[:days]
           since = DateTime.now - params[:days].to_i.days
           tickets = Ticket.where('user_id != owner_id').where('user_id > 0')
-          count = 0
-          tickets.each do |ticket|
-            count += 1 if ticket.event.start_time > since
-          end
-          respond_with json_response('tickets_transferred', count)
+                    .joins(:event)
+                    .where("start_time > '#{since}'")
+          respond_with json_response('tickets_transferred', tickets.count)
         else
           respond_with json_response(
             'tickets_transferred',
@@ -99,11 +102,9 @@ module AdminApi
         if params[:days]
           since = DateTime.now - params[:days].to_i.days
           tickets = Ticket.where('user_id != owner_id').where('user_id = 0')
-          count = 0
-          tickets.each do |ticket|
-            count += 1 if ticket.event.start_time > since
-          end
-          respond_with json_response('tickets_unused', count)
+                    .joins(:event)
+                    .where("start_time > '#{since}'")
+          respond_with json_response('tickets_unused', tickets.count)
         else
           respond_with json_response(
             'tickets_unused',
