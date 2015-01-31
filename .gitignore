@@ -30,3 +30,6 @@
 # Ignore rvm configuration files
 .ruby-version
 .ruby-gemset
+
+# Ignore node modules
+/node_modules/
