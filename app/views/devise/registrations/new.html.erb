@@ -82,6 +82,8 @@
     <div class="col-md-12">
         <% if @invite %>
         <%= f.hidden_field :invite_code, :value => @invite.invitation_code %>
+        <% elsif @group %>
+        <%= f.hidden_field :invite_code, :value => @group.invitation_code %>
         <% elsif @entity %>
         <%= f.hidden_field :entity_id, :value => @entity.id %>
         <% end %>
@@ -111,9 +113,16 @@
 <% if @invite %>
 <div class="alert alert-success">
   <h4>You've been invited join a group!</h4>
-  <p><%= @invite.user.display_name %> invited you to join <%= @invite.group.group_name %>, so you will be ready to go here in just a bit!</p>
+  <p><strong><%= @invite.user.display_name %></strong> invited you to join <strong><%= @invite.group.group_name %></strong>, so you will be ready to go here in just a bit!</p>
   <br />
   <p class="text-lg">Invitation code: <strong class="invite_code"><%= @invite.invitation_code %></strong></p>
+</div>
+<% elsif @group %>
+<div class="alert alert-success">
+  <h4>You've been invited join a group!</h4>
+  <p>You have been invited to join <strong><%= @group.group_name %></strong>, so you will be ready to go here in just a bit!</p>
+  <br />
+  <p class="text-lg">Invitation code: <strong class="invite_code"><%= @group.invitation_code %></strong></p>
 </div>
 <% elsif @entity %>
 <div class="alert alert-success">

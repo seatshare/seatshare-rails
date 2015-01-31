@@ -28,6 +28,21 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_select 'strong.invite_code', 'ABCDEFG123', 'invitation code appears'
   end
 
+  test 'get register route with group code' do
+    @request.env['devise.mapping'] = Devise.mappings[:user]
+
+    get :new, group_code: 'QWERTY1234'
+
+    assert_response :success
+    assert_select 'title', 'Create a SeatShare Account'
+    assert_select(
+      'h4',
+      "You've been invited join a group!",
+      'invitation code block appears'
+    )
+    assert_select 'strong.invite_code', 'QWERTY1234', 'invitation code appears'
+  end
+
   test 'get register route with team id' do
     @request.env['devise.mapping'] = Devise.mappings[:user]
 
