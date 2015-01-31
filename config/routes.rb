@@ -13,6 +13,7 @@ SeatShare::Application.routes.draw do
   get 'contact' => 'public#contact'
 
   devise_scope :user do
+    get "register/group/:group_code", to: "registrations#new", as: 'register_with_group_code'
     get "register/invite/:invite_code", to: "registrations#new", as: 'register_with_invite_code'
     get "register/:entity_slug/:entity_id", to: "registrations#new", as: 'register_with_entity_id'
   end
