@@ -41,5 +41,8 @@ module SeatShare
     # Autoload additional classes
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
+    # Better error messages
+    require Rails.root.join('lib/custom_public_exceptions')
+    config.exceptions_app = CustomPublicExceptions.new(Rails.public_path)
   end
 end
