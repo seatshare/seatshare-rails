@@ -28,52 +28,34 @@
       </tr>
     </thead>
     <tbody>
-    <% if @tickets.count > 0 %>
-    <% for ticket in @tickets %>
-      <tr>
-        <td>
-          <%= link_to ticket.group.group_name, :controller => 'groups', :action => 'show', :id => ticket.group_id %>
-        </td>
-        <td>
-          <%= link_to ticket.event.event_name, :controller => 'events', :action => 'show', :group_id => ticket.group_id, :id => ticket.event_id %><br />
-            <%= ticket.event.date_time %>
-        </td>
-        <td>
-          <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => ticket.group_id, :event_id => ticket.event_id, :id => ticket.id %>
-          <% if !ticket.note.nil? && ticket.note.length > 0 %>
-          <span data-toggle="tooltip" title="<%= ticket.note %>" class="fa fa-comment"></span>
-          <% end %>
-          <% if ticket.ticket_files.count > 0 %>
-          <span data-toggle="tooltip" title="Attachments" class="fa fa-paperclip"></span>
-          <% end %>
-        </td>
-        <td>
-          <% if ticket.assigned %>
-          <%= link_to ticket.assigned.display_name, :controller => 'profiles', :action => 'show', :id => ticket.assigned.id %>
-          <% if ticket.alias %>
-          <br />(for <%= ticket.alias.display_name %>)
-          <% end %>
-          <% else %>
-          <%= link_to raw('<span class="badge badge-lg">Available!</span>'), { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => ticket.event_id, :group_id => ticket.group_id }, { :data => { :toggle => 'tooltip'}, :title => 'Request Ticket' } %>
-          <% end %>
-        </td>
-        <td class="text-right">
-          <div class="input-group">
-            <span class="input-group-addon">$</span>
-            <%= text_field :ticket_cost, ticket.id, { :class=>'form-control', :value=>number_to_currency(ticket.cost, :unit=>'') } %>
-          </div>
-        </td>
+      <tr class="active">
+        <th colspan="5">Tickets You Own</th>
       </tr>
-    <% end %>
-    <% else %>
+      <% if @tickets[:owned].count > 0 %>
+      <% for ticket in @tickets[:owned] %>
+      <%= render 'tickets/ticket_row', ticket: ticket, current_user: current_user %>
+      <% end %>
+      <% else %>
       <tr>
         <td colspan="5">
-          <div class="alert alert-info">
-              No tickets matched the selected criteria.
-          </div>
+          <em>No tickets matched the selected criteria.</em>
         </td>
       </tr>
-    <% end %>
+      <% end %>
+      <tr class="active">
+        <th colspan="5">Tickets Assigned to You</th>
+      </tr>
+      <% if @tickets[:assigned].count > 0 %>
+      <% for ticket in @tickets[:assigned] %>
+      <%= render 'tickets/ticket_row', ticket: ticket, current_user: current_user %>
+      <% end %>
+      <% else %>
+      <tr>
+        <td colspan="5">
+          <em>No tickets matched the selected criteria.</em>
+        </td>
+      </tr>
+      <% end %>
     </tbody>
   </table>
 </div>
