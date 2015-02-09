@@ -8,20 +8,23 @@ class TicketsController < ApplicationController
   # View of user's future and past tickets
   def index
     if params[:filter] == 'past'
-      @tickets = Ticket.where("owner_id = #{current_user.id}")
-                 .joins(:event)
-                 .where("start_time < '#{Time.now}'")
-                 .order_by_date
-                 .order_by_seat
       @page_title = 'My Past Tickets'
+      operator = '<'
     else
-      @tickets = Ticket.where("owner_id = #{current_user.id}")
-                 .joins(:event)
-                 .where("start_time > '#{Time.now}'")
-                 .order_by_date
-                 .order_by_seat
       @page_title = 'My Tickets'
+      operator = '>='
     end
+    @tickets = {
+      owned:   Ticket.where("owner_id = #{current_user.id}")
+               .joins(:event)
+               .where("start_time #{operator} '#{Time.now}'")
+               .order_by_date.order_by_seat,
+      assigned: Ticket.where("owner_id != #{current_user.id}")
+                .where("user_id = #{current_user.id}")
+                .joins(:event)
+                .where("start_time #{operator} '#{Time.now}'")
+                .order_by_date.order_by_seat
+    }
     render layout: 'single-column'
   end
 
@@ -32,10 +35,7 @@ class TicketsController < ApplicationController
       params[:ticket_cost].each do |ticket_id, cost|
         ticket = Ticket.find(ticket_id)
         next if ticket.cost.to_f == cost.to_f
-        if ticket.owner_id != current_user.id
-          flash[:error] = 'Ticket cost could not be updated.'
-          next
-        end
+        next unless ticket.can_edit?(current_user)
         ticket.cost = cost
         if ticket.save
           log_ticket_history ticket, 'updated'
