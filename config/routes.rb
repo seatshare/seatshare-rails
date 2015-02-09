@@ -64,6 +64,7 @@ SeatShare::Application.routes.draw do
   post 'profile/aliases/:id/edit' => 'user_aliases#update'
   get 'profile/aliases/:id/delete' => 'user_aliases#delete', as: 'delete_user_alias'
 
+  match '/404' => 'errors#error404', via: [:get, :post, :patch, :delete]
 
   namespace :admin_api, defaults: {format: 'json'} do
     namespace :v1 do
