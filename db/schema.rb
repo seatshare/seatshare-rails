@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141128180743) do
+ActiveRecord::Schema.define(version: 20150213214036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20141128180743) do
     t.integer  "weekly_reminder"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "mine_only"
   end
 
   add_index "group_users", ["group_id", "user_id"], name: "index_group_users_on_group_id_and_user_id", using: :btree
@@ -135,14 +136,6 @@ ActiveRecord::Schema.define(version: 20141128180743) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "sms_notify"
-  end
-
-  create_table "subscriptions", force: true do |t|
-    t.integer  "group_id"
-    t.string   "customer_id"
-    t.integer  "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "ticket_files", force: true do |t|
