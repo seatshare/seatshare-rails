@@ -16,7 +16,7 @@
   <% if !event.description.blank? %>
   <tr>
     <th>Description</th>
-    <td><%= event.description %></td>
+    <td><%= raw(event.description_md) %></td>
   </tr>
   <% end %>
 

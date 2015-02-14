@@ -77,6 +77,9 @@ gem 'capistrano-bower', '~> 1.0'
 # Whenever
 gem 'whenever', :require => false
 
+# Markdown Support
+gem 'github-markdown', '~> 0.6.8'
+
 # REST Client (for Google Analytics goal tracking)
 gem 'rest_client'
 

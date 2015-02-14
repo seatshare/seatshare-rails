@@ -85,6 +85,12 @@ class Event < ActiveRecord::Base
   end
 
   ##
+  # Description as Markdown
+  def description_md
+    GitHub::Markdown.render(description)
+  end
+
+  ##
   # Create a new event based on object passed from SODA importer
   # - row: hash passed from importer
   def self.import(row = nil)

@@ -137,4 +137,21 @@ class EventTest < ActiveSupport::TestCase
     assert record[:date_tba] == 0
     assert record[:time_tba] == 0
   end
+
+  test 'uses markdown for description' do
+    event = Event.find(1)
+    event.description = "**I'm a teapot**"
+
+    assert_equal(
+      event.description_md,
+      "<p><strong>I&#39;m a teapot</strong></p>\n"
+    )
+
+    event.description = '[A link](http://google.com)'
+
+    assert_equal(
+      event.description_md,
+      "<p><a href=\"http://google.com\">A link</a></p>\n"
+    )
+  end
 end

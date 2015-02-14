@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-7">
         <h3><%= link_to @event.event_name, :controller => 'events', :action => 'show', :group_id => @group.id, :id => @event.id %></h3>
-        <p><%= @event.description %></p>
+        <%= raw(@event.description_md) %>
         <% if @ticket && (@ticket.section || @ticket.row || @ticket.seat) %>
         <ul class="list-inline">
           <li><strong>Section</strong> <%= @ticket.section %></li>
