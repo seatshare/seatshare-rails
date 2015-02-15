@@ -48,6 +48,7 @@ end
 
 ##
 # Sitemap
+set :linked_dirs, %w{bin log tmp vendor/bundle public/system public/sitemaps}
 after "deploy:update_code", "sitemaps:create_symlink"
 
 namespace :sitemaps do
