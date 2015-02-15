@@ -58,11 +58,7 @@ class RegistrationsController < Devise::RegistrationsController
         end
       end
 
-      # Measure in Google Analytics
-      GoogleAnalyticsApi.new.event('user', 'signup', params[:ga_client_id])
-
-      # Mark as Converted for Google AdWords
-      flash[:conversion] = true
+      send_conversion
 
       yield resource if block_given?
       if resource.active_for_authentication?
@@ -104,5 +100,15 @@ class RegistrationsController < Devise::RegistrationsController
   # Process email and password updates
   def update
     super
+  end
+
+  private
+
+  def send_conversion
+    # Measure in Google Analytics
+    GoogleAnalyticsApi.new.event('user', 'signup', params[:ga_client_id])
+
+    # Mark as Converted for Google AdWords
+    flash[:conversion] = true
   end
 end
