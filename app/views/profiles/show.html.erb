@@ -15,7 +15,7 @@
     <h2><%= @user.display_name %></h2>
     <p><small class="text-muted"> <%= !@user.profile.location.blank? ? @user.profile.location : '<em>No Location Set</em>'.html_safe %> <span class="fa fa-map-marker"></span></small></p>
 
-    <%= simple_format @user.profile.bio, :class => 'lead' %>
+    <div class="lead"><%= raw(@user.profile.bio_md) %></div>
 
     <br />
     <ul class="list-group">

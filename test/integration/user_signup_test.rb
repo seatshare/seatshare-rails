@@ -15,7 +15,8 @@ class UserSignupTest < ActionDispatch::IntegrationTest
         email: 'newuser@example.com',
         password: 'testing123',
         password_confirm: 'testing123'
-      }
+      },
+      newsletter_signup: '1'
     )
 
     assert_response :success

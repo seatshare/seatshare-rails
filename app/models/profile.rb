@@ -8,4 +8,10 @@ class Profile < ActiveRecord::Base
   def mobile_e164
     GlobalPhone.normalize(mobile)
   end
+
+  ##
+  # Bio as Markdown
+  def bio_md
+    GitHub::Markdown.render(bio)
+  end
 end

@@ -62,5 +62,7 @@
 
 <%= yield :page_footer %>
 
+<%= render 'layouts/adwords' if flash[:conversion] == true %>
+
 </body>
 </html>

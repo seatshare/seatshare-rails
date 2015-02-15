@@ -10,7 +10,8 @@ class GroupUser < ActiveRecord::Base
   def initialize(attributes = {})
     attr_with_defaults = {
       daily_reminder: 1,
-      weekly_reminder: 1
+      weekly_reminder: 1,
+      mine_only: 0
     }.merge(attributes)
     super(attr_with_defaults)
   end

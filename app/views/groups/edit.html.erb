@@ -109,7 +109,7 @@
 
 <% content_for :sidebar do %>
 
-<%= form_for :group_user, html: {class: "form-horizontal", role: "form"} do |f| %>
+<%= form_for :group_user, html: {class: "form-horizontal", role: "form"}, url: "notifications/edit" do |f| %>
 
 <fieldset>
   <legend>Reminder Settings</legend>
@@ -121,6 +121,10 @@
       </div>
       <div class="checkbox">
         <label><%= f.check_box :weekly_reminder%> Weekly Schedule Reminder</label>
+      </div>
+      <hr />
+        <div class="checkbox">
+        <label><%= f.check_box :mine_only %> Send only if I have tickets.</label>
       </div>
     </div>
   </div>
