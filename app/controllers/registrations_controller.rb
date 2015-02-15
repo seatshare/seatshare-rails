@@ -35,27 +35,7 @@ class RegistrationsController < Devise::RegistrationsController
 
       # Newsletter signup
       if params[:newsletter_signup] == '1' && !ENV['MAILCHIMP_LIST_ID'].nil?
-        begin
-          require 'mailchimp'
-          mailchimp = Mailchimp::API.new(ENV['MAILCHIMP_API_KEY'])
-          merge_vars = {
-            'FNAME' => sign_up_params[:first_name],
-            'LNAME' => sign_up_params[:last_name]
-          }
-          mailchimp.lists.subscribe(
-            ENV['MAILCHIMP_LIST_ID'],
-            { 'email' => sign_up_params[:email] },
-            merge_vars,
-            'html',
-            false,
-            true,
-            false,
-            false
-          )
-        rescue Mailchimp::Error => e
-          puts e.message
-          puts e.backtrace.inspect
-        end
+        subscribe_newsletter
       end
 
       send_conversion
@@ -104,6 +84,32 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
+  ##
+  # Subscribe Newsletter
+  def subscribe_newsletter
+    require 'mailchimp'
+    mailchimp = Mailchimp::API.new(ENV['MAILCHIMP_API_KEY'])
+    merge_vars = {
+      'FNAME' => sign_up_params[:first_name],
+      'LNAME' => sign_up_params[:last_name]
+    }
+    mailchimp.lists.subscribe(
+      ENV['MAILCHIMP_LIST_ID'],
+      { 'email' => sign_up_params[:email] },
+      merge_vars,
+      'html',
+      false,
+      true,
+      false,
+      false
+    )
+  rescue Mailchimp::Error => e
+    # Sign up failed
+    logger.info e.message
+  end
+
+  ##
+  # Send Conversion
   def send_conversion
     # Measure in Google Analytics
     GoogleAnalyticsApi.new.event('user', 'signup', params[:ga_client_id])
