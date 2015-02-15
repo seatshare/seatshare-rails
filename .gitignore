@@ -33,3 +33,7 @@
 
 # Ignore node modules
 /node_modules/
+
+# Ignore generated sitemaps
+public/sitemaps/
+public/sitemap.xml

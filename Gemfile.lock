@@ -111,6 +111,7 @@ GEM
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
+    dynamic_sitemaps (2.0.0)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -345,6 +346,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   dotenv-rails
+  dynamic_sitemaps
   font-awesome-rails
   global_phone (~> 1.0.1)
   guard-bundler
