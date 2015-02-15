@@ -11,6 +11,8 @@ class Event < ActiveRecord::Base
   scope :order_by_date, -> { order('start_time ASC') }
   scope :future, -> { where("start_time > '#{Time.now}'") }
   scope :past, -> { where("start_time < '#{Time.now}'") }
+  scope :next_seven_days, -> { next_seven_days }
+  scope :today, -> { today }
 
   @ticket_stats = nil
 
@@ -108,6 +110,14 @@ class Event < ActiveRecord::Base
     event
   end
 
+  ##
+  # User has tickets?
+  def user_has_ticket?(user)
+    tickets = Ticket.where("event_id = #{id} AND user_id = #{user.id}")
+    return false if tickets.empty?
+    true
+  end
+
   private
 
   ##
@@ -122,5 +132,23 @@ class Event < ActiveRecord::Base
   # Run import key generator if not set
   def clean_import_key
     self.import_key = generate_import_key(self) if import_key.blank?
+  end
+
+  ##
+  # Next Seven Days
+  def self.next_seven_days
+    where(
+      "start_time >= '#{Date.today.beginning_of_day.utc}'"\
+      " AND start_time <= '#{Date.today.end_of_day.utc + 6.days}'"
+    )
+  end
+
+  ##
+  # Today
+  def self.today
+    where(
+      "start_time >= '#{Date.today.beginning_of_day.utc}'"\
+      " AND start_time <= '#{Date.today.end_of_day.utc}'"
+    )
   end
 end

@@ -60,33 +60,43 @@ class GroupsController < ApplicationController
   ##
   # Process group edits
   def update
-    group = Group.find(params[:id])
-    if params[:group_user].nil?
-      fail 'NotGroupAdmin' unless group.admin?(current_user)
-      group.group_name = group_params[:group_name]
-      group.avatar = group_params[:avatar] unless group_params[:avatar].nil?
-      group.avatar = nil if group_params[:remove_avatar] == '1'
-      if group.save
-        flash[:notice] = 'Group updated!'
-      else
-        flash[:error] = 'Group could not be updated.'
-      end
+    group = Group.find(params[:id]) || not_found
+    fail 'NotGroupAdmin' unless group.admin?(current_user)
+    group.group_name = group_params[:group_name]
+    group.avatar = group_params[:avatar] unless group_params[:avatar].nil?
+    group.avatar = nil if group_params[:remove_avatar] == '1'
+    if group.save
+      flash[:notice] = 'Group updated!'
     else
-      fail 'NotGroupMember' unless group.member?(current_user)
-      daily = params[:group_user][:daily_reminder].to_i
-      weekly = params[:group_user][:weekly_reminder].to_i
-      flash.keep
-      status = GroupUser
-               .where("user_id = #{current_user.id} AND group_id = #{group.id}")
-               .update_all("daily_reminder=#{daily}, weekly_reminder=#{weekly}")
-      if status
-        flash[:notice] = 'Reminder settings updated!'
-      else
-        flash[:error] = 'Reminder settings could not be updated.'
-        redirect_to(
-          controller: 'groups', action: 'edit', id: group.id
-        ) && return
-      end
+      flash[:error] = 'Group could not be updated.'
+    end
+    redirect_to(
+      controller: 'groups', action: 'show', id: group.id
+    ) && return
+  end
+
+  ##
+  # Process notification edits
+  def update_notifications
+    group = Group.find(params[:id]) || not_found
+    fail 'NotGroupMember' unless group.member?(current_user)
+    daily = params[:group_user][:daily_reminder].to_i
+    weekly = params[:group_user][:weekly_reminder].to_i
+    mine = params[:group_user][:mine_only].to_i
+    flash.keep
+    status = GroupUser
+             .where("user_id = #{current_user.id} AND group_id = #{group.id}")
+             .update_all(
+                "daily_reminder=#{daily}, weekly_reminder=#{weekly}, "\
+                "mine_only=#{mine}"
+              )
+    if status
+      flash[:notice] = 'Reminder settings updated!'
+    else
+      flash[:error] = 'Reminder settings could not be updated.'
+      redirect_to(
+        controller: 'groups', action: 'edit', id: group.id
+      ) && return
     end
     redirect_to(
       controller: 'groups', action: 'show', id: group.id
