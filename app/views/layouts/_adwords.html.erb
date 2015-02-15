@@ -1,0 +1,20 @@
+<!-- Google Code for New Account Conversion Page -->
+<% if ENV['ADWORDS_CONVERSION_ID'] && ENV['ADWORDS_CONVERSION_LABEL'] %>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = <%= ENV['ADWORDS_CONVERSION_ID'].to_i %>;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "<%= ENV['ADWORDS_CONVERSION_LABEL'] %>";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/<%= ENV['ADWORDS_CONVERSION_ID'].to_i %>/?label=<%= ENV['ADWORDS_CONVERSION_LABEL'] %>&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+<% end %>

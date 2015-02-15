@@ -61,6 +61,9 @@ class RegistrationsController < Devise::RegistrationsController
       # Measure in Google Analytics
       GoogleAnalyticsApi.new.event('user', 'signup', params[:ga_client_id])
 
+      # Mark as Converted for Google AdWords
+      flash[:conversion] = true
+
       yield resource if block_given?
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
