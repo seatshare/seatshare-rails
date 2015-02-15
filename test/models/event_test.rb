@@ -137,4 +137,16 @@ class EventTest < ActiveSupport::TestCase
     assert record[:date_tba] == 0
     assert record[:time_tba] == 0
   end
+
+  test 'user has tickets' do
+    event = Event.find(4)
+    user = User.find(1)
+
+    assert event.user_has_ticket?(user) == true
+
+    event = Event.find(2)
+    user = User.find(1)
+
+    assert event.user_has_ticket?(user) == false
+  end
 end

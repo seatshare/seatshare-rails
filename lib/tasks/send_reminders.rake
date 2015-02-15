@@ -6,15 +6,17 @@ namespace :send_reminders do
 
     puts "[START] #{DateTime.now}"
     groups = Group.all
-    start_time = Date.today.beginning_of_day.utc
-    end_time = Date.today.end_of_day.utc
-    puts "Sending Daily Reminders for events between #{start_time} and #{end_time}"
+    puts "Sending Daily Reminders for events for today"
     for group in groups
-      events = group.events.where("start_time >= '#{start_time}' AND start_time <= '#{end_time}'").order_by_date
+      events = group.events.today.order_by_date
       if events.count > 0
         for group_user in group.group_users
-          if group_user.daily_reminder === 1
+          if group_user.daily_reminder == 1
             user = User.find(group_user.user_id)
+            if (group_user.mine_only == 1)
+              has_tickets = events.map { |e| e.user_has_ticket?(user) }
+              next unless has_tickets.include?(true)
+            end
             puts "- Sending #{user.display_name} (#{user.email}) for #{group.group_name}"
             ScheduleNotifier.daily_schedule(events, group, user).deliver
           end
@@ -34,15 +36,17 @@ namespace :send_reminders do
 
     puts "[START] #{DateTime.now}"
     groups = Group.all
-    start_time = Date.today.beginning_of_day.utc
-    end_time = Date.today.end_of_day.utc + 6.days
-    puts "Sending Weekly Reminders for events between #{start_time} and #{end_time}"
+    puts "Sending Weekly Reminders for events for next seven days"
     for group in groups
-    events = group.events.where("start_time >= '#{start_time}' AND start_time <= '#{end_time}'").order_by_date
+    events = group.events.next_seven_days.order_by_date
       if events.count > 0
         for group_user in group.group_users
-          if group_user.weekly_reminder === 1
+          if group_user.weekly_reminder == 1
             user = User.find(group_user.user_id)
+            if (group_user.mine_only == 1)
+              has_tickets = events.map { |e| e.user_has_ticket?(user) }
+              next unless has_tickets.include?(true)
+            end
             puts "- Sending #{user.display_name} (#{user.email}) for #{group.group_name}"
             ScheduleNotifier.weekly_schedule(events, group, user).deliver
           end
