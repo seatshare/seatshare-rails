@@ -29,6 +29,7 @@ set :default_env, { path: "/opt/rbenv/shims:$PATH" }
 
 set :keep_releases, 5
 
+##
 # Whenever (for scheduled jobs)
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
@@ -45,6 +46,19 @@ namespace :deploy do
 
 end
 
+##
+# Sitemap
+after "deploy:update_code", "sitemaps:create_symlink"
+
+namespace :sitemaps do
+  task :create_symlink, roles: :app do
+    run "mkdir -p #{shared_path}/sitemaps"
+    run "rm -rf #{release_path}/public/sitemaps"
+    run "ln -s #{shared_path}/sitemaps #{release_path}/public/sitemaps"
+  end
+end
+
+##
 # Capistrano console
 namespace :rails do
   desc "Remote console"

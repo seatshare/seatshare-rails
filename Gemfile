@@ -93,6 +93,9 @@ gem "paperclip", "~> 4.2"
 gem "twilio-ruby", '~> 3.12'
 gem "global_phone", "~> 1.0.1"
 
+# Sitemaps
+gem "dynamic_sitemaps"
+
 # testing
 group :testing do
   gem 'guard-minitest'
