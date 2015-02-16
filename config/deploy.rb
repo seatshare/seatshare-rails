@@ -23,6 +23,7 @@ set :bundle_binstubs, nil
 set :pty, true
 
 set :linked_files, %w{config/database.yml .rbenv-vars}
+set :linked_dirs, %w{bin log tmp vendor/bundle public/system public/sitemaps}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 set :default_env, { path: "/opt/rbenv/shims:$PATH" }
@@ -49,14 +50,14 @@ end
 ##
 # Sitemap
 namespace :sitemaps do
-  task :create_symlink, roles: :app do
-    run "mkdir -p #{shared_path}/sitemaps"
-    run "rm -rf #{release_path}/public/sitemaps"
-    run "ln -s #{shared_path}/sitemaps #{release_path}/public/sitemaps"
+  task :create_symlink do 
+    on roles(:web) do
+      run "mkdir -p #{shared_path}/sitemaps"
+      run "rm -rf #{release_path}/public/sitemaps"
+      run "ln -s #{shared_path}/sitemaps #{release_path}/public/sitemaps"
+    end
   end
 end
-
-after "deploy:update_code", "sitemaps:create_symlink"
 
 ##
 # Capistrano console
