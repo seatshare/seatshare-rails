@@ -51,7 +51,7 @@ namespace :sitemap do
   task :generate do
     on roles(:app) do |h|
       run_interactively "bundle exec rake RAILS_ENV=#{fetch(:rails_env)} sitemap:generate", h.user
-      run_interactively "ln -s sitemaps/sitemap.xml sitemap.xml", h.user
+      run_interactively "ln -s public/sitemaps/sitemap.xml public/sitemap.xml", h.user
     end
   end
 end
