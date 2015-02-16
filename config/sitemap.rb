@@ -2,7 +2,7 @@ host "myseatshare.com"
 
 # Default public routes
 sitemap :site do
-  url "https://#{host}#{root_url}", last_mod: Time.now, change_freq: "daily", priority: 1.0
+  url "https://#{host}", last_mod: Time.now, change_freq: "daily", priority: 1.0
   url "https://#{host}#{contact_path}", last_mod: Time.now, change_freq: "weekly", priority: 0.8
   url "https://#{host}#{privacy_path}", last_mod: Time.now, change_freq: "weekly", priority: 0.8
   url "https://#{host}#{tos_path}", last_mod: Time.now, change_freq: "weekly", priority: 0.8

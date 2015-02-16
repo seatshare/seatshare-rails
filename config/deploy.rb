@@ -23,8 +23,7 @@ set :bundle_binstubs, nil
 set :pty, true
 
 set :linked_files, %w{config/database.yml .rbenv-vars}
-set :linked_dirs, %w{bin log tmp vendor/bundle public/system public/sitemaps}
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps}
 
 set :default_env, { path: "/opt/rbenv/shims:$PATH" }
 
@@ -35,7 +34,6 @@ set :keep_releases, 5
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 namespace :deploy do
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -44,17 +42,16 @@ namespace :deploy do
   end
 
   after :publishing, :restart
-
 end
 
 ##
-# Sitemap
-namespace :sitemaps do
-  task :create_symlink do 
-    on roles(:web) do
-      run "mkdir -p #{shared_path}/sitemaps"
-      run "rm -rf #{release_path}/public/sitemaps"
-      run "ln -s #{shared_path}/sitemaps #{release_path}/public/sitemaps"
+# Generate Sitemap
+namespace :sitemap do
+  desc "Generate Sitemap"
+  task :generate do
+    on roles(:app) do |h|
+      run_interactively "bundle exec rake RAILS_ENV=#{fetch(:rails_env)} sitemap:generate", h.user
+      run_interactively "ln -s sitemaps/sitemap.xml sitemap.xml", h.user
     end
   end
 end
