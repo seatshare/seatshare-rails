@@ -45,7 +45,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_equal '/', path
   end
 
-  test 'signup for an account with an invite code' do
+  test 'signup for an account with a valid invite code' do
     get '/register/invite/ABCDEFG123'
     assert_response :success
     assert_select 'h4', "You've been invited join a group!"
@@ -65,7 +65,26 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal nil, flash[:alert]
     assert_equal 'Welcome! You have signed up successfully.', flash[:notice]
-    assert_equal '/groups/join', path
+    assert_equal '/groups/1', path
+  end
+
+  test 'signup for an account with a bad invite code' do
+    post_via_redirect(
+      '/',
+      user: {
+        first_name: 'New',
+        last_name: 'User',
+        email: 'newuser@example.com',
+        password: 'testing123',
+        password_confirm: 'testing123',
+        invite_code: 'XYZ890'
+      }
+    )
+
+    assert_response :success
+    assert_equal nil, flash[:alert]
+    assert_equal 'Welcome! You have signed up successfully.', flash[:notice]
+    assert_equal '/groups', path
   end
 
   test 'signup for an account with an team ID' do

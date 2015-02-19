@@ -1,6 +1,9 @@
 ##
 # Registrations controller
 class RegistrationsController < Devise::RegistrationsController
+  skip_before_filter :require_no_authentication
+  before_filter :redirect_to_join_if_signed_in, if: :user_signed_in?
+
   ##
   # New registration form
   def new
@@ -45,11 +48,7 @@ class RegistrationsController < Devise::RegistrationsController
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         if params[:user][:invite_code]
-          invite_code = params[:user][:invite_code]
-          respond_with(
-            resource,
-            location: groups_join_path + '?invite_code=' + invite_code
-          )
+          register_with_invitation_code(params[:user][:invite_code], resource)
         elsif params[:user][:entity_id]
           entity_id = params[:user][:entity_id]
           respond_with(
@@ -67,7 +66,7 @@ class RegistrationsController < Devise::RegistrationsController
         respond_with(
           resource,
           location: after_inactive_sign_up_path_for(resource)
-        )
+        ) && return
       end
     else
       flash[:alert] = 'There were errors with your registration.'
@@ -83,6 +82,35 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   private
+
+  ##
+  # Redirect to Join if Signed In
+  def redirect_to_join_if_signed_in
+    if params[:group_code] || params[:invite_code]
+      redirect_to(
+        controller: 'groups',
+        action: 'join',
+        invite_code: "#{params[:group_code]}#{params[:invite_code]}"
+      ) && return
+    end
+    require_no_authentication
+  end
+
+  ##
+  # Register with Invitation Code
+  def register_with_invitation_code(invitation_code = nil, resource = nil)
+    group = Group.join_with_invitation_code(invitation_code, resource)
+    if group
+      respond_with(
+        resource,
+        location: group_path(id: group.id)
+      ) && return
+    end
+    respond_with(
+      resource,
+      location: root_path
+    ) && return
+  end
 
   ##
   # Subscribe Newsletter

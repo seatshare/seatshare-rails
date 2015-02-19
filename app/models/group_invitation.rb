@@ -29,11 +29,9 @@ class GroupInvitation < ActiveRecord::Base
   ##
   # Retrieve invitation by invitation code
   def self.get_by_invitation_code(invitation_code = nil)
-    fail 'InvalidInvitation' if invitation_code.length != 10
     invitation = GroupInvitation.where(
       "invitation_code = '#{invitation_code}'"
     ).first
-    fail 'InvalidInvitation' if invitation.nil?
     invitation
   end
 
