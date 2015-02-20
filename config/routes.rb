@@ -23,6 +23,7 @@ SeatShare::Application.routes.draw do
   post 'groups/new' => 'groups#create'
   get 'groups/join' => 'groups#join', as: 'join_group'
   post 'groups/join' => 'groups#do_join'
+  get 'groups/join/:invite_code' => 'groups#join'
   get 'groups/:id' => 'groups#show', as: 'group'
   get 'groups/:id/edit' => 'groups#edit', as: 'edit_group'
   patch 'groups/:id/edit' => 'groups#update'

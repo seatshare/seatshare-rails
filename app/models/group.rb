@@ -111,6 +111,30 @@ class Group < ActiveRecord::Base
     )
   end
 
+  ##
+  # Join by invitation code
+  # - invitation_code: String
+  def self.join_with_invitation_code(invitation_code = nil, user = nil)
+    return false if invitation_code.nil? || user.nil?
+
+    # Start by attempting to using a GroupInvite
+    invitation = GroupInvitation.get_by_invitation_code(invitation_code)
+    unless invitation.blank?
+      invitation.group.join_group(user, 'member')
+      invitation.use_invitation
+      return invitation.group
+    end
+
+    # If that didn't work, use a group.invitation_code
+    group = find_by_invitation_code(invitation_code)
+    unless group.nil?
+      group.join(user, 'member')
+      return group
+    end
+
+    false
+  end
+
   private
 
   ##
