@@ -49,6 +49,26 @@ ActiveAdmin.register User do
     ul do
       User.find(resource.id).groups.order_by_name.collect do |group|
         li auto_link(group)
+        ul do
+          membership = group.group_users.each do |m|
+            next if m.user_id != user.id
+            if m.weekly_reminder == 1
+              li status_tag('Weekly Reminder', :ok)
+            else
+              li status_tag('Weekly Reminder')
+            end
+            if m.daily_reminder == 1
+              li status_tag('Daily Reminder', :ok)
+            else
+              li status_tag('Daily Reminder')
+            end
+            if m.mine_only == 1
+              li status_tag('Mine Only', :ok)
+            else
+              li status_tag('Mine Only')
+            end
+          end
+        end
       end
     end
   end
