@@ -56,6 +56,21 @@ class User < ActiveRecord::Base
   end
 
   ##
+  # User Can View?
+  # - user: instance of user to see if they have a common group
+  def user_can_view?(user)
+    return false if user.nil?
+    shared_users = []
+    groups.collect do |group|
+      group.users.collect do |u|
+        shared_users << u.id
+      end
+    end
+    return true if shared_users.include? user.id
+    false
+  end
+
+  ##
   # Order user records by name
   def self.order_by_name
     order('LOWER(last_name) ASC, LOWER(first_name) ASC')

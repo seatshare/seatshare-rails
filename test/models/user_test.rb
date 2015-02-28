@@ -38,4 +38,16 @@ class UserTest < ActiveSupport::TestCase
     assert users[0].first_name?, 'fixture first name is set'
     assert users[0].last_name?, 'fixture last name is set'
   end
+
+  test 'user can view?' do
+    user1 = User.find(1)
+    user2 = User.find(2)
+    user3 = User.find(3)
+    user4 = User.find(4)
+
+    assert user1.user_can_view?(user2) == true
+    assert user2.user_can_view?(user3) == true
+    assert user3.user_can_view?(user4) == false
+    assert user4.user_can_view?(user2) == false
+  end
 end

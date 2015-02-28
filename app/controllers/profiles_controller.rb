@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
   # Show a user profile
   def show
     @user = User.find_by_id(params[:id]) || not_found
+    not_found unless current_user.user_can_view? @user
     @user.profile = Profile.new if @user.profile.nil?
   end
 
