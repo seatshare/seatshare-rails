@@ -165,7 +165,7 @@ class GroupsController < ApplicationController
       group.join_group(current_user, 'member')
       flash[:notice] = 'Group joined!'
       redirect_to(action: 'show', id: group.id) && return
-    rescue InvitationAlreadyUsed
+    rescue
       flash[:error] = 'The provided invitation code has already been used.'
       redirect_to(action: 'join') && return
     end
@@ -212,6 +212,8 @@ class GroupsController < ApplicationController
   def invite
     @group = Group.find(params[:id]) || not_found
     @group_invitation = GroupInvitation.new
+    @invite_link = "#{request.protocol}#{request.host_with_port}"\
+      "#{new_user_registration_path}/group/#{@group.invitation_code}"
   end
 
   ##
