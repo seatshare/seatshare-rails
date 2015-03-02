@@ -97,6 +97,9 @@ gem "global_phone", "~> 1.0.1"
 # Sitemaps
 gem "dynamic_sitemaps"
 
+# Zeroclipboard
+gem 'zeroclipboard-rails'
+
 # testing
 group :testing do
   gem 'guard-minitest'

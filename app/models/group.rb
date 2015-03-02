@@ -85,6 +85,7 @@ class Group < ActiveRecord::Base
   def join_group(user = nil, role = nil)
     role = 'member' if role != 'admin'
     fail 'NotValidGroup' if id.nil?
+    fail 'AlreadyMember' if member?(user)
     user_group = GroupUser.new(
       user_id: user.id,
       group_id: id,

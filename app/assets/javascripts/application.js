@@ -18,4 +18,5 @@
 //= require underscore
 //= require clndr
 //= require select2
+//= require zeroclipboard
 //= require_directory .
