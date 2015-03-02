@@ -56,7 +56,7 @@ class RegistrationsController < Devise::RegistrationsController
             location: groups_new_path + '?entity_id=' + entity_id
           )
         else
-          respond_with resource, location: after_sign_up_path_for(resource)
+          respond_with resource, location: groups_new_path
         end
       else
         set_flash_message(

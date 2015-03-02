@@ -3,31 +3,48 @@
 <%= form_for @group, url: new_group_path, html: {class: "form-horizontal", role: "form"} do |f| %>
 
 <fieldset>
-  <legend>Group Details</legend>
+  <legend>Create a Season Ticket Group</legend>
 
   <p class="lead">A ticket group exchanges tickets among its membership. You can assign tickets to other users, or request their available tickets.</p> 
 
-  <div class="form-group">
-    <%= f.label :entity, 'Your team', :class => 'col-md-3 control-label'  %>
-    <div class="col-md-9">
-      <% if @entity %>
-      <p class="form-control-static"><%= @entity.display_name %></p>
-      <%= f.hidden_field :entity_id, :value => @entity.id %>
-      <% else %>
-      <%= select_tag 'group[entity_id]', grouped_options_for_select(@entities), { :class => 'form-control', :prompt => '' } %>
-      <p class="help-block"><strong>Choose carefully!</strong> You cannot change your team / venue after the group is created.</p>
-      <% end %>
-    </div>
-  </div>
+  <hr />
 
-  <div class="form-group">
-    <%= f.label :group_name, :class => 'col-md-3 control-label' %>
-    <div class="col-md-9">
-      <%= f.text_field :group_name, :class => 'form-control input-lg', :placeholder => 'e.g. Your Team Super Fans' %>
-    </div>
-  </div>
+  <ol class="user-steps">
+    <li>
+      <h3>Pick a team</h3>
+      <p class="lead">This is how we will organize your tickets.</p>
+      <div class="well">
+        <%= f.label :entity, 'Your Team', :class => 'sr-only control-label'  %>
+        <div>
+          <% if @entity %>
+          <p class="form-control-static"><%= @entity.display_name %></p>
+          <%= f.hidden_field :entity_id, :value => @entity.id %>
+          <% else %>
+          <%= select_tag 'group[entity_id]', grouped_options_for_select(@entities), { :class => 'form-control', :prompt => '' } %>
+          <p class="help-block"><strong>Choose carefully!</strong> You cannot change your team after the group is created.</p>
+          <% end %>
+        </div>
+      </div>
+    </li>
 
+    <li>
+      <h3>Give your group a name</h3>
+      <p class="lead">Tickets to more than one team? Give your group a name to tell them apart.</p>
+      <div class="well">
+        <%= f.label :group_name, 'Group Name', :class => 'sr-only control-label' %>
+        <div>
+          <%= f.text_field :group_name, :class => 'form-control input-lg', :placeholder => 'e.g. Your Team Super Fans' %>
+        </div>
+      </div>
+    </li>
+    <li>
+      <h3>Invite your friends</h3>
+      <p class="lead">You could keep SeatShare all to yourself, but that's not very interesting.</p>
+    </li>
+  </ol>
 </fieldset>
+
+<hr />
 
 <div class="row">
   <div class="text-right col-md-12">
@@ -40,22 +57,15 @@
 <% end %>
 
 <% content_for :sidebar do %>
-
-<div class="well hidden-xs">
-  <h3>All of your favorite teams</h3>
-  <ul>
-    <li>National Football League</li>
-    <li>Major League Baseball</li>
-    <li>National Basketball Association</li>
-    <li>National Hockey League</li>
-    <li>College Football</li>
-    <li>College Basketball</li>
-    <li>Major League Soccer</li>
-    <li>Canadian Football League</li>
-    <li>Women's Flat Track Roller Derby</li>
-  </ul>
+<div class="alert alert-info">
+  <h4>I have an invitation code</h4>
+  <p>If you received an invitation to join an existing group, <%= link_to 'enter your invitation code', groups_join_path %>.</p>
 </div>
 
+<div class="alert alert-info">
+  <h4>Can I browse for public groups?</h4>
+  <p>SeatShare does not yet have "open" ticket groups. Create a group and invite your friends to get started.</p>
+</div>
 <% end %>
 
 <% content_for :page_footer do %>

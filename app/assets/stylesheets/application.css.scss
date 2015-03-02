@@ -22,19 +22,21 @@ body {
   padding-bottom: 30px;
 }
 
+/* Table Cells */
 th.action {
   width: 40px;
 }
-
 th.cost {
   width: 135px;
   min-width: 120px;
 }
 
+/* Group Members */
 ul.group-members li {
   margin-bottom: 0.25em;
 }
 
+/* Sidebar Icon */
 .sidebar-icon {
   float:right;
   opacity: 0.4;
@@ -43,19 +45,17 @@ ul.group-members li {
   margin-left:0.1em;
 }
 
+/* Navbar */
 .navbar-inverse {
   background-color: #4963AE;
   border-color: #4963AE;
 }
-
 .navbar-inverse .navbar-nav > li > a {
   color: #ffffff;
 }
-
 .navbar-inverse .navbar-brand a {
   color: #ffffff;
 }
-
 .navbar-inverse .logo {
   background-image: image-url('seatshare-inverted.svg');
   background-size: 150px 50px;
@@ -64,7 +64,6 @@ ul.group-members li {
   width: 150px;
   overflow: hidden;
 }
-
 .navbar-inverse .logo a {
   margin: 0;
   display: block;
@@ -80,4 +79,33 @@ ul.group-members li {
 /* Tooltips */
 [data-toggle="tooltip"] {
   cursor: pointer;
+}
+
+/* User Steps */
+ol.user-steps {
+  counter-reset: li;
+  list-style: none;
+  *list-style: decimal;
+}
+ol.user-steps > li {
+  position: relative;
+  padding-left: 60px;
+  min-height: 60px;
+}
+ol.user-steps > li:before {
+  content: counter(li);
+  counter-increment: li;
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+  border-radius: 50%;
+  font-size: 18px;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

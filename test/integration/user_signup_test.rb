@@ -22,7 +22,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal nil, flash[:alert]
     assert_equal 'Welcome! You have signed up successfully.', flash[:notice]
-    assert_equal '/groups', path
+    assert_equal '/groups/new', path
   end
 
   test 'signup for an account with an existing email' do
