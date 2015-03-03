@@ -42,6 +42,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
 
       send_conversion
+      notify_slack(resource)
 
       yield resource if block_given?
       if resource.active_for_authentication?
@@ -144,5 +145,18 @@ class RegistrationsController < Devise::RegistrationsController
 
     # Mark as Converted for Google AdWords
     flash[:conversion] = true
+  end
+
+  ##
+  # Notify Slack
+  def notify_slack(user = nil)
+    return if user.nil? || ENV['SLACK_WEBHOOK_URL'].nil? ||
+              Rails.env != 'production'
+    notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
+    notifier.ping "New user: #{user.display_name} <#{user.email}>",
+                  icon_emoji: ':bust_in_silhouette:',
+                  username: 'Signup Notifications'
+  rescue StandardError => e
+    logger.info e.message
   end
 end

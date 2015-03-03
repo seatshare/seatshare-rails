@@ -100,6 +100,9 @@ gem "dynamic_sitemaps"
 # Zeroclipboard
 gem 'zeroclipboard-rails'
 
+# Slack Notifier
+gem 'slack-notifier', '~> 1.1.0'
+
 # testing
 group :testing do
   gem 'guard-minitest'
