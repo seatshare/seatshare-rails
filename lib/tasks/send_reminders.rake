@@ -5,7 +5,7 @@ namespace :send_reminders do
     Time.zone = ActiveSupport::TimeZone["Central Time (US & Canada)"]
 
     puts "[START] #{DateTime.now}"
-    groups = Group.all
+    groups = Group.active
     puts "Sending Daily Reminders for events for today"
     for group in groups
       events = group.events.today.order_by_date
@@ -35,7 +35,7 @@ namespace :send_reminders do
     Time.zone = ActiveSupport::TimeZone["Central Time (US & Canada)"]
 
     puts "[START] #{DateTime.now}"
-    groups = Group.all
+    groups = Group.active
     puts "Sending Weekly Reminders for events for next seven days"
     for group in groups
     events = group.events.next_seven_days.order_by_date
