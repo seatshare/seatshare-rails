@@ -79,6 +79,15 @@ class GroupsControllerTest < ActionController::TestCase
     assert_select 'title', 'Leave Nashville Fans of Ballsports'
   end
 
+  test 'should see deactivate page' do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :deactivate, id: 1
+    assert_response :success, 'got a 200 status'
+    assert_select 'title', 'Deactivate Geeks Watching Hockey'
+  end
+
   test 'should get group page' do
     @user = User.find(1)
     sign_in :user, @user

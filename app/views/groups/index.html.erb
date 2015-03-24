@@ -21,7 +21,10 @@
 			</div>
 			<div class="panel-body">
 				<ul class="list-unstyled text-center">
-					<li>A <strong><%= group.entity.entity_name %></strong> group.</li>
+					<li style="line-height: 120px">
+						<%= image_tag group.avatar.url(:thumb) %>
+					</li>
+					<li>Your <strong><%= group.entity.entity_name %></strong> group.</li>
 					<li>
 						<%= group.users.count %> members.
 					</li>

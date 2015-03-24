@@ -1,0 +1,22 @@
+<% content_for :page_title do %><%= "Deactivate #{@group.group_name}" %><% end %>
+
+<%= form_for @group, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'deactivate', :id => @group.id } do |f| %>
+
+<div class="alert alert-danger alert-block">
+	<h3>Are you sure you want to deactivate "<strong><%= @group.group_name %></strong>?"</h3>
+	<ul class="list">
+		<li>All members will lose access to the group.</li>
+		<li>All members will lose access to their past and future tickets.</li>
+		<li>No further schedule reminders will be sent.</li>
+	</ul>
+	<p class="text-right">
+		<%= f.hidden_field :id, :value => @group.id %>
+		<%= f.submit 'Deactivate the Group', :class => 'btn btn-danger' %>
+	</p>
+</div>
+
+<% end %>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View deactivate group"); }</script>
+<% end %>

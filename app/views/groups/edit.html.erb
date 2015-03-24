@@ -8,7 +8,7 @@
   <legend>Group Details</legend>
 
   <div class="form-group">
-    <%= f.label :group_name, :class => 'col-md-3 control-label' %>
+    <%= f.label :group_name, 'Group Name', :class => 'col-md-3 control-label' %>
     <div class="col-md-9">
       <%= f.text_field :group_name, :class => 'form-control', :placeholder => 'Cellblock 303', :value => @group.group_name %>
     </div>
@@ -41,6 +41,7 @@
 <div class="row">
   <div class="text-right col-md-12">
     <%= f.hidden_field :form_type, :value => 'group' %>
+    <%= link_to 'Deactivate Group', deactivate_group_path, :class => 'btn btn-danger' %>
     <%= f.submit 'Update Group', :class => 'btn btn-primary' %>
   </div>
 </div>
@@ -89,6 +90,8 @@
             <td class="remove-user">
               <% if member != current_user %>
                 <%= link_to raw('<span class="fa fa-trash"></span>'), { :action => 'leave', :user_id => member.id, :id => @group.id }, :class => 'btn btn-sm btn-danger confirm', :method => 'post' %>
+              <% else %>
+                <div data-toggle="tooltip" title="You cannot leave this group."><span class="btn btn-sm btn-danger disabled"><i class="fa fa-trash"></i></span></div>
               <% end %>
             </td>
           <% end %>
