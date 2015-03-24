@@ -138,4 +138,18 @@ class GroupTest < ActiveSupport::TestCase
     assert group.member?(user) == true, 'user is still a member'
     assert group.admin?(user) == true, 'user is still an admin'
   end
+
+  test 'deactivate a group as an admin' do
+    user = User.find(1)
+    group = Group.find(1)
+
+    assert group.member?(user) == true, 'user is a member'
+    assert group.admin?(user) == true, 'user is an admin'
+
+    group.deactivate
+
+    assert group.status == 0, 'group is inactive'
+    assert group.member?(user) == true, 'user is still a member'
+    assert group.admin?(user) == true, 'user is still an admin'
+  end
 end

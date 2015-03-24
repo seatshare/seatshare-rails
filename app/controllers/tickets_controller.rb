@@ -15,12 +15,16 @@ class TicketsController < ApplicationController
       operator = '>='
     end
     @tickets = {
-      owned:   Ticket.where("owner_id = #{current_user.id}")
-               .joins(:event)
-               .where("start_time #{operator} '#{Time.now}'")
-               .order_by_date.order_by_seat,
+      owned:    Ticket.where("owner_id = #{current_user.id}")
+                .joins(:group)
+                .where('status = 1')
+                .joins(:event)
+                .where("start_time #{operator} '#{Time.now}'")
+                .order_by_date.order_by_seat,
       assigned: Ticket.where("owner_id != #{current_user.id}")
                 .where("user_id = #{current_user.id}")
+                .joins(:group)
+                .where('status = 1')
                 .joins(:event)
                 .where("start_time #{operator} '#{Time.now}'")
                 .order_by_date.order_by_seat
@@ -55,8 +59,7 @@ class TicketsController < ApplicationController
   def new
     @group = Group.find_by_id(params[:group_id]) || not_found
     @ticket = Ticket.new(
-      owner_id: current_user.id,
-      user_id: current_user.id
+      owner_id: current_user.id, user_id: current_user.id
     )
 
     @members = @group.users.order_by_name.collect { |p| [p.display_name, p.id] }
@@ -209,8 +212,7 @@ class TicketsController < ApplicationController
     fail 'NotGroupMember' unless @group.member?(current_user)
     @ticket_stats = @event.ticket_stats(@group, current_user)
     redirect_to(
-      action: 'edit',
-      id: @ticket.id
+      action: 'edit', id: @ticket.id
     ) if @ticket.assigned == current_user || @ticket.owner == current_user
   end
 
@@ -292,9 +294,7 @@ class TicketsController < ApplicationController
       ticket_id: ticket.id,
       group_id: ticket.group_id,
       entry: JSON.generate(
-        text: action,
-        user: user_record,
-        ticket: ticket.attributes
+        text: action, user: user_record, ticket: ticket.attributes
       )
     )
     ticket_history.save

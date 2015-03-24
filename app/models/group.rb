@@ -9,6 +9,8 @@ class Group < ActiveRecord::Base
   has_many :events, through: :entity
 
   validates :entity_id, :group_name, :creator_id, presence: true
+  validates_uniqueness_of :group_name, scope: :creator_id,
+                                       conditions: -> { where(status: 1) }
   before_save :clean_invitation_code
 
   has_attached_file(
@@ -113,6 +115,13 @@ class Group < ActiveRecord::Base
   end
 
   ##
+  # Deactivate Group
+  def deactivate
+    self.status = 0
+    save!
+  end
+
+  ##
   # Join by invitation code
   # - invitation_code: String
   def self.join_with_invitation_code(invitation_code = nil, user = nil)
@@ -129,7 +138,7 @@ class Group < ActiveRecord::Base
     # If that didn't work, use a group.invitation_code
     group = find_by_invitation_code(invitation_code)
     unless group.nil?
-      group.join(user, 'member')
+      group.join_group(user, 'member')
       return group
     end
 

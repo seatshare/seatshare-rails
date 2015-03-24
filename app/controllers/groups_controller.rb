@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
   ##
   # Index view of groups or welcome page
   def index
-    @groups = current_user.groups
+    @groups = current_user.groups.active
     render 'groups/welcome' if @groups.blank?
   end
 
@@ -205,6 +205,30 @@ class GroupsController < ApplicationController
     else
       redirect_to(controller: 'groups', action: 'index') && return
     end
+  end
+
+  ##
+  # Deactivate Group
+  def deactivate
+    @group = Group.find_by_id(params[:id]) || not_found
+    redirect_to(
+      action: 'show', id: @group.id
+    ) && return unless @group.admin?(current_user)
+  end
+
+  ##
+  # Process a group deactivation
+  def do_deactivate
+    group = Group.find(params[:id]) || not_found
+    if group.deactivate
+      flash[:notice] = 'Your group has been deactivated!'
+      session.delete :current_group_id
+    else
+      flash[:error] = 'Unable to deactivate your group.'
+    end
+    redirect_to(
+      action: 'index'
+    ) && return
   end
 
   ##

@@ -33,6 +33,8 @@ SeatShare::Application.routes.draw do
   get 'groups/:id/invite' => 'groups#invite', as: 'invite_group'
   post 'groups/:id/invite' => 'groups#do_invite'
   post 'groups/:id/reset_invite' => 'groups#do_reset_invite'
+  get 'groups/:id/deactivate' => 'groups#deactivate', as: 'deactivate_group'
+  patch 'groups/:id/deactivate' => 'groups#do_deactivate'
   get 'groups/:id/message' => 'groups#message', as: 'message_group'
   post 'groups/:id/message' => 'groups#do_message'
   get 'groups/:id/events_feed' => 'groups#events_feed'
