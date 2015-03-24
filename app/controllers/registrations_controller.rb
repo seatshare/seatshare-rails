@@ -94,7 +94,7 @@ class RegistrationsController < Devise::RegistrationsController
         invite_code: "#{params[:group_code]}#{params[:invite_code]}"
       ) && return
     end
-    require_no_authentication
+    require_no_authentication unless %w(edit update).include? params[:action]
   end
 
   ##

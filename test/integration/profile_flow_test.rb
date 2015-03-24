@@ -34,6 +34,28 @@ class ProfileFlowTest < ActionDispatch::IntegrationTest
     assert_select '.profile-mobile', '(555) 555-4567'
   end
 
+  test 'change email or password' do
+    post_via_redirect(
+      '/login',
+      user: { email: users(:jim).email, password: 'testing123' }
+    )
+
+    get '/edit'
+    assert_response :success
+    assert_select 'legend', 'Your Login'
+
+    put_via_redirect(
+      '/',
+      user: {
+        email: 'some_new_email@example.com',
+        current_password: 'testing123'
+      }
+    )
+    assert_response :success
+    assert_equal '/groups/1', path
+    assert_equal 'You updated your account successfully.', flash[:notice]
+  end
+
   test 'view edit user without profile' do
     post_via_redirect(
       '/login',
