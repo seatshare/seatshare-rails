@@ -146,9 +146,7 @@ class GroupTest < ActiveSupport::TestCase
     assert group.member?(user) == true, 'user is a member'
     assert group.admin?(user) == true, 'user is an admin'
 
-    assert_raises RuntimeError do
-      group.deactivate
-    end
+    group.deactivate
 
     assert group.status == 0, 'group is inactive'
     assert group.member?(user) == true, 'user is still a member'
