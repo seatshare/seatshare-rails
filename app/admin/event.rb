@@ -25,6 +25,10 @@ ActiveAdmin.register Event do
     link_to 'Import from SODA', action: 'import_soda'
   end
 
+  action_item 'import', only: :index do
+    link_to 'Import from File', action: 'import_file'
+  end
+
   show do
     attributes_table do
       row :id
@@ -95,4 +99,28 @@ ActiveAdmin.register Event do
       end
     end
   end
+
+  collection_action :import_file, method: :get
+  collection_action :import_file, method: :post do
+    @page_title = 'Import from File'
+
+    unless params[:file].nil?
+
+      # Used to display the list back upon completion
+      @events_list = []
+
+      # Used to flash messages describing error or success
+      @messages = []
+
+      # Loop through team ids and run importer
+      importer = FileScheduleImport.new
+      importer.run(
+        file: params[:file],
+      )
+
+      @events_list += importer.events_list
+      @messages += importer.messages
+    end
+  end
+
 end
