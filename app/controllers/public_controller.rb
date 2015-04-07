@@ -32,6 +32,17 @@ class PublicController < ApplicationController
   end
 
   ##
+  # League page
+  def league
+    abbreviation = params[:entity_type_abbreviation].upcase || not_found
+    @entity_types = EntityType.by_sort
+    @entity_type = EntityType.where(
+      ['entity_type_abbreviation = ?', abbreviation]
+    ).first || not_found
+    @entities = @entity_type.entities.active.by_name
+  end
+
+  ##
   # Terms of Service
   def tos
   end
@@ -53,6 +64,8 @@ class PublicController < ApplicationController
   def layout_by_action
     if params[:action] == 'index'
       'home'
+    elsif params[:action] == 'league'
+      'single-column'
     else
       'two-column'
     end
