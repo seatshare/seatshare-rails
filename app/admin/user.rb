@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :first_name, :last_name, :email, :password, :password_confirmation, :status, :timezone, profile_attributes: [:bio, :location, :mobile]
+  permit_params :first_name, :last_name, :email, :password, :password_confirmation, :status, :timezone, :bio, :location, :mobile, :sms_notify
 
   index do
     selectable_column
@@ -33,14 +33,10 @@ ActiveAdmin.register User do
       f.input :email
       f.input :timezone
       f.input :status
-      f.inputs do
-        f.has_many :profile, allow_destroy: false, new_record: false do |pf|
-          pf.input :bio
-          pf.input :location
-          pf.input :mobile
-          pf.input :sms_notify, :label => 'Notify SMS'
-        end
-      end
+      f.input :bio
+      f.input :location
+      f.input :mobile
+      f.input :sms_notify, :label => 'Notify SMS'
     end
     f.actions
   end
@@ -50,7 +46,7 @@ ActiveAdmin.register User do
       User.find(resource.id).groups.by_name.collect do |group|
         li auto_link(group)
         ul do
-          membership = group.memberships.each do |m|
+          group.memberships.each do |m|
             next if m.user_id != user.id
             if m.weekly_reminder == 1
               li status_tag('Weekly Reminder', :ok)

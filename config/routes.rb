@@ -57,15 +57,10 @@ SeatShare::Application.routes.draw do
   get 'tickets/:filter' => 'tickets#index'
   post 'tickets' => 'tickets#bulk_update'
 
-  get 'profiles/:id' => 'profiles#show'
-  get 'profile' => 'profiles#edit'
-  patch 'profile' => 'profiles#update'
-
-  get 'profile/aliases/new' => 'user_aliases#new', as: 'new_user_alias'
-  post 'profile/aliases/new' => 'user_aliases#create'
-  get 'profile/aliases/:id/edit' => 'user_aliases#edit', as: 'edit_user_alias'
-  post 'profile/aliases/:id/edit' => 'user_aliases#update'
-  get 'profile/aliases/:id/delete' => 'user_aliases#delete', as: 'delete_user_alias'
+  resource :user, path: 'profile', only: [:edit, :update] do
+    resources :aliases, controller: :user_aliases
+  end
+  resources :users, path: 'profiles', only: [:show]
 
   match '/404' => 'errors#error404', via: [:get, :post, :patch, :delete]
 

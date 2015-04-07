@@ -21,7 +21,7 @@ class UserAliasesController < ApplicationController
     user_alias.save!
     flash.keep
     flash[:notice] = 'User alias created!'
-    redirect_to(controller: 'profiles', action: 'edit') && return
+    redirect_to(controller: :users, action: :edit) && return
   end
 
   ##
@@ -29,7 +29,7 @@ class UserAliasesController < ApplicationController
   def edit
     @user_alias = UserAlias.find_by_id(params[:id]) || not_found
     redirect_to(
-      controller: 'profiles', action: 'edit'
+      controller: :users, action: :edit
     ) && return if @user_alias.user_id != current_user.id
   end
 
@@ -42,20 +42,20 @@ class UserAliasesController < ApplicationController
     user_alias.save!
     flash.keep
     flash[:notice] = 'User Alias updated!'
-    redirect_to(controller: 'profiles', action: 'edit') && return
+    redirect_to(controller: :users, action: :edit) && return
   end
 
   ##
   # Process a user alias delete
-  def delete
+  def destroy
     user_alias = UserAlias.find_by_id(params[:id]) || not_found
     if user_alias.user_id != current_user.id
-      redirect_to(controller: 'profiles', action: 'edit') && return
+      redirect_to(controller: :users, action: :edit) && return
     end
     user_alias.destroy
     flash.keep
     flash[:notice] = 'User Alias deleted.'
-    redirect_to(controller: 'profiles', action: 'edit') && return
+    redirect_to(controller: :users, action: :edit) && return
   end
 
   private

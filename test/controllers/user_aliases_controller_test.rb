@@ -17,7 +17,7 @@ class UserAliasesControllerTest < ActionController::TestCase
     get :edit, id: 1
 
     assert_response :redirect
-    assert_redirected_to '/profile'
+    assert_redirected_to edit_user_path
   end
 
   test 'should get add' do
@@ -40,13 +40,13 @@ class UserAliasesControllerTest < ActionController::TestCase
     assert_select 'title', 'Edit User Alias'
   end
 
-  test 'should get delete' do
+  test 'should get destroy' do
     @user = User.find(1)
     sign_in :user, @user
 
-    get :delete, id: 1
+    get :destroy, id: 1
 
     assert_response :redirect
-    assert_redirected_to '/profile'
+    assert_redirected_to edit_user_path
   end
 end

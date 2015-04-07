@@ -116,4 +116,6 @@ group :development do
   gem 'guard-livereload'
   gem 'guard-bundler', group: :development
   gem 'guard-rubocop'
+  gem 'pry-rails'
+  gem 'pry-nav'
 end

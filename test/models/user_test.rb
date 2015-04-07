@@ -23,6 +23,10 @@ class UserTest < ActiveSupport::TestCase
     assert user.first_name == 'Jim', 'fixture first name matches'
     assert user.last_name == 'Stone', 'fixture last name matches'
     assert user.email == 'stonej@example.net', 'fixture email matches'
+    assert user.bio == 'A simple kind of man.', 'fixture bio matches'
+    assert user.location == 'Some Town, TX', 'fixture location matches'
+    assert user.mobile == '141-086-75309', 'fixture mobile matches'
+    assert user.sms_notify == true, 'fixture sms_notify matches'
   end
 
   test 'get full name of user' do
@@ -49,5 +53,24 @@ class UserTest < ActiveSupport::TestCase
     assert user2.user_can_view?(user3) == true
     assert user3.user_can_view?(user4) == false
     assert user4.user_can_view?(user2) == false
+  end
+
+  test 'convert phone number to E.164 format' do
+    user = User.find(1)
+    assert_equal '+14108675309', user.mobile_e164
+  end
+
+  test 'uses markdown for bio' do
+    user = User.find(1)
+    user.bio = "*I'm a teapot*"
+
+    assert_equal user.bio_md, "<p><em>I&#39;m a teapot</em></p>\n"
+
+    user.bio = 'http://google.com'
+
+    assert_equal(
+      user.bio_md,
+      "<p><a href=\"http://google.com\">http://google.com</a></p>\n"
+    )
   end
 end

@@ -1,8 +1,8 @@
 require 'test_helper'
 
 ##
-# Profiles controller test
-class ProfilesControllerTest < ActionController::TestCase
+# Users controller test
+class UsersControllerTest < ActionController::TestCase
   test 'should be redirected' do
     get :show, id: 3
 

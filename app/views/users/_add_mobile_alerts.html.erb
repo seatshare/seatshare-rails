@@ -1,0 +1,10 @@
+<% if current_user.mobile.blank? %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="sidebar-icon"><%= link_to raw('<span class="fa fa-mobile"></span>'), user_path %></div>
+    <h3>Never miss an alert from SeatShare</h3>
+    <p>Add your mobile phone number to receive a text message when someone requests or assigns you a ticket.</p>
+    <p><%= link_to 'Add Mobile Number', user_path, class: 'btn btn-info' %></p>
+  </div>
+</div>
+<% end %>

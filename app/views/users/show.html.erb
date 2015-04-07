@@ -13,15 +13,15 @@
     </p>
     <% end %>
     <h2><%= @user.display_name %></h2>
-    <p><small class="text-muted"> <%= !@user.profile.location.blank? ? @user.profile.location : '<em>No Location Set</em>'.html_safe %> <span class="fa fa-map-marker"></span></small></p>
+    <p><small class="text-muted"> <%= !@user.location.blank? ? @user.location : '<em>No Location Set</em>'.html_safe %> <span class="fa fa-map-marker"></span></small></p>
 
-    <div class="lead"><%= raw(@user.profile.bio_md) %></div>
+    <div class="lead"><%= raw(@user.bio_md) %></div>
 
     <br />
     <ul class="list-group">
       <li class="list-group-item profile-email"><span class="fa fa-envelope"></span> <%= mail_to @user.email, @user.email %></li>
       <li class="list-group-item profile-joined"><span class="fa fa-user"></span> Joined <%= @user.created_at.strftime('%B %-d, %Y') %></li>
-      <li class="list-group-item profile-mobile"><span class="fa fa-phone"></span> <%= !@user.profile.mobile.blank? ? number_to_phone(@user.profile.mobile) : 'Not Provided' %></li>
+      <li class="list-group-item profile-mobile"><span class="fa fa-phone"></span> <%= !@user.mobile.blank? ? number_to_phone(@user.mobile) : 'Not Provided' %></li>
     </ul>
   </div>
 </div>

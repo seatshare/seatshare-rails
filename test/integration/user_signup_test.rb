@@ -120,14 +120,14 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post_via_redirect(
-      '/profile/aliases/new',
+      user_aliases_path,
       user_alias: { first_name: 'New', last_name: 'Alias' }
     )
 
     assert_response :success
     assert_equal nil, flash[:alert]
     assert_equal 'User alias created!', flash[:notice]
-    assert_equal '/profile', path
+    assert_equal edit_user_path, path
   end
 
   test 'delete user alias' do
@@ -136,14 +136,14 @@ class UserSignupTest < ActionDispatch::IntegrationTest
       user: { email: users(:jill).email, password: 'testing123' }
     )
 
-    get '/profile'
+    get edit_user_path
     assert_response :success
 
-    get_via_redirect '/profile/aliases/2/delete'
+    delete_via_redirect user_alias_path(2)
 
     assert_response :success
     assert_equal nil, flash[:alert]
     assert_equal 'User Alias deleted.', flash[:notice]
-    assert_equal '/profile', path
+    assert_equal edit_user_path, path
   end
 end

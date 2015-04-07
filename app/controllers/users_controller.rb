@@ -1,6 +1,6 @@
 ##
-# Profiles controller
-class ProfilesController < ApplicationController
+# Users controller
+class UsersController < ApplicationController
   before_action :authenticate_user!
   layout 'two-column'
 
@@ -9,14 +9,12 @@ class ProfilesController < ApplicationController
   def show
     @user = User.find_by_id(params[:id]) || not_found
     not_found unless current_user.user_can_view? @user
-    @user.profile = Profile.new if @user.profile.nil?
   end
 
   ##
   # Edit the current user's profile
   def edit
     @user = current_user
-    @user.profile = Profile.new if @user.profile.nil?
     @user_aliases = current_user.user_aliases.by_name
   end
 
@@ -28,7 +26,7 @@ class ProfilesController < ApplicationController
 
     flash.keep
     flash[:notice] = 'Profile updated!'
-    redirect_to(action: 'show', id: @current_user.id) && return
+    redirect_to(action: :show, id: @current_user.id) && return
   end
 
   private
@@ -37,8 +35,7 @@ class ProfilesController < ApplicationController
   # Strong parameters for user profile
   def user_params
     params.require(:user).permit(
-      :first_name, :last_name, :timezone,
-      profile_attributes: [:bio, :location, :mobile, :sms_notify]
+      :first_name, :last_name, :timezone, :bio, :location, :mobile, :sms_notify
     )
   end
 end

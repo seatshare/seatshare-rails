@@ -46,11 +46,11 @@
           <% end %>
         </td>
         <td>
-          <%= link_to ticket.owner.display_name, :controller => 'profiles', :action => 'show', :id => ticket.owner.id %>
+          <%= link_to ticket.owner.display_name, :controller => :users, :action => :show, :id => ticket.owner.id %>
         </td>
         <td>
           <% if ticket.assigned %>
-          <%= link_to ticket.assigned.display_name, :controller => 'profiles', :action => 'show', :id => ticket.assigned.id %>
+          <%= link_to ticket.assigned.display_name, :controller => :users, :action => :show, :id => ticket.assigned.id %>
           <% if ticket.alias %>
           <br />(for <%= ticket.alias.display_name %>)
           <% end %>

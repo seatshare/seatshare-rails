@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
   has_many :user_aliases
   has_many :memberships
   has_many :groups, through: :memberships
-  has_one :profile
-
-  accepts_nested_attributes_for :profile
 
   validates :first_name, :last_name, :email, presence: true
 
@@ -52,6 +49,18 @@ class User < ActiveRecord::Base
     email_address = email.downcase
     hash = Digest::MD5.hexdigest(email_address)
     "https://www.gravatar.com/avatar/#{hash}?s=#{dimensions}&d=mm"
+  end
+
+  ##
+  # Format mobile phone number in `+11235551234` format
+  def mobile_e164
+    GlobalPhone.normalize(mobile)
+  end
+
+  ##
+  # Bio as Markdown
+  def bio_md
+    GitHub::Markdown.render(bio)
   end
 
   ##

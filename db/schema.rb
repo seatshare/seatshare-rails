@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326015944) do
+ActiveRecord::Schema.define(version: 20150407030434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,16 +128,6 @@ ActiveRecord::Schema.define(version: 20150326015944) do
 
   add_index "memberships", ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id", using: :btree
 
-  create_table "profiles", force: true do |t|
-    t.integer  "user_id"
-    t.text     "bio"
-    t.string   "location"
-    t.string   "mobile"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "sms_notify"
-  end
-
   create_table "ticket_files", force: true do |t|
     t.integer  "user_id"
     t.integer  "ticket_id"
@@ -205,6 +195,10 @@ ActiveRecord::Schema.define(version: 20150326015944) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "timezone"
+    t.text     "bio"
+    t.string   "location"
+    t.string   "mobile"
+    t.boolean  "sms_notify"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

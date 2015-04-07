@@ -16,10 +16,10 @@ class TwilioSMS
   ##
   # Send notification of an assigned ticket
   def assign_ticket(ticket, acting_user)
-    profile = ticket.assigned.profile
-    return false unless !profile.mobile.blank? && profile.sms_notify
+    assignee = ticket.assigned
+    return false unless !assignee.mobile.blank? && user.sms_notify
     twilio_client.messages.create(
-      from: ENV['TWILIO_OUTBOUND_NUMBER'], to: profile.mobile_e164,
+      from: ENV['TWILIO_OUTBOUND_NUMBER'], to: assignee.mobile_e164,
       body: "#{acting_user.display_name} has assigned you "\
         "#{ticket.display_name} for #{ticket.event.event_name}. Log in to "\
         'https://myseatshare.com to view.'
@@ -31,10 +31,10 @@ class TwilioSMS
   ##
   # Send notification of a requested ticket
   def request_ticket(ticket, acting_user)
-    profile = ticket.owner.profile
-    return false unless !profile.mobile.blank? && profile.sms_notify
+    owner = ticket.owner
+    return false unless !owner.mobile.blank? && owner.sms_notify
     twilio_client.messages.create(
-      from: ENV['TWILIO_OUTBOUND_NUMBER'], to: profile.mobile_e164,
+      from: ENV['TWILIO_OUTBOUND_NUMBER'], to: owner.mobile_e164,
       body: "#{acting_user.display_name} has requested #{ticket.display_name} "\
         "for #{ticket.event.event_name}. Log in to "\
         'https://myseatshare.com to assign.'

@@ -84,7 +84,7 @@
         <% for member in @members %>
         <tr>
           <td><%= image_tag member.gravatar, :alt => member.display_name, :title => member.display_name %></td>
-          <td><%= link_to member.display_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></td>
+          <td><%= link_to member.display_name, {:controller => :users, :action => :show, :id => member.id } %></td>
           <td><%= mail_to member.email %></td>
           <% if @group.admin?(current_user) %>
             <td class="remove-user">
