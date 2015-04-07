@@ -89,5 +89,92 @@ Entity.create([
   },
   {
     id: 4270, import_key: "l.pclbaseball.com-t.310", entity_name: "Las Vegas 51s", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4271, import_key: "l.texas-league.com-t.Y95", entity_name: "Corpus Christi Hooks", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4272, import_key: "l.texas-league.com-t.354", entity_name: "Frisco RoughRiders", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4273, import_key: "l.texas-league.com-t.344", entity_name: "Midland RockHounds", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4274, import_key: "l.texas-league.com-t.353", entity_name: "San Antonio Missions", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4275, import_key: "l.texas-league.com-t.332", entity_name: "Arkansas Travelers", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4276, import_key: "l.texas-league.com-t.359", entity_name: "Northwest Arkansas Naturals", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4277, import_key: "l.texas-league.com-t.338", entity_name: "Springfield Cardinals", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4278, import_key: "l.texas-league.com-t.357", entity_name: "Tulsa Drillers", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4279, import_key: "l.southernleague.com-t.343", entity_name: "Jacksonville Suns", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4280, import_key: "l.southernleague.com-t.340", entity_name: "Mississippi Braves", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4281, import_key: "l.southernleague.com-t.345", entity_name: "Mobile BayBears", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4282, import_key: "l.southernleague.com-t.ZX9", entity_name: "Pensacola Blue Wahoos", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4283, import_key: "l.southernleague.com-t.342", entity_name: "Biloxi Shuckers", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4284, import_key: "l.southernleague.com-t.334", entity_name: "Birmingham Barons", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4285, import_key: "l.southernleague.com-t.337", entity_name: "Chattanooga Lookouts", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4286, import_key: "l.southernleague.com-t.358", entity_name: "Jackson Generals", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4287, import_key: "l.southernleague.com-t.349", entity_name: "Montgomery Biscuits", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4288, import_key: "l.southernleague.com-t.355", entity_name: "Tennessee Smokies", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4289, import_key: "l.easternleague.com-t.330", entity_name: "Akron RubberDucks", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4290, import_key: "l.easternleague.com-t.331", entity_name: "Altoona Curve", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4291, import_key: "l.easternleague.com-t.335", entity_name: "Bowie Baysox", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4292, import_key: "l.easternleague.com-t.339", entity_name: "Erie SeaWolves", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4293, import_key: "l.easternleague.com-t.341", entity_name: "Harrisburg Senators", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4294, import_key: "l.easternleague.com-t.348", entity_name: "Richmond Flying Squirrels", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4295, import_key: "l.easternleague.com-t.333", entity_name: "Binghamton Mets", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4296, import_key: "l.easternleague.com-t.346", entity_name: "New Britain Rock Cats", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4297, import_key: "l.easternleague.com-t.347", entity_name: "New Hampshire Fisher Cats", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4298, import_key: "l.easternleague.com-t.350", entity_name: "Portland Sea Dogs", entity_type_id: 11, status: 1
+  },
+  {
+    id: 4299, import_key: "l.easternleague.com-t.356", entity_name: "Trenton Thunder", entity_type_id: 11, status: 1
   }
 ])
