@@ -27,10 +27,10 @@ ActiveAdmin.register Group do
 
   sidebar 'Group Members', only: :show do
     ul do
-      Group.find(resource.id).users.order_by_name.collect do |user|
+      Group.find(resource.id).members.order_by_name.collect do |user|
         li auto_link(user)
         ul do
-          membership = user.group_users.each do |m|
+          membership = user.memberships.each do |m|
             next if m.group_id != group.id
             if m.weekly_reminder == 1
               li status_tag('Weekly Reminder', :ok)

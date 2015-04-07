@@ -159,7 +159,7 @@ ActiveAdmin.register_page 'Dashboard' do
               Group.all.order('created_at DESC').limit(5).map do |group|
                 tr class: cycle('even', 'odd') do
                   td link_to(group.group_name, admin_group_path(group))
-                  td group.users.count
+                  td group.members.count
                   td auto_link(group.entity)
                   td group.created_at.strftime('%-m/%-d/%Y')
                 end

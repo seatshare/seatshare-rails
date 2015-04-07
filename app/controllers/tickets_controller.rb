@@ -62,7 +62,7 @@ class TicketsController < ApplicationController
       owner_id: current_user.id, user_id: current_user.id
     )
 
-    @members = @group.users.order_by_name.collect { |p| [p.display_name, p.id] }
+    @members = @group.members.order_by_name.collect { |p| [p.display_name, p.id] }
     @members.unshift(['Unassigned', 0])
     @user_aliases = current_user.user_aliases
                     .order_by_name
@@ -150,7 +150,7 @@ class TicketsController < ApplicationController
       redirect_to action: 'request_ticket', id: @ticket.id
     end
     @ticket_stats = @event.ticket_stats(@group, current_user)
-    @members = @group.users
+    @members = @group.members
                .order_by_name
                .order_by_name
                .collect { |p| [p.display_name, p.id] }
