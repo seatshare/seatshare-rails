@@ -24,9 +24,12 @@ EntityType.create([
     id: 8, entity_type_name: 'NCAA Men\'s Basketball', entity_type_abbreviation: 'NCAAMB', sort: 80
   },
   {
-    id: 9, entity_type_name: 'Women\'s Flat Track Derby Assocation', entity_type_abbreviation: 'WFTDA', sort: 100
+    id: 9, entity_type_name: 'Women\'s Flat Track Derby Assocation', entity_type_abbreviation: 'WFTDA', sort: 110
   },
   {
     id: 10, entity_type_name: 'NCAA Women\'s Basketball', entity_type_abbreviation: 'NCAAWB', sort: 90
+  },
+  {
+    id: 11, entity_type_name: 'Minor League Baseball', entity_type_abbreviation: 'MILB', sort: 100
   }
 ])
