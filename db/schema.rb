@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213234045) do
+ActiveRecord::Schema.define(version: 20150326015944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,19 +97,6 @@ ActiveRecord::Schema.define(version: 20150213234045) do
   add_index "group_invitations", ["invitation_code"], name: "index_group_invitations_on_invitation_code", unique: true, using: :btree
   add_index "group_invitations", ["user_id"], name: "index_group_invitations_on_user_id", using: :btree
 
-  create_table "group_users", id: false, force: true do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.string   "role"
-    t.integer  "daily_reminder"
-    t.integer  "weekly_reminder"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "mine_only"
-  end
-
-  add_index "group_users", ["group_id", "user_id"], name: "index_group_users_on_group_id_and_user_id", using: :btree
-
   create_table "groups", force: true do |t|
     t.integer  "entity_id"
     t.string   "group_name"
@@ -127,6 +114,19 @@ ActiveRecord::Schema.define(version: 20150213234045) do
   add_index "groups", ["creator_id"], name: "index_groups_on_creator_id", using: :btree
   add_index "groups", ["entity_id"], name: "index_groups_on_entity_id", using: :btree
   add_index "groups", ["invitation_code"], name: "index_groups_on_invitation_code", unique: true, using: :btree
+
+  create_table "memberships", id: false, force: true do |t|
+    t.integer  "group_id"
+    t.integer  "member_id"
+    t.string   "role"
+    t.integer  "daily_reminder"
+    t.integer  "weekly_reminder"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "mine_only"
+  end
+
+  add_index "memberships", ["group_id", "member_id"], name: "index_memberships_on_group_id_and_member_id", using: :btree
 
   create_table "profiles", force: true do |t|
     t.integer  "user_id"

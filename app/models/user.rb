@@ -5,11 +5,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :groups
   has_many :tickets
   has_many :user_aliases
-  has_many :group_users
-  has_many :groups, through: :group_users
+  has_many :memberships
+  has_many :groups, through: :memberships
   has_one :profile
 
   accepts_nested_attributes_for :profile
@@ -62,7 +61,7 @@ class User < ActiveRecord::Base
     return false if user.nil?
     shared_users = []
     groups.collect do |group|
-      group.users.collect do |u|
+      group.members.collect do |u|
         shared_users << u.id
       end
     end

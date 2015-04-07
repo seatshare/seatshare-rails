@@ -10,10 +10,10 @@ namespace :send_reminders do
     for group in groups
       events = group.events.today.order_by_date
       if events.count > 0
-        for group_user in group.group_users
-          if group_user.daily_reminder == 1
-            user = User.find(group_user.user_id)
-            if (group_user.mine_only == 1)
+        for membership in group.memberships
+          if membership.daily_reminder == 1
+            user = User.find(membership.user_id)
+            if (membership.mine_only == 1)
               has_tickets = events.map { |e| e.user_has_ticket?(user) }
               next unless has_tickets.include?(true)
             end
@@ -40,10 +40,10 @@ namespace :send_reminders do
     for group in groups
     events = group.events.next_seven_days.order_by_date
       if events.count > 0
-        for group_user in group.group_users
-          if group_user.weekly_reminder == 1
-            user = User.find(group_user.user_id)
-            if (group_user.mine_only == 1)
+        for membership in group.memberships
+          if membership.weekly_reminder == 1
+            user = User.find(membership.user_id)
+            if (membership.mine_only == 1)
               has_tickets = events.map { |e| e.user_has_ticket?(user) }
               next unless has_tickets.include?(true)
             end

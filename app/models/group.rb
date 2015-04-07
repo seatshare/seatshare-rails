@@ -4,8 +4,8 @@ class Group < ActiveRecord::Base
   belongs_to :entity
   belongs_to :creator, class_name: 'User'
 
-  has_many :group_users
-  has_many :users, through: :group_users
+  has_many :memberships
+  has_many :members, through: :memberships, source: :user
   has_many :events, through: :entity
 
   validates :entity_id, :group_name, :creator_id, presence: true
@@ -55,29 +55,29 @@ class Group < ActiveRecord::Base
   ##
   # List of administrators for group
   def administrators
-    users.where(group_users: { role: 'admin' })
+    members.where(memberships: { role: 'admin' })
   end
 
   ##
   # See if user is group member
   # - user: User object
   def member?(user = nil)
-    group_user = GroupUser.where(
+    membership = Membership.where(
       "group_id = #{id} AND user_id = #{user.id}"
     ).first
-    return false if group_user.nil?
-    group_user.user_id == user.id
+    return false if membership.nil?
+    membership.user_id == user.id
   end
 
   ##
   # See if user is group admin
   # - user: User object
   def admin?(user = nil)
-    group_user = GroupUser.where(
+    membership = Membership.where(
       "group_id = #{id} AND user_id = #{user.id} AND role = 'admin'"
     ).first
-    return false if group_user.nil?
-    group_user.user_id == user.id
+    return false if membership.nil?
+    membership.user_id == user.id
   end
 
   ##
@@ -88,7 +88,7 @@ class Group < ActiveRecord::Base
     role = 'member' if role != 'admin'
     fail 'NotValidGroup' if id.nil?
     fail 'AlreadyMember' if member?(user)
-    user_group = GroupUser.new(
+    user_group = Membership.new(
       user_id: user.id,
       group_id: id,
       role: role
@@ -101,16 +101,16 @@ class Group < ActiveRecord::Base
   # Leave a group
   # - user: User object
   def leave_group(user = nil)
-    group_user = GroupUser.where(
+    membership = Membership.where(
       "user_id = #{user.id} AND group_id = #{id}"
     ).first
-    fail 'AdminUserCannotLeave' if group_user.role == 'admin'
+    fail 'AdminUserCannotLeave' if membership.role == 'admin'
 
     Ticket.where("group_id = #{id} AND owner_id = #{user.id}").delete_all
     Ticket.where("group_id = #{id} AND user_id = #{user.id}").each(&:unassign)
 
     ActiveRecord::Base.connection.execute(
-      "DELETE FROM group_users WHERE group_id = #{id} AND user_id = #{user.id}"
+      "DELETE FROM memberships WHERE group_id = #{id} AND user_id = #{user.id}"
     )
   end
 

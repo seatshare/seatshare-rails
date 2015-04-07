@@ -2,20 +2,20 @@ require 'test_helper'
 
 ##
 # Group User test
-class GroupUserTest < ActiveSupport::TestCase
+class MembershipTest < ActiveSupport::TestCase
   test 'add user to group' do
-    group_users = GroupUser.new(
+    memberships = Membership.new(
       user_id: 5,
       group_id: 6
     )
-    group_users.save!
+    memberships.save!
 
-    assert group_users.user_id == 5, 'new user ID match'
-    assert group_users.group_id == 6, 'new group ID match'
+    assert memberships.user_id == 5, 'new user ID match'
+    assert memberships.group_id == 6, 'new group ID match'
   end
 
   test 'group users match group ID' do
-    users = Group.find(1).users
+    users = Group.find(1).members
 
     assert users.count == 3, 'fixture user count matches'
     assert users[0].first_name?, 'fixture first name is set'

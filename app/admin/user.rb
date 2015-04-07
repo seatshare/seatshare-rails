@@ -50,7 +50,7 @@ ActiveAdmin.register User do
       User.find(resource.id).groups.order_by_name.collect do |group|
         li auto_link(group)
         ul do
-          membership = group.group_users.each do |m|
+          membership = group.memberships.each do |m|
             next if m.user_id != user.id
             if m.weekly_reminder == 1
               li status_tag('Weekly Reminder', :ok)

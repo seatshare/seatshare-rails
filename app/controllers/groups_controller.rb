@@ -51,8 +51,8 @@ class GroupsController < ApplicationController
   def edit
     @group = Group.find_by_id(params[:id]) || not_found
     redirect_to(action: 'index') && return unless @group.member?(current_user)
-    @members = @group.users.order_by_name
-    @group_user = GroupUser.where(
+    @members = @group.members.order_by_name
+    @membership = Membership.where(
       "user_id = #{current_user.id} AND group_id = #{@group.id}"
     ).first
   end
@@ -80,11 +80,11 @@ class GroupsController < ApplicationController
   def update_notifications
     group = Group.find(params[:id]) || not_found
     fail 'NotGroupMember' unless group.member?(current_user)
-    daily = params[:group_user][:daily_reminder].to_i
-    weekly = params[:group_user][:weekly_reminder].to_i
-    mine = params[:group_user][:mine_only].to_i
+    daily = params[:membership][:daily_reminder].to_i
+    weekly = params[:membership][:weekly_reminder].to_i
+    mine = params[:membership][:mine_only].to_i
     flash.keep
-    status = GroupUser
+    status = Membership
              .where("user_id = #{current_user.id} AND group_id = #{group.id}")
              .update_all(
                 "daily_reminder=#{daily}, weekly_reminder=#{weekly}, "\
@@ -114,7 +114,7 @@ class GroupsController < ApplicationController
               .future
               .order_by_date
     @group.entity.retrive_schedule if @events.count == 0
-    @members = @group.users.order_by_name
+    @members = @group.members.order_by_name
     session[:current_group_id] = @group.id
   end
 
@@ -278,7 +278,7 @@ class GroupsController < ApplicationController
   # Group message form
   def message
     @group = Group.find(params[:id]) || not_found
-    @members = @group.users.order_by_name
+    @members = @group.members.order_by_name
   end
 
   ##

@@ -34,7 +34,7 @@ class GroupTest < ActiveSupport::TestCase
       group.entity.entity_name == 'Nashville Predators',
       'entity name matches fixture'
     )
-    assert group.users.count == 3, 'group member count matches'
+    assert group.members.count == 3, 'group member count matches'
   end
 
   test 'get group by ticket ID' do
@@ -76,11 +76,11 @@ class GroupTest < ActiveSupport::TestCase
     assert group.member?(user) == false, 'user is not yet a member'
     assert group.admin?(user) == false, 'user is not an admin'
 
-    group_user = group.join_group(user)
+    membership = group.join_group(user)
 
-    assert group_user.user_id == 4, 'user ID matches'
-    assert group_user.group_id == 2, 'group ID matches'
-    assert group_user.role == 'member', 'role matches'
+    assert membership.user_id == 4, 'user ID matches'
+    assert membership.group_id == 2, 'group ID matches'
+    assert membership.role == 'member', 'role matches'
 
     assert group.member?(user) == true, 'user is a member'
     assert group.admin?(user) == false, 'user is not an admin'
@@ -93,11 +93,11 @@ class GroupTest < ActiveSupport::TestCase
     assert group.member?(user) == false, 'user is not yet a member'
     assert group.admin?(user) == false, 'user is not yet an admin'
 
-    group_user = group.join_group(user, 'admin')
+    membership = group.join_group(user, 'admin')
 
-    assert group_user.user_id == 4, 'user ID matches'
-    assert group_user.group_id == 2, 'group ID matches'
-    assert group_user.role == 'admin', 'role matches'
+    assert membership.user_id == 4, 'user ID matches'
+    assert membership.group_id == 2, 'group ID matches'
+    assert membership.role == 'admin', 'role matches'
 
     assert group.member?(user) == true, 'user is a member'
     assert group.admin?(user) == true, 'user is an admin'

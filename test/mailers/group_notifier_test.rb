@@ -36,7 +36,7 @@ class GroupNotifierTest < ActionMailer::TestCase
   test 'send group message' do
     sending_user = User.find(1)
     group = Group.find(1)
-    recipient_users = group.users
+    recipient_users = group.members
 
     email = GroupNotifier.send_group_message(
         group,
