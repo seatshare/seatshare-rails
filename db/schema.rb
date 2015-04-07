@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20150326015944) do
 
   create_table "memberships", id: false, force: true do |t|
     t.integer  "group_id"
-    t.integer  "member_id"
+    t.integer  "user_id"
     t.string   "role"
     t.integer  "daily_reminder"
     t.integer  "weekly_reminder"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20150326015944) do
     t.integer  "mine_only"
   end
 
-  add_index "memberships", ["group_id", "member_id"], name: "index_memberships_on_group_id_and_member_id", using: :btree
+  add_index "memberships", ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id", using: :btree
 
   create_table "profiles", force: true do |t|
     t.integer  "user_id"
