@@ -1,4 +1,4 @@
-class AddProfileFieldsToUser < ActiveRecord::Migration
+class MoveProfileFieldsToUser < ActiveRecord::Migration
   class User < ActiveRecord::Base
     has_one :profile
   end
