@@ -11,7 +11,7 @@
           <%= link_to raw('<span class="fa fa-cog"></span><span class="hidden-xs hidden-sm"> Group Settings</span>'), { :controller => 'groups', :action => 'edit', :id => @group.id }, :class => 'btn btn-xs btn-default' %>
         </div>
         <p class="lead" style="margin-bottom:0">
-          Your <strong><%= @entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.display_name, {:controller => 'profiles', :action => 'show', :id => @group.administrators.first.id } %>
+          Your <strong><%= @entity.entity_name %></strong> group is administered by <%= link_to @group.administrators.first.display_name, {:controller => :users, :action => :show, :id => @group.administrators.first.id } %>
         </p>
       </div>
     </div>
@@ -31,7 +31,7 @@
     <span class="fa fa-calendar"></span> <%= event.date_time %>
   </div>
   <div class="panel-body">
-    <h2><%= link_to event.event_name, :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id %></h2>
+    <h2><%= link_to event.event_name, :controller => :events, :action => :show, :group_id => @group.id, :id => event.id %></h2>
     <%= raw(event.description_md) %>
     <% if ticket_stats[:available] > 0 %>
     <p class="lead"><strong>There are tickets available for this event!</strong><br />Click on a ticket below to send a request.</p>
@@ -85,7 +85,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-md-7">
-        <h3><%= link_to event.event_name, :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id %></h3>
+        <h3><%= link_to event.event_name, :controller => :events, :action => :show, :group_id => @group.id, :id => event.id %></h3>
         <%= raw(event.description_md) %>
       </div>
       <div class="col-md-5">
@@ -157,7 +157,7 @@
   </ul>
 </div>
 
-<%= render 'profiles/add_moble_alerts' %>
+<%= render 'users/add_mobile_alerts' %>
 
 <fieldset>
   <legend>Calendar</legend>
@@ -168,7 +168,7 @@
   <legend>Group Members</legend>
   <ul class="list-unstyled group-members">
     <% for member in @members %>
-    <li><%= image_tag member.gravatar, :alt => member.display_name, :title => member.display_name %> <%= link_to member.display_name, :controller => 'profiles', :action => 'show', :id => member.id %></li>
+    <li><%= image_tag member.gravatar, :alt => member.display_name, :title => member.display_name %> <%= link_to member.display_name, :controller => :users, :action => :show, :id => member.id %></li>
     <% end %>
     <li class="text-right"><%= link_to raw('<span class="fa fa-plus"></span> Invite Member'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %></li>
   </ul>

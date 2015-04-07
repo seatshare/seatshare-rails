@@ -1,13 +1,13 @@
 <tr>
   <td>
-    <%= link_to ticket.group.group_name, :controller => 'groups', :action => 'show', :id => ticket.group_id %>
+    <%= link_to ticket.group.group_name, :controller => :groups, :action => :show, :id => ticket.group_id %>
   </td>
   <td>
-    <%= link_to ticket.event.event_name, :controller => 'events', :action => 'show', :group_id => ticket.group_id, :id => ticket.event_id %><br />
+    <%= link_to ticket.event.event_name, :controller => :events, :action => :show, :group_id => ticket.group_id, :id => ticket.event_id %><br />
       <%= ticket.event.date_time %>
   </td>
   <td>
-    <%= link_to ticket.display_name, :controller => 'tickets', :action => 'edit', :group_id => ticket.group_id, :event_id => ticket.event_id, :id => ticket.id %>
+    <%= link_to ticket.display_name, :controller => :tickets, :action => 'edit', :group_id => ticket.group_id, :event_id => ticket.event_id, :id => ticket.id %>
     <% if !ticket.note.nil? && ticket.note.length > 0 %>
     <span data-toggle="tooltip" title="<%= ticket.note %>" class="fa fa-comment"></span>
     <% end %>
@@ -17,15 +17,15 @@
   </td>
   <td>
     <% if ticket.assigned %>
-    <%= link_to ticket.assigned.display_name, :controller => 'profiles', :action => 'show', :id => ticket.assigned.id %>
+    <%= link_to ticket.assigned.display_name, :controller => :users, :action => :show, :id => ticket.assigned.id %>
     <% if ticket.alias %>
     <br />(for <%= ticket.alias.display_name %>)
     <% end %>
     <% if ticket.owner.id != current_user.id %>
-    <br /> from <%= link_to ticket.owner.display_name, :controller => 'profiles', :action => 'show', :id => ticket.owner.id %>
+    <br /> from <%= link_to ticket.owner.display_name, :controller => :users, :action => :show, :id => ticket.owner.id %>
     <% end %>
     <% else %>
-    <%= link_to raw('<span class="badge badge-lg">Available!</span>'), { :controller => 'tickets', :action => 'edit', :id => ticket.id, :event_id => ticket.event_id, :group_id => ticket.group_id }, { :data => { :toggle => 'tooltip'}, :title => 'Request Ticket' } %>
+    <%= link_to raw('<span class="badge badge-lg">Available!</span>'), { :controller => :tickets, :action => 'edit', :id => ticket.id, :event_id => ticket.event_id, :group_id => ticket.group_id }, { :data => { :toggle => 'tooltip'}, :title => 'Request Ticket' } %>
     <% end %>
   </td>
   <td class="text-right">

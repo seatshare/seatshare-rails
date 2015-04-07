@@ -1,6 +1,6 @@
 <% content_for :page_title do %>Edit Profile<% end %>
 
-<%= form_for @user, :url => profile_path, html: {class: "form-horizontal", role: "form"} do |f| %>
+<%= form_for @user, :url => user_path, html: {class: "form-horizontal", role: "form"} do |f| %>
 
   <fieldset>
     <legend>Your Details</legend>
@@ -34,41 +34,36 @@
 
     <hr />
 
-    <%= f.fields_for :profile do |ff| %>
-
     <div class="form-group">
-      <%= ff.label :bio, :class => 'col-md-3 control-label' %>
+      <%= f.label :bio, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
-        <%= ff.text_area :bio, :class => 'form-control', :placeholder => 'Who is your favorite team?' %>
+        <%= f.text_area :bio, :class => 'form-control', :placeholder => 'Who is your favorite team?' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= ff.label :location, :class => 'col-md-3 control-label' %>
+      <%= f.label :location, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
-        <%= ff.text_field :location, :class => 'form-control', :placeholder => 'Any Town, USA' %>
+        <%= f.text_field :location, :class => 'form-control', :placeholder => 'Any Town, USA' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= ff.label :mobile, :class => 'col-md-3 control-label' %>
+      <%= f.label :mobile, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
-        <%= ff.text_field :mobile, :class => 'form-control', :placeholder => '(555) 555-1234' %>
+        <%= f.text_field :mobile, :class => 'form-control', :placeholder => '(555) 555-1234' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= ff.label :sms_notify, 'SMS Notifications', :class => 'col-md-3 control-label' %>
+      <%= f.label :sms_notify, 'SMS Notifications', :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
-        <label><%= ff.check_box :sms_notify %> Receive notifications when tickets are assigned or requested.</label>
+        <label><%= f.check_box :sms_notify %> Receive notifications when tickets are assigned or requested.</label>
         <p class="help-block">
-          Standard messaging rates apply. Messages will originate from <strong><%= number_to_phone ENV['TWILIO_OUTBOUND_NUMBER'].gsub('+1','') %></strong>.
+        Standard messaging rates apply. Messages will originate from <strong><%= number_to_phone ENV['TWILIO_OUTBOUND_NUMBER'].gsub('+1','') %></strong>.
         </p>
       </div>
     </div>
-
-    <% end %>
-
   </fieldset>
 
   <div class="row">
@@ -99,7 +94,7 @@
       <% for user_alias in @user_aliases %>
       <tr>
         <td><%= link_to user_alias.display_name, :controller => 'user_aliases', :action => 'edit', :id => user_alias.id %></td>
-        <td><%= link_to raw('<span class="fa fa-trash"></span>'), { :controller => 'user_aliases', :action => 'delete', :id => user_alias.id }, :class => 'btn btn-sm btn-danger confirm' %></td>
+        <td><%= link_to raw('<span class="fa fa-trash"></span>'), { :controller => 'user_aliases', :action => 'destroy', :id => user_alias.id }, :class => 'btn btn-sm btn-danger confirm' %></td>
       </tr>
       <% end %>
     </tbody>

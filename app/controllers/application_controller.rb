@@ -26,7 +26,6 @@ class ApplicationController < ActionController::Base
     @group_selector = current_user.groups.by_name.active.collect do|p|
       [p.group_name, p.id]
     end
-    current_user.profile = Profile.new if current_user.profile.nil?
   end
 
   ##

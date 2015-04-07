@@ -5,6 +5,10 @@ jim:
   email: stonej@example.net
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
   status: 1
+  bio: "A simple kind of man."
+  location: Some Town, TX
+  mobile: 141-086-75309
+  sms_notify: true
 
 jill:
   id: 2
@@ -14,6 +18,10 @@ jill:
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
   timezone: "Eastern Time (US & Canada)"
   status: 1
+  bio: "Just a girl in the world. That's all they will let me be."
+  location: Random City, NY
+  mobile: 141-086-75310
+  sms_notify: false
 
 rick:
   id: 3
