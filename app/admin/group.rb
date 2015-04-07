@@ -27,7 +27,7 @@ ActiveAdmin.register Group do
 
   sidebar 'Group Members', only: :show do
     ul do
-      Group.find(resource.id).users.order_by_name.collect do |user|
+      Group.find(resource.id).users.by_name.collect do |user|
         li auto_link(user)
         ul do
           membership = user.group_users.each do |m|

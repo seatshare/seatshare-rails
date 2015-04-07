@@ -10,7 +10,7 @@ class Entity < ActiveRecord::Base
   validates_uniqueness_of :entity_name, scope: :entity_type
   before_save :clean_import_key
 
-  scope :order_by_name, -> { order_by_name }
+  scope :by_name, -> { order('LOWER(entity_name) ASC') }
   scope :active, -> { where('status = 1') }
   scope :is_soda, -> { where("import_key LIKE 'l.%'") }
 
@@ -61,11 +61,5 @@ class Entity < ActiveRecord::Base
   # Run generate import key if empty
   def clean_import_key
     self.import_key = generate_import_key(self) if import_key.blank?
-  end
-
-  ##
-  # Order list by entity name
-  def self.order_by_name
-    order('LOWER(entity_name) ASC')
   end
 end

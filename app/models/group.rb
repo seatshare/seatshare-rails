@@ -32,7 +32,7 @@ class Group < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  scope :order_by_name, -> { order('LOWER(group_name) ASC') }
+  scope :by_name, -> { order('LOWER(group_name) ASC') }
   scope :active, -> { where('status = 1') }
 
   ##

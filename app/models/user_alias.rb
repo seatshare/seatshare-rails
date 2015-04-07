@@ -5,7 +5,7 @@ class UserAlias < ActiveRecord::Base
 
   validates :first_name, :last_name, :user_id, presence: true
 
-  scope :order_by_name, -> { order_by_name }
+  scope :by_name, -> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') }
 
   ##
   # Display name for user alias
@@ -22,11 +22,5 @@ class UserAlias < ActiveRecord::Base
       ticket.save!
     end
     super
-  end
-
-  ##
-  # Order user aliases by name
-  def self.order_by_name
-    order('LOWER(last_name) ASC, LOWER(first_name) ASC')
   end
 end

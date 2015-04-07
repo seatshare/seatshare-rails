@@ -176,7 +176,7 @@ ActiveAdmin.register_page 'Dashboard' do
               th 'Date & Time'
             end
             tbody do
-              Event.future.order_by_date.limit(5).map do |event|
+              Event.future.by_date.limit(5).map do |event|
                 tr class: cycle('even', 'odd') do
                   td link_to(event.event_name, admin_event_path(event))
                   td auto_link(event.entity)

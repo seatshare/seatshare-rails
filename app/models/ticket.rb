@@ -13,8 +13,8 @@ class Ticket < ActiveRecord::Base
   validates :group_id, :event_id, :owner_id, :user_id, presence: true
   validates :cost, numericality: { greater_than_or_equal_to: 0 }
 
-  scope :order_by_date, -> { order('start_time ASC') }
-  scope :order_by_seat, -> { order_by_seat }
+  scope :by_date, -> { joins(:event).order('events.start_time ASC') }
+  scope :by_seat, -> { order(:section, :row, :seat) }
 
   ##
   # Display name for ticket
@@ -63,11 +63,5 @@ class Ticket < ActiveRecord::Base
   def seat_location?
     empty_error = 'Ticket must have a section, row or seat'
     errors[:base] << (empty_error) if display_name.blank?
-  end
-
-  ##
-  # Order tickets by section/row/seat
-  def self.order_by_seat
-    order('section ASC').order('row ASC').order('seat ASC')
   end
 end
