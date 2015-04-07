@@ -85,7 +85,7 @@ Entity.create([
     id: 4268, import_key: "l.pclbaseball.com-t.307", entity_name: "Fresno Grizzlies", entity_type_id: 11, status: 1
   },
   {
-    id: 4269, import_key: "l.pclbaseball.com-t.ZY1", entity_name: "Tucson Padres", entity_type_id: 11, status: 1
+    id: 4269, import_key: "l.pclbaseball.com-t.AZ1", entity_name: "El Paso Chihuahuas", entity_type_id: 11, status: 1
   },
   {
     id: 4270, import_key: "l.pclbaseball.com-t.310", entity_name: "Las Vegas 51s", entity_type_id: 11, status: 1
