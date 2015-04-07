@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, :email, presence: true
 
-  scope :order_by_name, -> { order_by_name }
+  scope :by_name, -> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') }
   scope :active, -> { where('status = 1') }
 
   attr_accessor :entity_id
@@ -67,11 +67,5 @@ class User < ActiveRecord::Base
     end
     return true if shared_users.include? user.id
     false
-  end
-
-  ##
-  # Order user records by name
-  def self.order_by_name
-    order('LOWER(last_name) ASC, LOWER(first_name) ASC')
   end
 end

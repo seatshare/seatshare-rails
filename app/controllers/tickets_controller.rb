@@ -20,14 +20,14 @@ class TicketsController < ApplicationController
                 .where('status = 1')
                 .joins(:event)
                 .where("start_time #{operator} '#{Time.now}'")
-                .order_by_date.order_by_seat,
+                .by_date.by_seat,
       assigned: Ticket.where("owner_id != #{current_user.id}")
                 .where("user_id = #{current_user.id}")
                 .joins(:group)
                 .where('status = 1')
                 .joins(:event)
                 .where("start_time #{operator} '#{Time.now}'")
-                .order_by_date.order_by_seat
+                .by_date.by_seat
     }
     render layout: 'single-column'
   end
@@ -62,10 +62,10 @@ class TicketsController < ApplicationController
       owner_id: current_user.id, user_id: current_user.id
     )
 
-    @members = @group.members.order_by_name.collect { |p| [p.display_name, p.id] }
+    @members = @group.members.by_name.collect { |p| [p.display_name, p.id] }
     @members.unshift(['Unassigned', 0])
     @user_aliases = current_user.user_aliases
-                    .order_by_name
+                    .by_name
                     .collect { |p| [p.display_name, p.id] }
     @user_aliases.unshift(['Not Set', 0])
 
@@ -151,8 +151,8 @@ class TicketsController < ApplicationController
     end
     @ticket_stats = @event.ticket_stats(@group, current_user)
     @members = @group.members
-               .order_by_name
-               .order_by_name
+               .by_name
+               .by_name
                .collect { |p| [p.display_name, p.id] }
     @members.unshift(['Unassigned', 0])
     @user_aliases = current_user.user_aliases

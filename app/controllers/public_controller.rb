@@ -21,13 +21,13 @@ class PublicController < ApplicationController
   ##
   # Teams page
   def teams
-    @entity_types = EntityType.order_by_sort
+    @entity_types = EntityType.by_sort
     @teams_list = {}
     @entity_types.each do |et|
       label = "#{et.entity_type_name} (#{et.entity_type_abbreviation})"
       @teams_list[label] = Entity.where(
         "entity_type_id = #{et.id}"
-      ).active.order_by_name
+      ).active.by_name
     end
   end
 

@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
   validates :entity_id, :event_name, :start_time, presence: true
   before_save :clean_import_key
 
-  scope :order_by_date, -> { order('start_time ASC') }
+  scope :by_date, -> { order('start_time ASC') }
   scope :future, -> { where("start_time > '#{Time.now}'") }
   scope :past, -> { where("start_time < '#{Time.now}'") }
   scope :next_seven_days, -> { next_seven_days }

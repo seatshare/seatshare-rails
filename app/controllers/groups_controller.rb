@@ -16,7 +16,7 @@ class GroupsController < ApplicationController
   def new
     active_entities = Entity.active.includes(:entity_type).order(
       'entity_types.sort ASC'
-    ).order_by_name
+    ).by_name
     @entity = Entity.find_by_id(params[:entity_id])
     options = {}
     active_entities.each_with_object({}) do |e|
@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
   def edit
     @group = Group.find_by_id(params[:id]) || not_found
     redirect_to(action: 'index') && return unless @group.member?(current_user)
-    @members = @group.members.order_by_name
+    @members = @group.members.by_name
     @membership = Membership.where(
       "user_id = #{current_user.id} AND group_id = #{@group.id}"
     ).first
@@ -112,9 +112,9 @@ class GroupsController < ApplicationController
     redirect_to(action: 'index') && return unless @group.member?(current_user)
     @events = @group.events
               .future
-              .order_by_date
+              .by_date
     @group.entity.retrive_schedule if @events.count == 0
-    @members = @group.members.order_by_name
+    @members = @group.members.by_name
     session[:current_group_id] = @group.id
   end
 
@@ -278,7 +278,7 @@ class GroupsController < ApplicationController
   # Group message form
   def message
     @group = Group.find(params[:id]) || not_found
-    @members = @group.members.order_by_name
+    @members = @group.members.by_name
   end
 
   ##

@@ -38,7 +38,7 @@ ActiveAdmin.register Entity do
     end
 
     panel "Events" do
-      table_for resource.events.order_by_date do |event|
+      table_for resource.events.by_date do |event|
         column :display_name do |e|
           auto_link(e, e.event_name)
         end
@@ -52,7 +52,7 @@ ActiveAdmin.register Entity do
     end
 
     panel "Tickets" do
-      table_for resource.tickets.order_by_date do |ticket|
+      table_for resource.tickets.by_date do |ticket|
         column :display_name do |t|
           auto_link(t, t.display_name)
         end
@@ -74,7 +74,7 @@ ActiveAdmin.register Entity do
 
   sidebar 'Entity Groups', only: :show do
     ul do
-      Entity.find(resource.id).groups.order_by_name.collect do |group|
+      Entity.find(resource.id).groups.by_name.collect do |group|
         li auto_link(group)
       end
     end

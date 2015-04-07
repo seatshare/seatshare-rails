@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
   def edit
     @user = current_user
     @user.profile = Profile.new if @user.profile.nil?
-    @user_aliases = current_user.user_aliases.order_by_name
+    @user_aliases = current_user.user_aliases.by_name
   end
 
   ##

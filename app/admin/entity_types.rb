@@ -20,7 +20,7 @@ ActiveAdmin.register EntityType do
     ul do
       EntityType.find_by_id(
         resource.id
-      ).entities.order_by_name.collect do |entity|
+      ).entities.by_name.collect do |entity|
         li auto_link(entity)
       end
     end
