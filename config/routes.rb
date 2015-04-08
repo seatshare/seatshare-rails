@@ -8,6 +8,7 @@ SeatShare::Application.routes.draw do
   root 'public#index'
 
   get 'teams' => 'public#teams'
+  get 'teams/:entity_type_abbreviation' => 'public#league', as: 'league'
   get 'tos' => 'public#tos'
   get 'privacy' => 'public#privacy'
   get 'contact' => 'public#contact'

@@ -65,6 +65,26 @@
     </div>
 </div>
 
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <br />
+        <hr />
+        <br />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h2>Have season tickets? We have you covered!</h2>
+        <ul class="list-inline">
+            <% @entity_types.each do |et| %>
+            <li><%= link_to et.entity_type_name, league_path(entity_type_abbreviation: et.entity_type_abbreviation), title: et.entity_type_name, class: 'btn btn-link' %></li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12 text-center">
         <br />
