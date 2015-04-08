@@ -62,7 +62,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
     get '/profile'
     assert_response :success
     assert_select '.profile-email', 'stonej@example.net'
-    assert_select '.profile-mobile', '(555) 555-4567'
+    assert_select '.profile-mobile', '141-086-75309'
     assert_select 'title', 'Jim Stone'
   end
 end
