@@ -57,7 +57,7 @@ SeatShare::Application.routes.draw do
   get 'tickets/:filter' => 'tickets#index'
   post 'tickets' => 'tickets#bulk_update'
 
-  resource :user, path: 'profile', only: [:edit, :update] do
+  resource :user, path: 'profile', only: [:show, :edit, :update] do
     resources :aliases, controller: :user_aliases
   end
   resources :users, path: 'profiles', only: [:show]
