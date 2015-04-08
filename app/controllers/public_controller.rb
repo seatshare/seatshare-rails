@@ -7,6 +7,7 @@ class PublicController < ApplicationController
   ##
   # Home page
   def index
+    @entity_types = EntityType.by_sort
     render 'index' && return unless user_signed_in?
     if session[:current_group_id].is_a? Numeric
       redirect_to(
