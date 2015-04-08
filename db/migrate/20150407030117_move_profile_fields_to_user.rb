@@ -15,13 +15,16 @@ class MoveProfileFieldsToUser < ActiveRecord::Migration
       t.boolean  :sms_notify
     end
 
-    Profile.find_each do |profile|
-      profile.user.update_attributes(
-        bio: profile.bio,
-        location: profile.location,
-        mobile: profile.mobile,
-        sms_notify: profile.sms_notify
-      )
+    Profile.joins(:user).find_each do |profile|
+      begin
+        profile.user.update_attributes(
+          bio: profile.bio,
+          location: profile.location,
+          mobile: profile.mobile,
+          sms_notify: profile.sms_notify
+        )
+      rescue
+      end
     end
 
      drop_table :profiles
