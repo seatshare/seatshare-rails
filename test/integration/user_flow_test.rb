@@ -53,4 +53,16 @@ class UserFlowTest < ActionDispatch::IntegrationTest
     assert_equal '/groups/1', path
     assert_equal 'You updated your account successfully.', flash[:notice]
   end
+
+  test 'show current user profile' do
+    post_via_redirect(
+      '/login',
+      user: { email: users(:jim).email, password: 'testing123' }
+    )
+    get '/profile'
+    assert_response :success
+    assert_select '.profile-email', 'stonej@example.net'
+    assert_select '.profile-mobile', '141-086-75309'
+    assert_select 'title', 'Jim Stone'
+  end
 end
