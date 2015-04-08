@@ -2,8 +2,8 @@
 
 <div class="jumbotron">
   <p>Anyone with this link can join your ticket group.</p>
-  <p><%= link_to @invite_link, @invite_link %></p>
-  <p>
+  <h5><%= link_to @invite_link, @invite_link %></h5>
+  <p class="hidden-xs hidden-sm">
     <button class="btn btn-default zeroclipboard" data-clipboard-text="<%= @invite_link %>" data-toggle="tooltip" title="Copy link to clipboard."><span class="fa fa-clipboard"></span> Copy to Clipboard</button>
   </p>
 </div>
