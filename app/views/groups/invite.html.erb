@@ -1,9 +1,9 @@
 <% content_for :page_title do %><%= "Invite Member to #{@group.group_name}" %><% end %>
 
 <div class="jumbotron">
-  <p>Anyone with this link can join your ticket group.</p>
-  <h5><%= link_to @invite_link, @invite_link %></h5>
-  <p class="hidden-xs hidden-sm">
+  <p>Anyone with <%= link_to 'this link', @invite_link %> can join your ticket group.</p>
+  <h5 class="visible-lg"><%= link_to @invite_link, @invite_link %></h5>
+  <p class="visible-lg">
     <button class="btn btn-default zeroclipboard" data-clipboard-text="<%= @invite_link %>" data-toggle="tooltip" title="Copy link to clipboard."><span class="fa fa-clipboard"></span> Copy to Clipboard</button>
   </p>
 </div>
