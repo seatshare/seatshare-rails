@@ -6,6 +6,7 @@ class Group < ActiveRecord::Base
 
   has_many :memberships
   has_many :members, through: :memberships, source: :user
+  has_many :tickets
   has_many :events, through: :entity
 
   validates :entity_id, :group_name, :creator_id, presence: true
