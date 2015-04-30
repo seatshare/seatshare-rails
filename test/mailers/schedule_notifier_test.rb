@@ -29,6 +29,18 @@ class ScheduleNotifierTest < ActionMailer::TestCase
       '<td><a href="http://localhost:3000/groups/1/event-7">Nashville '\
         'Predators vs. Florida Panthers</a></td>'
     )
+    assert_includes(
+      email.body.to_s,
+      '<li><span style="font-weight:bold;">1</span> available in the group</li>'
+    )
+    assert_includes(
+      email.body.to_s,
+      '<li><span style="font-weight:bold;">2</span> total in the group</li>'
+    )
+    assert_includes(
+      email.body.to_s,
+      '<li><span style="font-weight:bold;">1</span> held by you</li>'
+    )
   end
 
   test 'send weekly schedule' do
@@ -52,6 +64,18 @@ class ScheduleNotifierTest < ActionMailer::TestCase
       email.body.to_s,
       '<td><a href="http://localhost:3000/groups/1/event-6">Nashville '\
         'Predators vs. Los Angeles Kings</a></td>'
+    )
+    assert_includes(
+      email.body.to_s,
+      '<li><span style="font-weight:bold;">1</span> available in the group</li>'
+    )
+    assert_includes(
+      email.body.to_s,
+      '<li><span style="font-weight:bold;">2</span> total in the group</li>'
+    )
+    assert_includes(
+      email.body.to_s,
+      '<li><span style="font-weight:bold;">1</span> held by you</li>'
     )
   end
 end
