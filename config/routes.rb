@@ -58,6 +58,10 @@ SeatShare::Application.routes.draw do
   get 'tickets/:filter' => 'tickets#index'
   post 'tickets' => 'tickets#bulk_update'
 
+  get 'calendar' => 'calendar#index'
+  get 'calendar/full/:token' => 'calendar#full'
+  get 'groups/:group_id/calendar/:token' => 'calendar#group'
+
   resource :user, path: 'profile', only: [:show, :edit, :update] do
     resources :aliases, controller: :user_aliases
   end

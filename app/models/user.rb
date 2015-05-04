@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :groups, through: :memberships
 
+  before_save :clean_calendar_token
+
   validates :first_name, :last_name, :email, presence: true
 
   scope :by_name, -> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') }
@@ -76,5 +78,19 @@ class User < ActiveRecord::Base
     end
     return true if shared_users.include? user.id
     false
+  end
+
+  private
+
+  ##
+  # Generate a unique calendar token
+  def generate_calendar_token
+    SecureRandom.urlsafe_base64(nil, false)
+  end
+
+  ##
+  # Run calendar token generator if not set
+  def clean_calendar_token
+    self.calendar_token = generate_calendar_token if calendar_token.blank?
   end
 end
