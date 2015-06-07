@@ -29,7 +29,7 @@ class EventsControllerTest < ActionController::TestCase
 
     assert_response :success, 'received a 200 status'
     assert_select(
-      'div.panel-heading',
+      'span.event_date_time',
       'Saturday, October 26, 2013 - 3:00 pm EDT'
     )
   end
@@ -44,5 +44,23 @@ class EventsControllerTest < ActionController::TestCase
     assert_select 'li.available-ticket-count', '1 available in the group'
     assert_select 'li.total-ticket-count', '4 total in the group'
     assert_select 'li.held-ticket-count', '1 held by you'
+  end
+
+  test 'should get calendar event in ical format' do
+    @user = User.find(1)
+    sign_in :user, @user
+
+    get :show, id: 4, group_id: 1, format: 'ics'
+
+    assert_response :success
+    assert response.body.include? 'BEGIN:VEVENT'
+    assert response.body.include? 'UID:preds_20131026'
+    assert response.body.include? 'DTSTART:20131026T140000'
+    assert response.body.include? 'DTEND:20131026T170000'
+    assert response.body.include? 'CLASS:PUBLIC'
+    assert response.body.include? 'LOCATION:'
+    assert response.body.include? 'SUMMARY:Nashville Predators vs. St. Louis'
+    assert response.body.include? 'URL:http://test.host/groups/1/event-4'
+    assert response.body.include? 'END:VEVENT'
   end
 end

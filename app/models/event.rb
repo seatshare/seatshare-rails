@@ -118,6 +118,27 @@ class Event < ActiveRecord::Base
     true
   end
 
+  ##
+  # To ICS
+  def to_ics(event_link = nil)
+    event = Icalendar::Event.new
+    if time_tba == 0
+      event.dtstart = start_time
+      event.dtend = start_time + 3.hours
+    else
+      event.dtstart = start_time.to_date
+    end
+    event.summary = event_name
+    event.description = description
+    event.location = ''
+    event.ip_class = 'PUBLIC'
+    event.created = created_at
+    event.last_modified = updated_at
+    event.uid = import_key
+    event.url = event_link unless event_link.nil?
+    event
+  end
+
   private
 
   ##

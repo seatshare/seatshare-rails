@@ -166,4 +166,24 @@ class EventTest < ActiveSupport::TestCase
 
     assert event.user_has_ticket?(user) == false
   end
+
+  test 'export as ics' do
+    event = Event.find(1)
+    ics = event.to_ics('http://example.com/1')
+
+    assert ics.summary == 'Belmont Bruins vs. Brescia'
+    assert ics.dtstart == '2013-11-26'
+    assert ics.dtend.nil?
+    assert ics.uid == 'belmont_20131126'
+    assert ics.url.to_s == 'http://example.com/1'
+
+    event = Event.find(4)
+    ics = event.to_ics('http://example.com/4')
+
+    assert ics.summary == 'Nashville Predators vs. St. Louis Blues'
+    assert ics.dtstart == '2013-10-26T14:00:00-05:00'
+    assert ics.dtend == '2013-10-26T17:00:00-05:00'
+    assert ics.uid == 'preds_20131026'
+    assert ics.url.to_s == 'http://example.com/4'
+  end
 end

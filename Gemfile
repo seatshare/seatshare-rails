@@ -100,6 +100,9 @@ gem "dynamic_sitemaps"
 # Zeroclipboard
 gem 'zeroclipboard-rails'
 
+# iCalendar
+gem 'icalendar', '~> 2.3.0'
+
 # Slack Notifier
 gem 'slack-notifier', '~> 1.1.0'
 
