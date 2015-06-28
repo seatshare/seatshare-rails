@@ -32,7 +32,9 @@ class SodaScheduleImport
         start_datetime: options[:start_datetime],
         end_datetime: options[:end_datetime]
       )
-    rescue StandardError
+    rescue StandardError => e
+      Rails.logger.error e
+      messages << e
       documents = []
     end
 

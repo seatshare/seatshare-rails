@@ -36,13 +36,6 @@ SeatShare::Application.configure do
   config.action_mailer.asset_host = "http://localhost:3000"
   config.action_mailer.default_url_options = { :host => 'http://localhost:3000' }
 
-
   # Enable LiveReload in asset pipeline
   config.middleware.use Rack::LiveReload
-
-  # Stop SSL issues with MailChimp API
-  silence_warnings do
-    OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
-  end
-
 end
