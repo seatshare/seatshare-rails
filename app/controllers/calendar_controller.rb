@@ -8,14 +8,15 @@ class CalendarController < ApplicationController
   # Calendar Instructions
   def index
     @token = current_user.calendar_token
-    @groups = current_user.groups
+    @groups = current_user.groups.active
   end
 
   ##
   # Complete Feed
   def full
-    show_404 unless check_token params[:token]
-    groups = current_user.groups
+    user = User.find_by_calendar_token(params[:token])
+    show_404 unless user
+    groups = user.groups
 
     # Create calendar object
     cal = Icalendar::Calendar.new
@@ -46,9 +47,10 @@ class CalendarController < ApplicationController
   ##
   # Group Feed
   def group
-    show_404 unless check_token params[:token]
+    user = User.find_by_calendar_token(params[:token])
+    show_404 unless user
     group = Group.find(params[:group_id]) || show_404
-    fail 'NotGroupMember' unless group.member?(current_user)
+    fail 'NotGroupMember' unless group.member?(user)
 
     # Create calendar object
     cal = Icalendar::Calendar.new
@@ -72,13 +74,5 @@ class CalendarController < ApplicationController
         render text: cal.to_ical
       end
     end
-  end
-
-  private
-
-  ##
-  # Check Token
-  def check_token(token)
-    current_user.calendar_token == token
   end
 end

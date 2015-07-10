@@ -17,6 +17,9 @@
 @import "bootstrap";
 @import "font-awesome";
 
+$break-small: 320px;
+$break-large: 1200px;
+
 body {
   padding-top: 70px;
   padding-bottom: 30px;
@@ -83,29 +86,35 @@ ul.group-members li {
 
 /* User Steps */
 ol.user-steps {
-  counter-reset: li;
+  padding-left: 0;
   list-style: none;
-  *list-style: decimal;
 }
-ol.user-steps > li {
-  position: relative;
-  padding-left: 60px;
-  min-height: 60px;
-}
-ol.user-steps > li:before {
-  content: counter(li);
-  counter-increment: li;
-  color: #fff;
-  background-color: #428bca;
-  border-color: #357ebd;
-  border-radius: 50%;
-  font-size: 18px;
-  width: 48px;
-  height: 48px;
-  line-height: 48px;
-  text-align: center;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
+@media screen and (min-width: $break-large) {
+  ol.user-steps {
+    counter-reset: li;
+    list-style: none;
+    *list-style: decimal;
+  }
+  ol.user-steps > li {
+    position: relative;
+    padding-left: 60px;
+    min-height: 60px;
+  }
+  ol.user-steps > li:before {
+    content: counter(li);
+    counter-increment: li;
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    border-radius: 50%;
+    font-size: 18px;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }

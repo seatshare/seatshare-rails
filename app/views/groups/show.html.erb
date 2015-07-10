@@ -151,7 +151,7 @@
 <div class="well well-sm well-actions text-center">
   <ul class="list-inline">
     <% if @events.count > 0 %>
-    <li><%= link_to raw('<span class="fa fa-calendar"></span> Add Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
+    <li><%= link_to raw('<span class="fa fa-plus"></span> Add Tickets'), { :controller => 'tickets', :action => 'new', :group_id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
     <% end %>
     <li><%= link_to raw('<span class="fa fa-envelope"></span> Group Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default btn-sm' %></li>
   </ul>
@@ -160,7 +160,12 @@
 <%= render 'users/add_mobile_alerts' %>
 
 <fieldset>
-  <legend>Calendar</legend>
+  <legend>
+    Calendar
+    <div class="pull-right">
+      <%= link_to raw('<span class="fa fa-calendar fa-rss"></span> Calendar Feeds'), { :controller => 'calendar', :action => 'index' }, :class => 'btn btn-xs' %>
+    </div>
+  </legend>
   <div id="sidebar_calendar"></div>
 </fieldset>
 

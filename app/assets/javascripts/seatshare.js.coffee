@@ -1,4 +1,3 @@
-# Global
 seatshareReady = ->
 
   # Navbar group switching

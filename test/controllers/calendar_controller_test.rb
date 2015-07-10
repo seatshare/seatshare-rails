@@ -16,7 +16,6 @@ class CalendarControllerTest < ActionController::TestCase
 
   test 'get full calendar' do
     @user = User.find(1)
-    sign_in :user, @user
 
     get :full, token: @user.calendar_token, format: 'ics'
 
@@ -34,7 +33,6 @@ class CalendarControllerTest < ActionController::TestCase
 
   test 'get group calendar' do
     @user = User.find(1)
-    sign_in :user, @user
 
     get :group, group_id: 1, token: @user.calendar_token, format: 'ics'
 
