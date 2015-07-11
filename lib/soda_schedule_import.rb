@@ -80,7 +80,6 @@ class SodaScheduleImport
     # Parse the schedule and create the events
     schedule = SodaXmlTeam::Schedule.parse_schedule(schedule_document)
     schedule.each do |row|
-
       # Map in entity_id for import
       row[:entity_id] = entity.id
 

@@ -53,6 +53,7 @@ class EventsControllerTest < ActionController::TestCase
     get :show, id: 4, group_id: 1, format: 'ics'
 
     assert_response :success
+    assert response.body.include? 'NAME:Nashville Predators vs. St. Louis Blues'
     assert response.body.include? 'BEGIN:VEVENT'
     assert response.body.include? 'UID:preds_20131026'
     assert response.body.include? 'DTSTART:20131026T140000'

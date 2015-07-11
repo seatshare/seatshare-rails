@@ -20,17 +20,28 @@ class CalendarController < ApplicationController
 
     # Create calendar object
     cal = Icalendar::Calendar.new
+    cal.append_custom_property 'name', 'SeatShare'
+    cal.timezone do |t|
+      tz = user ? user.timezone : nil
+      if tz.blank?
+        t.tzid = Time.zone.tzinfo.name
+      else
+        t.tzid = tz
+      end
+    end
 
     # Loop through the events
     groups.each do |group|
       group.events.each do |group_event|
         next if group_event.date_tba? == true
-        cal.add_event(group_event.to_ics(
-          url_for(
-            controller: 'events', action: 'show',
-            id: group_event.id, group_id: group.id
+        cal.add_event(
+          group_event.to_ics(
+            url_for(
+              controller: 'events', action: 'show',
+              id: group_event.id, group_id: group.id
+            )
           )
-        ))
+        )
       end
     end
 
@@ -54,16 +65,27 @@ class CalendarController < ApplicationController
 
     # Create calendar object
     cal = Icalendar::Calendar.new
+    cal.append_custom_property 'name', group.group_name
+    cal.timezone do |t|
+      tz = user ? user.timezone : nil
+      if tz.blank?
+        t.tzid = Time.zone.tzinfo.name
+      else
+        t.tzid = tz
+      end
+    end
 
     # Loop through the events
     group.events.each do |group_event|
       next if group_event.date_tba? == true
-      cal.add_event(group_event.to_ics(
-        url_for(
-          controller: 'events', action: 'show',
-          id: group_event.id, group_id: group.id
+      cal.add_event(
+        group_event.to_ics(
+          url_for(
+            controller: 'events', action: 'show',
+            id: group_event.id, group_id: group.id
+          )
         )
-      ))
+      )
     end
 
     respond_to do |format|

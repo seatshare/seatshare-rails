@@ -87,13 +87,10 @@ class TicketsController < ApplicationController
     group = Group.find(params[:group_id])
     fail 'NotGroupMember' unless group.member?(current_user)
     ticket = Ticket.new(
-      group_id: params[:group_id],
-      section: ticket_params[:section],
-      row: ticket_params[:row],
-      seat: ticket_params[:seat],
+      group_id: params[:group_id], section: ticket_params[:section],
+      row: ticket_params[:row], seat: ticket_params[:seat],
       cost: ticket_params[:cost].gsub(/[^0-9\.]/, '').to_f,
-      user_id: ticket_params[:user_id].to_i,
-      owner_id: current_user.id
+      user_id: ticket_params[:user_id].to_i, owner_id: current_user.id
     )
     if !ticket_params[:alias_id].nil? &&
        ticket_params[:user_id].to_i == current_user.id
@@ -123,15 +120,20 @@ class TicketsController < ApplicationController
         season_ticket.event_id = event_id
         if season_ticket.valid? && season_ticket.save
           log_ticket_history season_ticket, 'created'
+          flash[:notice] = 'Tickets added!'
         else
           flash[:error] = 'Could not create tickets.'
-          redirect_to(
-            controller: 'tickets', action: 'new', group_id: group.id
-          ) && return
         end
       end
-      flash[:notice] = 'Tickets added!'
-      redirect_to(controller: 'groups', action: 'show', id: group.id) && return
+      if flash[:error]
+        redirect_to(
+          controller: 'tickets', action: 'new', group_id: group.id
+        ) && return
+      else
+        redirect_to(
+          controller: 'groups', action: 'show', id: group.id
+        ) && return
+      end
     else
       flash[:error] = 'No events selected.'
       redirect_to(

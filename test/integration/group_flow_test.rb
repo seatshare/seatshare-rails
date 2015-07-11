@@ -87,7 +87,6 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal '/groups/1', path
     assert_equal 'Group invitation sent!', flash[:notice]
-
   end
 
   test 'remove a user from a group' do
