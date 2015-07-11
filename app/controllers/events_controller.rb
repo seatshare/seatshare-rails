@@ -21,7 +21,7 @@ class EventsController < ApplicationController
           if tz.blank?
             t.tzid = Time.zone.tzinfo.name
           else
-            t.tzid = tz
+            t.tzid = ActiveSupport::TimeZone.create(user.timezone).tzinfo.name
           end
         end
         cal.add_event(
