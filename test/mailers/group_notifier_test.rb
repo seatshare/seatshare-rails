@@ -39,12 +39,12 @@ class GroupNotifierTest < ActionMailer::TestCase
     recipient_users = group.members
 
     email = GroupNotifier.send_group_message(
-        group,
-        sending_user,
-        recipient_users,
-        'Anyone want to go to the game on Friday?',
-        "I'll have an extra ticket to spare.\n\nFree to a good home."
-        ).deliver
+      group,
+      sending_user,
+      recipient_users,
+      'Anyone want to go to the game on Friday?',
+      "I'll have an extra ticket to spare.\n\nFree to a good home."
+    ).deliver
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal ['no-reply@myseatshare.com'], email.from

@@ -29,8 +29,8 @@ class TicketFile < ActiveRecord::Base
   ##
   # Upload S3 file
   def self.upload_s3_file(uploaded_file, attrs)
-    File.open(Rails.root.join(
-      'tmp', 'uploads', uploaded_file.original_filename), 'wb'
+    File.open(
+      Rails.root.join('tmp', 'uploads', uploaded_file.original_filename), 'wb'
     ) do |file|
       file.write(uploaded_file.read)
     end

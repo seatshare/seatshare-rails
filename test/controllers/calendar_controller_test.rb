@@ -22,8 +22,8 @@ class CalendarControllerTest < ActionController::TestCase
     assert_response :success
     assert response.body.include? 'BEGIN:VEVENT'
     assert response.body.include? 'UID:preds_20131024'
-    assert response.body.include? 'DTSTART:20131024T140000'
-    assert response.body.include? 'DTEND:20131024T170000'
+    assert response.body.include? 'DTSTART:20131026T140000'
+    assert response.body.include? 'DTEND:20131026T170000'
     assert response.body.include? 'CLASS:PUBLIC'
     assert response.body.include? 'LOCATION:'
     assert response.body.include? 'SUMMARY:Nashville Predators vs. Winnipeg'

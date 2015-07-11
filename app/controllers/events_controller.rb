@@ -15,7 +15,16 @@ class EventsController < ApplicationController
       format.html { render :show }
       format.ics do
         cal = Icalendar::Calendar.new
-        cal.add_event(@event.to_ics(
+        cal.timezone do |t|
+          tz = current_user ? current_user.timezone : nil
+          if tz.blank?
+            t.tzid = Time.zone.tzinfo.name
+          else
+            t.tzid = tz
+          end
+        end
+        cal.add_event(
+          @event.to_ics(
             url_for(
               controller: 'events', action: 'show',
               id: @event.id, group_id: @group.id
