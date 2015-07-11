@@ -20,6 +20,7 @@ class CalendarControllerTest < ActionController::TestCase
     get :full, token: @user.calendar_token, format: 'ics'
 
     assert_response :success
+    assert response.body.include? 'NAME:SeatShare'
     assert response.body.include? 'BEGIN:VEVENT'
     assert response.body.include? 'UID:preds_20131024'
     assert response.body.include? 'DTSTART:20131026T140000'
@@ -37,6 +38,7 @@ class CalendarControllerTest < ActionController::TestCase
     get :group, group_id: 1, token: @user.calendar_token, format: 'ics'
 
     assert_response :success
+    assert response.body.include? 'NAME:Geeks Watching Hockey'
     assert response.body.include? 'BEGIN:VEVENT'
     assert response.body.include? 'UID:preds_20131026'
     assert response.body.include? 'DTSTART:20131026T140000'

@@ -15,6 +15,7 @@ class EventsController < ApplicationController
       format.html { render :show }
       format.ics do
         cal = Icalendar::Calendar.new
+        cal.append_custom_property 'name', @event.event_name
         cal.timezone do |t|
           tz = current_user ? current_user.timezone : nil
           if tz.blank?

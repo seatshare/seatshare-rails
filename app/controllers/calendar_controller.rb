@@ -20,6 +20,7 @@ class CalendarController < ApplicationController
 
     # Create calendar object
     cal = Icalendar::Calendar.new
+    cal.append_custom_property 'name', 'SeatShare'
     cal.timezone do |t|
       tz = user ? user.timezone : nil
       if tz.blank?
@@ -64,6 +65,7 @@ class CalendarController < ApplicationController
 
     # Create calendar object
     cal = Icalendar::Calendar.new
+    cal.append_custom_property 'name', group.group_name
     cal.timezone do |t|
       tz = user ? user.timezone : nil
       if tz.blank?
