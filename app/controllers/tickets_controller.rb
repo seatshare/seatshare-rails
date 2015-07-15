@@ -35,12 +35,13 @@ class TicketsController < ApplicationController
   ##
   # Process cost updates from ticket index
   def bulk_update
-    unless params[:ticket_cost].nil?
-      params[:ticket_cost].each do |ticket_id, cost|
+    unless params[:ticket].nil?
+      params[:ticket].each do |ticket_id, ticket_values|
         ticket = Ticket.find(ticket_id)
-        next if ticket.cost.to_f == cost.to_f
         next unless ticket.can_edit?(current_user)
-        ticket.cost = cost
+        ticket.cost = ticket_values[:cost].to_f
+        ticket.user_id = ticket_values[:user_id].to_i
+        next unless ticket.cost_changed? || ticket.user_id_changed?
         if ticket.save
           log_ticket_history ticket, 'updated'
           flash[:notice] = 'Tickets updated!'
@@ -64,8 +65,7 @@ class TicketsController < ApplicationController
 
     @members = @group.members.by_name.collect { |p| [p.display_name, p.id] }
     @members.unshift(['Unassigned', 0])
-    @user_aliases = current_user.user_aliases
-                    .by_name
+    @user_aliases = current_user.user_aliases.by_name
                     .collect { |p| [p.display_name, p.id] }
     @user_aliases.unshift(['Not Set', 0])
 
