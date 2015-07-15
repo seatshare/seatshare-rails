@@ -220,11 +220,13 @@ class TicketFlowTest < ActionDispatch::IntegrationTest
 
     post_via_redirect(
       '/tickets',
-      ticket_cost: { '1' => '10.00', '2' => '15.00' }, tickets: { filter: nil }
+      ticket: {
+        '1' => { cost: 15, user_id: 1 },
+        '2' => { cost: 15, user_id: 1 }
+      }
     )
-
     assert_response :success
-    assert_equal 'Tickets updated!', flash[:notice]
+    assert_equal 'Ticket(s) updated!', flash[:notice]
   end
 
   test 'bulk edit tickets - past' do
@@ -234,11 +236,13 @@ class TicketFlowTest < ActionDispatch::IntegrationTest
     )
 
     post_via_redirect(
-      '/tickets',
-      ticket_cost: { '2' => '15.00' }, tickets: { filter: 'past' }
+      '/tickets/?filter=past',
+      ticket: {
+        '3' => { cost: 13, user_id: 1 },
+        '4' => { cost: 13, user_id: 2 }
+      }
     )
-
     assert_response :success
-    assert_equal 'Tickets updated!', flash[:notice]
+    assert_equal 'Ticket(s) updated!', flash[:notice]
   end
 end

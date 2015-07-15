@@ -44,14 +44,14 @@ class TicketsController < ApplicationController
         next unless ticket.cost_changed? || ticket.user_id_changed?
         if ticket.save
           log_ticket_history ticket, 'updated'
-          flash[:notice] = 'Tickets updated!'
+          flash[:notice] = 'Ticket(s) updated!'
         else
-          flash[:error] = 'Ticket cost could not be updated.'
+          flash[:error] = 'Ticket(s) could not be updated.'
         end
       end
     end
     redirect_to(
-      controller: 'tickets', action: 'index', filter: params[:tickets][:filter]
+      controller: 'tickets', action: 'index', filter: params[:filter]
     )
   end
 
