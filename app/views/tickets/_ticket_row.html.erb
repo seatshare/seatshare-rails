@@ -16,22 +16,18 @@
     <% end %>
   </td>
   <td>
-    <% if ticket.assigned %>
-    <%= link_to ticket.assigned.display_name, :controller => :users, :action => :show, :id => ticket.assigned.id %>
-    <% if ticket.alias %>
-    <br />(for <%= ticket.alias.display_name %>)
+    <%= select_tag "ticket[#{ticket.id}][user_id]", options_for_select(ticket.group.members_options, ticket.assigned ? ticket.assigned.id : nil), { :class => 'form-control' } %>
+    <% if ticket.assigned && ticket.alias%>
+    <div class="text-muted">for <%= ticket.alias.display_name %></div>
     <% end %>
     <% if ticket.owner.id != current_user.id %>
-    <br /> from <%= link_to ticket.owner.display_name, :controller => :users, :action => :show, :id => ticket.owner.id %>
-    <% end %>
-    <% else %>
-    <%= link_to raw('<span class="badge badge-lg">Available!</span>'), { :controller => :tickets, :action => 'edit', :id => ticket.id, :event_id => ticket.event_id, :group_id => ticket.group_id }, { :data => { :toggle => 'tooltip'}, :title => 'Request Ticket' } %>
+    <div class="text-muted">from <%= link_to ticket.owner.display_name, :controller => :users, :action => :show, :id => ticket.owner.id %></div>
     <% end %>
   </td>
   <td class="text-right">
     <div class="input-group">
       <span class="input-group-addon">$</span>
-      <%= text_field :ticket_cost, ticket.id, { :class=>'form-control', :value=>number_to_currency(ticket.cost, :unit=>'') } %>
+      <%= text_field "ticket[#{ticket.id}]", :cost, { :class=>'form-control', :value=>number_to_currency(ticket.cost, :unit=>'') } %>
     </div>
   </td>
 </tr>

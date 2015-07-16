@@ -146,6 +146,14 @@ class Group < ActiveRecord::Base
     false
   end
 
+  ##
+  # List of group members as option array
+  def members_options(append_empty = true)
+    options = []
+    options << ['', ''] if append_empty
+    options + members.map { |m| [m.display_name, m.id] }
+  end
+
   private
 
   ##

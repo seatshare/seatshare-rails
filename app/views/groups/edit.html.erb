@@ -89,7 +89,7 @@
           <% if @group.admin?(current_user) %>
             <td class="remove-user">
               <% if member != current_user %>
-                <%= link_to raw('<span class="fa fa-trash"></span>'), { :action => 'leave', :user_id => member.id, :id => @group.id }, :class => 'btn btn-sm btn-danger confirm', :method => 'post' %>
+                <%= link_to raw('<span class="fa fa-trash"></span>'), { :action => 'leave', :user_id => member.id, :id => @group.id }, :class => 'btn btn-sm btn-danger confirm', :method => 'patch' %>
               <% else %>
                 <div data-toggle="tooltip" title="You cannot leave this group."><span class="btn btn-sm btn-danger disabled"><i class="fa fa-trash"></i></span></div>
               <% end %>
