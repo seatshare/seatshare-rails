@@ -41,11 +41,13 @@ ul.group-members li {
 
 /* Sidebar Icon */
 .sidebar-icon {
-  float:right;
+  float: right;
+  font-size: 10em;
+  line-height: 0;
+  margin-left: 0.1em;
   opacity: 0.4;
-  font-size: 17em;
-  line-height: 0em;
-  margin-left:0.1em;
+  text-align: center;
+  width: 1em;
 }
 
 /* Navbar */
