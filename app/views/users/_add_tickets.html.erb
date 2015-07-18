@@ -1,0 +1,10 @@
+<% if @group.tickets.count == 0 && @group.events.future.count > 0 %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="sidebar-icon"><%= link_to raw('<span class="fa fa-ticket"></span>'), user_path %></div>
+    <h3>Add Your Tickets</h3>
+    <p>Have tickets for your group? Add them to SeatShare.</p>
+    <p><%= link_to 'Add Tickets', { :controller => 'tickets', :action => 'new', :group_id => @group.id }, class: 'btn btn-info' %></p>
+  </div>
+</div>
+<% end %>
