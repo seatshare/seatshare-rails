@@ -18,6 +18,9 @@ ActiveAdmin.register Entity do
         status_tag('inactive')
       end
     end
+    column :groups do |entity|
+      entity.groups.count
+    end
     column :import_key
     column :entity_type
     actions

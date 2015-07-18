@@ -12,6 +12,9 @@ ActiveAdmin.register EntityType do
     id_column
     column :entity_type_name
     column :entity_type_abbreviation
+    column :entities do |entity_type|
+      entity_type.entities.count
+    end
     column :sort
     actions
   end

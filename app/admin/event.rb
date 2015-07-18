@@ -10,6 +10,9 @@ ActiveAdmin.register Event do
     column :start_time do |event|
       event.date_time
     end
+    column :tickets do |event|
+      event.tickets.count
+    end
     column :entity
     column :import_key
     actions

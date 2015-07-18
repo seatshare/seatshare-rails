@@ -7,12 +7,15 @@ ActiveAdmin.register Group do
     id_column
     column :group_name
     column :invitation_code
-    column :status do |entity|
-      if entity.status == 1
+    column :status do |group|
+      if group.status == 1
         status_tag('active', :ok)
       else
         status_tag('inactive')
       end
+    end
+    column :members do |group|
+      group.members.count
     end
     column :created_at
     column :updated_at
