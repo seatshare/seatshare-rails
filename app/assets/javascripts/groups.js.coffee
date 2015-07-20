@@ -51,6 +51,14 @@ groupsReady = ->
         doneRendering: () ->
           $('#sidebar_calendar td.day.event').each (i, day) ->
             events = $(day).data('events')
+            # Add ticket indicator
+            for e in events
+              if e.ticket_stats.held > 0
+                notation = $('<div class="has_tickets" />').tooltip({
+                  title: "You have #{e.ticket_stats.held} ticket(s) for this event."
+                });
+                $(day).prepend(notation)
+            # Add tooltip
             $('div', day).tooltip
               title: () ->
                 output = []

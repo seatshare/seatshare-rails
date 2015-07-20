@@ -136,7 +136,8 @@ class GroupsController < ApplicationController
       feed << {
         date: event.start_time.strftime('%Y-%m-%d'),
         title: "#{event.time != '' ? event.time : 'TBA'} - #{event.event_name}",
-        url: event_link
+        url: event_link,
+        ticket_stats: event.ticket_stats(@group, current_user)
       }
     end
     render json: feed
