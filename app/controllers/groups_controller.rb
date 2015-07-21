@@ -124,18 +124,20 @@ class GroupsController < ApplicationController
     @group = Group.find_by_id(params[:id]) || not_found
     not_found if @group.status != 1
     fail 'NotGroupMember' unless @group.member?(current_user)
-    @events = @group.events
+    @events = @group.events.by_date
 
     feed = []
     @events.each do |event|
+      next if event.date_tba == 1
       event_link = url_for(
         controller: 'events', action: 'show', group_id: @group.id,
         id: event.id
       )
       feed << {
         date: event.start_time.strftime('%Y-%m-%d'),
-        title: event.event_name,
-        url: event_link
+        title: "#{event.time != '' ? event.time : 'TBA'} - #{event.event_name}",
+        url: event_link,
+        ticket_stats: event.ticket_stats(@group, current_user)
       }
     end
     render json: feed

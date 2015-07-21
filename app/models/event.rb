@@ -87,6 +87,14 @@ class Event < ActiveRecord::Base
   end
 
   ##
+  # Show only the time of the event based on TBA settings
+  def time
+    out = ''
+    out += start_time.strftime('%-I:%M %P %Z') if time_tba == 0
+    out
+  end
+
+  ##
   # Description as Markdown
   def description_md
     GitHub::Markdown.render(description)
