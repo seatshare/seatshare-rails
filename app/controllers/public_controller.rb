@@ -58,9 +58,9 @@ class PublicController < ApplicationController
   def contact
   end
 
+  ##
+  # Calculator
   def calculator
-    @page_title = %q{SeatShare Calculator}
-    @meta_description = %q{Calculate how many seats your season ticket investment would be worth}
   end
 
   private
