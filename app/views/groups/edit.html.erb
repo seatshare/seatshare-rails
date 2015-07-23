@@ -1,24 +1,38 @@
-<% if @group.is_admin(current_user) %>
+<% content_for :page_title do %>Edit Group<% end %>
 
-<%= form_for @group, url: edit_group_path, html: {class: "form-horizontal", role: "form"} do |f| %>
+<% if @group.admin?(current_user) %>
+
+<%= form_for @group, url: edit_group_path, html: { class: "form-horizontal", role: "form", multipart: true } do |f| %>
 
 <fieldset>
   <legend>Group Details</legend>
 
   <div class="form-group">
-    <%= f.label :group_name, :class => 'col-md-3 control-label' %>
+    <%= f.label :group_name, 'Group Name', :class => 'col-md-3 control-label' %>
     <div class="col-md-9">
       <%= f.text_field :group_name, :class => 'form-control', :placeholder => 'Cellblock 303', :value => @group.group_name %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :invitation_code, :class => 'col-md-3 control-label' %>
+    <%= f.label :invitation_code, 'Share Link', class: 'col-md-3 control-label' %>
     <div class="col-md-9">
       <p class="form-control-static">
-        <%= @group.invitation_code %><br />
+        <span class="text-muted"><%= "#{request.protocol}#{request.host_with_port}#{new_user_registration_path}" %>/group/</span><%= @group.invitation_code %><br />
         <small><%= link_to 'Reset invitation code', { :controller => 'groups', :action => 'do_reset_invite', :id => @group.id }, :class => 'text-muted confirm', :method => 'post' %></small>
       </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :avatar, :class => 'col-md-3 control-label' %>
+    <div class="col-md-9">
+      <% if !@group.avatar.nil? %>
+      <%= image_tag @group.avatar.url(:thumb), :class => "img-thumbnail" %><br />
+      <label><%= check_box_tag 'group[remove_avatar]', 1 %> Remove?</label>
+      <br />
+      <% end %>
+      <%= f.file_field :avatar %>
     </div>
   </div>
 
@@ -27,6 +41,7 @@
 <div class="row">
   <div class="text-right col-md-12">
     <%= f.hidden_field :form_type, :value => 'group' %>
+    <%= link_to 'Deactivate Group', deactivate_group_path, :class => 'btn btn-danger' %>
     <%= f.submit 'Update Group', :class => 'btn btn-primary' %>
   </div>
 </div>
@@ -44,7 +59,7 @@
 
 <div class="row">
   <div class="text-right col-md-12">
-    <%= link_to raw('<span class="glyphicon glyphicon-remove"></span> Leave Group'), { :action => 'leave', :id => @group.id }, :class => 'btn btn-large btn-danger' %>
+    <%= link_to raw('<span class="fa fa-eject"></span> Leave Group'), { :action => 'leave', :id => @group.id }, :class => 'btn btn-large btn-danger' %>
   </div>
 
 </div>
@@ -60,7 +75,7 @@
           <th class="action"></th>
           <th>Name</th>
           <th>Email</th>
-          <% if @group.is_admin(current_user) %>
+          <% if @group.admin?(current_user) %>
             <th class="action"></th>
           <% end %>
         </tr>
@@ -69,12 +84,14 @@
         <% for member in @members %>
         <tr>
           <td><%= image_tag member.gravatar, :alt => member.display_name, :title => member.display_name %></td>
-          <td><%= link_to member.display_name, {:controller => 'profiles', :action => 'show', :id => member.id } %></td>
+          <td><%= link_to member.display_name, {:controller => :users, :action => :show, :id => member.id } %></td>
           <td><%= mail_to member.email %></td>
-          <% if @group.is_admin(current_user) %>
+          <% if @group.admin?(current_user) %>
             <td class="remove-user">
               <% if member != current_user %>
-                <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), { :action => 'leave', :user_id => member.id, :id => @group.id }, :class => 'btn btn-sm btn-danger confirm', :method => 'post' %>
+                <%= link_to raw('<span class="fa fa-trash"></span>'), { :action => 'leave', :user_id => member.id, :id => @group.id }, :class => 'btn btn-sm btn-danger confirm', :method => 'patch' %>
+              <% else %>
+                <div data-toggle="tooltip" title="You cannot leave this group."><span class="btn btn-sm btn-danger disabled"><i class="fa fa-trash"></i></span></div>
               <% end %>
             </td>
           <% end %>
@@ -86,8 +103,8 @@
 
   <div class="text-right">
     <ul class="list-inline">
-      <li><%= link_to raw('<span class="glyphicon glyphicon-envelope"></span> Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default' %></li>
-      <li><%= link_to raw('<span class="glyphicon glyphicon-plus"></span> Invite'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %></li>
+      <li><%= link_to raw('<span class="fa fa-envelope"></span> Message'), { :controller => 'groups', :action => 'message', :id => @group.id }, :class => 'btn btn-default' %></li>
+      <li><%= link_to raw('<span class="fa fa-plus"></span> Invite'), { :controller => 'groups', :action => 'invite', :id => @group.id }, :class => 'btn btn-default' %></li>
     </ul>
   </div>
 
@@ -95,7 +112,7 @@
 
 <% content_for :sidebar do %>
 
-<%= form_for :group_user, html: {class: "form-horizontal", role: "form"} do |f| %>
+<%= form_for :membership, html: {class: "form-horizontal", role: "form"}, url: "notifications/edit" do |f| %>
 
 <fieldset>
   <legend>Reminder Settings</legend>
@@ -107,6 +124,10 @@
       </div>
       <div class="checkbox">
         <label><%= f.check_box :weekly_reminder%> Weekly Schedule Reminder</label>
+      </div>
+      <hr />
+        <div class="checkbox">
+        <label><%= f.check_box :mine_only %> Send only if I have tickets.</label>
       </div>
     </div>
   </div>

@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
+# dotenv
+gem 'dotenv-rails', groups: [:development, :test]
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
-
-# Use sqlite3 as the database for Active Record
-# gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -14,9 +14,6 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -32,23 +29,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
 # Use thin instead of Webrick
 gem 'thin'
 
 # Use Bootstrap
 gem 'bootstrap-sass', '~> 3.1.1'
+
+# Use Font Awesome
+gem "font-awesome-rails"
 
 # Use Devise
 gem 'devise'
@@ -73,21 +61,64 @@ gem 'newrelic_rpm', group: :production
 gem 'select2-rails'
 
 # ActiveAdmin
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin', github: 'activeadmin'
 
 # Mailchimp API
 gem 'mailchimp-api', '~> 2.0.5'
 
 # SeatShare's own SODA gem
-gem 'soda_xml_team', '~> 1.0.8'
+gem 'soda_xml_team', '~> 1.3.0'
 
 # Capistrano
 gem 'capistrano', '~> 3.2.1'
 gem 'capistrano-rails', '~> 1.1'
 gem 'capistrano-bower', '~> 1.0'
+gem 'slackistrano', require: false
 
 # Whenever
-gem 'whenever', :require => false
+gem 'whenever', require: false
 
-# REST Client
+# Markdown Support
+gem 'github-markdown', '~> 0.6.8'
+
+# REST Client (for Google Analytics goal tracking)
 gem 'rest_client'
+
+# Readline support (for remote console)
+gem 'rb-readline'
+
+# Paperclip
+gem "paperclip", "~> 4.2"
+
+# Twilio / SMS related
+gem "twilio-ruby", '~> 3.12'
+gem "global_phone", "~> 1.0.1"
+
+# Sitemaps
+gem "dynamic_sitemaps"
+
+# Zeroclipboard
+gem 'zeroclipboard-rails'
+
+# iCalendar
+gem 'icalendar', '~> 2.3.0'
+
+# Slack Notifier
+gem 'slack-notifier', '~> 1.1.0'
+
+# testing
+group :testing do
+  gem 'guard-minitest'
+  gem 'guard-spork'
+  gem 'spork-rails'
+  gem 'spork-minitest', github: 'dekart/spork-minitest'
+end
+
+group :development do
+  gem 'rack-livereload'
+  gem 'guard-livereload'
+  gem 'guard-bundler', group: :development
+  gem 'guard-rubocop'
+  gem 'pry-rails'
+  gem 'pry-nav'
+end

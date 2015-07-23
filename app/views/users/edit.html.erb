@@ -1,0 +1,114 @@
+<% content_for :page_title do %>Edit Profile<% end %>
+
+<%= form_for @user, :url => user_path, html: {class: "form-horizontal", role: "form"} do |f| %>
+
+  <fieldset>
+    <legend>Your Details</legend>
+
+    <div class="form-group">
+      <%= f.label :first_name, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :first_name, :class => 'form-control', :placeholder => 'John' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :last_name, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :last_name, :class => 'form-control', :placeholder => 'Doe' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :timezone, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.time_zone_select :timezone, nil, { include_blank: true }, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-9">
+        <span><%= link_to "Change your email or password", edit_user_registration_path %></span>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="form-group">
+      <%= f.label :bio, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_area :bio, :class => 'form-control', :placeholder => 'Who is your favorite team?' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :location, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :location, :class => 'form-control', :placeholder => 'Any Town, USA' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :mobile, :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <%= f.text_field :mobile, :class => 'form-control', :placeholder => '(555) 555-1234' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :sms_notify, 'SMS Notifications', :class => 'col-md-3 control-label' %>
+      <div class="col-md-9">
+        <label><%= f.check_box :sms_notify %> Receive notifications when tickets are assigned or requested.</label>
+        <p class="help-block">
+        Standard messaging rates apply. Messages will originate from <strong><%= number_to_phone ENV['TWILIO_OUTBOUND_NUMBER'].gsub('+1','') %></strong>.
+        </p>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="row">
+    <div class="col-md-12">
+        <p class="text-right">
+          <%= f.submit 'Update Profile', :class => 'btn btn-primary' %>
+        </p>
+    </div>
+  </div>
+
+<% end %>
+
+<% content_for :sidebar do %>
+
+<fieldset>
+  <legend>Aliases</legend>
+  <p class="text-muted">"Aliases" allow you to flag tickets that are assigned to you, but under a different name, such as your spouse or sibling. You can create as many aliases as you need.</p>
+
+  <% if @user_aliases.count > 0 %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th class="action">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for user_alias in @user_aliases %>
+      <tr>
+        <td><%= link_to user_alias.display_name, :controller => 'user_aliases', :action => 'edit', :id => user_alias.id %></td>
+        <td><%= link_to raw('<span class="fa fa-trash"></span>'), { :controller => 'user_aliases', :action => 'destroy', :id => user_alias.id }, :class => 'btn btn-sm btn-danger confirm' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+  <p class="text-right">
+    <%= link_to raw('<span class="fa fa-plus"></span> Add Alias'), { :controller => 'user_aliases', :action => 'new' }, :class => 'btn btn-default' %>
+  </p>
+
+</fieldset>
+
+<% end %>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View edit profile"); }</script>
+<% end %>

@@ -1,7 +1,6 @@
 {
   "name": "seatshare-rails",
   "dependencies": {
-    "clndr": "1.2.0",
-    "bootstrap.growl": "mouse0270/bootstrap-growl"
+    "clndr": "1.2.14"
   }
 }

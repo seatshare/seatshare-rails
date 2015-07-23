@@ -1,3 +1,44 @@
-// Place all the styles related to the Public controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/* Home */
+.home {
+  padding-top: 0;
+}
+
+.home-navbar {
+  border-radius: 0;
+}
+
+.home-header {
+  margin-top: -20px;
+  background-color: #4963AE;
+  border-color: #4963AE;
+}
+
+.home-logo {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.home-topbar {
+  position: relative;
+  margin-bottom: -50px;
+  z-index: 1000;
+}
+
+.home-screenshot {
+  margin-bottom: -50px;
+}
+
+.home-cta {
+  margin-top: 2em;
+}
+
+/* Teams Page */
+.teams-header {
+  margin-top: -1.5em;
+  background-image: image-url('teams-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  text-align: center;
+  color: #fff;
+}

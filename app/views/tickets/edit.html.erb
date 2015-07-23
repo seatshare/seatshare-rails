@@ -1,3 +1,5 @@
+<% content_for :page_title do %><%= "#{@event.event_name} - #{@ticket.display_name}" %><% end %>
+
 <%= render 'event' %>
 
 <%= form_for :ticket, html: {class: "form-horizontal", role: "form"} do |f| %>
@@ -20,7 +22,7 @@
       <%= f.label :alias_id, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
         <%= f.select :alias_id, @user_aliases, {}, { :class => 'form-control' } %>
-        <span class="help-block"><%= link_to "Manage my user aliases", {:controller => 'profiles', :action => 'edit' } %></span>
+        <span class="help-block"><%= link_to "Manage my user aliases", {:controller => :users, :action => :edit } %></span>
       </div>
     </div>
   </div>
@@ -28,7 +30,10 @@
   <div class="form-group">
     <%= f.label :cost, :class => 'col-md-3 control-label' %>
     <div class="col-md-9">
-      <%= f.text_field :cost, :class=>'form-control', :placeholder=>'25.00', :value=>number_to_currency(@ticket.cost, :unit=>'') %>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <%= f.text_field :cost, :class=>'form-control', :placeholder=>'25.00', :value=>number_to_currency(@ticket.cost, :unit=>'') %>
+      </div>
     </div>
   </div>
   <div class="form-group">
@@ -49,10 +54,10 @@
         <% for file in @ticket.ticket_files %>
         <tr>
           <td>
-            <%= link_to raw('<span class="glyphicon glyphicon-save"></span> ') + file.file_name, file.download_link %>
+            <%= link_to raw('<span class="fa fa-save"></span> ') + file.file_name, file.download_link %>
             <br /><small>Uploaded <%= file.created_at %></small>
           </td>
-          <td><a href="#" class="btn btn-sm btn-danger confirm"><span class="glyphicon glyphicon-trash"></span></a></td>
+          <td><%= link_to raw('<span class="fa fa-trash"></span>'), delete_ticket_file_path(ticket_id: @ticket.id, id: file.id), :class => 'btn btn-sm btn-danger confirm' %></td>
         </tr>
         <% end %>
       </table>

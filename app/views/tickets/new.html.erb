@@ -1,3 +1,15 @@
+<% content_for :page_title do %><%= @page_title %><% end %>
+
+<% if @events.nil? && @event.nil? %>
+
+  <div class="alert alert-info">
+    <p><strong class="alert-title">No Events.</strong> We do not yet have a schedule for future events in this group.</p>
+  </div>
+  <p class="text-right">
+    <%= link_to 'Back to Group', group_path(@group.id), :class => 'btn btn-default' %>
+  </p>
+<% else %>
+
 <%= form_for :ticket, html: {class: "form-horizontal", role: "form"} do |f| %>
 
 <fieldset>
@@ -25,7 +37,10 @@
   <div class="form-group">
     <%= f.label :cost, :class => 'col-md-3 control-label' %>
     <div class="col-md-9">
-      <%= f.text_field :cost, :class=>'form-control', :placeholder=>'25.00' %>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <%= f.text_field :cost, :class=>'form-control', :placeholder=>'25.00' %>
+      </div>
     </div>
   </div>
   <div class="form-group">
@@ -40,7 +55,7 @@
       <%= f.label :alias_id, :class => 'col-md-3 control-label' %>
       <div class="col-md-9">
         <%= f.select :alias_id, @user_aliases, {}, { :class => 'form-control' } %>
-        <span class="help-block"><%= link_to "Manage my user aliases", {:controller => 'profiles', :action => 'edit' } %></span>
+        <span class="help-block"><%= link_to "Manage my user aliases", {:controller => :users, :action => :edit } %></span>
       </div>
     </div>
   </div>
@@ -60,7 +75,7 @@
           <label>
             <%= @event.event_name %>
             <%= f.hidden_field :event_id, :value => @event.id %>
-            <div class="help-block"><span class="glyphicon glyphicon-calendar"></span> <%= @event.date_time %></div>
+            <div class="help-block"><span class="fa fa-calendar"></span> <%= @event.date_time %></div>
           </label>
         </div>
     </div>
@@ -80,7 +95,7 @@
         <div class="checkbox">
           <label>
             <%= check_box_tag 'ticket[event_id][]', event.id, :checked => true %> <%= event.event_name %>
-            <div class="help-block"><span class="glyphicon glyphicon-calendar"></span> <%= event.date_time %></div>
+            <div class="help-block"><span class="fa fa-calendar"></span> <%= event.date_time %></div>
           </label>
         </div>
       <% end %>
@@ -98,6 +113,8 @@
     </p>
   </div>
 </div>
+
+<% end %>
 
 <% end %>
 

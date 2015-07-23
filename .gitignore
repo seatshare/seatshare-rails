@@ -17,11 +17,23 @@
 
 /vendor/*
 
-# Ignore local_env.yml file
-/config/local_env.yml
+# Ignore local config files
+/config/database.yml
+.env
+/config/deploy/slack.rb
 
 # Ignore bower components
 /vendor/assets/components
 
 # Ignore pre-compiled assets
 /public/assets/
+
+# Ignore rvm configuration files
+.ruby-version
+.ruby-gemset
+
+# Ignore node modules
+/node_modules/
+
+# Ignore generated sitemaps
+public/sitemaps/

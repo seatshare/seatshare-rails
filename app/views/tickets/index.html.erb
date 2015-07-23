@@ -1,0 +1,69 @@
+<% content_for :page_title do %><%= @page_title %><% end %>
+
+<div class="pull-right">
+  <div class="btn-group">
+    <% if params[:filter].nil? %>
+    <%= link_to 'Future Events', { :controller => 'tickets', :action => 'index', :filter => nil }, :class => "btn btn-default active" %>
+    <%= link_to 'Past Events', { :controller => 'tickets', :action => 'index', :filter => 'past' }, :class => "btn btn-default" %>
+    <% else %>
+    <%= link_to 'Future Events', { :controller => 'tickets', :action => 'index', :filter => nil }, :class => "btn btn-default" %>
+    <%= link_to 'Past Events', { :controller => 'tickets', :action => 'index', :filter => 'past' }, :class => "btn btn-default active" %>
+    <% end %>
+  </div>
+</div>
+
+<p class="lead">Here are all of the tickets from your ticket groups.</p>
+
+<%= form_tag tickets_path(filter: params[:filter]) do %>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Group</th>
+        <th>Event</th>
+        <th>Location</th>
+        <th>Assigned</th>
+        <th class="cost">Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="active">
+        <th colspan="5">Tickets You Own</th>
+      </tr>
+      <% if @tickets[:owned].count > 0 %>
+      <% for ticket in @tickets[:owned] %>
+      <%= render 'tickets/ticket_row', ticket: ticket, current_user: current_user %>
+      <% end %>
+      <% else %>
+      <tr>
+        <td colspan="5">
+          <em>No tickets matched the selected criteria.</em>
+        </td>
+      </tr>
+      <% end %>
+      <tr class="active">
+        <th colspan="5">Tickets Assigned to You</th>
+      </tr>
+      <% if @tickets[:assigned].count > 0 %>
+      <% for ticket in @tickets[:assigned] %>
+      <%= render 'tickets/ticket_row', ticket: ticket, current_user: current_user %>
+      <% end %>
+      <% else %>
+      <tr>
+        <td colspan="5">
+          <em>No tickets matched the selected criteria.</em>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @tickets.count > 0 %>
+<p class="text-right">
+  <%= submit_tag 'Update Tickets', :class => 'btn btn-primary' %>
+</p>
+<% end %>
+
+<% end %>

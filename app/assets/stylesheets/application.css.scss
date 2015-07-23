@@ -15,83 +15,108 @@
  */
 
 @import "bootstrap";
+@import "font-awesome";
+
+$break-small: 320px;
+$break-large: 1200px;
 
 body {
   padding-top: 70px;
   padding-bottom: 30px;
 }
 
+/* Table Cells */
 th.action {
-	width: 40px;
+  width: 40px;
+}
+th.cost {
+  width: 135px;
+  min-width: 120px;
 }
 
+/* Group Members */
 ul.group-members li {
-	margin-bottom: 0.25em;
+  margin-bottom: 0.25em;
 }
 
+/* Sidebar Icon */
+.sidebar-icon {
+  float: right;
+  font-size: 10em;
+  line-height: 0;
+  margin-left: 0.1em;
+  opacity: 0.4;
+  text-align: center;
+  width: 1em;
+}
+
+/* Navbar */
 .navbar-inverse {
-    background-color: #4963AE;
-    border-color: #4963AE;
+  background-color: #4963AE;
+  border-color: #4963AE;
 }
-
 .navbar-inverse .navbar-nav > li > a {
-	color: #ffffff;
+  color: #ffffff;
 }
-
 .navbar-inverse .navbar-brand a {
-	color: #ffffff;
+  color: #ffffff;
 }
-
 .navbar-inverse .logo {
-	background-image: image-url('seatshare-inverted.svg');
-	background-size: 150px 50px;
-	background-repeat: no-repeat;
-	height: 50px;
-	width: 150px;
-	overflow: hidden;
+  background-image: image-url('seatshare-inverted.svg');
+  background-size: 150px 50px;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 150px;
+  overflow: hidden;
 }
-
 .navbar-inverse .logo a {
-	margin: 0;
-	display: block;
-	width: 165px;
-	padding-top: 50px;
+  margin: 0;
+  display: block;
+  width: 165px;
+  padding-top: 50px;
 }
 
-.home {
-	padding-top: 0;
-}
-
-.home-navbar {
-	border-radius: 0;
-}
-
-.home-header {
-	margin-top: -20px;
-	background-color: #4963AE;
-    border-color: #4963AE;
-}
-
-.home-logo {
-	padding-top: 30px;
-	padding-bottom: 30px;
-}
-
-.home-topbar {
-	position: relative;
-	margin-bottom: -50px;
-	z-index: 1000;
-}
-
-.home-screenshot {
-	margin-bottom: -50px;
-}
-
-.home-cta {
-	margin-top: 2em;
+/* Action Well */
+.well-actions ul {
+  margin-bottom: 0;
 }
 
 /* Tooltips */
 [data-toggle="tooltip"] {
-	cursor: pointer;
+  cursor: pointer;
+}
+
+/* User Steps */
+ol.user-steps {
+  padding-left: 0;
+  list-style: none;
+}
+@media screen and (min-width: $break-large) {
+  ol.user-steps {
+    counter-reset: li;
+    list-style: none;
+    *list-style: decimal;
+  }
+  ol.user-steps > li {
+    position: relative;
+    padding-left: 60px;
+    min-height: 60px;
+  }
+  ol.user-steps > li:before {
+    content: counter(li);
+    counter-increment: li;
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    border-radius: 50%;
+    font-size: 18px;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }

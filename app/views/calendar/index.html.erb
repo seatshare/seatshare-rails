@@ -1,0 +1,60 @@
+<% content_for :page_title do %>Events Calendar Feeds<% end %>
+
+<h1>Calendar Feeds</h1>
+
+<p class="lead">Import your SeatShare calendar into your favorite calendar application, such as Google Calendar, Microsoft Outlook or Apple OS X Calendar.</p>
+
+<fieldset>
+  <legend>Instructions</legend>
+  <ol class="user-steps">
+    <li>
+      <h3>Select a Calendar</h3>
+      <p>Choose from the list provided. If you have more than one group, select "Full" to have a single feed for all your groups.</p>
+    </li>
+    <li>
+      <h3>Copy the iCal Feed Link</h3>
+      <p>You will use this in your application of choice.</p>
+    </li>
+    <li>
+      <h3>Add the Calendar to Your Application</h3>
+      <p>Follow these instructions for your prefered application.</p>
+      <ul>
+        <li><a href="https://support.google.com/calendar/answer/37100?hl=en">Google Calendar</a></li>
+        <li><a href="https://support.office.com/en-in/article/View-and-subscribe-to-Internet-Calendars-f6248506-e144-4508-b658-c838b6067597#bm2">Microsoft Outlook</a></li>
+        <li><a href="https://support.apple.com/kb/PH11523">Apple OS X Calendar</a></li>
+      </ul>
+    </li>
+  </ol>
+</fieldset>
+
+<% content_for :sidebar do %>
+
+<h3>Full Calendar Feed</h3>
+
+<ul class="list-group">
+  <li class="list-group-item">
+    <%= link_to raw('<span class="fa fa-calendar"></span> All Groups'), { :controller => 'calendar', :action => 'full', :token => current_user.calendar_token, :format => 'ics' } %>
+    <div class="visible-lg visible-md pull-right"><button class="btn btn-link btn-xs zeroclipboard" data-clipboard-text="<%= "#{request.protocol}#{request.host_with_port}" + url_for(:controller => 'calendar', :action => 'full', :token => current_user.calendar_token, :format => 'ics') %>" data-toggle="tooltip" title="Copy link to clipboard."><span class="fa fa-clipboard"></span></button></div>
+  </li>
+</ul>
+
+<h3>Group Calendar Feeds</h3>
+
+<ul class="list-group">
+  <% if @groups.count > 0 %>
+  <% @groups.each do |group| %>
+  <li class="list-group-item">
+    <%= link_to raw('<span class="fa fa-calendar"></span> ' + group.group_name), { :controller => 'calendar', :action => 'group', :group_id => group.id, :token => current_user.calendar_token, :format => 'ics' } %>
+    <div class="visible-lg visible-md pull-right"><button class="btn btn-link btn-xs zeroclipboard" data-clipboard-text="<%= "#{request.protocol}#{request.host_with_port}" + url_for(:controller => 'calendar', :action => 'group', :group_id => group.id, :token => current_user.calendar_token, :format => 'ics') %>" data-toggle="tooltip" title="Copy link to clipboard."><span class="fa fa-clipboard"></span></button></div>
+  </li>
+  <% end %>
+  <% else %>
+  <li class="list-group-item">You are not a member of any groups!</li>
+  <% end %>
+</ul>
+
+<% end %>
+
+<% content_for :page_footer do %>
+<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View calendar instructions"); }</script>
+<% end %>

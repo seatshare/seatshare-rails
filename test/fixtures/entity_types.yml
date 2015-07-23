@@ -1,0 +1,29 @@
+nhl:
+  id: 1
+  entity_type_name: National Hockey League
+  entity_type_abbreviation: NHL
+  sort: 40
+
+ncaamb:
+  id: 2
+  entity_type_name: NCAA Men's Basketball
+  entity_type_abbreviation: NCAAMB
+  sort: 20
+
+wftda:
+  id: 3
+  entity_type_name: Women's Flat Track Derby Association
+  entity_type_abbreviation: WFTDA
+  sort: 30
+
+nfl:
+  id: 4
+  entity_type_name: National Football League
+  entity_type_abbreviation: NFL
+  sort: 10
+
+sbl:
+  id: 5
+  entity_type_name: Sportsball League
+  entity_type_abbreviation: SBL
+  sort: 50

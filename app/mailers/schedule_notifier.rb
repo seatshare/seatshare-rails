@@ -1,17 +1,26 @@
+##
+# Schedule Notifier class
 class ScheduleNotifier < ActionMailer::Base
-  default from: "no-reply@myseatshare.com"
+  default from: 'no-reply@myseatshare.com'
   layout 'email'
 
+  ##
+  # Send a daily schedule
+  # - events: array of Event objects
+  # - group: Group object
+  # - user: recipient User object
   def daily_schedule(events, group, user)
-
-    set_timezone user
+    timezone user
 
     @events = events
     @group = group
     @user = user
 
     @view_action = {
-      url: url_for(:controller => 'groups', :action => 'show', :id => @group.id, :only_path => false),
+      url: url_for(
+        controller: 'groups', action: 'show',
+        id: @group.id, only_path: false
+      ),
       action: 'View Tickets',
       description: 'See available tickets.'
     }
@@ -26,24 +35,23 @@ class ScheduleNotifier < ActionMailer::Base
     headers['X-MC-SigningDomain'] = 'myseatshare.com'
   end
 
+  ##
+  # Send a weekly schedule
+  # - events: array of Event objects
+  # - group: Group object
+  # - user: recipient User object
   def weekly_schedule(events, group, user)
-    events_day_of_week = []
-    for day_of_week, index in Date::DAYNAMES.each_with_index.to_a.rotate(1)
-      events_day_of_week[index] = []
-      for event in events
-        next if event.start_time.wday != index
-        events_day_of_week[index] << event
-      end
-    end
+    timezone user
 
-    set_timezone user
-
-    @events_day_of_week = events_day_of_week
+    @events_day_of_week = events_day_of_week(events)
     @group = group
     @user = user
 
     @view_action = {
-      url: url_for(:controller => 'groups', :action => 'show', :id => @group.id, :only_path => false),
+      url: url_for(
+        controller: 'groups', action: 'show', id: @group.id,
+        only_path: false
+      ),
       action: 'View Tickets',
       description: 'See available tickets.'
     }
@@ -60,13 +68,30 @@ class ScheduleNotifier < ActionMailer::Base
 
   private
 
-  def set_timezone(user)
+  ##
+  # Format a list of events by week day
+  # - events: array of Event objects
+  def events_day_of_week(events)
+    events_day_of_week = []
+    Date::DAYNAMES.each_with_index.to_a.rotate(1).each do |_, index|
+      events_day_of_week[index] = []
+      events.each do |event|
+        next if event.start_time.wday != index
+        events_day_of_week[index] << event
+      end
+    end
+    events_day_of_week
+  end
+
+  ##
+  # Set timezone based on user
+  # - user: recipient User object
+  def timezone(user)
     tz = user ? user.timezone : nil
     if tz.blank?
-      Time.zone = ActiveSupport::TimeZone["Central Time (US & Canada)"]
+      Time.zone = ActiveSupport::TimeZone['Central Time (US & Canada)']
     else
       Time.zone = tz
     end
   end
-
 end

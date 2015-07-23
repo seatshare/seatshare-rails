@@ -1,4 +1,18 @@
-<h2>Create your SeatShare Account</h2>
+<% if @entity.nil? %>
+<% content_for :page_title do %>Create a SeatShare Account<% end %>
+<% content_for :page_description do %>Register for an account with SeatShare to start managing your season tickets.<% end %>
+<% content_for :html_head do %>
+<link rel="canonical" href="https://myseatshare.com/register" />
+<% end %>
+<% else %>
+<% content_for :page_title do %><%= "Create a SeatShare Account - #{@entity.display_name}".truncate(70, omission: '...') %><% end %>
+<% content_for :page_description do %><%= "Register for an account with SeatShare to start managing your season tickets for your #{@entity.display_name} group." %><% end %>
+<% content_for :html_head do %>
+<link rel="canonical" href="https://myseatshare.com/register" />
+<% end %>
+<% end %>
+
+<h2>Create a SeatShare Account</h2>
 
 <p class="text-muted">Your SeatShare account lets you join an existing group or create your own.</p>
 
@@ -68,6 +82,8 @@
     <div class="col-md-12">
         <% if @invite %>
         <%= f.hidden_field :invite_code, :value => @invite.invitation_code %>
+        <% elsif @group %>
+        <%= f.hidden_field :invite_code, :value => @group.invitation_code %>
         <% elsif @entity %>
         <%= f.hidden_field :entity_id, :value => @entity.id %>
         <% end %>
@@ -86,7 +102,7 @@
 
 <% end %>
 
-<p class="text-muted">SeatShare is not a ticket broker or marketplace, and we do not process payment for tickets that may be sold through the platform. More importantly, SeatShare is the easiest way to manage your season tickets online and share them with a group of other fans. Ticket groups can be created for more than 2,200 teams for which we are able to maintain up-to-date schedules -- including professional, college and amateur teams.</p>
+<p class="text-muted">SeatShare is not a ticket broker or marketplace, and we do not process payment for tickets that may be sold through the platform. More importantly, SeatShare is the easiest way to manage your season tickets online and share them with a group of other fans. Ticket groups can be created for more than 2,700 teams for which we are able to maintain up-to-date schedules -- including professional, college and amateur teams.</p>
 <% if @entity %>
 <p class="text-muted">Yep, that means we are ready for the <%= @entity.entity_name %> season!</p>
 <% end %>
@@ -97,13 +113,20 @@
 <% if @invite %>
 <div class="alert alert-success">
   <h4>You've been invited join a group!</h4>
-  <p><%= @invite.user.display_name %> invited you to join <%= @invite.group.group_name %>, so you will be ready to go here in just a bit!</p>
+  <p><strong><%= @invite.user.display_name %></strong> invited you to join <strong><%= @invite.group.group_name %></strong>, so you will be ready to go here in just a bit!</p>
   <br />
   <p class="text-lg">Invitation code: <strong class="invite_code"><%= @invite.invitation_code %></strong></p>
 </div>
+<% elsif @group %>
+<div class="alert alert-success">
+  <h4>You've been invited join a group!</h4>
+  <p>You have been invited to join <strong><%= @group.group_name %></strong>, so you will be ready to go here in just a bit!</p>
+  <br />
+  <p class="text-lg">Invitation code: <strong class="invite_code"><%= @group.invitation_code %></strong></p>
+</div>
 <% elsif @entity %>
 <div class="alert alert-success">
-  <h4>Create a <%= @entity.entity_name %> group!</h4>
+  <h4>Create a <%= @entity.entity_name %> group</h4>
   <p>After sign up, you will be ready to invite people to your new season ticket group!</p>
 </div>
 <% else %>

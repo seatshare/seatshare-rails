@@ -1,3 +1,5 @@
+<% content_for :page_title do %>Groups<% end %>
+
 <p class="lead">Groups of users exchange tickets among its membership. You can assign tickets to other users, or request their available tickets.</p> 
 
 <hr />
@@ -9,7 +11,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="pull-right">
-					<% if group.is_admin(current_user) %>
+					<% if group.admin?(current_user) %>
 					<%= link_to raw('<span class="label label-primary">Administrator</span>'), :action => 'edit', :id => group.id %>
 					<% else %>
 					<%= link_to raw('<span class="label label-default">Member</span>'), :action => 'edit', :id => group.id %>
@@ -19,15 +21,18 @@
 			</div>
 			<div class="panel-body">
 				<ul class="list-unstyled text-center">
-					<li>A <strong><%= group.entity.entity_name %></strong> group.</li>
+					<li style="line-height: 120px">
+						<%= image_tag group.avatar.url(:thumb) %>
+					</li>
+					<li>Your <strong><%= group.entity.entity_name %></strong> group.</li>
 					<li>
-						<%= group.users.count %> members.
+						<%= group.members.count %> members.
 					</li>
 				</ul>
 				<hr />
 				<ul class="list-inline text-center">
 					<li><%= link_to 'Switch to Group', {:action => 'show', :id => group.id }, :class => 'btn btn-default' %></li>
-					<% if !group.is_admin(current_user) %>
+					<% if !group.admin?(current_user) %>
 					<li><%= link_to 'Leave Group', {:action => 'leave', :id => group.id }, :class => 'btn btn-default' %></li>
 					<% end %>
 				</ul>

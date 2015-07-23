@@ -17,6 +17,6 @@
 //= require moment
 //= require underscore
 //= require clndr
-//= require bootstrap.growl
 //= require select2
+//= require zeroclipboard
 //= require_directory .

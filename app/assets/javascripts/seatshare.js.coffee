@@ -1,4 +1,3 @@
-# Global
 seatshareReady = ->
 
   # Navbar group switching
@@ -10,7 +9,10 @@ seatshareReady = ->
   	return window.confirm 'Are you sure?'
 
   # Tooltips
-  $('a[data-toggle="tooltip"], span[data-toggle="tooltip"], div[data-toggle="tooltip"]').tooltip()
+  $('a[data-toggle="tooltip"], span[data-toggle="tooltip"], div[data-toggle="tooltip"], button[data-toggle="tooltip"]').tooltip()
+
+  # Zeroclipboard
+  clip = new ZeroClipboard($("button.zeroclipboard"))
 
 $(document).ready(seatshareReady)
 $(document).on('page:load', seatshareReady)

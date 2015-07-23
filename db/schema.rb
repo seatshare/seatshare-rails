@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140824185250) do
+ActiveRecord::Schema.define(version: 20150504021139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,15 +51,22 @@ ActiveRecord::Schema.define(version: 20140824185250) do
 
   create_table "entities", force: true do |t|
     t.string   "entity_name"
-    t.integer  "status",      default: 0,  null: false
+    t.integer  "status",         default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "import_key",  default: "", null: false
-    t.string   "entity_type", default: "", null: false
+    t.string   "import_key",     default: "", null: false
+    t.integer  "entity_type_id", default: 0
   end
 
-  add_index "entities", ["entity_name", "entity_type"], name: "index_entities_on_entity_name_and_entity_type", unique: true, using: :btree
   add_index "entities", ["import_key"], name: "index_entities_on_import_key", unique: true, using: :btree
+
+  create_table "entity_types", force: true do |t|
+    t.string   "entity_type_name"
+    t.string   "entity_type_abbreviation"
+    t.integer  "sort"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", force: true do |t|
     t.integer  "entity_id"
@@ -90,18 +97,6 @@ ActiveRecord::Schema.define(version: 20140824185250) do
   add_index "group_invitations", ["invitation_code"], name: "index_group_invitations_on_invitation_code", unique: true, using: :btree
   add_index "group_invitations", ["user_id"], name: "index_group_invitations_on_user_id", using: :btree
 
-  create_table "group_users", id: false, force: true do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.string   "role"
-    t.integer  "daily_reminder"
-    t.integer  "weekly_reminder"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "group_users", ["group_id", "user_id"], name: "index_group_users_on_group_id_and_user_id", using: :btree
-
   create_table "groups", force: true do |t|
     t.integer  "entity_id"
     t.string   "group_name"
@@ -110,19 +105,28 @@ ActiveRecord::Schema.define(version: 20140824185250) do
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "groups", ["creator_id"], name: "index_groups_on_creator_id", using: :btree
   add_index "groups", ["entity_id"], name: "index_groups_on_entity_id", using: :btree
   add_index "groups", ["invitation_code"], name: "index_groups_on_invitation_code", unique: true, using: :btree
 
-  create_table "subscriptions", force: true do |t|
+  create_table "memberships", id: false, force: true do |t|
     t.integer  "group_id"
-    t.string   "customer_id"
-    t.integer  "status"
+    t.integer  "user_id"
+    t.string   "role"
+    t.integer  "daily_reminder"
+    t.integer  "weekly_reminder"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "mine_only"
   end
+
+  add_index "memberships", ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id", using: :btree
 
   create_table "ticket_files", force: true do |t|
     t.integer  "user_id"
@@ -191,6 +195,11 @@ ActiveRecord::Schema.define(version: 20140824185250) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "timezone"
+    t.text     "bio"
+    t.string   "location"
+    t.string   "mobile"
+    t.boolean  "sms_notify"
+    t.string   "calendar_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

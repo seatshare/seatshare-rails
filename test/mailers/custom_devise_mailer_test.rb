@@ -1,11 +1,17 @@
 require 'test_helper'
 
+##
+# Custom Devise Mailer test
 class CustomDeviseMailerTest < ActionMailer::TestCase
+  ##
+  # Setup tests
   def setup
     ActionMailer::Base.deliveries = []
     Devise.mailer = 'CustomDeviseMailer'
   end
 
+  ##
+  # Get user
   def user
     @user ||= begin
       user = User.find(1)
@@ -14,6 +20,7 @@ class CustomDeviseMailerTest < ActionMailer::TestCase
     end
   end
 
+  ## Send mail
   def mail
     @mail ||= begin
       user
@@ -42,11 +49,17 @@ class CustomDeviseMailerTest < ActionMailer::TestCase
   end
 
   test 'body should have link to confirm the account' do
-    if mail.body.encoded =~ %r{<a href=\"http://localhost:3000/password/edit\?reset_password_token=([^"]+)">}
-      assert_equal Devise.token_generator.digest(user.class, :reset_password_token, $1), user.reset_password_token
+    if mail.body.encoded =~ %r{/password/edit\?reset_password_token=([^"]+)">}
+      assert_equal(
+        Devise.token_generator.digest(
+          user.class,
+          :reset_password_token,
+          Regexp.last_match[1]
+        ),
+        user.reset_password_token
+      )
     else
-      flunk "expected reset password url regex to match"
+      flunk 'expected reset password url regex to match'
     end
   end
-
 end

@@ -1,6 +1,9 @@
+<% content_for :page_title do %>Contact - SeatShare<% end %>
+<% content_for :page_description do %>Have questions or comments about SeatShare? We are here to help.<% end %>
+
 <h1>Let's talk!</h1>
 
-<p class="lead">Got an idea for a new feature? Cannot find your team in our list of more than 2,200? For any of these reasons and more, let's get in touch!</p>
+<p class="lead">Got an idea for a new feature? Cannot find your team in our list of more than 2,700? For any of these reasons and more, let's get in touch!</p>
 
 <h2>Have questions or comments?</h2>
 
@@ -14,7 +17,7 @@
 </div>
 <% end %>
 
-<%= form_tag "http://getsimpleform.com/messages?form_api_token=#{ENV['SIMPLE_FORM_FORM_API_TOKEN']}", :class => "form-horizontal", :role => "form" do |f| %>
+<%= form_tag "https://getsimpleform.com/messages?form_api_token=#{ENV['SIMPLE_FORM_FORM_API_TOKEN']}", :class => "form-horizontal", :role => "form" do |f| %>
 
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Your Name</label>

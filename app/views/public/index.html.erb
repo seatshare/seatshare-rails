@@ -1,9 +1,12 @@
+<% content_for :page_title do %>Welcome to SeatShare<% end %>
+<% content_for :page_description do %>SeatShare helps you manage your group's season tickets for sports or performing arts events. Sign up for free.<% end %>
+
 <h1>What is SeatShare?</h1>
 <p class="lead">SeatShare is the easiest way to manage your shared pool of tickets for a sports team or performing arts venue.</p>
 
 <div class="visible-xs">
-    <div class="well text-center">
-        <ul class="list-inline" style="margin-bottom:0;">
+    <div class="well well-actions text-center">
+        <ul class="list-inline">
             <li><%= link_to 'Register', new_user_registration_path, :class=> 'btn btn-primary' %></li>
             <li><%= link_to 'Login', 'login', :class=> 'btn btn-primary' %></li>
         </ul>
@@ -15,14 +18,23 @@
         <%= link_to image_tag('screenshot-iphone.png', :class => "img-responsive visible-md visible-lg", :alt => "Screenshots", :title => "Simulated Mobile Screenshot"), new_user_registration_path %>
     </div>
     <div class="col-md-9">
+
+        <br />
+
+        <div class="well well-sm">
+            <div class="text-center">
+                <span class="fa fa-ticket"></span> <strong>SeatShare can manage group season tickets for <%= link_to "more than 2,700 professional and college sports teams", teams_path %>!</strong>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-4">
                 <h2>Groups</h2>
-                <p>Join or create a new group to share your season tickets with friend and coworkers.</p>
+                <p>Join or create a new group to share your season tickets with friends and coworkers.</p>
             </div>
             <div class="col-md-4">
                 <h2>Events</h2>
-                <p>Your <%= link_to 'favorite teams', teams_path %> and venues are available with up-to-date schedules. Plan the entire season.</p>
+                <p>Your <%= link_to 'favorite teams', teams_path %> are available with up-to-date schedules. Plan the entire season.</p>
             </div>
             <div class="col-md-4">
                 <h2>Tickets</h2>
@@ -36,25 +48,45 @@
             </div>
             <div class="col-md-4">
                 <h2>Notifications</h2>
-                <p>Recieve an email when someone requests a ticket or assigns one to you. Respond quickly from your phone.</p>
+                <p>Recieve an SMS text message when someone requests a ticket or assigns one to you. Respond quickly from your phone.</p>
             </div>
             <div class="col-md-4">
-                <h2>&amp; more!</h2>
+                <h2>... and more!</h2>
                 <p>SeatShare is web-based software, so you get the latest features as soon as they are released.</p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="home-cta">
-                    <p class="lead text-center"><%= link_to "Create Your SeatShare Account", new_user_registration_path, :class=>'btn btn-primary btn-lg' %></p>
+                    <p class="lead text-center"><%= link_to "Create a SeatShare Account", new_user_registration_path, :class=>'btn btn-primary btn-lg' %></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
+        <br />
+        <hr />
+        <br />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h2>Have season tickets? We have you covered!</h2>
+        <ul class="list-inline">
+            <% @entity_types.each do |et| %>
+            <li><%= link_to et.entity_type_name, league_path(entity_type_abbreviation: et.entity_type_abbreviation), title: et.entity_type_name, class: 'btn btn-link' %></li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
         <br />
         <hr />
         <br />
@@ -85,7 +117,7 @@
     <div class="col-md-offset-1 col-md-7">
         <h3>Need Tickets?</h3>
         <p class="lead">If you want to attend an event, find an available ticket and use the dropdown menu to “Request” the ticket. This will send a message to the ticket holder saying that you want to attend that event. Ticketholders can then update the ticket’s assignee.</p>
-        <p class="lead text-center"><%= link_to "Create Your SeatShare Account", new_user_registration_path, :class=>'btn btn-primary btn-lg' %></p>
+        <p class="lead text-center"><%= link_to "Create a SeatShare Account", new_user_registration_path, :class=>'btn btn-primary btn-lg' %></p>
     </div>
     <div class="col-md-3">
          <%= link_to image_tag('screenshot-tickets.png', :alt=>"Screenshot", :title=>"Tickets", :class=>"img-thumbnail hidden-xs"), new_user_registration_path %>

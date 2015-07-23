@@ -61,13 +61,13 @@
   <li class="select input">
     <fieldset class="fragments">
       <legend class="label" style="width:inherit;">
-        <strong><%= entity_type %></strong><br />
-        <a href="javascript:void(0);" onclick="$('.team_id_<%= entity_type %>').prop('checked', true);">select all</a> | <a href="javascript:void(0);" onclick="$('.team_id_<%= entity_type %>').prop('checked', false);">select none</a>
+        <strong><%= entity_type.entity_type_abbreviation %></strong><br />
+        <a href="javascript:void(0);" onclick="$('.team_id_<%= entity_type.id %>').prop('checked', true);">select all</a> | <a href="javascript:void(0);" onclick="$('.team_id_<%= entity_type.id %>').prop('checked', false);">select none</a>
       </legend>
       <ol class="fragments-group">
       <% for entity_list in entities %>
       <%for entity in entity_list %>
-      <li class="<%= entity.groups.count > 0 ? 'highlight' : '' %>"><label><%= check_box_tag "team_id[]", entity.import_key, false, :class=>"team_id_#{entity_type}" %> <%= entity.entity_name %></label><li>
+      <li class="<%= entity.groups.count > 0 ? 'highlight' : '' %>"><label><%= check_box_tag "team_id[]", entity.import_key, false, :class=>"team_id_#{entity_type.id}" %> <%= entity.entity_name %></label><li>
       <% end %>
       <% end %>
       </ol>

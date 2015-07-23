@@ -1,0 +1,33 @@
+<tr>
+  <td>
+    <%= link_to ticket.group.group_name, :controller => :groups, :action => :show, :id => ticket.group_id %>
+  </td>
+  <td>
+    <%= link_to ticket.event.event_name, :controller => :events, :action => :show, :group_id => ticket.group_id, :id => ticket.event_id %><br />
+      <%= ticket.event.date_time %>
+  </td>
+  <td>
+    <%= link_to ticket.display_name, :controller => :tickets, :action => 'edit', :group_id => ticket.group_id, :event_id => ticket.event_id, :id => ticket.id %>
+    <% if !ticket.note.nil? && ticket.note.length > 0 %>
+    <span data-toggle="tooltip" title="<%= ticket.note %>" class="fa fa-comment"></span>
+    <% end %>
+    <% if ticket.ticket_files.count > 0 %>
+    <span data-toggle="tooltip" title="Attachments" class="fa fa-paperclip"></span>
+    <% end %>
+  </td>
+  <td>
+    <%= select_tag "ticket[#{ticket.id}][user_id]", options_for_select(ticket.group.members_options, ticket.assigned ? ticket.assigned.id : nil), { :class => 'form-control' } %>
+    <% if ticket.assigned && ticket.alias%>
+    <div class="text-muted">for <%= ticket.alias.display_name %></div>
+    <% end %>
+    <% if ticket.owner.id != current_user.id %>
+    <div class="text-muted">from <%= link_to ticket.owner.display_name, :controller => :users, :action => :show, :id => ticket.owner.id %></div>
+    <% end %>
+  </td>
+  <td class="text-right">
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <%= text_field "ticket[#{ticket.id}]", :cost, { :class=>'form-control', :value=>number_to_currency(ticket.cost, :unit=>'') } %>
+    </div>
+  </td>
+</tr>

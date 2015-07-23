@@ -1,4 +1,6 @@
-<%= form_for @user_alias, url: new_user_alias_path, html: {class: "form-horizontal", role: "form"} do |f| %>
+<% content_for :page_title do %>Add User Alias<% end %>
+
+<%= form_for @user_alias, url: user_aliases_path, html: {class: "form-horizontal", role: "form"} do |f| %>
 
   <fieldset>
     <legend>User Alias details</legend>

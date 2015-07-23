@@ -28,15 +28,14 @@ SeatShare::Application.configure do
   config.assets.debug = true
 
   # Configure the ActionMailer
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'http://localhost:3000' }
-  config.action_mailer.smtp_settings = { :address => "127.0.0.1", :port => 1025 }
-  config.action_mailer.asset_host = "http://localhost:3000"
-
-  # Stop SSL issues with MailChimp API
-  silence_warnings do
-    OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
+  if ENV.has_key? 'USE_MAILCATCHER'
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = { :address => "127.0.0.1", :port => 1025 }
   end
+  config.action_mailer.asset_host = "http://localhost:3000"
+  config.action_mailer.default_url_options = { :host => 'http://localhost:3000' }
 
+  # Enable LiveReload in asset pipeline
+  config.middleware.use Rack::LiveReload
 end

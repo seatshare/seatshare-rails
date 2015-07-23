@@ -1,0 +1,7 @@
+machine:
+  ruby:
+    version: 2.1.0
+database:
+  override:
+    - mv config/database.ci.yml config/database.yml
+    - bundle exec rake db:create db:migrate --trace

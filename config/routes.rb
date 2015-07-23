@@ -8,12 +8,14 @@ SeatShare::Application.routes.draw do
   root 'public#index'
 
   get 'teams' => 'public#teams'
+  get 'teams/:entity_type_abbreviation' => 'public#league', as: 'league'
   get 'tos' => 'public#tos'
   get 'privacy' => 'public#privacy'
   get 'contact' => 'public#contact'
   get 'calculator' => 'public#calculator'
 
   devise_scope :user do
+    get "register/group/:group_code", to: "registrations#new", as: 'register_with_group_code'
     get "register/invite/:invite_code", to: "registrations#new", as: 'register_with_invite_code'
     get "register/:entity_slug/:entity_id", to: "registrations#new", as: 'register_with_entity_id'
   end
@@ -23,15 +25,18 @@ SeatShare::Application.routes.draw do
   post 'groups/new' => 'groups#create'
   get 'groups/join' => 'groups#join', as: 'join_group'
   post 'groups/join' => 'groups#do_join'
+  get 'groups/join/:invite_code' => 'groups#join'
   get 'groups/:id' => 'groups#show', as: 'group'
   get 'groups/:id/edit' => 'groups#edit', as: 'edit_group'
   patch 'groups/:id/edit' => 'groups#update'
-  post 'groups/:id/edit' => 'groups#update'
+  post 'groups/:id/notifications/edit' => 'groups#update_notifications'
   get 'groups/:id/leave' => 'groups#leave', as: 'leave_group'
-  post 'groups/:id/leave' => 'groups#do_leave'
+  patch 'groups/:id/leave' => 'groups#do_leave'
   get 'groups/:id/invite' => 'groups#invite', as: 'invite_group'
   post 'groups/:id/invite' => 'groups#do_invite'
   post 'groups/:id/reset_invite' => 'groups#do_reset_invite'
+  get 'groups/:id/deactivate' => 'groups#deactivate', as: 'deactivate_group'
+  patch 'groups/:id/deactivate' => 'groups#do_deactivate'
   get 'groups/:id/message' => 'groups#message', as: 'message_group'
   post 'groups/:id/message' => 'groups#do_message'
   get 'groups/:id/events_feed' => 'groups#events_feed'
@@ -42,6 +47,7 @@ SeatShare::Application.routes.draw do
   post 'groups/:group_id/event-:event_id/ticket-:id' => 'tickets#update'
   get 'groups/:group_id/event-:event_id/ticket-:id/unassign' => 'tickets#unassign'
   get 'groups/:group_id/event-:event_id/ticket-:id/delete' => 'tickets#delete'
+  get 'groups/:group_id/event-:event_id/ticket-:ticket_id/ticket-file/:id/delete' => 'tickets#delete_ticket_file', as: 'delete_ticket_file'
   get 'groups/:group_id/add-tickets' => 'tickets#new'
   post 'groups/:group_id/add-tickets' => 'tickets#create'
   get 'groups/:group_id/event-:event_id/add-ticket' => 'tickets#new'
@@ -49,14 +55,26 @@ SeatShare::Application.routes.draw do
   get 'groups/:group_id/event-:event_id/ticket-:id/request' => 'tickets#request_ticket'
   patch 'groups/:group_id/event-:event_id/ticket-:id/request' => 'tickets#do_request_ticket'
 
-  get 'profiles/:id' => 'profiles#show'
-  get 'profile' => 'profiles#edit'
-  post 'profile' => 'profiles#update'
+  get 'tickets' => 'tickets#index'
+  get 'tickets/:filter' => 'tickets#index'
+  post 'tickets' => 'tickets#bulk_update'
 
-  get 'profile/aliases/new' => 'user_aliases#new', as: 'new_user_alias'
-  post 'profile/aliases/new' => 'user_aliases#create'
-  get 'profile/aliases/:id/edit' => 'user_aliases#edit', as: 'edit_user_alias'
-  post 'profile/aliases/:id/edit' => 'user_aliases#update'
-  get 'profile/aliases/:id/delete' => 'user_aliases#delete', as: 'delete_user_alias'
+  get 'calendar' => 'calendar#index'
+  get 'calendar/full/:token' => 'calendar#full'
+  get 'groups/:group_id/calendar/:token' => 'calendar#group'
+
+  resource :user, path: 'profile', only: [:show, :edit, :update] do
+    resources :aliases, controller: :user_aliases
+  end
+  resources :users, path: 'profiles', only: [:show]
+
+  match '/404' => 'errors#error404', via: [:get, :post, :patch, :delete]
+
+  namespace :admin_api, defaults: {format: 'json'} do
+    namespace :v1 do
+      root 'admin_api#index'
+      get ':action' => 'admin_api#:action'
+    end
+  end
 
 end

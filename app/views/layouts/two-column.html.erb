@@ -4,13 +4,7 @@
 
 <meta charset="utf-8">
 
-<title><%= @page_title || 'SeatShare' %></title>
-<% if !@meta_description.nil? %>
-<meta name="description" content="<%= @meta_description %>" />
-<% end %>
-<% if !@link_canonical.nil? %>
-<link rel="canonical" href="<%= @link_canonical %>" />
-<% end %>
+<title><%= yield :page_title || 'SeatShare' %></title>
 <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 <%= csrf_meta_tags %>
@@ -19,23 +13,29 @@
 
 <%= favicon_link_tag 'favicon.png', rel: 'shortcut icon', type: 'image/png' %>
 
+<%= render 'layouts/meta_tags' %>
+
 <%= render 'layouts/ios' %>
 
 <%= render 'layouts/mixpanel' %>
 
 <%= render 'layouts/analytics' %>
 
-<%= yield :page_header %>
+<%= yield :html_head %>
 
 </head>
-<body class="default">
+<body class="two-column">
 
 <%= render 'layouts/navbar' %>
+
+<%= yield :page_header %>
 
 <div class="container">
 
   <div class="row">
     <section class="col-md-8">
+
+    <%= render 'layouts/flash' %>
 
     <%= yield %>
 
@@ -50,9 +50,9 @@
 
 </div>
 
-<%= render 'layouts/growl' %>
-
 <%= yield :page_footer %>
+
+<%= render 'layouts/adwords' if flash[:conversion] == true %>
 
 </body>
 </html>

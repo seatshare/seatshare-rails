@@ -1,3 +1,5 @@
+<% content_for :page_title do %><%= "Leave #{@group.group_name}" %><% end %>
+
 <%= form_for @group, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'leave', :id => @group.id } do |f| %>
 
 <div class="alert alert-danger alert-block">

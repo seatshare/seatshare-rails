@@ -16,7 +16,7 @@
   <% if !event.description.blank? %>
   <tr>
     <th>Description</th>
-    <td><%= event.description %></td>
+    <td><%= raw(event.description_md) %></td>
   </tr>
   <% end %>
 
@@ -34,7 +34,7 @@
       <table width="100%" cellpadding="10px">
         <tbody>
           <% for ticket in tickets %>
-          <% next if ticket.is_assigned? %>
+          <% next if ticket.assigned? %>
           <tr>
             <td>
               <%= link_to ticket.display_name, { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %>

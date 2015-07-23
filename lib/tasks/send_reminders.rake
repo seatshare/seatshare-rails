@@ -5,16 +5,18 @@ namespace :send_reminders do
     Time.zone = ActiveSupport::TimeZone["Central Time (US & Canada)"]
 
     puts "[START] #{DateTime.now}"
-    groups = Group.all
-    start_time = Date.today.beginning_of_day.utc
-    end_time = Date.today.end_of_day.utc
-    puts "Sending Daily Reminders for events between #{start_time} and #{end_time}"
+    groups = Group.active
+    puts "Sending Daily Reminders for events for today"
     for group in groups
-      events = group.events.where("start_time >= '#{start_time}' AND start_time <= '#{end_time}'").order_by_date
+      events = group.events.today.by_date
       if events.count > 0
-        for group_user in group.group_users
-          if group_user.daily_reminder === 1
-            user = User.find(group_user.user_id)
+        for membership in group.memberships
+          if membership.daily_reminder == 1
+            user = User.find(membership.user_id)
+            if (membership.mine_only == 1)
+              has_tickets = events.map { |e| e.user_has_ticket?(user) }
+              next unless has_tickets.include?(true)
+            end
             puts "- Sending #{user.display_name} (#{user.email}) for #{group.group_name}"
             ScheduleNotifier.daily_schedule(events, group, user).deliver
           end
@@ -33,16 +35,18 @@ namespace :send_reminders do
     Time.zone = ActiveSupport::TimeZone["Central Time (US & Canada)"]
 
     puts "[START] #{DateTime.now}"
-    groups = Group.all
-    start_time = Date.today.beginning_of_day.utc
-    end_time = Date.today.end_of_day.utc + 6
-    puts "Sending Weekly Reminders for events between #{start_time} and #{end_time}"
+    groups = Group.active
+    puts "Sending Weekly Reminders for events for next seven days"
     for group in groups
-    events = group.events.where("start_time >= '#{start_time}' AND start_time <= '#{end_time}'").order_by_date
+    events = group.events.next_seven_days.by_date
       if events.count > 0
-        for group_user in group.group_users
-          if group_user.weekly_reminder === 1
-            user = User.find(group_user.user_id)
+        for membership in group.memberships
+          if membership.weekly_reminder == 1
+            user = User.find(membership.user_id)
+            if (membership.mine_only == 1)
+              has_tickets = events.map { |e| e.user_has_ticket?(user) }
+              next unless has_tickets.include?(true)
+            end
             puts "- Sending #{user.display_name} (#{user.email}) for #{group.group_name}"
             ScheduleNotifier.weekly_schedule(events, group, user).deliver
           end

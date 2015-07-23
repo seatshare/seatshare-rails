@@ -1,9 +1,19 @@
+<% content_for :page_title do %><%= "Invite Member to #{@group.group_name}" %><% end %>
+
+<div class="jumbotron">
+  <p>Anyone with <%= link_to 'this link', @invite_link %> can join your ticket group.</p>
+  <h5 class="visible-lg"><%= link_to @invite_link, @invite_link %></h5>
+  <p class="visible-lg">
+    <button class="btn btn-default zeroclipboard" data-clipboard-text="<%= @invite_link %>" data-toggle="tooltip" title="Copy link to clipboard."><span class="fa fa-clipboard"></span> Copy to Clipboard</button>
+  </p>
+</div>
+
 <%= form_for @group_invitation, html: {class: "form-horizontal", role: "form"}, url: { :controller => 'groups', :action => 'invite', :id => @group.id } do |f| %>
 
 <div class="row">
   <div class="col-md-12">
     <fieldset>
-      <legend>Invite a New Member</legend>
+      <legend>Invite a New Member via Email</legend>
       <div class="form-group">
         <%= f.label :email, :class => 'col-md-3 control-label' %>
         <div class="col-md-9">

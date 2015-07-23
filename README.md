@@ -1,10 +1,10 @@
-# SeatShare
+# SeatShare [![Circle CI](https://circleci.com/gh/seatshare/seatshare-rails.svg?style=svg&circle-token=b15e16199f58286483c6319a05cb11452131ab70)](https://circleci.com/gh/seatshare/seatshare-rails)
 
-This project is a mock SaaS to allow a group of people to manage a pool of tickets to events. The most common use case is to share season tickets to a sports team.
+This project allows a group of people to manage a pool of tickets to events. The most common use case is to share season tickets to a sports team.
 
 ## Installation
 
-Please see the complete [installation instructions](https://github.com/stephenyeargin/seatshare-rails/wiki/Installation) in the wiki.
+Please see the complete [installation instructions](https://github.com/seatshare/seatshare-rails/wiki/Installation) in the wiki.
 
 ## Getting started with the application
 
@@ -16,3 +16,7 @@ The group will not have any events yet. You need to use the `/admin` route to lo
 
 * Email: `stephen@seatsha.re`
 * Password: `password`
+
+## Using the automated test runner and livereload
+
+This project uses [Guard](https://github.com/guard/guard) to automatically run the test suite as you develop. It also watches views and assets and will trigger livereload in your browser as you develop the app's front-end. All you need to do to use these features is run `guard` from the project root once you have completed the installation instructions linked above.
