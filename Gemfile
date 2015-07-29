@@ -67,7 +67,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'mailchimp-api', '~> 2.0.5'
 
 # SeatShare's own SODA gem
-gem 'soda_xml_team', '~> 1.3.0'
+gem 'soda_xml_team', '~> 1.4.3'
 
 # Capistrano
 gem 'capistrano', '~> 3.2.1'
