@@ -12,6 +12,7 @@ SeatShare::Application.routes.draw do
   get 'tos' => 'public#tos'
   get 'privacy' => 'public#privacy'
   get 'contact' => 'public#contact'
+  post 'contact' => 'public#do_contact'
 
   devise_scope :user do
     get "register/group/:group_code", to: "registrations#new", as: 'register_with_group_code'

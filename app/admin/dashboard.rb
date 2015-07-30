@@ -3,54 +3,11 @@ ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
   content title: proc { I18n.t('active_admin.dashboard') } do
-
     columns do
-
       column do
-
-        panel 'Recent Contact Messages' do
-          token = ENV['SIMPLE_FORM_API_TOKEN']
-          begin
-            contact_form_messages = HTTParty.get(
-              "http://getsimpleform.com/messages.json?api_token=#{token}", no_follow: true
-            )
-          rescue
-            contact_form_messages = []
-          end
-          div do
-            if contact_form_messages.count > 0
-              contact_form_messages.first(5).each do |message|
-                h4 mail_to(
-                  message['data']['email'],
-                  message['data']['name'] + ' - ' + message['data']['email']
-                )
-                div do
-                  simple_format "#{message['data']['message']}"
-                end
-                div "#{message['created_at']} - #{message['request_ip']}"
-                hr
-              end
-            else
-              h4 'No recent messages. '\
-                'Messages sent through the contact form appear here.'
-              hr
-            end
-          end
-          div style: 'text-align: right' do
-            token = ENV['SIMPLE_FORM_API_TOKEN']
-            link_to(
-              'Manage Messages',
-              "http://getsimpleform.com/messages?api_token=#{token}",
-              target: '_blank'
-            )
-          end
-        end
-
         panel 'Twilio' do
           client = TwilioSMS.new
-
           h3 'Account Summary'
-
           usage = client.sms_usage
           if usage.is_a? String
             h4 usage
@@ -67,9 +24,7 @@ ActiveAdmin.register_page 'Dashboard' do
               end
             end
           end
-
           h3 'Recent Messages'
-
           usage = client.recent_messages
           if usage.is_a? String
             h4 usage
