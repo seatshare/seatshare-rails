@@ -17,8 +17,7 @@
 </div>
 <% end %>
 
-<%= form_tag "https://getsimpleform.com/messages?form_api_token=#{ENV['SIMPLE_FORM_FORM_API_TOKEN']}", :class => "form-horizontal", :role => "form" do |f| %>
-
+<%= form_tag contact_path, :class => "form-horizontal", :role => "form" do |f| %>
   <div class="form-group">
     <label for="name" class="col-sm-2 control-label">Your Name</label>
     <div class="col-sm-10">
@@ -50,9 +49,6 @@
       </p>
     </div>
   </div>
-
-  <%= hidden_field_tag :redirect_to, url_for({:controller => 'public', :action => 'contact', :host => 'myseatshare.com', :thank_you => 1}) %>
-
 <% end %>
 
 <p class="text-muted">We hate spam email as much as you do. We will only use the provided contact information to discuss your message. We will not to sign you up for any email lists or share with a third party. See our <%= link_to "privacy policy", privacy_path %> for more details.</p>

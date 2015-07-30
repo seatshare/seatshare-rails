@@ -58,6 +58,20 @@ class PublicController < ApplicationController
   def contact
   end
 
+  ##
+  # Send Contact Form
+  def do_contact
+    ContactMailer.support_ticket(
+      params[:name],
+      params[:email],
+      params[:subject],
+      params[:message]
+    ).deliver
+    redirect_to(
+      controller: 'public', action: 'contact', status: 302, thank_you: 1
+    ) && return
+  end
+
   private
 
   ##
