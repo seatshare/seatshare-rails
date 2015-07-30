@@ -11,7 +11,7 @@ ActiveAdmin.register Event do
       event.date_time
     end
     column :tickets do |event|
-      event.tickets.count
+      link_to event.tickets.count, admin_tickets_path(q: { event_id_eq: event.id })
     end
     column :entity
     column :import_key

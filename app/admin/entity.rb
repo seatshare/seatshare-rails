@@ -19,7 +19,13 @@ ActiveAdmin.register Entity do
       end
     end
     column :groups do |entity|
-      entity.groups.count
+      link_to entity.groups.count, admin_groups_path(q: { entity_id_eq: entity.id })
+    end
+    column :events do |entity|
+      link_to entity.events.count, admin_events_path(q: { entity_id_eq: entity.id })
+    end
+    column :tickets do |entity|
+      link_to entity.tickets.count, admin_tickets_path(q: { entity_id_eq: entity.id })
     end
     column :import_key
     column :entity_type

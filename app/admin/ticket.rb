@@ -2,6 +2,7 @@ ActiveAdmin.register Ticket do
 
   permit_params :event_id, :group_id, :user_id, :owner_id, :alias_id, :event, :section, :row, :seat, :cost, :note
 
+  filter :group
   filter :user
   filter :owner
   filter :alias
@@ -15,6 +16,7 @@ ActiveAdmin.register Ticket do
   index do
     selectable_column
     id_column
+    column :group
     column :owner
     column :user
     column :event

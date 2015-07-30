@@ -6,6 +6,7 @@ ActiveAdmin.register Group do
     selectable_column
     id_column
     column :group_name
+    column :entity
     column :invitation_code
     column :status do |group|
       if group.status == 1
@@ -17,8 +18,10 @@ ActiveAdmin.register Group do
     column :members do |group|
       group.members.count
     end
+    column :tickets do |group|
+      link_to group.tickets.count, admin_tickets_path(q: { group_id_eq: group.id })
+    end
     column :created_at
-    column :updated_at
     actions
   end
 
