@@ -2,7 +2,16 @@
 <script type="text/javascript">
 mixpanel.init('<%= ENV['MIXPANEL_API_KEY'] %>');
 <% if user_signed_in? %>
-mixpanel.identify("<%= current_user.id %>");
+<% if flash[:conversion] == true %>
+// Track what happened prior to signup (converts old UUID to new ID)
+mixpanel.alias(<%= current_user.email.to_json.html_safe %>);
+<% end %>
+
+// Alias older numeric user.id to email address
+mixpanel.alias(<%= current_user.email.to_json.html_safe %>, <%= current_user.id.to_json.html_safe %>);
+
+// Authoritative Tracking
+mixpanel.identify(<%= current_user.email.to_json.html_safe %>);
 mixpanel.people.set({
     "$first_name": <%= current_user.first_name.to_json.html_safe %>,
     "$last_name": <%= current_user.last_name.to_json.html_safe %>,
