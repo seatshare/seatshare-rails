@@ -66,7 +66,7 @@ class PublicController < ApplicationController
       params[:email],
       params[:subject],
       params[:message]
-    ).deliver
+    ).deliver_now
     redirect_to(
       controller: 'public', action: 'contact', status: 302, thank_you: 1
     ) && return

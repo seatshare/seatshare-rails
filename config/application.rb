@@ -44,5 +44,8 @@ module SeatShare
     # Better error messages
     require Rails.root.join('lib/custom_public_exceptions')
     config.exceptions_app = CustomPublicExceptions.new(Rails.public_path)
+
+    # Don't supress errors in after_rollback and after_commit callbacks
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

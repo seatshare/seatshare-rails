@@ -6,7 +6,7 @@ class GroupNotifierTest < ActionMailer::TestCase
   test 'send group invitation' do
     invite = GroupInvitation.find(1)
 
-    email = GroupNotifier.create_invite(invite).deliver
+    email = GroupNotifier.create_invite(invite).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal ['no-reply@myseatshare.com'], email.from
@@ -44,7 +44,7 @@ class GroupNotifierTest < ActionMailer::TestCase
       recipient_users,
       'Anyone want to go to the game on Friday?',
       "I'll have an extra ticket to spare.\n\nFree to a good home."
-    ).deliver
+    ).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal ['no-reply@myseatshare.com'], email.from

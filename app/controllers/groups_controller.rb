@@ -256,7 +256,7 @@ class GroupsController < ApplicationController
       GroupNotifier.create_invite(
         group_invitation,
         params[:group_invitation][:message]
-      ).deliver
+      ).deliver_now
       flash[:notice] = 'Group invitation sent!'
     else
       flash[:error] = 'Unable to send group invitation.'
@@ -297,7 +297,7 @@ class GroupsController < ApplicationController
     recipients = User.find(params[:message][:recipients])
     email = GroupNotifier.send_group_message(
       group, current_user, recipients, subject, message
-    ).deliver
+    ).deliver_now
     flash.keep
     if email
       flash[:notice] = 'Message sent!'

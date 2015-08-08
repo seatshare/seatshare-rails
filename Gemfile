@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.5'
+gem 'rails', '4.2.3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -46,7 +46,7 @@ gem 'momentjs-rails'
 gem 'underscore-rails'
 
 # S3
-gem 'aws-sdk'
+gem 'aws-sdk-v1'
 
 # Postgres
 gem 'pg'
@@ -82,13 +82,13 @@ gem 'whenever', require: false
 gem 'github-markdown', '~> 0.6.8'
 
 # REST Client (for Google Analytics goal tracking)
-gem 'rest_client'
+gem 'rest-client'
 
 # Readline support (for remote console)
 gem 'rb-readline'
 
 # Paperclip
-gem "paperclip", "~> 4.2"
+gem "paperclip", "~> 4.2.1"
 
 # Twilio / SMS related
 gem "twilio-ruby", '~> 3.12'

@@ -9,7 +9,7 @@ class ContactMailerTest < ActionMailer::TestCase
       'john@example.com',
       'This is a sample message',
       "This is a long message that\n has a line break or\n two in it."
-    ).deliver
+    ).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal ['john@example.com'], email.from

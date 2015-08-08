@@ -55,10 +55,8 @@ class GroupsControllerTest < ActionController::TestCase
     get :join, invite_code: 'ABC123'
     assert_response :success, 'got a 200 status'
     assert_select 'title', 'Join a Group', 'page title matches'
-    assert_tag(
-      tag: 'input',
-      attributes: { id: 'group_invitation_code', value: 'ABC123' }
-    )
+    assert_select 'input[id="group_invitation_code"]'
+    assert_select 'input[value="ABC123"]'
   end
 
   test 'should see invite page' do

@@ -13,7 +13,7 @@ class TicketNotifierTest < ActionMailer::TestCase
     ticket = Ticket.find(7)
     user = User.find(3)
 
-    email = TicketNotifier.assign(ticket, user).deliver
+    email = TicketNotifier.assign(ticket, user).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal email.from, ['no-reply@myseatshare.com']
@@ -51,7 +51,7 @@ class TicketNotifierTest < ActionMailer::TestCase
     ticket = Ticket.find(2)
     user = User.find(2)
 
-    email = TicketNotifier.request_ticket(ticket, user).deliver
+    email = TicketNotifier.request_ticket(ticket, user).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal email.from, ['no-reply@myseatshare.com']

@@ -34,7 +34,7 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.save
 
       # Send welcome email
-      WelcomeEmail.welcome(resource).deliver
+      WelcomeEmail.welcome(resource).deliver_now
 
       # Newsletter signup
       if params[:newsletter_signup] == '1' && !ENV['MAILCHIMP_LIST_ID'].nil?
