@@ -31,7 +31,7 @@ class Group < ActiveRecord::Base
     hash_secret: 'obfusticateOurAvatarUrlsPlz'
   )
 
-  validates_attachment_content_type :avatar, content_type: %r{/\Aimage\/.*\Z/}
+  validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\Z}i
 
   scope :by_name, -> { order('LOWER(group_name) ASC') }
   scope :active, -> { where('status = 1') }
