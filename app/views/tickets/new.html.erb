@@ -59,6 +59,12 @@
       </div>
     </div>
   </div>
+  <% else %>
+  <div class="form-group">
+    <div class="col-md-9 col-md-offset-3">
+      <span class="help-block"><i class="fa fa-info-circle"></i> Create <%= link_to "User Aliases", edit_user_path %> to reserve tickets for people without accounts.</span>
+    </div>
+  </div>
   <% end %>
 
 </fieldset>
