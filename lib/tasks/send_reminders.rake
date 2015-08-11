@@ -18,7 +18,7 @@ namespace :send_reminders do
               next unless has_tickets.include?(true)
             end
             puts "- Sending #{user.display_name} (#{user.email}) for #{group.group_name}"
-            ScheduleNotifier.daily_schedule(events, group, user).deliver
+            ScheduleNotifier.daily_schedule(events, group, user).deliver_now
           end
         end
       else
@@ -48,7 +48,7 @@ namespace :send_reminders do
               next unless has_tickets.include?(true)
             end
             puts "- Sending #{user.display_name} (#{user.email}) for #{group.group_name}"
-            ScheduleNotifier.weekly_schedule(events, group, user).deliver
+            ScheduleNotifier.weekly_schedule(events, group, user).deliver_now
           end
         end
       else

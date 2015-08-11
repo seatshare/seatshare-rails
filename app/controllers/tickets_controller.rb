@@ -190,7 +190,7 @@ class TicketsController < ApplicationController
          ticket.user_id != 0 &&
          original_ticket.user_id != ticket.user_id
         fail 'NotGroupMember' unless ticket.group.member?(ticket.assigned)
-        TicketNotifier.assign(ticket, current_user).deliver
+        TicketNotifier.assign(ticket, current_user).deliver_now
         TwilioSMS.new.assign_ticket(ticket, current_user)
         log_ticket_history ticket, 'assigned'
       else
@@ -224,7 +224,7 @@ class TicketsController < ApplicationController
     ticket = Ticket.find_by_id(params[:id]) || not_found
     fail 'NotGroupMember' unless ticket.group.member?(current_user)
     message = params[:message][:personalization]
-    TicketNotifier.request_ticket(ticket, current_user, message).deliver
+    TicketNotifier.request_ticket(ticket, current_user, message).deliver_now
     TwilioSMS.new.request_ticket(ticket, current_user)
     log_ticket_history ticket, 'requested'
     flash.keep

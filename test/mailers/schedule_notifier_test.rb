@@ -14,7 +14,7 @@ class ScheduleNotifierTest < ActionMailer::TestCase
     group = Group.find(1)
     user = User.find(1)
 
-    email = ScheduleNotifier.daily_schedule(events, group, user).deliver
+    email = ScheduleNotifier.daily_schedule(events, group, user).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal ['no-reply@myseatshare.com'], email.from
@@ -50,7 +50,7 @@ class ScheduleNotifierTest < ActionMailer::TestCase
     group = Group.find(1)
     user = User.find(1)
 
-    email = ScheduleNotifier.weekly_schedule(events, group, user).deliver
+    email = ScheduleNotifier.weekly_schedule(events, group, user).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal ['no-reply@myseatshare.com'], email.from
