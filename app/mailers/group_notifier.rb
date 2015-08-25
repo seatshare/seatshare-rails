@@ -16,7 +16,7 @@ class GroupNotifier < ActionMailer::Base
     @personalized = message
     @view_action = {
       url: url_for(
-        controller: 'registrations', action: 'new',
+        controller: 'users/registrations', action: 'new',
         invite_code: @invite.invitation_code, only_path: false
       ),
       action: 'Accept Invitation',

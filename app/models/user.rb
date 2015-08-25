@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook]
   has_many :tickets
   has_many :user_aliases
   has_many :memberships
@@ -70,6 +71,7 @@ class User < ActiveRecord::Base
   # - user: instance of user to see if they have a common group
   def user_can_view?(user)
     return false if user.nil?
+    return true if user.id == id
     shared_users = []
     groups.collect do |group|
       group.members.collect do |u|
@@ -78,6 +80,28 @@ class User < ActiveRecord::Base
     end
     return true if shared_users.include? user.id
     false
+  end
+
+  ##
+  # From OmniAuth
+  def self.from_omniauth(auth)
+    if where(email: auth.info.email).exists?
+      return_user = where(email: auth.info.email).first
+      return_user.provider = auth.provider
+      return_user.uid = auth.uid
+    else
+      return_user = create({}) do |user|
+        user.provider = auth.provider
+        user.uid = auth.uid
+        name_part = auth.info.name.split ' '
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0, 20]
+        user.first_name = name_part[0]
+        user.last_name = name_part[1..-1].join(' ')
+      end
+    end
+
+    return_user
   end
 
   private

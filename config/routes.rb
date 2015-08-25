@@ -1,9 +1,13 @@
 SeatShare::Application.routes.draw do
-
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  devise_for :users, :controllers => {:registrations => "registrations"}, :path => '/', :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'register' }
+  devise_for :users, controllers: {
+    registrations:  'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }, path: '/', path_names: {
+    sign_in: 'login', sign_out: 'logout', sign_up: 'register'
+  }
 
   root 'public#index'
 
@@ -15,9 +19,9 @@ SeatShare::Application.routes.draw do
   post 'contact' => 'public#do_contact'
 
   devise_scope :user do
-    get "register/group/:group_code", to: "registrations#new", as: 'register_with_group_code'
-    get "register/invite/:invite_code", to: "registrations#new", as: 'register_with_invite_code'
-    get "register/:entity_slug/:entity_id", to: "registrations#new", as: 'register_with_entity_id'
+    get "register/group/:group_code", to: "users/registrations#new", as: 'register_with_group_code'
+    get "register/invite/:invite_code", to: "users/registrations#new", as: 'register_with_invite_code'
+    get "register/:entity_slug/:entity_id", to: "users/registrations#new", as: 'register_with_entity_id'
   end
 
   get 'groups/' => 'groups#index'
