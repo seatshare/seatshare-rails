@@ -6,7 +6,6 @@ ActiveAdmin.register GroupInvitation do
     selectable_column
     id_column
     column :email
-    column :group
     column :status do |i|
       if i.status == 1
         status_tag('pending')
