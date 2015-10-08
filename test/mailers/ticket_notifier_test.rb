@@ -30,7 +30,7 @@ class TicketNotifierTest < ActionMailer::TestCase
         'following event in your group Geeks Watching Hockey.</p>'
     )
     fails_intermittently(
-      'https://github.com/seatshare/seatshare-rails/issues/109',
+      'https://github.com/stephenyeargin/seatshare-rails/issues/109',
       'Rails.configuration.time_zone' => Rails.configuration.time_zone,
       'Time.zone.name' => Time.zone.name, 'user.timezone' => user.timezone
     ) do
@@ -68,7 +68,7 @@ class TicketNotifierTest < ActionMailer::TestCase
         'following event in your group Geeks Watching Hockey.</p>'
     )
     fails_intermittently(
-      'https://github.com/seatshare/seatshare-rails/issues/109',
+      'https://github.com/stephenyeargin/seatshare-rails/issues/109',
       'Rails.configuration.time_zone' => Rails.configuration.time_zone,
       'Time.zone.name' => Time.zone.name,
       'user.timezone' => user.timezone
