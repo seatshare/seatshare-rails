@@ -60,6 +60,9 @@ gem 'newrelic_rpm', group: :production
 # Select2
 gem 'select2-rails'
 
+# OmniAuth
+gem 'omniauth-facebook'
+
 # ActiveAdmin
 gem 'activeadmin', github: 'activeadmin'
 

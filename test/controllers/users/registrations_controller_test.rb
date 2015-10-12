@@ -3,6 +3,10 @@ require 'test_helper'
 ##
 # Registrations controller test
 class RegistrationsControllerTest < ActionController::TestCase
+  def setup
+    @controller = Users::RegistrationsController.new
+  end
+
   test 'get register route' do
     @request.env['devise.mapping'] = Devise.mappings[:user]
 

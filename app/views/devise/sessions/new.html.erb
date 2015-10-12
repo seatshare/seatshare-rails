@@ -4,6 +4,8 @@
 
   <%= render 'layouts/flash' %>
 
+  <div class="facebook_signin"><%= link_to raw('<i class="fa fa-facebook"></i> Sign In With Facebook'), user_omniauth_authorize_path(:facebook), class: 'btn btn-block btn-lg btn-primary' %></div>
+
   <div>
     <%= f.email_field :email, autofocus: true, :class => 'form-control input-lg', :placeholder => 'Email address', :autocapitalize => 'off', :autocorrect => 'off' %>
   </div>
