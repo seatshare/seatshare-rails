@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -36,7 +36,7 @@ gem 'thin'
 gem 'bootstrap-sass', '~> 3.1.1'
 
 # Use Font Awesome
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
 # Use Devise
 gem 'devise'
@@ -88,14 +88,14 @@ gem 'rest-client'
 gem 'rb-readline'
 
 # Paperclip
-gem "paperclip", "~> 4.2.1"
+gem 'paperclip', '~> 4.2.1'
 
 # Twilio / SMS related
-gem "twilio-ruby", '~> 3.12'
-gem "global_phone", "~> 1.0.1"
+gem 'twilio-ruby', '~> 3.12'
+gem 'global_phone', '~> 1.0.1'
 
 # Sitemaps
-gem "dynamic_sitemaps"
+gem 'dynamic_sitemaps'
 
 # Zeroclipboard
 gem 'zeroclipboard-rails'
