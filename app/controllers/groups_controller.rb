@@ -113,7 +113,6 @@ class GroupsController < ApplicationController
     @events = @group.events
               .future
               .by_date
-    @group.entity.retrive_schedule if @events.count == 0
     @members = @group.members.by_name
     session[:current_group_id] = @group.id
   end

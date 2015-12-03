@@ -132,7 +132,7 @@ class RegistrationsController < Devise::RegistrationsController
       false,
       false
     )
-  rescue Mailchimp::Error => e
+  rescue StandardError => e
     # Sign up failed
     logger.info e.message
   end

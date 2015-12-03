@@ -12,7 +12,6 @@ class Entity < ActiveRecord::Base
 
   scope :by_name, -> { order('LOWER(entity_name) ASC') }
   scope :active, -> { where('status = 1') }
-  scope :is_soda, -> { where("import_key LIKE 'l.%'") }
 
   ##
   # New entity object
@@ -32,16 +31,38 @@ class Entity < ActiveRecord::Base
   end
 
   ##
-  # Retrieve schedule from SODA for entity
-  def retrive_schedule
-    importer = SodaScheduleImport.new
-    importer.run(
-      team_id: import_key,
-      start_datetime: DateTime.now.beginning_of_day - 30.days,
-      end_datetime: DateTime.now.end_of_day,
-      force_update: false
-    )
-    importer
+  # Is SeatGeek?
+  def seatgeek?
+    import_key.include? 'api.seatgeek.com'
+  end
+
+  ##
+  # Import SeatGeek Events
+  # - overwrite: whether to overwrite the title and description
+  def seatgeek_import(overwrite = false)
+    fail 'Not a SeatGeek entity' unless seatgeek?
+    params = Rack::Utils.parse_query URI(import_key).query
+    params[:per_page] = 500
+    response = SeatGeek::Connection.events(params)
+    fail 'No events.' unless response && response['events'].count > 0
+    records = []
+    response['events'].each do |event|
+      venue = event['venue']
+      records << Event.import(
+        {
+          import_key: "https://api.seatgeek.com/2/events?id=#{event['id']}",
+          event_name: event['title'],
+          description: "#{venue['name']} (#{venue['display_location']})",
+          entity_id: id,
+          start_time: "#{event['datetime_utc']}+00:00",
+          time_tba: event['datetime_tbd']
+        }, overwrite
+      )
+    end
+    records
+  rescue StandardError => e
+    logger.info e.message
+    return e.message
   end
 
   private

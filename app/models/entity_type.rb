@@ -9,4 +9,10 @@ class EntityType < ActiveRecord::Base
   def display_name
     "#{entity_type_name} (#{entity_type_abbreviation})"
   end
+
+  ##
+  # Is SeatGeek?
+  def seatgeek?
+    import_key.include? 'api.seatgeek.com'
+  end
 end

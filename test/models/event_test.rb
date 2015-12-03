@@ -114,29 +114,95 @@ class EventTest < ActiveSupport::TestCase
   test 'imported row matches output' do
     row1 = {
       entity_id: 1,
-      home_team: 'Nashville Predators',
-      away_team: 'Colorado Avalanche',
-      start_date_time: '20091008T200000-0400',
-      time_certainty: 'not certain'
+      event_name: 'Colorado Avalanche at Nashville Predators',
+      start_time: '20091008T200000-0400',
+      time_tba: true
     }
     record = Event.import row1
-    assert record[:event_name] == 'Colorado Avalanche vs. Nashville Predators'
+    assert record[:event_name] == 'Colorado Avalanche at Nashville Predators'
     assert record[:start_time] == DateTime.parse('October 8, 2009 7:00 PM CDT')
     assert record[:date_tba] == 0
     assert record[:time_tba] == 1
 
     row2 = {
       entity_id: 1,
-      home_team: 'Nashville Predators',
-      away_team: 'San Jose Sharks',
-      start_date_time: '20091022T200000-0400',
-      time_certainty: 'certain'
+      event_name: 'San Jose Sharks at Nashville Predators',
+      start_time: '20091022T200000-0400',
+      time_tba: false
     }
     record = Event.import row2
-    assert record[:event_name] == 'San Jose Sharks vs. Nashville Predators'
+    assert record[:event_name] == 'San Jose Sharks at Nashville Predators'
     assert record[:start_time] == DateTime.parse('October 22, 2009 7:00 PM CDT')
     assert record[:date_tba] == 0
     assert record[:time_tba] == 0
+  end
+
+  test 'imported row overwrites existing values' do
+    row = {
+      entity_id: 2,
+      event_name: 'Belmont Bruins vs. Brescia',
+      description: 'New value',
+      start_time: '20131126T18:00:00-0500',
+      time_tba: true,
+      import_key: 'belmont_20131126'
+    }
+    record = Event.import row, true
+    assert record[:event_name] == 'Belmont Bruins vs. Brescia'
+    assert record[:description] == 'New value'
+    assert record[:start_time] == DateTime.parse('Nov 26, 2013 5:00 PM CST')
+    assert record[:date_tba] == 0
+    assert record[:time_tba] == 1
+  end
+
+  test 'imported row does not overwrite existing values' do
+    row = {
+      entity_id: 2,
+      event_name: 'Big Game: Belmont Bruins vs. Lipscomb',
+      description: 'New value',
+      start_time: '20131120T18:00:00-0500',
+      time_tba: true,
+      import_key: 'belmont_20131120'
+    }
+    record = Event.import row, false
+    assert record[:event_name] == 'Belmont Bruins vs. Lipscomb'
+    assert record[:description] == 'Curb Event Center (Nashville, Tenn.)'
+    assert record[:start_time] == DateTime.parse('Nov 20, 2013 5:00 PM CST')
+    assert record[:date_tba] == 0
+    assert record[:time_tba] == 1
+  end
+
+  test 'imported row with different key does not import at same time slot' do
+    row = {
+      entity_id: 1,
+      event_name: 'Nashville Predators vs. St. Louis Boos',
+      start_time: 'Sun, 27 Oct 2013 01:00:00 +0000',
+      time_tba: false,
+      import_key: 'preds_20131026-new'
+    }
+    record = Event.import row, false
+
+    assert record[:event_name] == 'Nashville Predators vs. St. Louis Blues'
+    assert record[:start_time] == 'Sun, 27 Oct 2013 01:00:00 +0000'
+    assert record[:import_key] == 'preds_20131026'
+    assert record[:date_tba] == 0
+    assert record[:time_tba] == 0
+  end
+
+  test 'imported row with different key will import at same time slot' do
+    row = {
+      entity_id: 2,
+      event_name: 'Belmont Bruins vs. Indiana States',
+      start_time: '20131114T120000-0500',
+      time_tba: true,
+      import_key: 'belmont_20131114-new'
+    }
+    record = Event.import row, false, true
+
+    assert record[:event_name] == 'Belmont Bruins vs. Indiana States'
+    assert record[:start_time] == DateTime.parse('Nov 14, 2013 12:00 PM CDT')
+    assert record[:import_key] == 'belmont_20131114-new'
+    assert record[:date_tba] == 0
+    assert record[:time_tba] == 1
   end
 
   test 'uses markdown for description' do
@@ -182,8 +248,8 @@ class EventTest < ActiveSupport::TestCase
     ics = event.to_ics('http://example.com/4')
 
     assert ics.summary == 'Nashville Predators vs. St. Louis Blues'
-    assert ics.dtstart == '2013-10-26T14:00:00-05:00'
-    assert ics.dtend == '2013-10-26T17:00:00-05:00'
+    assert ics.dtstart == '2013-10-26T20:00:00-05:00'
+    assert ics.dtend == '2013-10-26T23:00:00-05:00'
     assert ics.uid == 'preds_20131026'
     assert ics.url.to_s == 'http://example.com/4'
   end

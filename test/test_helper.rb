@@ -1,6 +1,7 @@
 $LOAD_PATH << 'test'
 require 'rubygems'
 require 'spork'
+require 'webmock/minitest'
 AWS.stub!
 
 Spork.prefork do

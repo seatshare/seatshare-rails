@@ -2,7 +2,7 @@ ActiveAdmin.register EntityType do
 
   menu parent: 'Entities'
 
-  permit_params :entity_type_name, :entity_type_abbreviation, :sort
+  permit_params :entity_type_name, :entity_type_abbreviation, :import_key, :sort
 
   filter :entity_type_name
   filter :entity_type_abbreviation
@@ -15,6 +15,7 @@ ActiveAdmin.register EntityType do
     column :entities do |entity_type|
       link_to entity_type.entities.count, admin_entities_path(q: { entity_type_id_eq: entity_type.id })
     end
+    column :import_key
     column :sort
     actions
   end
@@ -25,6 +26,7 @@ ActiveAdmin.register EntityType do
       row :entity_type_name
       row :entity_type_abbreviation
       row :sort
+      row :import_key
       row :created_at
       row :updated_at
     end

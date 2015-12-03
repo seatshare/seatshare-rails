@@ -10,7 +10,7 @@ class ScheduleNotifierTest < ActionMailer::TestCase
   end
 
   test 'send daily schedule' do
-    events = Event.where('DATE(start_time) = \'2013-10-15\'').by_date
+    events = Event.where('DATE(start_time) = \'2013-10-16\'').by_date
     group = Group.find(1)
     user = User.find(1)
 
