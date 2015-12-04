@@ -37,7 +37,7 @@ class TicketNotifierTest < ActionMailer::TestCase
       assert_includes(
         email.body.to_s,
         '<td>Nashville Predators vs. St. Louis Blues : Saturday, '\
-          'October 26, 2013 - 2:00 pm CDT</td>'
+          'October 26, 2013 - 8:00 pm CDT</td>'
       )
     end
     assert_includes(
@@ -76,7 +76,7 @@ class TicketNotifierTest < ActionMailer::TestCase
       assert_includes(
         email.body.to_s,
         '<td>Nashville Predators vs. St. Louis Blues : Saturday, October 26, '\
-          '2013 - 2:00 pm CDT</td>'
+          '2013 - 8:00 pm CDT</td>'
       )
     end
     assert_includes(

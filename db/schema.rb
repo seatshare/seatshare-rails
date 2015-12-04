@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504021139) do
+ActiveRecord::Schema.define(version: 20151203213623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_admin_comments", force: true do |t|
-    t.string   "namespace"
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string   "namespace",     limit: 255
     t.text     "body"
-    t.string   "resource_id",   null: false
-    t.string   "resource_type", null: false
+    t.string   "resource_id",   limit: 255, null: false
+    t.string   "resource_type", limit: 255, null: false
     t.integer  "author_id"
-    t.string   "author_type"
+    t.string   "author_type",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,17 +31,17 @@ ActiveRecord::Schema.define(version: 20150504021139) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
-  create_table "admin_users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "admin_users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,45 +49,48 @@ ActiveRecord::Schema.define(version: 20150504021139) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "entities", force: true do |t|
-    t.string   "entity_name"
-    t.integer  "status",         default: 0,  null: false
+  create_table "entities", force: :cascade do |t|
+    t.string   "entity_name",    limit: 255
+    t.integer  "status",                     default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "import_key",     default: "", null: false
-    t.integer  "entity_type_id", default: 0
+    t.string   "import_key",     limit: 255, default: "", null: false
+    t.integer  "entity_type_id",             default: 0
   end
 
   add_index "entities", ["import_key"], name: "index_entities_on_import_key", unique: true, using: :btree
 
-  create_table "entity_types", force: true do |t|
-    t.string   "entity_type_name"
-    t.string   "entity_type_abbreviation"
+  create_table "entity_types", force: :cascade do |t|
+    t.string   "entity_type_name",         limit: 255
+    t.string   "entity_type_abbreviation", limit: 255
     t.integer  "sort"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "import_key"
   end
 
-  create_table "events", force: true do |t|
+  add_index "entity_types", ["import_key"], name: "index_entity_types_on_import_key", unique: true, using: :btree
+
+  create_table "events", force: :cascade do |t|
     t.integer  "entity_id"
-    t.string   "event_name"
+    t.string   "event_name",  limit: 255
     t.text     "description"
     t.datetime "start_time"
     t.integer  "date_tba"
     t.integer  "time_tba"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "import_key",  default: "", null: false
+    t.string   "import_key",  limit: 255, default: "", null: false
   end
 
   add_index "events", ["entity_id"], name: "index_events_on_entity_id", using: :btree
   add_index "events", ["import_key"], name: "index_events_on_import_key", unique: true, using: :btree
 
-  create_table "group_invitations", force: true do |t|
+  create_table "group_invitations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
-    t.string   "email"
-    t.string   "invitation_code"
+    t.string   "email",           limit: 255
+    t.string   "invitation_code", limit: 255
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -97,16 +100,16 @@ ActiveRecord::Schema.define(version: 20150504021139) do
   add_index "group_invitations", ["invitation_code"], name: "index_group_invitations_on_invitation_code", unique: true, using: :btree
   add_index "group_invitations", ["user_id"], name: "index_group_invitations_on_user_id", using: :btree
 
-  create_table "groups", force: true do |t|
+  create_table "groups", force: :cascade do |t|
     t.integer  "entity_id"
-    t.string   "group_name"
+    t.string   "group_name",          limit: 255
     t.integer  "creator_id"
-    t.string   "invitation_code"
+    t.string   "invitation_code",     limit: 255
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
   end
@@ -115,10 +118,10 @@ ActiveRecord::Schema.define(version: 20150504021139) do
   add_index "groups", ["entity_id"], name: "index_groups_on_entity_id", using: :btree
   add_index "groups", ["invitation_code"], name: "index_groups_on_invitation_code", unique: true, using: :btree
 
-  create_table "memberships", id: false, force: true do |t|
+  create_table "memberships", id: false, force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "user_id"
-    t.string   "role"
+    t.string   "role",            limit: 255
     t.integer  "daily_reminder"
     t.integer  "weekly_reminder"
     t.datetime "created_at"
@@ -128,18 +131,18 @@ ActiveRecord::Schema.define(version: 20150504021139) do
 
   add_index "memberships", ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id", using: :btree
 
-  create_table "ticket_files", force: true do |t|
+  create_table "ticket_files", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "ticket_id"
-    t.string   "path"
-    t.string   "file_name"
+    t.string   "path",       limit: 255
+    t.string   "file_name",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "ticket_files", ["ticket_id"], name: "index_ticket_files_on_ticket_id", using: :btree
 
-  create_table "ticket_histories", force: true do |t|
+  create_table "ticket_histories", force: :cascade do |t|
     t.integer  "ticket_id"
     t.integer  "group_id"
     t.integer  "event_id"
@@ -149,15 +152,15 @@ ActiveRecord::Schema.define(version: 20150504021139) do
     t.datetime "updated_at"
   end
 
-  create_table "tickets", force: true do |t|
+  create_table "tickets", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "event_id"
     t.integer  "owner_id"
     t.integer  "user_id"
     t.integer  "alias_id"
-    t.string   "section"
-    t.string   "row"
-    t.string   "seat"
+    t.string   "section",    limit: 255
+    t.string   "row",        limit: 255
+    t.string   "seat",       limit: 255
     t.decimal  "cost"
     t.text     "note"
     t.datetime "created_at"
@@ -170,39 +173,43 @@ ActiveRecord::Schema.define(version: 20150504021139) do
   add_index "tickets", ["owner_id"], name: "index_tickets_on_owner_id", using: :btree
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id", using: :btree
 
-  create_table "user_aliases", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+  create_table "user_aliases", force: :cascade do |t|
+    t.string   "first_name", limit: 255
+    t.string   "last_name",  limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "timezone"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "timezone",               limit: 255
     t.text     "bio"
-    t.string   "location"
-    t.string   "mobile"
+    t.string   "location",               limit: 255
+    t.string   "mobile",                 limit: 255
     t.boolean  "sms_notify"
-    t.string   "calendar_token"
+    t.string   "calendar_token",         limit: 255
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
 end

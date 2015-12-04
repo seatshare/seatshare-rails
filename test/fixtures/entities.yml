@@ -2,7 +2,7 @@ preds:
   id: 1
   entity_name: Nashville Predators
   status: 1
-  import_key: l.nhl.com-t.19
+  import_key: https://api.seatgeek.com/2/events?performers.slug=nashville-predators&venue.id=2195
   entity_type_id: 1
 
 belmont:

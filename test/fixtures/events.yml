@@ -2,7 +2,7 @@ belmont_20131126:
   id: 1
   entity_id: 2
   event_name: Belmont Bruins vs. Brescia
-  start_time: 2013-11-26 12:00:00
+  start_time: Tue, 26 Nov 2013 17:00:00 +0000
   date_tba: false
   time_tba: true
   import_key: belmont_20131126
@@ -11,7 +11,8 @@ belmont_20131120:
   id: 2
   entity_id: 2
   event_name: Belmont Bruins vs. Lipscomb
-  start_time: 2013-11-20 12:00:00
+  description: Curb Event Center (Nashville, Tenn.)
+  start_time: Wed, 20 Nov 2013 17:00:00 +0000
   date_tba: false
   time_tba: true
   import_key: belmont_20131120
@@ -20,7 +21,7 @@ belmont_20131114:
   id: 3
   entity_id: 2
   event_name: Belmont Bruins vs. Indiana State
-  start_time: 2013-11-14 12:00:00
+  start_time: Thu, 14 Nov 2013 17:00:00 +0000
   date_tba: false
   time_tba: true
   import_key: belmont_20131114
@@ -29,7 +30,7 @@ preds_20131026:
   id: 4
   entity_id: 1
   event_name: Nashville Predators vs. St. Louis Blues
-  start_time: 2013-10-26 19:00:00
+  start_time: Sun, 27 Oct 2013 01:00:00 +0000
   date_tba: false
   time_tba: false
   import_key: preds_20131026
@@ -38,7 +39,7 @@ preds_20131024:
   id: 5
   entity_id: 1
   event_name: Nashville Predators vs. Winnipeg Jets
-  start_time: 2013-10-24 19:00:00
+  start_time: Fri, 25 Oct 2013 01:00:00 +0000
   date_tba: false
   time_tba: false
   import_key: preds_20131024
@@ -47,7 +48,7 @@ preds_20131017:
   id: 6
   entity_id: 1
   event_name: Nashville Predators vs. Los Angeles Kings
-  start_time: 2013-10-17 19:00:00
+  start_time: Fri, 18 Oct 2013 01:00:00 +0000
   date_tba: false
   time_tba: false
   import_key: preds_20131017
@@ -56,7 +57,7 @@ preds_20131015:
   id: 7
   entity_id: 1
   event_name: Nashville Predators vs. Florida Panthers
-  start_time: 2013-10-15 19:00:00
+  start_time: Wed, 16 Oct 2013 01:00:00 +0000
   date_tba: false
   time_tba: false
   import_key: preds_20131015
@@ -65,7 +66,7 @@ preds_20131012:
   id: 8
   entity_id: 1
   event_name: Nashville Predators vs. New York Islanders
-  start_time: 2013-10-12 19:00:00
+  start_time: Sun, 13 Oct 2013 01:00:00 +0000
   date_tba: false
   time_tba: false
   import_key: preds_20131012
@@ -74,7 +75,7 @@ preds_20131010:
   id: 9
   entity_id: 1
   event_name: Nashville Predators vs. Toronto Maple Leafs
-  start_time: 2013-10-10 19:00:00
+  start_time: Fri, 11 Oct 2013 01:00:00 +0000
   date_tba: false
   time_tba: false
   import_key: preds_20131010
@@ -83,7 +84,7 @@ preds_20131008:
   id: 10
   entity_id: 1 
   event_name: Nashville Predators vs. Minnesota Wild
-  start_time: 2013-10-08 19:00:00
+  start_time: Wed, 09 Oct 2013 01:00:00 +0000
   date_tba: false
   time_tba: false
   import_key: preds_20131008

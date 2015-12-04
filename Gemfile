@@ -66,8 +66,8 @@ gem 'activeadmin', github: 'activeadmin'
 # Mailchimp API
 gem 'mailchimp-api', '~> 2.0.5'
 
-# SeatShare's own SODA gem
-gem 'soda_xml_team', '~> 1.4.3'
+# SeatGeek data provider
+gem 'seatgeek', '0.1.2'
 
 # Capistrano
 gem 'capistrano', '~> 3.2.1'
@@ -108,6 +108,7 @@ gem 'slack-notifier', '~> 1.1.0'
 
 # testing
 group :testing do
+  gem 'webmock'
   gem 'guard-minitest'
   gem 'guard-spork'
   gem 'spork-rails'

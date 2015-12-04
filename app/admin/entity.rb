@@ -7,6 +7,21 @@ ActiveAdmin.register Entity do
   filter :import_key
   filter :status
 
+  action_item :seatgeek_import, only: :show do
+    link_to 'Import SeatGeek Events', seatgeek_import_admin_entity_path(resource) if resource.seatgeek?
+  end
+
+  member_action :seatgeek_import, method: :get do
+    response = resource.seatgeek_import
+    case response
+    when Array
+      notice = "Imported #{response.count} record(s)"
+    else
+      notice = response
+    end
+    redirect_to resource_path, notice: notice
+  end
+
   index do
     selectable_column
     id_column
@@ -88,4 +103,12 @@ ActiveAdmin.register Entity do
       end
     end
   end
+
+  controller do
+    def import_seatgeek(resource)
+      records = resource.seatgeek_import
+      puts records
+    end
+  end
+
 end

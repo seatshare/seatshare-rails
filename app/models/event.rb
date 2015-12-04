@@ -101,18 +101,28 @@ class Event < ActiveRecord::Base
   end
 
   ##
-  # Create a new event based on object passed from SODA importer
+  # Create a new event from given hash
   # - row: hash passed from importer
-  def self.import(row = nil)
-    event = find_by_import_key(row[:event_key]) || new
-
-    event.entity_id = row[:entity_id]
-    event.event_name = "#{row[:away_team]} vs. #{row[:home_team]}"
-    event.start_time = row[:start_date_time]
-    event.import_key = row[:event_key]
-    if !row[:time_certainty].blank? && row[:time_certainty] != 'certain'
-      event.time_tba = 1
+  # - overwrite: whether to overwrite the title and description
+  # - allow_duplicate: whether to allow duplicate at same time slot
+  def self.import(hash = nil, overwrite = false, allow_duplicate = false)
+    event = find_by_import_key(hash[:import_key]) || new
+    event.entity_id = hash[:entity_id]
+    if overwrite || event.new_record?
+      event.event_name = hash[:event_name]
+      event.description = hash[:description]
     end
+    event.start_time = hash[:start_time]
+    event.import_key = hash[:import_key]
+    event.time_tba = hash[:time_tba] || 0
+
+    if event.new_record? && !allow_duplicate
+      collisions = Event.where(
+        "start_time='#{hash[:start_time]}' AND entity_id=#{event.entity_id}"
+      )
+      return collisions.first if collisions.size > 0
+    end
+
     event.save!
 
     event

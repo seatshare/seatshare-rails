@@ -4,6 +4,8 @@ require 'test_helper'
 # User Signup test
 class UserSignupTest < ActionDispatch::IntegrationTest
   test 'signup for an account - success' do
+    stub_request(:any, /api.mailchimp.com/)
+
     get '/register'
     assert_response :success
 

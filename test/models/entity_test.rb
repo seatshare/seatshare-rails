@@ -37,4 +37,32 @@ class EntityTest < ActiveSupport::TestCase
     assert entities[0].class.to_s == 'Entity', 'class of fixture entity matches'
     assert entities[0].entity_name?, 'fixture entity name is set'
   end
+
+  test 'import from SeatGeek' do
+    stub_request(
+      :get,
+      'http://api.seatgeek.com/2/events'\
+        '?per_page=500&performers.slug=nashville-predators&venue.id=2195'
+    ).to_return(
+      status: 200,
+      body: File.new(
+        'test/fixtures/seatgeek/events-nashville-predators.json'
+      ).read
+    )
+
+    entity = Entity.find(1)
+    records = entity.seatgeek_import
+
+    assert records.count == 29
+    assert records.first.event_name == 'Florida Panthers at Nashville Predators'
+    assert records.first.description == 'Bridgestone Arena (Nashville, TN)'
+    assert records.first.start_time == '2015-12-03 19:00:00 -0600'
+  end
+
+  test 'import from SeatGeek without proper import key' do
+    entity = Entity.find(2)
+    response = entity.seatgeek_import
+
+    assert response == 'Not a SeatGeek entity'
+  end
 end
