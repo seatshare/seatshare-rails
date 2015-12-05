@@ -38,9 +38,9 @@ module AdminApi
       ##
       # Returns the group invitation count
       def total_invites
-        since = DateTime.now - params[:days].to_i.days
+        since = Time.zone.now - params[:days].to_i.days
         count = GroupInvitation
-                .where("created_at > '#{since}'")
+                .where(created_at: since)
                 .count
         respond_with json_response('total_invites', count)
       end
@@ -48,9 +48,9 @@ module AdminApi
       ##
       # Returns the accepted group invitation count
       def accepted_invites
-        since = DateTime.now - params[:days].to_i.days
+        since = Time.zone.now - params[:days].to_i.days
         count = GroupInvitation.accepted
-                .where("created_at > '#{since}'")
+                .where(created_at: since)
                 .count
         respond_with json_response('accepted_invites', count)
       end
@@ -83,10 +83,10 @@ module AdminApi
       # Returns the transferred ticket count
       def tickets_transferred
         if params[:days]
-          since = DateTime.now - params[:days].to_i.days
+          since = Time.zone.now - params[:days].to_i.days
           tickets = Ticket.where('user_id != owner_id').where('user_id > 0')
                     .joins(:event)
-                    .where("start_time > '#{since}'")
+                    .where('start_time > ?', since)
           respond_with json_response('tickets_transferred', tickets.count)
         else
           respond_with json_response(
@@ -100,15 +100,15 @@ module AdminApi
       # Returns the unused ticket count
       def tickets_unused
         if params[:days]
-          since = DateTime.now - params[:days].to_i.days
-          tickets = Ticket.where('user_id != owner_id').where('user_id = 0')
+          since = Time.zone.now - params[:days].to_i.days
+          tickets = Ticket.where('user_id != owner_id').where(user_id: 0)
                     .joins(:event)
-                    .where("start_time > '#{since}'")
+                    .where('start_time > ?', since)
           respond_with json_response('tickets_unused', tickets.count)
         else
           respond_with json_response(
             'tickets_unused',
-            Ticket.where('user_id != owner_id').where('user_id = 0').count
+            Ticket.where('user_id != owner_id').where(user_id: 0).count
           )
         end
       end

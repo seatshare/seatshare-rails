@@ -9,8 +9,8 @@ class Event < ActiveRecord::Base
   before_save :clean_import_key
 
   scope :by_date, -> { order('start_time ASC') }
-  scope :future, -> { where("start_time > '#{Time.now}'") }
-  scope :past, -> { where("start_time < '#{Time.now}'") }
+  scope :future, -> { where('start_time > ?', Time.zone.now) }
+  scope :past, -> { where('start_time < ?', Time.zone.now) }
   scope :next_seven_days, -> { next_seven_days }
   scope :today, -> { today }
 
@@ -40,9 +40,9 @@ class Event < ActiveRecord::Base
   # - group: Group object
   def tickets(group = nil)
     if group.nil?
-      Ticket.where("event_id = #{id}")
+      Ticket.where(event_id: id)
     else
-      Ticket.where("event_id = #{id} AND group_id = #{group.id}")
+      Ticket.where(event_id: id, group_id: group.id)
     end
   end
 
@@ -119,7 +119,7 @@ class Event < ActiveRecord::Base
 
     if event.new_record? && !allow_duplicate
       collisions = Event.where(
-        "start_time='#{hash[:start_time]}' AND entity_id=#{event.entity_id}"
+        start_time: hash[:start_time], entity_id: event.entity_id
       )
       return collisions.first if collisions.size > 0
     end
@@ -132,7 +132,7 @@ class Event < ActiveRecord::Base
   ##
   # User has tickets?
   def user_has_ticket?(user)
-    tickets = Ticket.where("event_id = #{id} AND user_id = #{user.id}")
+    tickets = Ticket.where(event_id: id, user_id: user.id)
     return false if tickets.empty?
     true
   end
@@ -178,8 +178,9 @@ class Event < ActiveRecord::Base
   # Next Seven Days
   def self.next_seven_days
     where(
-      "start_time >= '#{Date.today.beginning_of_day.utc}'"\
-      " AND start_time <= '#{Date.today.end_of_day.utc + 6.days}'"
+      'start_time >= ? AND start_time <= ?',
+      Time.zone.today.beginning_of_day.utc,
+      Time.zone.today.end_of_day.utc + 6.days
     )
   end
 
@@ -187,8 +188,9 @@ class Event < ActiveRecord::Base
   # Today
   def self.today
     where(
-      "start_time >= '#{Date.today.beginning_of_day.utc}'"\
-      " AND start_time <= '#{Date.today.end_of_day.utc}'"
+      'start_time >= ? AND start_time <= ?',
+      Time.zone.today.beginning_of_day.utc,
+      Time.zone.today.end_of_day.utc
     )
   end
 end

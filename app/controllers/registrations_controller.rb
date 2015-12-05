@@ -1,8 +1,8 @@
 ##
 # Registrations controller
 class RegistrationsController < Devise::RegistrationsController
-  skip_before_filter :require_no_authentication
-  before_filter :redirect_to_join_if_signed_in, if: :user_signed_in?
+  skip_before_action :require_no_authentication
+  before_action :redirect_to_join_if_signed_in, if: :user_signed_in?
 
   ##
   # New registration form

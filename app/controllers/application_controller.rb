@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
-  before_filter :load_shared_interface_variables, if: :user_signed_in?
-  before_filter :set_timezone, if: :user_signed_in?
+  before_action :load_shared_interface_variables, if: :user_signed_in?
+  before_action :set_timezone, if: :user_signed_in?
 
   layout :layout_by_resource
 

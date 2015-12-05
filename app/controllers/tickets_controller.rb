@@ -15,18 +15,18 @@ class TicketsController < ApplicationController
       operator = '>='
     end
     @tickets = {
-      owned:    Ticket.where("owner_id = #{current_user.id}")
+      owned:    Ticket.where(owner_id: current_user.id)
                 .joins(:group)
-                .where('status = 1')
+                .where(groups: { status: 1 })
                 .joins(:event)
-                .where("start_time #{operator} '#{Time.now}'")
+                .where("start_time #{operator} ?", Time.zone.now)
                 .by_date.by_seat,
-      assigned: Ticket.where("owner_id != #{current_user.id}")
-                .where("user_id = #{current_user.id}")
+      assigned: Ticket.where.not(owner_id: current_user.id)
+                .where(user_id: current_user.id)
                 .joins(:group)
-                .where('status = 1')
+                .where(groups: { status: 1 })
                 .joins(:event)
-                .where("start_time #{operator} '#{Time.now}'")
+                .where("start_time #{operator} ?", Time.zone.now)
                 .by_date.by_seat
     }
     render layout: 'single-column'
@@ -76,7 +76,7 @@ class TicketsController < ApplicationController
     else
       @events = @group.events
                 .order('start_time ASC')
-                .where("start_time > '#{Date.today}'")
+                .where('start_time > ?', Time.zone.today)
       @page_title = 'Add Tickets'
     end
   end
