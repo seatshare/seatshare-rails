@@ -114,6 +114,7 @@ class Event < ActiveRecord::Base
     end
     event.start_time = hash[:start_time]
     event.import_key = hash[:import_key]
+    event.date_tba = hash[:date_tba] || 0
     event.time_tba = hash[:time_tba] || 0
 
     if event.new_record? && !allow_duplicate
