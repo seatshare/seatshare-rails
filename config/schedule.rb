@@ -2,7 +2,7 @@
 set :output, "/tmp/whenever.log"
 
 # Nightly schedule
-every 1.day :at => '11:00 pm' do
+every 1.day, :at => '11:00 pm' do
   rake "seatgeek:update_events"
 end
 
