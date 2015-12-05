@@ -1,4 +1,4 @@
-<% if @entity.import_key.match /l\..*/i %>
-<p class="text-muted text-center"><small>Team schedule content Copyright <%= Date.today.year %> <%= link_to 'The Sports Forecaster', 'http://www.sportsforecaster.com', :target => '_blank' %>. Distributed by <%= link_to 'XML Team Solutions', 'http://www.xmlteam.com', :target => '_blank' %>.</small>
+<% if @entity.seatgeek? %>
+<p class="data-credit text-muted text-right"><small>Data powered by <%= link_to image_tag('seatgeek.svg', :class => '', :alt => "SeatGeek", :title => "SeatGeek Logo"), 'http://seatgeek.com/', :target => '_blank' %>.</small>
 </p>
 <% end %>
