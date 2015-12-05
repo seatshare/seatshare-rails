@@ -37,6 +37,8 @@ load 'config/deploy/slack.rb'
 # Whenever (for scheduled jobs)
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
+##
+# Deploy Commands
 namespace :deploy do
   desc 'Restart application'
   task :restart do
@@ -74,6 +76,21 @@ namespace :rails do
   task :dbconsole do
     on roles(:app) do |h|
       run_interactively "bundle exec rails dbconsole #{fetch(:rails_env)}", h.user
+    end
+  end
+
+  # @example
+  #   bundle exec cap production rails:rake task=seatgeek:update_entities
+  desc 'Invoke rake task on the server'
+  task :rake do
+    fail 'no task provided' unless ENV['task']
+
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, ENV['task']
+        end
+      end
     end
   end
 
