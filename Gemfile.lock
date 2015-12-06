@@ -17,6 +17,13 @@ GIT
       sass-rails
 
 GIT
+  remote: git://github.com/circleci/minitest-ci.git
+  revision: 5ff612993491fcf8355a3d4b196345af82337a3a
+  specs:
+    minitest-ci (3.0.4.pre)
+      minitest (~> 5.0, >= 5.0.6)
+
+GIT
   remote: git://github.com/dekart/spork-minitest.git
   revision: c20d6ae6d6efda826b2e9e1f6dbcada305dec9e0
   specs:
@@ -413,6 +420,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   mailchimp-api (~> 2.0.5)
+  minitest-ci!
   momentjs-rails
   newrelic_rpm
   paperclip (~> 4.2.1)

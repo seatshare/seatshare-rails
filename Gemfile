@@ -113,6 +113,7 @@ group :testing do
   gem 'guard-spork'
   gem 'spork-rails'
   gem 'spork-minitest', github: 'dekart/spork-minitest'
+  gem 'minitest-ci', github: 'circleci/minitest-ci'
 end
 
 group :development do
