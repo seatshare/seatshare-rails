@@ -120,7 +120,7 @@ class EventTest < ActiveSupport::TestCase
     }
     record = Event.import row1
     assert record[:event_name] == 'Colorado Avalanche at Nashville Predators'
-    assert record[:start_time] == DateTime.parse('October 8, 2009 7:00 PM CDT')
+    assert record[:start_time] == Time.zone.parse('October 8, 2009 7:00 PM CDT')
     assert record[:date_tba] == 0
     assert record[:time_tba] == 1
 
@@ -132,7 +132,7 @@ class EventTest < ActiveSupport::TestCase
     }
     record = Event.import row2
     assert record[:event_name] == 'San Jose Sharks at Nashville Predators'
-    assert record[:start_time] == DateTime.parse('October 22, 2009 7:00 PM CDT')
+    assert record[:start_time] == Time.zone.parse('Oct 22, 2009 7:00 PM CDT')
     assert record[:date_tba] == 0
     assert record[:time_tba] == 0
   end
@@ -149,7 +149,7 @@ class EventTest < ActiveSupport::TestCase
     record = Event.import row, true
     assert record[:event_name] == 'Belmont Bruins vs. Brescia'
     assert record[:description] == 'New value'
-    assert record[:start_time] == DateTime.parse('Nov 26, 2013 5:00 PM CST')
+    assert record[:start_time] == Time.zone.parse('Nov 26, 2013 5:00 PM CST')
     assert record[:date_tba] == 0
     assert record[:time_tba] == 1
   end
@@ -166,7 +166,7 @@ class EventTest < ActiveSupport::TestCase
     record = Event.import row, false
     assert record[:event_name] == 'Belmont Bruins vs. Lipscomb'
     assert record[:description] == 'Curb Event Center (Nashville, Tenn.)'
-    assert record[:start_time] == DateTime.parse('Nov 20, 2013 5:00 PM CST')
+    assert record[:start_time] == Time.zone.parse('Nov 20, 2013 5:00 PM CST')
     assert record[:date_tba] == 0
     assert record[:time_tba] == 1
   end
@@ -199,7 +199,7 @@ class EventTest < ActiveSupport::TestCase
     record = Event.import row, false, true
 
     assert record[:event_name] == 'Belmont Bruins vs. Indiana States'
-    assert record[:start_time] == DateTime.parse('Nov 14, 2013 12:00 PM CDT')
+    assert record[:start_time] == Time.zone.parse('Nov 14, 2013 12:00 PM CDT')
     assert record[:import_key] == 'belmont_20131114-new'
     assert record[:date_tba] == 0
     assert record[:time_tba] == 1

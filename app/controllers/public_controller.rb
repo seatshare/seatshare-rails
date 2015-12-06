@@ -26,9 +26,7 @@ class PublicController < ApplicationController
     @teams_list = {}
     @entity_types.each do |et|
       label = "#{et.entity_type_name} (#{et.entity_type_abbreviation})"
-      @teams_list[label] = Entity.where(
-        "entity_type_id = #{et.id}"
-      ).active.by_name
+      @teams_list[label] = Entity.where(entity_type_id: et.id).active.by_name
     end
   end
 
@@ -37,9 +35,9 @@ class PublicController < ApplicationController
   def league
     abbreviation = params[:entity_type_abbreviation].upcase || not_found
     @entity_types = EntityType.by_sort
-    @entity_type = EntityType.where(
-      ['entity_type_abbreviation = ?', abbreviation]
-    ).first || not_found
+    @entity_type = EntityType.find_by(
+      entity_type_abbreviation: abbreviation
+    ) || not_found
     @entities = @entity_type.entities.active.by_name
   end
 

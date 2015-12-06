@@ -85,10 +85,9 @@ class GroupsController < ApplicationController
     mine = params[:membership][:mine_only].to_i
     flash.keep
     status = Membership
-             .where("user_id = #{current_user.id} AND group_id = #{group.id}")
+             .where(user_id: current_user.id, group_id: group.id)
              .update_all(
-               "daily_reminder=#{daily}, weekly_reminder=#{weekly}, "\
-               "mine_only=#{mine}"
+               daily_reminder: daily, weekly_reminder: weekly, mine_only: mine
              )
     if status
       flash[:notice] = 'Reminder settings updated!'

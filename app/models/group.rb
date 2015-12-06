@@ -10,8 +10,9 @@ class Group < ActiveRecord::Base
   has_many :events, through: :entity
 
   validates :entity_id, :group_name, :creator_id, presence: true
-  validates_uniqueness_of :group_name, scope: :creator_id,
-                                       conditions: -> { where(status: 1) }
+  validates :group_name, uniqueness: {
+    scope: :creator_id, conditions: -> { where(status: 1) }
+  }
   before_save :clean_invitation_code
 
   has_attached_file(
@@ -63,9 +64,7 @@ class Group < ActiveRecord::Base
   # See if user is group member
   # - user: User object
   def member?(user = nil)
-    membership = Membership.where(
-      "group_id = #{id} AND user_id = #{user.id}"
-    ).first
+    membership = Membership.find_by group_id: id, user_id: user.id
     return false if membership.nil?
     membership.user_id == user.id
   end
@@ -74,9 +73,8 @@ class Group < ActiveRecord::Base
   # See if user is group admin
   # - user: User object
   def admin?(user = nil)
-    membership = Membership.where(
-      "group_id = #{id} AND user_id = #{user.id} AND role = 'admin'"
-    ).first
+    membership = Membership.find_by group_id: id, user_id: user.id,
+                                    role: 'admin'
     return false if membership.nil?
     membership.user_id == user.id
   end
@@ -102,17 +100,12 @@ class Group < ActiveRecord::Base
   # Leave a group
   # - user: User object
   def leave_group(user = nil)
-    membership = Membership.where(
-      "user_id = #{user.id} AND group_id = #{id}"
-    ).first
+    membership = Membership.find_by user_id: user.id, group_id: id
     fail 'AdminUserCannotLeave' if membership.role == 'admin'
 
-    Ticket.where("group_id = #{id} AND owner_id = #{user.id}").delete_all
-    Ticket.where("group_id = #{id} AND user_id = #{user.id}").each(&:unassign)
-
-    ActiveRecord::Base.connection.execute(
-      "DELETE FROM memberships WHERE group_id = #{id} AND user_id = #{user.id}"
-    )
+    Ticket.where(group_id: id, owner_id: user.id).delete_all
+    Ticket.where(group_id: id, user_id: user.id).find_each(&:unassign)
+    Membership.where(group_id: id, user_id: user.id).delete_all
   end
 
   ##

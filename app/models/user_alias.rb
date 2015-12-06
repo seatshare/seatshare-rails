@@ -16,7 +16,7 @@ class UserAlias < ActiveRecord::Base
   ##
   # Handle ticket unassignment on delete
   def destroy
-    tickets = Ticket.where("alias_id = #{id}")
+    tickets = Ticket.where(alias_id: id)
     tickets.each do |ticket|
       ticket.alias_id = 0
       ticket.save!

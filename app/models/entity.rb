@@ -6,8 +6,7 @@ class Entity < ActiveRecord::Base
   has_many :events
   belongs_to :entity_type
 
-  validates :entity_name, presence: true
-  validates_uniqueness_of :entity_name, scope: :entity_type
+  validates :entity_name, presence: true, uniqueness: { scope: :entity_type }
   before_save :clean_import_key
 
   scope :by_name, -> { order('LOWER(entity_name) ASC') }

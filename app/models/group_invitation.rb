@@ -29,9 +29,7 @@ class GroupInvitation < ActiveRecord::Base
   ##
   # Retrieve invitation by invitation code
   def self.get_by_invitation_code(invitation_code = nil)
-    invitation = GroupInvitation.where(
-      "invitation_code = '#{invitation_code}'"
-    ).first
+    invitation = GroupInvitation.find_by(invitation_code: invitation_code)
     invitation
   end
 
