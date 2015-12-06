@@ -40,7 +40,7 @@ module AdminApi
       def total_invites
         since = Time.zone.now - params[:days].to_i.days
         count = GroupInvitation
-                .where(created_at: since)
+                .where('created_at > ?', since)
                 .count
         respond_with json_response('total_invites', count)
       end
@@ -50,7 +50,7 @@ module AdminApi
       def accepted_invites
         since = Time.zone.now - params[:days].to_i.days
         count = GroupInvitation.accepted
-                .where(created_at: since)
+                .where('created_at > ?', since)
                 .count
         respond_with json_response('accepted_invites', count)
       end

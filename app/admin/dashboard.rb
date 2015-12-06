@@ -15,7 +15,7 @@ ActiveAdmin.register_page 'Dashboard' do
             end
             tbody do
               Group.active.by_name.each do |g|
-                events = g.events.where(start_time: Time.zone.now)
+                events = g.events.where('start_time > ?', Time.zone.now)
                 if events.count == 0
                   tr class: cycle('even', 'odd') do
                     td link_to(g.display_name, admin_group_path(g))
