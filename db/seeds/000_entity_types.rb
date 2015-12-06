@@ -31,5 +31,8 @@ EntityType.create([
   },
   {
     id: 11, entity_type_name: 'Minor League Baseball', entity_type_abbreviation: 'MILB', sort: 100, import_key: 'http://api.seatgeek.com/2/performers?taxonomies.name=minor_league_baseball'
+  },
+  {
+    id: 12, entity_type_name: 'NCAA College Baseball', entity_type_abbreviation: 'NCAACB', sort: 120, import_key: 'http://api.seatgeek.com/2/performers?taxonomies.name=ncaa_college_baseball'
   }
 ])
