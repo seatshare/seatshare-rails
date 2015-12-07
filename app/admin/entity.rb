@@ -7,12 +7,41 @@ ActiveAdmin.register Entity do
   filter :import_key
   filter :status
 
+  batch_action :seatgeek_import do |ids|
+    Entity.find(ids).each do |entity|
+      entity.seatgeek_import false
+    end
+    redirect_to collection_path, alert: 'Schedules updated!'
+  end
+
+  batch_action :seatgeek_import_overwrite do |ids|
+    Entity.find(ids).each do |entity|
+      entity.seatgeek_import true
+    end
+    redirect_to collection_path, alert: 'Schedules updated!'
+  end
+
   action_item :seatgeek_import, only: :show do
-    link_to 'Import SeatGeek Events', seatgeek_import_admin_entity_path(resource) if resource.seatgeek?
+    link_to 'SeatGeek Import', seatgeek_import_admin_entity_path(resource) if resource.seatgeek?
+  end
+
+  action_item :seatgeek_import_overwrite, only: :show do
+    link_to 'SeatGeek Import (Overwrite Existing Data)', seatgeek_import_overwrite_admin_entity_path(resource) if resource.seatgeek?
   end
 
   member_action :seatgeek_import, method: :get do
-    response = resource.seatgeek_import
+    response = resource.seatgeek_import false
+    case response
+    when Array
+      notice = "Imported #{response.count} record(s)"
+    else
+      notice = response
+    end
+    redirect_to resource_path, notice: notice
+  end
+
+  member_action :seatgeek_import_overwrite, method: :get do
+    response = resource.seatgeek_import true
     case response
     when Array
       notice = "Imported #{response.count} record(s)"
