@@ -1,30 +1,31 @@
 # -*- coding: utf-8 -*-
+entity_type_id = EntityType.find_by_entity_type_abbreviation('CFL').id
 Entity.create([
   {
-    id: 601, entity_name: 'Hamilton Tiger-Cats', entity_type_id: 6, status: 1, import_key: 'l.cfl.ca-t.4'
+    entity_name: 'Hamilton Tiger-Cats', entity_type_id: entity_type_id, status: 1, import_key: 'l.cfl.ca-t.4'
   },
   {
-    id: 602, entity_name: 'Montreal Alouettes', entity_type_id: 6, status: 1, import_key: 'l.cfl.ca-t.5'
+    entity_name: 'Montreal Alouettes', entity_type_id: entity_type_id, status: 1, import_key: 'l.cfl.ca-t.5'
   },
   {
-    id: 603, entity_name: 'Ottawa Redblacks', entity_type_id: 6, status: 1, import_key: 'l.cfl.ca-t.6'
+    entity_name: 'Ottawa Redblacks', entity_type_id: entity_type_id, status: 1, import_key: 'l.cfl.ca-t.6'
   },
   {
-    id: 604, entity_name: 'Toronto Argonauts', entity_type_id: 6, status: 1, import_key: 'l.cfl.ca-t.8'
+    entity_name: 'Toronto Argonauts', entity_type_id: entity_type_id, status: 1, import_key: 'l.cfl.ca-t.8'
   },
   {
-    id: 605, entity_name: 'BC Lions', entity_type_id: 6, status: 1, import_key: 'l.cfl.ca-t.1'
+    entity_name: 'BC Lions', entity_type_id: entity_type_id, status: 1, import_key: 'l.cfl.ca-t.1'
   },
   {
-    id: 606, entity_name: 'Calgary Stampeders', entity_type_id: 6, status: 1, import_key: 'l.cfl.ca-t.2'
+    entity_name: 'Calgary Stampeders', entity_type_id: entity_type_id, status: 1, import_key: 'l.cfl.ca-t.2'
   },
   {
-    id: 607, entity_name: 'Edmonton Eskimos', entity_type_id: 6, status: 1, import_key: 'l.cfl.ca-t.3'
+    entity_name: 'Edmonton Eskimos', entity_type_id: entity_type_id, status: 1, import_key: 'l.cfl.ca-t.3'
   },
   {
-    id: 608, entity_name: 'Saskatchewan Roughriders', entity_type_id: 6, status: 1, import_key: 'l.cfl.ca-t.7'
+    entity_name: 'Saskatchewan Roughriders', entity_type_id: entity_type_id, status: 1, import_key: 'l.cfl.ca-t.7'
   },
   {
-    id: 609, entity_name: 'Winnipeg Blue Bombers', entity_type_id: 6, status: 1, import_key: 'l.cfl.ca-t.9'
+    entity_name: 'Winnipeg Blue Bombers', entity_type_id: entity_type_id, status: 1, import_key: 'l.cfl.ca-t.9'
   }
 ])
