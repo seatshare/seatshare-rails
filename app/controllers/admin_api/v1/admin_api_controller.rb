@@ -133,13 +133,13 @@ module AdminApi
       # Validates the API key
       def require_api_key
         api_key = params[:api_key]
-        return true if !api_key || api_key != ENV['ADMIN_API_KEY']
+        return if api_key == ENV['ADMIN_API_KEY'] && !ENV['ADMIN_API_KEY'].nil?
         response = {
           status: 'error',
           version: 1,
           error: 'Invalid API key'
         }
-        respond_with response
+        respond_with response, status: :forbidden
       end
     end
   end
