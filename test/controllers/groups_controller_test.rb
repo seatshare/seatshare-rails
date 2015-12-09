@@ -28,11 +28,6 @@ class GroupsControllerTest < ActionController::TestCase
     assert_response :success, 'got a 200 status'
     assert_select 'title', 'Create a Group', 'page title matches'
     assert_select(
-      "form input[name='group[group_name]']",
-      1,
-      'group name field exists'
-    )
-    assert_select(
       "form select[name='group[entity_id]'] option",
       6,
       'select on page has six items'

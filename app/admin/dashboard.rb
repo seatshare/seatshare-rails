@@ -115,6 +115,7 @@ ActiveAdmin.register_page 'Dashboard' do
             thead do
               th 'User'
               th 'Email'
+              th 'Groups'
               th 'Joined'
             end
             tbody do
@@ -122,6 +123,7 @@ ActiveAdmin.register_page 'Dashboard' do
                 tr class: cycle('even', 'odd') do
                   td link_to(user.display_name, admin_user_path(user))
                   td mail_to(user.email, user.email)
+                  td user.groups.count
                   td user.created_at.strftime('%-m/%-d/%Y')
                 end
               end

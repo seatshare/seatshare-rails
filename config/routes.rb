@@ -40,6 +40,7 @@ SeatShare::Application.routes.draw do
   get 'groups/:id/message' => 'groups#message', as: 'message_group'
   post 'groups/:id/message' => 'groups#do_message'
   get 'groups/:id/events_feed' => 'groups#events_feed'
+  post 'groups/:id/schedule_notify' => 'groups#do_request_notify'
 
   get 'groups/:group_id/event-:id' => 'events#show'
 
