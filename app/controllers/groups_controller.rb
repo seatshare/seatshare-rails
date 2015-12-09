@@ -29,12 +29,14 @@ class GroupsController < ApplicationController
   ##
   # Processes a new group
   def create
+    entity = Entity.find_by_id(group_params[:entity_id]) || not_found
     group = Group.new(
-      group_name: group_params[:group_name],
+      group_name: "#{entity.entity_name} Group",
       entity_id: group_params[:entity_id],
       creator_id: current_user.id
     )
     if group.save
+      group.entity.seatgeek_import if group.events.future.empty?
       group.join_group current_user, 'admin'
       flash.keep
       flash[:notice] = 'Group created!'
@@ -304,6 +306,20 @@ class GroupsController < ApplicationController
       flash[:error] = 'Message delivery failed.'
       redirect_to(action: 'message', id: group.id) && return
     end
+  end
+
+  def do_request_notify
+    group = Group.find(params[:id]) || not_found
+    ContactMailer.support_ticket(
+      current_user.display_name,
+      current_user.email,
+      "Requesting #{group.entity.entity_name} schedule",
+      "Requestor: #{current_user.display_name}\n"\
+        "Group Name: #{group.display_name}\n"\
+        "Entity: #{group.entity.entity_name}"
+    ).deliver_now
+    flash[:notice] = 'Schedule request sent!'
+    redirect_to(action: 'show', id: group.id) && return
   end
 
   private

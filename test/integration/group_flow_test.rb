@@ -16,10 +16,10 @@ class GroupFlowTest < ActionDispatch::IntegrationTest
 
     post_via_redirect(
       '/groups/new',
-      group: { group_name: 'A Test Group', entity_id: '5' }
+      group: { entity_id: '5' }
     )
     assert_response :success
-    assert_select 'title', 'A Test Group'
+    assert_select 'title', 'Nashville Sportsball Group'
     assert_equal 'Group created!', flash[:notice]
   end
 

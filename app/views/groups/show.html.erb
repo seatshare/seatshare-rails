@@ -140,7 +140,7 @@
   </div>
   <div class="panel-body">
     <p class="lead">Your group is the first one to request the schedule for the upcoming season! SeatShare still needs to import the schedule from our data provider. We can let you know as soon as it is available.</p>
-    <p class="text-right"><%= mail_to "contact@myseatshare.com", "Notify Me", { subject: "Schedule for #{@entity.display_name}", body: "Please let me know when the schedule is released!", class: "btn btn-primary btn-lg" } %></p>
+    <p class="text-right"><%= link_to 'Notify Me', { controller: 'groups', action: 'do_request_notify', group_id: @group.id }, class: 'btn btn-primary btn-lg', method: 'post' %></p>
   </div>
 </div>
 
