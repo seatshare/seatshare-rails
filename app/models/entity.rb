@@ -54,7 +54,7 @@ class Entity < ActiveRecord::Base
           description: "#{venue['name']} (#{venue['display_location']})",
           entity_id: id,
           start_time: "#{event['datetime_utc']}+00:00",
-          date_tba: event['datetime_tbd'],
+          date_tba: event['date_tbd'],
           time_tba: event['time_tbd']
         }, overwrite
       )
