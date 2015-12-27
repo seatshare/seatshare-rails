@@ -5,18 +5,17 @@ ActiveAdmin.register_page 'Dashboard' do
   content title: proc { I18n.t('active_admin.dashboard') } do
     columns do
       column do
-        
         panel 'Groups Without Upcoming Events' do
-          table do
-            thead do
-              th 'Group'
-              th 'Entity'
-              th 'Provider'
-            end
-            tbody do
-              Group.active.by_name.each do |g|
-                events = g.events.where('start_time > ?', Time.zone.now)
-                if events.count == 0
+          groups = Group.active.by_name.select { |g| g.events.future.count == 0 }
+          unless groups.empty?
+            table do
+              thead do
+                th 'Group'
+                th 'Entity'
+                th 'Provider'
+              end
+              tbody do
+                groups.each do |g|
                   tr class: cycle('even', 'odd') do
                     td link_to(g.display_name, admin_group_path(g))
                     td link_to(g.entity.display_name, admin_entity_path(g.entity))
@@ -29,6 +28,8 @@ ActiveAdmin.register_page 'Dashboard' do
                 end
               end
             end
+          else
+            h3 'All groups have events.'
           end
         end
         
