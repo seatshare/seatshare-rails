@@ -1,4 +1,7 @@
 ActiveAdmin.register Event do
+  active_admin_importable  do |model, hash|
+    model.import(hash)
+  end
 
   index do
     selectable_column

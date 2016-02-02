@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.5'
+gem 'rails', '~> 4.2.5.1'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.4'
@@ -34,7 +34,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails', '~> 4.5.0.0'
 
 # Use Devise
-gem 'devise', '~> 3.5.3'
+gem 'devise', '~> 3.5.4'
 
 # Javascript libraries
 gem 'momentjs-rails', '~> 2.10.6'
@@ -51,6 +51,7 @@ gem 'select2-rails', '~> 4.0.0'
 
 # ActiveAdmin
 gem 'activeadmin', github: 'activeadmin'
+gem 'active_admin_importable', github: 'krhorst/active_admin_importable'
 
 # Mailchimp API
 gem 'mailchimp-api', '~> 2.0.6'
