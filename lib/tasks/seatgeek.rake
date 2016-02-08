@@ -97,6 +97,7 @@ namespace :seatgeek do
       next unless et.seatgeek?
       params = Rack::Utils.parse_query URI(et.import_key).query
       params[:per_page] = 1000
+      SeatGeek::Connection.protocol = :https
       response = SeatGeek::Connection.performers(params)
       seatgeek_data[et.import_key] = response['performers']
     end
