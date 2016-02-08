@@ -41,7 +41,7 @@ class EntityTest < ActiveSupport::TestCase
   test 'import from SeatGeek' do
     stub_request(
       :get,
-      'http://api.seatgeek.com/2/events'\
+      'https://api.seatgeek.com/2/events'\
         '?per_page=500&performers.slug=nashville-predators&venue.id=2195'
     ).to_return(
       status: 200,
