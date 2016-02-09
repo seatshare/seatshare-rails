@@ -1,4 +1,4 @@
-<% content_for :page_title do %>Manage Season Tickets for Your Favorite <%= @entity_type.entity_type_name %> Team - SeatShare<% end %>
+<% content_for :page_title do %>Manage season tickets for <%= @entity_type.entity_type_name %> teams - SeatShare<% end %>
 <% content_for :page_description do %>We import schedules for all of the <%= @entity_type.entity_type_name %> teams.<% end %>
 
 <% content_for :page_header do %>
@@ -24,6 +24,15 @@
   </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12 text-center">
+        <br />
+        <hr />
+        <br />
+    </div>
+</div>
+
+<%= render 'public/service_description' %>
+
 <% content_for :page_footer do %>
-<script>if (typeof mixpanel != 'undefined') { mixpanel.track("View league landing page"); }</script>
 <% end %>

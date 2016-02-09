@@ -1,5 +1,4 @@
-seatshareReady = ->
-
+$(document).on 'page:load ready', ->
   # Navbar group switching
   $('#group_switcher select#group_selector').change (e) ->
   	window.location = '/groups/' + $(this).val()
@@ -14,5 +13,5 @@ seatshareReady = ->
   # Zeroclipboard
   clip = new ZeroClipboard($("button.zeroclipboard"))
 
-$(document).ready(seatshareReady)
-$(document).on('page:load', seatshareReady)
+$(document).on 'page:before-change', ->
+  ZeroClipboard.destroy()
