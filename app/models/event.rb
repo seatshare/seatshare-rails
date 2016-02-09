@@ -138,6 +138,7 @@ class Event < ActiveRecord::Base
   def seatgeek_data
     fail 'Not a SeatGeek event' unless seatgeek?
     params = Rack::Utils.parse_query URI(import_key).query
+    SeatGeek::Connection.protocol = :https
     response = SeatGeek::Connection.events(params)
     return false if response['events'].nil? || response['events'].count == 0
     response['events'].first
