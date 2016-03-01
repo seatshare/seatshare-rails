@@ -78,14 +78,14 @@ SeatShare::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Mandrill SMTP
+  # SMTP Configuration
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV['MANDRILL_SMTP_HOST'],
+    address:              ENV['SMTP_HOST'],
     port:                 587,
     domain:               'myseatshare.com',
-    user_name:            ENV['MANDRILL_SMTP_USER'],
-    password:             ENV['MANDRILL_SMTP_PASS'],
+    user_name:            ENV['SMTP_USER'],
+    password:             ENV['SMTP_PASS'],
     authentication:       'plain',
     enable_starttls_auto: true  }
   config.action_mailer.default_url_options = { :host => 'https://myseatshare.com' }
