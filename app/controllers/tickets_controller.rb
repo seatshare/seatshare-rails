@@ -42,8 +42,9 @@ class TicketsController < ApplicationController
         ticket.cost = ticket_values[:cost].to_f
         ticket.user_id = ticket_values[:user_id].to_i
         next unless ticket.cost_changed? || ticket.user_id_changed?
+        ticket.alias_id = 0 if ticket.user_id_changed?
         if ticket.save
-          log_ticket_history ticket, 'updated'
+          Ticket.log_ticket_history ticket, 'updated', current_user
           flash[:notice] = 'Ticket(s) updated!'
         else
           flash[:error] = 'Ticket(s) could not be updated.'
@@ -102,7 +103,7 @@ class TicketsController < ApplicationController
     if ticket_params[:event_id].is_a? String
       ticket.event_id = ticket_params[:event_id]
       if ticket.valid? && ticket.save
-        log_ticket_history ticket, 'created'
+        Ticket.log_ticket_history ticket, 'created', current_user
         flash[:notice] = 'Ticket added!'
         redirect_to(
           controller: 'events', action: 'show', id: ticket_params[:event_id],
@@ -119,7 +120,7 @@ class TicketsController < ApplicationController
         season_ticket = ticket.dup
         season_ticket.event_id = event_id
         if season_ticket.valid? && season_ticket.save
-          log_ticket_history season_ticket, 'created'
+          Ticket.log_ticket_history season_ticket, 'created', current_user
           flash[:notice] = 'Tickets added!'
         else
           flash[:error] = 'Could not create tickets.'
@@ -192,9 +193,9 @@ class TicketsController < ApplicationController
         fail 'NotGroupMember' unless ticket.group.member?(ticket.assigned)
         TicketNotifier.assign(ticket, current_user).deliver_now
         TwilioSMS.new.assign_ticket(ticket, current_user)
-        log_ticket_history ticket, 'assigned'
+        Ticket.log_ticket_history ticket, 'assigned', current_user
       else
-        log_ticket_history ticket, 'updated'
+        Ticket.log_ticket_history ticket, 'updated', current_user
       end
     else
       flash[:error] = 'Ticket could not be updated.'
@@ -226,7 +227,7 @@ class TicketsController < ApplicationController
     message = params[:message][:personalization]
     TicketNotifier.request_ticket(ticket, current_user, message).deliver_now
     TwilioSMS.new.request_ticket(ticket, current_user)
-    log_ticket_history ticket, 'requested'
+    Ticket.log_ticket_history ticket, 'requested', current_user
     flash.keep
     flash[:notice] = 'Ticket request sent!'
     redirect_to(
@@ -241,7 +242,7 @@ class TicketsController < ApplicationController
     ticket = Ticket.find_by_id(params[:id]) || not_found
     fail 'AccessDenied' unless ticket.can_edit?(current_user)
     ticket.unassign
-    log_ticket_history ticket, 'unassigned'
+    Ticket.log_ticket_history ticket, 'unassigned', current_user
     flash.keep
     flash[:notice] = 'Ticket unassigned!'
     redirect_to(
@@ -278,29 +279,6 @@ class TicketsController < ApplicationController
   end
 
   private
-
-  ##
-  # Log a ticket history record
-  # - ticket: Ticket object
-  # - action: string of action
-  def log_ticket_history(ticket = nil, action = nil)
-    user = User.find_by_id(ticket.user_id)
-    if !user.nil?
-      user_record = user.attributes
-    else
-      user_record = nil
-    end
-    ticket_history = TicketHistory.new(
-      event_id: ticket.event_id,
-      user_id: current_user.id,
-      ticket_id: ticket.id,
-      group_id: ticket.group_id,
-      entry: JSON.generate(
-        text: action, user: user_record, ticket: ticket.attributes
-      )
-    )
-    ticket_history.save
-  end
 
   ##
   # Strong parameters for tickets
