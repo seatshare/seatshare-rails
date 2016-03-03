@@ -41,7 +41,7 @@ jill_1:
   owner_id: 1
   user_id: 2
   note: 
-  alias_id: 0
+  alias_id: 2
   cost: 12.00
 
 jill_2:

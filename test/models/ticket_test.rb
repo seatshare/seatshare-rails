@@ -115,4 +115,21 @@ class TicketTest < ActiveSupport::TestCase
 
     assert !ticket.can_edit?(user)
   end
+
+  test 'log_ticket_history' do
+    acting_user = User.find(2)
+    ticket = Ticket.find(4)
+    ticket.user_id = 3
+    ticket.save!
+
+    assert ticket.ticket_histories.count == 0
+
+    Ticket.log_ticket_history ticket, 'assigned', acting_user
+    entry = JSON.parse(ticket.ticket_histories[0].entry)
+
+    assert ticket.ticket_histories.count == 1
+    assert entry['text'] == 'assigned'
+    assert entry['user']['id'] == 3
+    assert entry['ticket']['user_id'] == 3
+  end
 end

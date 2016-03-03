@@ -56,6 +56,29 @@ class Ticket < ActiveRecord::Base
     false
   end
 
+  ##
+  # Log a ticket history record
+  # - ticket: Ticket object
+  # - action: string of action
+  def self.log_ticket_history(ticket = nil, action = nil, actor)
+    user = User.find_by_id(ticket.user_id)
+    if !user.nil?
+      user_record = user.attributes
+    else
+      user_record = nil
+    end
+    ticket_history = TicketHistory.new(
+      event_id: ticket.event_id,
+      user_id: actor.id,
+      ticket_id: ticket.id,
+      group_id: ticket.group_id,
+      entry: JSON.generate(
+        text: action, user: user_record, ticket: ticket.attributes
+      )
+    )
+    ticket_history.save
+  end
+
   private
 
   ##

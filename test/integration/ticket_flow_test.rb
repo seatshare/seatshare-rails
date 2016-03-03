@@ -236,7 +236,6 @@ class TicketFlowTest < ActionDispatch::IntegrationTest
       '/login',
       user: { email: users(:jim).email, password: 'testing123' }
     )
-
     post_via_redirect(
       '/tickets/?filter=past',
       ticket: {
@@ -246,5 +245,7 @@ class TicketFlowTest < ActionDispatch::IntegrationTest
     )
     assert_response :success
     assert_equal 'Ticket(s) updated!', flash[:notice]
+    assert_equal 0, Ticket.find(3).alias_id, 'Ticket alias cleared on 3'
+    assert_equal 2, Ticket.find(4).alias_id, 'Ticket alias not cleared on 4'
   end
 end
