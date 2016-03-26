@@ -57,7 +57,7 @@ gem 'active_admin_importable', github: 'krhorst/active_admin_importable'
 gem 'mailchimp-api', '~> 2.0.6'
 
 # SeatGeek data provider
-gem 'seatgeek', '~> 0.1.2'
+gem 'seatgeek', '~> 1.0.0'
 
 # Capistrano
 gem 'capistrano', '~> 3.4.0'

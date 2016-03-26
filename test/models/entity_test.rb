@@ -39,9 +39,10 @@ class EntityTest < ActiveSupport::TestCase
   end
 
   test 'import from SeatGeek' do
+    SeatGeek::Connection.client_id = 'a_test_client_id'
     stub_request(
       :get,
-      'https://api.seatgeek.com/2/events'\
+      'https://a_test_client_id:@api.seatgeek.com/2/events'\
         '?per_page=500&performers.slug=nashville-predators&venue.id=2195'
     ).to_return(
       status: 200,

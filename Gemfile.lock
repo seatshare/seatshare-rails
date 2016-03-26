@@ -343,7 +343,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    seatgeek (0.1.2)
+    seatgeek (1.0.0)
       faraday
       multi_json
       rake
@@ -446,7 +446,7 @@ DEPENDENCIES
   rest-client (~> 1.8.0)
   sass-rails (~> 5.0.4)
   sdoc (~> 0.4.1)
-  seatgeek (~> 0.1.2)
+  seatgeek (~> 1.0.0)
   select2-rails (~> 4.0.0)
   slack-notifier (~> 1.5.1)
   slackistrano (~> 1.0.0)
