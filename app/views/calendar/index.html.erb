@@ -34,7 +34,7 @@
 <ul class="list-group">
   <li class="list-group-item">
     <%= link_to raw('<span class="fa fa-calendar"></span> All Groups'), { :controller => 'calendar', :action => 'full', :token => current_user.calendar_token, :format => 'ics' } %>
-    <div class="visible-lg visible-md pull-right"><button class="btn btn-link btn-xs zeroclipboard" data-clipboard-text="<%= "#{request.protocol}#{request.host_with_port}" + url_for(:controller => 'calendar', :action => 'full', :token => current_user.calendar_token, :format => 'ics') %>" data-toggle="tooltip" title="Copy link to clipboard."><span class="fa fa-clipboard"></span></button></div>
+    <div class="visible-lg visible-md pull-right"><button class="btn btn-link btn-xs btn-clipboard" data-clipboard-text="<%= "#{request.protocol}#{request.host_with_port}" + url_for(:controller => 'calendar', :action => 'full', :token => current_user.calendar_token, :format => 'ics') %>"><span class="fa fa-clipboard"></span></button></div>
   </li>
 </ul>
 
@@ -45,7 +45,7 @@
   <% @groups.each do |group| %>
   <li class="list-group-item">
     <%= link_to raw('<span class="fa fa-calendar"></span> ' + group.group_name), { :controller => 'calendar', :action => 'group', :group_id => group.id, :token => current_user.calendar_token, :format => 'ics' } %>
-    <div class="visible-lg visible-md pull-right"><button class="btn btn-link btn-xs zeroclipboard" data-clipboard-text="<%= "#{request.protocol}#{request.host_with_port}" + url_for(:controller => 'calendar', :action => 'group', :group_id => group.id, :token => current_user.calendar_token, :format => 'ics') %>" data-toggle="tooltip" title="Copy link to clipboard."><span class="fa fa-clipboard"></span></button></div>
+    <div class="visible-lg visible-md pull-right"><button class="btn btn-link btn-xs btn-clipboard" data-clipboard-text="<%= "#{request.protocol}#{request.host_with_port}" + url_for(:controller => 'calendar', :action => 'group', :group_id => group.id, :token => current_user.calendar_token, :format => 'ics') %>"><span class="fa fa-clipboard"></span></button></div>
   </li>
   <% end %>
   <% else %>
