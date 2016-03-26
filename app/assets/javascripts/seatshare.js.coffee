@@ -10,8 +10,12 @@ $(document).on 'page:load ready', ->
   # Tooltips
   $('a[data-toggle="tooltip"], span[data-toggle="tooltip"], div[data-toggle="tooltip"], button[data-toggle="tooltip"]').tooltip()
 
-  # Zeroclipboard
-  clip = new ZeroClipboard($("button.zeroclipboard"))
+  # Clipboard.js
+  clipboard = new Clipboard('.btn-clipboard')
+  clipboard.on 'success', (e) ->
+    $(e.trigger).attr('title', 'Copied!').tooltip('show')
+    $(e.trigger).on 'hidden.bs.tooltip', () ->
+      $(e.trigger).tooltip('destroy')
   
   # Responsive Tables
   $('.table-responsive').on 'show.bs.dropdown', () ->
@@ -20,4 +24,5 @@ $(document).on 'page:load ready', ->
     $('.table-responsive').css "overflow", "auto"
 
 $(document).on 'page:before-change', ->
-  ZeroClipboard.destroy()
+  clipboard = new Clipboard('.btn-clipboard')
+  clipboard.destroy()

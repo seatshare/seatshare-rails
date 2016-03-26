@@ -87,9 +87,6 @@ gem 'global_phone', '~> 1.0.1'
 # Sitemaps
 gem 'dynamic_sitemaps', '~> 2.0.0'
 
-# Zeroclipboard
-gem 'zeroclipboard-rails', '~> 0.1.1'
-
 # iCalendar
 gem 'icalendar', '~> 2.3.0'
 
