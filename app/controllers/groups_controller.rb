@@ -111,9 +111,7 @@ class GroupsController < ApplicationController
     @entity = @group.entity
     not_found if @group.status != 1
     redirect_to(action: 'index') && return unless @group.member?(current_user)
-    @events = @group.events
-              .future
-              .by_date
+    @events = @group.events.future.confirmed.by_date
     @members = @group.members.by_name
     session[:current_group_id] = @group.id
   end
@@ -124,7 +122,7 @@ class GroupsController < ApplicationController
     @group = Group.find_by_id(params[:id]) || not_found
     not_found if @group.status != 1
     fail 'NotGroupMember' unless @group.member?(current_user)
-    @events = @group.events.by_date
+    @events = @group.events.confirmed.by_date
 
     feed = []
     @events.each do |event|

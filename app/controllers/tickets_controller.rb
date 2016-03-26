@@ -75,9 +75,7 @@ class TicketsController < ApplicationController
       @ticket_stats = @event.ticket_stats(@group, current_user)
       @page_title = "#{@event.event_name}"
     else
-      @events = @group.events
-                .order('start_time ASC')
-                .where('start_time > ?', Time.zone.today)
+      @events = @group.events.by_date.future.confirmed
       @page_title = 'Add Tickets'
     end
   end

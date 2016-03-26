@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   def show
     @group = Group.find_by_id(params[:group_id]) || not_found
     @event = Event.find_by_id(params[:id]) || not_found
+    not_found unless @group.entity.id == @event.entity.id
     @tickets = @event.tickets.where(group_id: @group.id).by_seat
     @ticket_stats = @event.ticket_stats(@group, current_user)
 

@@ -8,7 +8,7 @@ namespace :send_reminders do
     groups = Group.active
     puts "Sending Daily Reminders for events for today"
     for group in groups
-      events = group.events.today.by_date
+      events = group.events.today.confirmed.by_date
       if events.count > 0
         for membership in group.memberships
           if membership.daily_reminder == 1
@@ -38,7 +38,7 @@ namespace :send_reminders do
     groups = Group.active
     puts "Sending Weekly Reminders for events for next seven days"
     for group in groups
-    events = group.events.next_seven_days.by_date
+    events = group.events.next_seven_days.confirmed.by_date
       if events.count > 0
         for membership in group.memberships
           if membership.weekly_reminder == 1
