@@ -42,8 +42,8 @@ class Entity < ActiveRecord::Base
     fail 'Not a SeatGeek entity' unless seatgeek?
     params = Rack::Utils.parse_query URI(import_key).query
     params[:per_page] = 500
-    SeatGeek::Connection.protocol = :https
     response = SeatGeek::Connection.events(params)
+    fail response[:body] if response.key?(:status) && response[:status] != 200
     fail 'No events.' unless response && response['events'].count > 0
     records = []
     response['events'].each do |event|
