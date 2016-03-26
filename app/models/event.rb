@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   scope :past, -> { where('start_time < ?', Time.zone.now) }
   scope :next_seven_days, -> { next_seven_days }
   scope :today, -> { today }
+  scope :confirmed, -> { where('date_tba = 0') }
 
   @ticket_stats = nil
 

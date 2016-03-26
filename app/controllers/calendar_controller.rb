@@ -76,8 +76,7 @@ class CalendarController < ApplicationController
     end
 
     # Loop through the events
-    group.events.each do |group_event|
-      next if group_event.date_tba? == true
+    group.events.confirmed.each do |group_event|
       cal.add_event(
         group_event.to_ics(
           url_for(

@@ -14,11 +14,16 @@ class EventsControllerTest < ActionController::TestCase
     @user = User.find(1)
     sign_in :user, @user
 
-    get :show, id: 1, group_id: 2
+    get :show, id: 4, group_id: 1
 
     assert_response :success, 'received a 200 status'
-    assert_select 'title', 'Belmont Bruins vs. Brescia', 'event title matches'
+    assert_select 'title', 'Nashville Predators vs. St. Louis Blues',
+                  'event title matches'
     assert_select 'table', 1, 'there is a table for tickets'
+
+    assert_raises 'NotFound' do
+      get :show, id: 1, group_id: 2
+    end
   end
 
   test 'should see localized timezone' do
