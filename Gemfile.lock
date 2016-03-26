@@ -348,8 +348,6 @@ GEM
       multi_json
       rake
       yajl-ruby
-    select2-rails (4.0.0)
-      thor (~> 0.14)
     shellany (0.0.1)
     slack-notifier (1.5.1)
     slackistrano (1.0.0)
@@ -445,7 +443,6 @@ DEPENDENCIES
   sass-rails (~> 5.0.4)
   sdoc (~> 0.4.1)
   seatgeek (~> 1.0.0)
-  select2-rails (~> 4.0.0)
   slack-notifier (~> 1.5.1)
   slackistrano (~> 1.0.0)
   spork-minitest!
