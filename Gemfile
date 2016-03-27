@@ -46,9 +46,6 @@ gem 'aws-sdk-v1', '~> 1.66.0'
 # Postgres
 gem 'pg', '~> 0.18.4'
 
-# Select2
-gem 'select2-rails', '~> 4.0.0'
-
 # ActiveAdmin
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_admin_importable', github: 'krhorst/active_admin_importable'
