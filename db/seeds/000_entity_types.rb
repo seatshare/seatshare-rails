@@ -71,5 +71,17 @@ EntityType.create([
     entity_type_abbreviation: 'NCAACB',
     sort: 120,
     import_key: 'http://api.seatgeek.com/2/performers?taxonomies.name=ncaa_college_baseball'
+  },
+  {
+    entity_type_name: 'American Hockey League',
+    entity_type_abbreviation: 'AHL',
+    sort: 130,
+    import_key: 'american-hockey-league'
+  },
+  {
+    entity_type_name: 'East Coast Hockey League',
+    entity_type_abbreviation: 'ECHL',
+    sort: 140,
+    import_key: 'east-coast-hockey-league'
   }
 ])
