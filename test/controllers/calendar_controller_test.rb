@@ -3,6 +3,12 @@ require 'test_helper'
 ##
 # Calendar Controller Test
 class CalendarControllerTest < ActionController::TestCase
+  ##
+  # Setup test
+  def setup
+    Time.zone = 'Central Time (US & Canada)'
+  end
+
   test 'get calendar index' do
     @user = User.find(1)
     sign_in :user, @user
