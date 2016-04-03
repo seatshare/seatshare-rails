@@ -7,7 +7,6 @@ class PublicControllerTest < ActionController::TestCase
     get :index
     assert_response :success, 'got home page'
     assert_select 'title', 'Welcome to SeatShare', 'title matches expected'
-    assert_select 'h1', 'What is SeatShare?', 'page heading matches'
   end
 
   test 'gets redirected when logged in and has no groups' do

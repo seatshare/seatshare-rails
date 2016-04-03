@@ -44,6 +44,28 @@ class RegistrationsControllerTest < ActionController::TestCase
   end
 
   test 'get register route with team id' do
+    SeatGeek::Connection.client_id = 'a_test_client_id'
+    stub_request(
+      :get,
+      'https://a_test_client_id:@api.seatgeek.com/2/events'\
+        '?per_page=500&performers.slug=nashville-predators&venue.id=2195'
+    ).to_return(
+      status: 200,
+      body: File.new(
+        'test/fixtures/seatgeek/events-nashville-predators.json'
+      ).read
+    )
+    stub_request(
+      :get,
+      'https://a_test_client_id:@api.seatgeek.com/2/performers'\
+        '?slug=nashville-predators'
+    ).to_return(
+      status: 200,
+      body: File.new(
+        'test/fixtures/seatgeek/performers-nashville-predators.json'
+      ).read
+    )
+
     @request.env['devise.mapping'] = Devise.mappings[:user]
 
     get :new, entity_id: '1', entity_slug: 'nashville-predators-nhl'

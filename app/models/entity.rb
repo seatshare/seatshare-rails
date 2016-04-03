@@ -39,12 +39,7 @@ class Entity < ActiveRecord::Base
   # Import SeatGeek Events
   # - overwrite: whether to overwrite the title and description
   def seatgeek_import(overwrite = false)
-    fail 'Not a SeatGeek entity' unless seatgeek?
-    params = Rack::Utils.parse_query URI(import_key).query
-    params[:per_page] = 500
-    response = SeatGeek::Connection.events(params)
-    fail response[:body] if response.key?(:status) && response[:status] != 200
-    fail 'No events.' unless response && response['events'].count > 0
+    response = seatgeek_schedule
     records = []
     response['events'].each do |event|
       venue = event['venue']
@@ -64,6 +59,42 @@ class Entity < ActiveRecord::Base
   rescue StandardError => e
     logger.info e.message
     return e.message
+  end
+
+  ##
+  # SeatGeek Schedule
+  def seatgeek_schedule
+    fail 'Not a SeatGeek entity' unless seatgeek?
+    params = Rack::Utils.parse_query URI(import_key).query
+    params[:per_page] = 500
+    response = SeatGeek::Connection.events(params)
+    fail response[:body] if response.key?(:status) && response[:status] != 200
+    fail 'No events.' unless response && response['events'].count > 0
+    response
+  end
+
+  ##
+  # SeatGeek Performer
+  def seatgeek_performer
+    fail 'Not a SeatGeek entity' unless seatgeek?
+    params = Rack::Utils.parse_query URI(import_key).query
+    response = SeatGeek::Connection.performers(slug: params['performers.slug'])
+    fail response[:body] if response.key?(:status) && response[:status] != 200
+    fail 'No performer data.' unless response['performers'].count > 0
+    response['performers'].first
+  end
+
+  ##
+  # Entity Avatar
+  def default_avatar(style = nil)
+    style = 'medium' if style.nil?
+    abbr = entity_type.entity_type_abbreviation.downcase
+    image_path = File.join 'entity_types', "#{abbr}-group-#{style}-missing.png"
+    if File.exist?(File.join(Rails.root, 'app', 'assets', 'images', image_path))
+      ActionController::Base.helpers.asset_path image_path
+    else
+      ActionController::Base.helpers.asset_path("group-#{style}-missing.png")
+    end
   end
 
   private
