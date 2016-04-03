@@ -30,8 +30,8 @@
       </ul>
       <% else %>
       <ul class="nav navbar-nav pull-right">
-        <li class=""><%= link_to 'Create Account', new_user_registration_path %></li>
-        <li><%= link_to 'Login', new_user_session_path %></li>
+        <li><%= link_to 'Create Account', new_user_registration_path, title: 'Create Account' %></li>
+        <li><%= link_to 'Login', new_user_session_path, title: 'Login' %></li>
       </ul>
       <% end %>
     </div>

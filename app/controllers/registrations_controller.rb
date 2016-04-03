@@ -15,6 +15,18 @@ class RegistrationsController < Devise::RegistrationsController
     end
     if params[:entity_id]
       @entity = Entity.find_by_id(params[:entity_id])
+      begin
+        schedule = @entity.seatgeek_schedule
+        @schedule = schedule['events']
+      rescue StandardError
+        @schedule = []
+      end
+      begin
+        performer = @entity.seatgeek_performer
+        @performer = performer
+      rescue
+        @performer = nil
+      end
     else
       @entity = nil
     end

@@ -89,7 +89,29 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     assert_equal '/groups', path
   end
 
-  test 'signup for an account with an team ID' do
+  test 'signup for an account with a team id' do
+    SeatGeek::Connection.client_id = 'a_test_client_id'
+    stub_request(
+      :get,
+      'https://a_test_client_id:@api.seatgeek.com/2/events'\
+        '?per_page=500&performers.slug=nashville-predators&venue.id=2195'
+    ).to_return(
+      status: 200,
+      body: File.new(
+        'test/fixtures/seatgeek/events-nashville-predators.json'
+      ).read
+    )
+    stub_request(
+      :get,
+      'https://a_test_client_id:@api.seatgeek.com/2/performers'\
+        '?slug=nashville-predators'
+    ).to_return(
+      status: 200,
+      body: File.new(
+        'test/fixtures/seatgeek/performers-nashville-predators.json'
+      ).read
+    )
+
     get '/register/nashville-predators-nhl/1'
     assert_response :success
     assert_select 'h4', 'Create a Nashville Predators group'

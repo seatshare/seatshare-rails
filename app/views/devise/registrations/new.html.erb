@@ -17,8 +17,49 @@
 <p class="text-muted">Your SeatShare account lets you join an existing group or create your own.</p>
 
 <% if @entity %>
-<div class="alert alert-info">
-  <p class="lead text-center">SeatShare salutes <%= @entity.entity_name %> fans!</p>
+<div class="well team-schedule-box">
+
+  <div class="panel">
+    <div class="panel-body text-center">
+      <span class="lead">SeatShare is made for <strong><%= image_tag @entity.default_avatar, width: 24, alt: 'Group Image', class: 'image-text-inline' %> <%= @entity.entity_name %></strong> fans!</span>
+    </div>
+  </div>
+
+  <% if @schedule.count > 0 %>
+  <div class="row">
+    <% @schedule.take(3).each do |event| %>
+    <div class="col-md-4">
+      <div class="panel">
+        <div class="panel-body">
+          <h4><%= event['title'] %></h4>
+          <p><%= event['venue']['name'] %></p>
+          <% if event['date_tbd'] || event['time_tbd'] %>
+          <p><i class="fa fa-calendar"></i> <em>To be announced</em></p>
+          <% else %>
+          <p>
+            <i class="fa fa-calendar"></i> <%= DateTime.parse(event['datetime_local']).strftime('%A, %B %-d, %Y') %><br />
+            <i class="fa fa-clock-o"></i>  <%= DateTime.parse(event['datetime_local']).strftime('%-I:%M %P') %>
+          </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% else %>
+  <div class="panel">
+    <div class="panel-body text-center">
+      <span class=""><em>We will retrieve the latest schedule as soon as they are available.</em></span>
+    </div>
+  </div>
+  <% end %>
+  <% if @performer && @performer['image'] %>
+  <style>
+  .team-schedule-box {
+    background-image: url(<%= @performer['image'].gsub('huge.jpg', '1200x525.jpg') %>);
+  }
+  </style>
+  <% end %>
 </div>
 <% end %>
 
@@ -98,15 +139,9 @@
 
 <% end %>
 
-<% if @entity %>
+<hr />
 
-<% end %>
-
-<p class="text-muted">SeatShare is not a ticket broker or marketplace, and we do not process payment for tickets that may be sold through the platform. More importantly, SeatShare is the easiest way to manage your season tickets online and share them with a group of other fans. Ticket groups can be created for more than 2,700 teams for which we are able to maintain up-to-date schedules -- including professional, college and amateur teams.</p>
-<% if @entity %>
-<p class="text-muted">Yep, that means we are ready for the <%= @entity.entity_name %> season!</p>
-<% end %>
-<p class="text-muted">Create your free account today!</p>
+<p class="text-muted"><strong>Please Note:</strong> SeatShare is not a ticket broker or marketplace, and we do not process payment for tickets that may be sold while using the platform.</p>
 
 <% content_for :sidebar do %>
 
@@ -136,22 +171,24 @@
 </div>
 <% end %>
 
-<div class="well">
+<div class="panel">
+  <div class="panel-body">
 
-<h4>What can I do with a SeatShare account?</h4>
+    <h4>What can I do with a SeatShare account?</h4>
 
-<ul class="list-normal">
-  <li>Manage your season tickets from anywhere - from your computer, tablet or mobile phone.</li>
-  <li>Get weekly and daily alerts about available tickets for upcoming events.</li>
-  <li>See who is going to the next event.</li>
-  <li>List available tickets in your group.</li>
-  <li>Request available tickets.</li>
-  <li>Assign tickets to other group members.</li>
-</ul>
+    <ul class="list-normal">
+      <li>Manage your season tickets from anywhere - from your computer, tablet or mobile phone.</li>
+      <li>Get weekly and daily alerts about available tickets for upcoming events.</li>
+      <li>See who is going to the next event.</li>
+      <li>List available tickets in your group.</li>
+      <li>Request available tickets.</li>
+      <li>Assign tickets to other group members.</li>
+    </ul>
 
-<h4>Wait, how much does it cost?</h4>
-<p>SeatShare is <strong>free</strong> to create an account and to manage your season tickets. We created a tool that we ourselves use every season.</p>
+    <h4>Wait, how much does it cost?</h4>
+    <p>SeatShare is <strong>free</strong> to create an account and to manage your season tickets. We created a tool that we ourselves use every season.</p>
 
+  </div>
 </div>
 
 <% end %>

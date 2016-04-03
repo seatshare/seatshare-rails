@@ -4,7 +4,7 @@ groupsReady = ->
   if $("#group_entity_id").length > 0
     $("#group_entity_id").select2({
       theme: 'bootstrap',
-      placeholder: "Click to search our more than 2,700 available teams",
+      placeholder: "Click to search our more than 2,800 available teams",
       allowClear: true
     })
 
