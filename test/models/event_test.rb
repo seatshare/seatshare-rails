@@ -157,7 +157,7 @@ class EventTest < ActiveSupport::TestCase
   test 'imported row does not overwrite existing values' do
     row = {
       entity_id: 2,
-      event_name: 'Big Game: Belmont Bruins vs. Lipscomb',
+      event_name: 'Belmont Bruins vs. Lipscomb',
       description: 'New value',
       start_time: '20131120T18:00:00-0500',
       time_tba: true,

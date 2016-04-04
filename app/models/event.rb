@@ -109,8 +109,9 @@ class Event < ActiveRecord::Base
   def self.import(hash = nil, overwrite = false, allow_duplicate = false)
     event = find_by_import_key(hash[:import_key]) || new
     event.entity_id = hash[:entity_id]
+    event.event_name = hash[:event_name]
     if overwrite || event.new_record?
-      event.event_name = hash[:event_name]
+      # Attributes to overwrite (description)
       event.description = hash[:description]
     end
     event.start_time = hash[:start_time]
