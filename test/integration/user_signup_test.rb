@@ -3,9 +3,32 @@ require 'test_helper'
 ##
 # User Signup test
 class UserSignupTest < ActionDispatch::IntegrationTest
-  test 'signup for an account - success' do
+  def setup
+    SeatGeek::Connection.client_id = 'a_test_client_id'
+    stub_request(
+      :get,
+      'https://a_test_client_id:@api.seatgeek.com/2/events'\
+        '?per_page=500&performers.slug=nashville-predators&venue.id=2195'
+    ).to_return(
+      status: 200,
+      body: File.new(
+        'test/fixtures/seatgeek/events-nashville-predators.json'
+      ).read
+    )
+    stub_request(
+      :get,
+      'https://a_test_client_id:@api.seatgeek.com/2/performers'\
+        '?slug=nashville-predators'
+    ).to_return(
+      status: 200,
+      body: File.new(
+        'test/fixtures/seatgeek/performers-nashville-predators.json'
+      ).read
+    )
     stub_request(:any, /api.mailchimp.com/)
+  end
 
+  test 'signup for an account - success' do
     get '/register'
     assert_response :success
 
@@ -90,28 +113,6 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   end
 
   test 'signup for an account with a team id' do
-    SeatGeek::Connection.client_id = 'a_test_client_id'
-    stub_request(
-      :get,
-      'https://a_test_client_id:@api.seatgeek.com/2/events'\
-        '?per_page=500&performers.slug=nashville-predators&venue.id=2195'
-    ).to_return(
-      status: 200,
-      body: File.new(
-        'test/fixtures/seatgeek/events-nashville-predators.json'
-      ).read
-    )
-    stub_request(
-      :get,
-      'https://a_test_client_id:@api.seatgeek.com/2/performers'\
-        '?slug=nashville-predators'
-    ).to_return(
-      status: 200,
-      body: File.new(
-        'test/fixtures/seatgeek/performers-nashville-predators.json'
-      ).read
-    )
-
     get '/register/nashville-predators-nhl/1'
     assert_response :success
     assert_select 'h4', 'Create a Nashville Predators group'
