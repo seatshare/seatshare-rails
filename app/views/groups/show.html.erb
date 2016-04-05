@@ -136,10 +136,10 @@
 
 <div class="panel panel-info">
   <div class="panel-heading">
-    <p class="panel-title">We are getting your group's <%= @entity.entity_name %> schedule</p>
+    <p class="panel-title"><i class="fa fa-clock-o"></i> <%= @entity.entity_name %> schedule coming soon!</p>
   </div>
   <div class="panel-body">
-    <p class="lead">Your group is the first one to request the schedule for the upcoming season! SeatShare still needs to import the schedule from our data provider. We can let you know as soon as it is available.</p>
+    <p class="lead">Our data provider has not yet released the upcoming schedule for your team. We automatically import and update team schedules every night. We can notify you as soon as the schedule has been released.</p>
     <p class="text-right"><%= link_to 'Notify Me', { controller: 'groups', action: 'do_request_notify', group_id: @group.id }, class: 'btn btn-primary btn-lg', method: 'post' %></p>
   </div>
 </div>
