@@ -125,10 +125,25 @@ class Event < ActiveRecord::Base
       )
       return collisions.first if collisions.size > 0
     end
-
     event.save!
-
     event
+  end
+
+  ##
+  # Is SeatGeek?
+  def seatgeek?
+    import_key.include? 'api.seatgeek.com'
+  end
+
+  ##
+  # SeatGeek Data
+  def seatgeek_data
+    fail 'Not a SeatGeek event' unless seatgeek?
+    params = Rack::Utils.parse_query URI(import_key).query
+    SeatGeek::Connection.protocol = :https
+    response = SeatGeek::Connection.events(params)
+    return false if response['events'].nil? || response['events'].count == 0
+    response['events'].first
   end
 
   ##

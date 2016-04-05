@@ -11,6 +11,7 @@ class EventsController < ApplicationController
     not_found unless @group.entity.id == @event.entity.id
     @tickets = @event.tickets.where(group_id: @group.id).by_seat
     @ticket_stats = @event.ticket_stats(@group, current_user)
+    @seatgeek_data = @event.seatgeek_data if @event.seatgeek?
 
     respond_to do |format|
       format.html { render :show }

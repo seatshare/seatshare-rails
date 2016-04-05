@@ -29,5 +29,22 @@
         </ul>
       </div>
     </div>
+
+    <% if @seatgeek_data %>
+    <hr />
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-inline">
+          <li class="data-credit text-muted text-right"><%= link_to image_tag('seatgeek.svg', :class => '', :alt => "SeatGeek", :title => "SeatGeek Logo"), @seatgeek_data['url'], :target => '_blank' %></li>
+          <li><%= link_to "#{@seatgeek_data['stats']['listing_count'] || 0} Listings", @seatgeek_data['url'], class: 'btn btn-sm btn-info', target: '_blank' %></li>
+          <li><strong>Average Price:</strong> <%= number_to_currency(@seatgeek_data['stats']['average_price']) || 'N/A' %></li>
+          <li><strong>Lowest Price (Good Deals):</strong> <%= number_to_currency(@seatgeek_data['stats']['lowest_price_good_deals']) || 'N/A' %></li>
+          <li><strong>Lowest Price:</strong> <%= number_to_currency(@seatgeek_data['stats']['lowest_price']) || 'N/A' %></li>
+          <li><strong>Highest Price:</strong> <%= number_to_currency(@seatgeek_data['stats']['highest_price']) || 'N/A' %></li>
+        </ul>
+      </div>
+    </div>
+    <% end %>
+
   </div>
 </div>
