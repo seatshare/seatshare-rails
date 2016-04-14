@@ -3,7 +3,11 @@ require 'test_helper'
 ##
 # Entity test
 class EntityTest < ActiveSupport::TestCase
+  ##
+  # Setup test
   def setup
+    Time.zone = 'Central Time (US & Canada)'
+
     SeatGeek::Connection.client_id = 'a_test_client_id'
     stub_request(
       :get,
