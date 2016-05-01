@@ -4,7 +4,7 @@ bob:
   email: bob@example.com
   user_id: 4
   group_id: 1
-  status: 1
+  status: true
 
 jane:
   id: 2
@@ -12,4 +12,4 @@ jane:
   email: jane@example.org
   user_id: 1
   group_id: 1
-  status: 0
+  status: false

@@ -121,8 +121,8 @@ class EventTest < ActiveSupport::TestCase
     record = Event.import row1
     assert record[:event_name] == 'Colorado Avalanche at Nashville Predators'
     assert record[:start_time] == Time.zone.parse('October 8, 2009 7:00 PM CDT')
-    assert record[:date_tba] == 0
-    assert record[:time_tba] == 1
+    assert record[:date_tba] == false
+    assert record[:time_tba] == true
 
     row2 = {
       entity_id: 1,
@@ -133,8 +133,8 @@ class EventTest < ActiveSupport::TestCase
     record = Event.import row2
     assert record[:event_name] == 'San Jose Sharks at Nashville Predators'
     assert record[:start_time] == Time.zone.parse('Oct 22, 2009 7:00 PM CDT')
-    assert record[:date_tba] == 0
-    assert record[:time_tba] == 0
+    assert record[:date_tba] == false
+    assert record[:time_tba] == false
   end
 
   test 'imported row overwrites existing values' do
@@ -150,8 +150,8 @@ class EventTest < ActiveSupport::TestCase
     assert record[:event_name] == 'Belmont Bruins vs. Brescia'
     assert record[:description] == 'New value'
     assert record[:start_time] == Time.zone.parse('Nov 26, 2013 5:00 PM CST')
-    assert record[:date_tba] == 0
-    assert record[:time_tba] == 1
+    assert record[:date_tba] == false
+    assert record[:time_tba] == true
   end
 
   test 'imported row does not overwrite existing values' do
@@ -167,8 +167,8 @@ class EventTest < ActiveSupport::TestCase
     assert record[:event_name] == 'Belmont Bruins vs. Lipscomb'
     assert record[:description] == 'Curb Event Center (Nashville, Tenn.)'
     assert record[:start_time] == Time.zone.parse('Nov 20, 2013 5:00 PM CST')
-    assert record[:date_tba] == 0
-    assert record[:time_tba] == 1
+    assert record[:date_tba] == false
+    assert record[:time_tba] == true
   end
 
   test 'imported row with different key does not import at same time slot' do
@@ -184,8 +184,8 @@ class EventTest < ActiveSupport::TestCase
     assert record[:event_name] == 'Nashville Predators vs. St. Louis Blues'
     assert record[:start_time] == 'Sun, 27 Oct 2013 01:00:00 +0000'
     assert record[:import_key] == 'preds_20131026'
-    assert record[:date_tba] == 0
-    assert record[:time_tba] == 0
+    assert record[:date_tba] == false
+    assert record[:time_tba] == false
   end
 
   test 'imported row with different key will import at same time slot' do
@@ -201,8 +201,8 @@ class EventTest < ActiveSupport::TestCase
     assert record[:event_name] == 'Belmont Bruins vs. Indiana States'
     assert record[:start_time] == Time.zone.parse('Nov 14, 2013 12:00 PM CDT')
     assert record[:import_key] == 'belmont_20131114-new'
-    assert record[:date_tba] == 0
-    assert record[:time_tba] == 1
+    assert record[:date_tba] == false
+    assert record[:time_tba] == true
   end
 
   test 'uses markdown for description' do

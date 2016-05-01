@@ -11,145 +11,130 @@ class GroupTest < ActiveSupport::TestCase
     )
     group.save!
 
-    assert(
-      group.group_name == 'Another Sportsball Group',
-      'new group name matches'
-    )
-    assert group.creator_id == 5, 'new group creator ID matches'
-    assert(
-      group.invitation_code.length == 10,
-      'new group has valid invitation code'
-    )
+    assert_equal 'Another Sportsball Group', group.group_name, 'name matches'
+    assert_equal 5, group.creator_id, 'new group creator ID matches'
+    assert_equal 10, group.invitation_code.length, 'valid invitation code'
   end
 
   test 'fixture group has attributes' do
     group = Group.find(1)
 
-    assert(
-      group.group_name == 'Geeks Watching Hockey',
-      'group name matches fixture'
-    )
-    assert group.entity_id == 1, 'group entity ID matches fixture'
-    assert(
-      group.entity.entity_name == 'Nashville Predators',
-      'entity name matches fixture'
-    )
-    assert group.members.count == 3, 'group member count matches'
+    assert_equal 'Geeks Watching Hockey', group.group_name, 'name matches'
+    assert_equal 1, group.entity_id, 'group entity ID matches fixture'
+    assert_equal 'Nashville Predators', group.entity.entity_name, 'name matches'
+    assert_equal 3, group.members.count, 'group member count matches'
   end
 
   test 'get group by ticket ID' do
     group = Ticket.find(1).group
 
-    assert group.id == 1, 'fixture group ID matches'
-    assert(
-      group.group_name == 'Geeks Watching Hockey',
-      'fixture group name matches'
-    )
+    assert_equal 1, group.id, 'fixture group ID matches'
+    assert_equal 'Geeks Watching Hockey', group.group_name, 'group name matches'
   end
 
   test 'gets groups by user ID' do
     groups = User.find(2).groups
 
-    assert groups.count == 2, 'fixture group count matches'
+    assert_equal groups.count, 2, 'fixture group count matches'
   end
 
   test 'check if member' do
     user = User.find(1)
     group = Group.find(3)
 
-    assert group.member?(user) == false, 'fixture user is not a member'
-    assert group.admin?(user) == false, 'fixture user is not an admin'
+    refute group.member?(user), 'fixture user is not a member'
+    refute group.admin?(user), 'fixture user is not an admin'
   end
 
   test 'check if admin' do
     user = User.find(1)
     group = Group.find(1)
 
-    assert group.member?(user) == true, 'fixture user is a member'
-    assert group.admin?(user) == true, 'fixture user is an admin'
+    assert group.member?(user), 'fixture user is a member'
+    assert group.admin?(user), 'fixture user is an admin'
   end
 
   test 'join a group' do
     user = User.find(4)
     group = Group.find(2)
 
-    assert group.member?(user) == false, 'user is not yet a member'
-    assert group.admin?(user) == false, 'user is not an admin'
+    refute group.member?(user), 'user is not yet a member'
+    refute group.admin?(user), 'user is not an admin'
 
     membership = group.join_group(user)
 
-    assert membership.user_id == 4, 'user ID matches'
-    assert membership.group_id == 2, 'group ID matches'
-    assert membership.role == 'member', 'role matches'
+    assert_equal 4, membership.user_id, 'user ID matches'
+    assert_equal 2, membership.group_id, 'group ID matches'
+    assert_equal 'member', membership.role, 'role matches'
 
-    assert group.member?(user) == true, 'user is a member'
-    assert group.admin?(user) == false, 'user is not an admin'
+    assert group.member?(user), 'user is a member'
+    refute group.admin?(user), 'user is not an admin'
   end
 
   test 'join a group as an admin' do
     user = User.find(4)
     group = Group.find(2)
 
-    assert group.member?(user) == false, 'user is not yet a member'
-    assert group.admin?(user) == false, 'user is not yet an admin'
+    refute group.member?(user), 'user is not yet a member'
+    refute group.admin?(user), 'user is not yet an admin'
 
     membership = group.join_group(user, 'admin')
 
-    assert membership.user_id == 4, 'user ID matches'
-    assert membership.group_id == 2, 'group ID matches'
-    assert membership.role == 'admin', 'role matches'
+    assert_equal 4, membership.user_id, 'user ID matches'
+    assert_equal 2, membership.group_id, 'group ID matches'
+    assert_equal 'admin', membership.role, 'role matches'
 
-    assert group.member?(user) == true, 'user is a member'
-    assert group.admin?(user) == true, 'user is an admin'
+    assert group.member?(user), 'user is a member'
+    assert group.admin?(user), 'user is an admin'
   end
 
   test 'gets correct list of administrators' do
     group = Group.find(2)
 
-    assert group.administrators.count == 1
-    assert group.administrators.first.first_name == 'Rick'
-    assert group.administrators.first.last_name == 'Taylor'
+    assert_equal 1, group.administrators.count
+    assert_equal 'Rick', group.administrators.first.first_name
+    assert_equal 'Taylor', group.administrators.first.last_name
   end
 
   test 'leave a group' do
     user = User.find(2)
     group = Group.find(1)
 
-    assert group.member?(user) == true, 'user is a member'
-    assert group.admin?(user) == false, 'user is not an admin'
+    assert group.member?(user), 'user is a member'
+    refute group.admin?(user), 'user is not an admin'
 
     group.leave_group(user)
 
-    assert group.member?(user) == false, 'user is not a member'
-    assert group.admin?(user) == false, 'user is not an admin'
+    refute group.member?(user), 'user is not a member'
+    refute group.admin?(user), 'user is not an admin'
   end
 
   test 'leave a group as an admin' do
     user = User.find(1)
     group = Group.find(1)
 
-    assert group.member?(user) == true, 'user is a member'
-    assert group.admin?(user) == true, 'user is an admin'
+    assert group.member?(user), 'user is a member'
+    assert group.admin?(user), 'user is an admin'
 
     assert_raises RuntimeError do
       group.leave_group(user)
     end
 
-    assert group.member?(user) == true, 'user is still a member'
-    assert group.admin?(user) == true, 'user is still an admin'
+    assert group.member?(user), 'user is still a member'
+    assert group.admin?(user), 'user is still an admin'
   end
 
   test 'deactivate a group as an admin' do
     user = User.find(1)
     group = Group.find(1)
 
-    assert group.member?(user) == true, 'user is a member'
-    assert group.admin?(user) == true, 'user is an admin'
+    assert group.member?(user), 'user is a member'
+    assert group.admin?(user), 'user is an admin'
 
     group.deactivate
 
-    assert group.status == 0, 'group is inactive'
-    assert group.member?(user) == true, 'user is still a member'
-    assert group.admin?(user) == true, 'user is still an admin'
+    refute group.status, 'group is inactive'
+    assert group.member?(user), 'user is still a member'
+    assert group.admin?(user), 'user is still an admin'
   end
 end

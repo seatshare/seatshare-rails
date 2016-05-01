@@ -40,14 +40,14 @@ class EntityTest < ActiveSupport::TestCase
     entity.save!
 
     assert entity.entity_name?
-    assert_equal 0, entity.status
+    refute entity.status
   end
 
   test 'fixture entity has attributes' do
     entity = Entity.find(1)
 
     assert_equal 'Nashville Predators', entity.entity_name
-    assert_equal 1, entity.status
+    assert entity.status
   end
 
   test 'gets entity by group id' do
@@ -56,14 +56,14 @@ class EntityTest < ActiveSupport::TestCase
     assert_equal 5, entity.id
     assert_equal 'Nashville Sportsball', entity.entity_name
     assert_equal 'Sportsball League (SBL)', entity.entity_type.display_name
-    assert_equal 1, entity.status
+    assert entity.status
   end
 
   test 'get all active entities' do
     entities = Entity.active
 
-    assert entities.count == 5, 'count of fixture entities matches'
-    assert entities[0].class.to_s == 'Entity', 'class of fixture entity matches'
+    assert_equal 5, entities.count, 'count of fixture entities matches'
+    assert_equal 'Entity', entities[0].class.to_s, 'class of fixture matches'
     assert entities[0].entity_name?, 'fixture entity name is set'
   end
 

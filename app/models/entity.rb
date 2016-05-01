@@ -10,14 +10,14 @@ class Entity < ActiveRecord::Base
   before_save :clean_import_key
 
   scope :by_name, -> { order('LOWER(entity_name) ASC') }
-  scope :active, -> { where('status = 1') }
+  scope :active, -> { where(status: true) }
 
   ##
   # New entity object
   # - attributes: attributes for object
   def initialize(attributes = {})
     attr_with_defaults = {
-      status: 0,
+      status: false,
       import_key: generate_import_key(attributes)
     }.merge(attributes)
     super(attr_with_defaults)

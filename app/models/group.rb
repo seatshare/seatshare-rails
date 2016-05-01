@@ -11,7 +11,7 @@ class Group < ActiveRecord::Base
 
   validates :entity_id, :group_name, :creator_id, presence: true
   validates :group_name, uniqueness: {
-    scope: :creator_id, conditions: -> { where(status: 1) }
+    scope: :creator_id, conditions: -> { where(status: true) }
   }
   before_save :clean_invitation_code
 
@@ -35,14 +35,14 @@ class Group < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\Z}i
 
   scope :by_name, -> { order('LOWER(group_name) ASC') }
-  scope :active, -> { where('status = 1') }
+  scope :active, -> { where(status: true) }
 
   ##
   # New group object
   # - attributes: object attributes
   def initialize(attributes = {})
     attr_with_defaults = {
-      status: 1,
+      status: true,
       invitation_code: generate_invite_code(10)
     }.merge(attributes)
     super(attr_with_defaults)
@@ -111,7 +111,7 @@ class Group < ActiveRecord::Base
   ##
   # Deactivate Group
   def deactivate
-    self.status = 0
+    self.status = false
     save!
   end
 

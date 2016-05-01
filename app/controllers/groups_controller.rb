@@ -109,7 +109,7 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find_by_id(params[:id]) || not_found
     @entity = @group.entity
-    not_found if @group.status != 1
+    not_found unless @group.status == true
     redirect_to(action: 'index') && return unless @group.member?(current_user)
     @events = @group.events.future.confirmed.by_date
     @members = @group.members.by_name
@@ -120,13 +120,13 @@ class GroupsController < ApplicationController
   # JSON feed for calendar widget
   def events_feed
     @group = Group.find_by_id(params[:id]) || not_found
-    not_found if @group.status != 1
+    not_found unless @group.status == true
     fail 'NotGroupMember' unless @group.member?(current_user)
     @events = @group.events.confirmed.by_date
 
     feed = []
     @events.each do |event|
-      next if event.date_tba == 1
+      next if event.date_tba == true
       event_link = url_for(
         controller: 'events', action: 'show', group_id: @group.id,
         id: event.id

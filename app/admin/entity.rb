@@ -56,7 +56,7 @@ ActiveAdmin.register Entity do
     id_column
     column :entity_name
     column :status do |entity|
-      if entity.status == 1
+      if entity.status == true
         status_tag('active', :ok)
       else
         status_tag('inactive')
@@ -80,7 +80,7 @@ ActiveAdmin.register Entity do
     attributes_table do
       row :entity_name
       row :status do |entity|
-        if entity.status == 1
+        if entity.status == true
           status_tag('active', :ok)
         else
           status_tag('inactive')

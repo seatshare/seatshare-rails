@@ -2,7 +2,7 @@ sportsball:
   id: 1
   group_name: Geeks Watching Hockey
   invitation_code: QWERTY1234
-  status: 1
+  status: true
   entity_id: 1
   creator_id: 1
 
@@ -10,7 +10,7 @@ ballsports:
   id: 2
   group_name: Nashville Fans of Ballsports
   invitation_code: ZXCVBN9876
-  status: 1
+  status: true
   entity_id: 5
   creator_id: 2
 
@@ -18,6 +18,6 @@ abandoned:
   id: 3
   group_name: Abandoned Sportball Group
   invitation_code: ASDFG6789
-  status: 0
+  status: false
   entity_id: 5
   creator_id: 3
