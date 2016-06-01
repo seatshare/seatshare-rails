@@ -36,7 +36,7 @@ class GroupInvitation < ActiveRecord::Base
   ##
   # Mark invitation as used
   def use_invitation
-    fail 'InvitationAlreadyUsed' if status == false
+    fail 'InvitationAlreadyUsed' unless status?
     self.status = false
     self.save!
   end

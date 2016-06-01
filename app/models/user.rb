@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   ##
   # Check if active for authentication
   def active_for_authentication?
-    super && status == true
+    super && status?
   end
 
   ##

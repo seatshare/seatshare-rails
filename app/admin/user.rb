@@ -7,7 +7,7 @@ ActiveAdmin.register User do
     column :display_name
     column :email
     column :status do |u|
-      if u.status == true
+      if u.status?
         status_tag('active', :ok)
       else
         status_tag('inactive')

@@ -37,7 +37,7 @@ ActiveAdmin.register EntityType do
           auto_link(e, e.entity_name)
         end
         column :status do |e|
-          if e.status == true
+          if e.status?
             status_tag('active', :ok)
           else
             status_tag('inactive')
