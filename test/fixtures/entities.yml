@@ -1,34 +1,34 @@
 preds:
   id: 1
   entity_name: Nashville Predators
-  status: 1
+  status: true
   import_key: https://api.seatgeek.com/2/events?performers.slug=nashville-predators&venue.id=2195
   entity_type_id: 1
 
 belmont:
   id: 2
   entity_name: Belmont Bruins MBB
-  status: 1
+  status: true
   import_key: l.ncaa.org.mbasket-t.A22
   entity_type_id: 2
 
 nrg:
   id: 3
   entity_name: Nashville Rollergirls
-  status: 1
+  status: true
   import_key: wtfda-nashville
   entity_type_id: 3
 
 titans:
   id: 4
   entity_name: Tennessee Titans
-  status: 1
+  status: true
   import_key: l.nfl.com-t.11
   entity_type_id: 4
 
 sportsball:
   id: 5
   entity_name: Nashville Sportsball
-  status: 1
+  status: true
   import_key: sportsball-nashville
   entity_type_id: 5

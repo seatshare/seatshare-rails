@@ -9,7 +9,7 @@ ActiveAdmin.register Group do
     column :entity
     column :invitation_code
     column :status do |group|
-      if group.status == 1
+      if group.status?
         status_tag('active', :ok)
       else
         status_tag('inactive')
@@ -35,7 +35,7 @@ ActiveAdmin.register Group do
     attributes_table do
       row :group_name
       row :status do |group|
-        if group.status == 1
+        if group.status?
           status_tag('active', :ok)
         else
           status_tag('inactive')

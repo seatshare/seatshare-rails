@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
 
   scope :by_name, -> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') }
-  scope :active, -> { where('status = 1') }
+  scope :active, -> { where(status: true) }
 
   attr_accessor :entity_id
   attr_accessor :newsletter_signup
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   ##
   # Check if active for authentication
   def active_for_authentication?
-    super && status == 1
+    super && status?
   end
 
   ##
@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   # - attributes: attributes for object
   def initialize(attributes = {})
     attr_with_defaults = {
-      status: 1
+      status: true
     }.merge(attributes)
     super(attr_with_defaults)
   end

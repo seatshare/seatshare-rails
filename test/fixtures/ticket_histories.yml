@@ -5,7 +5,7 @@ history_1:
   group_id: 1
   event_id: 4
   user_id: 1
-  entry: '{"text":"created","user":{"id":"1","username":"jstone","first_name":"Jim","last_name":"Stone","email":"stonej@example.net","status":"1"},"ticket":{"event_id":"1","section":"326","row":"K","seat":"9","cost":"32.00","user_id":"1","id":1}}'
+  entry: '{"text":"created","user":{"id":"1","username":"jstone","first_name":"Jim","last_name":"Stone","email":"stonej@example.net","status":true},"ticket":{"event_id":"1","section":"326","row":"K","seat":"9","cost":"32.00","user_id":"1","id":1}}'
 
 history_2:
   id: 2

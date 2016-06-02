@@ -4,7 +4,7 @@ jim:
   last_name: Stone
   email: stonej@example.net
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
-  status: 1
+  status: true
   bio: "A simple kind of man."
   location: Some Town, TX
   mobile: 141-086-75309
@@ -18,7 +18,7 @@ jill:
   email: jillsmith83@us.example.org
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
   timezone: "Eastern Time (US & Canada)"
-  status: 1
+  status: true
   bio: "Just a girl in the world. That's all they will let me be."
   location: Random City, NY
   mobile: 141-086-75310
@@ -31,7 +31,7 @@ rick:
   last_name: Taylor
   email: rick.taylor@example.net
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
-  status: 1
+  status: true
   calendar_token: MvAqyLcu5oksXRhhjjWjXw
 
 sarah:
@@ -40,7 +40,7 @@ sarah:
   last_name: Becker
   email: sarahb@example.org
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
-  status: 1
+  status: true
   calendar_token: murwUuu4cqu2IBVRd8TfkQ
 
 peter:
@@ -49,7 +49,7 @@ peter:
   last_name: Jones
   email: pjones@example.com
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
-  status: 0
+  status: false
   calendar_token: 18eqlBdVVd7hxyBcXCYTOw
 
 bob:
@@ -58,7 +58,7 @@ bob:
   last_name: Loblaw
   email: bobloblaw@example.com
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
-  status: 1
+  status: true
   calendar_token: v0B119L1PD5sQieNR7CTdA
 
 jane:
@@ -67,5 +67,5 @@ jane:
   last_name: Birch
   email: jane@example.com
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
-  status: 1
+  status: true
   calendar_token: 18eqlBdVVd7hxyBcXCYTOw

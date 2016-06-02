@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   scope :past, -> { where('start_time < ?', Time.zone.now) }
   scope :next_seven_days, -> { next_seven_days }
   scope :today, -> { today }
-  scope :confirmed, -> { where('date_tba = 0') }
+  scope :confirmed, -> { where(date_tba: false) }
 
   @ticket_stats = nil
 
@@ -22,8 +22,8 @@ class Event < ActiveRecord::Base
   # - attributes: attributes for object
   def initialize(attributes = {})
     attr_with_defaults = {
-      date_tba: 0,
-      time_tba: 0,
+      date_tba: false,
+      time_tba: false,
       description: '',
       import_key: generate_import_key(attributes)
     }.merge(attributes)
@@ -79,8 +79,8 @@ class Event < ActiveRecord::Base
   # Show the date/time of the start of the event based on TBA settings
   def date_time
     out = ''
-    out += start_time.strftime('%A, %B %-d, %Y') if date_tba == 0
-    if time_tba == 0
+    out += start_time.strftime('%A, %B %-d, %Y') if date_tba == false
+    if time_tba == false
       out += ' - '
       out += start_time.strftime('%-I:%M %P %Z')
     end
@@ -91,7 +91,7 @@ class Event < ActiveRecord::Base
   # Show only the time of the event based on TBA settings
   def time
     out = ''
-    out += start_time.strftime('%-I:%M %P %Z') if time_tba == 0
+    out += start_time.strftime('%-I:%M %P %Z') if time_tba == false
     out
   end
 
@@ -116,8 +116,8 @@ class Event < ActiveRecord::Base
     end
     event.start_time = hash[:start_time]
     event.import_key = hash[:import_key]
-    event.date_tba = hash[:date_tba] || 0
-    event.time_tba = hash[:time_tba] || 0
+    event.date_tba = hash[:date_tba] || false
+    event.time_tba = hash[:time_tba] || false
 
     if event.new_record? && !allow_duplicate
       collisions = Event.where(
@@ -143,7 +143,7 @@ class Event < ActiveRecord::Base
   # To ICS
   def to_ics(event_link = nil)
     event = Icalendar::Event.new
-    if time_tba == 0
+    if time_tba == false
       event.dtstart = start_time
       event.dtend = start_time + 3.hours
     else

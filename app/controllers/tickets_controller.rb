@@ -17,14 +17,14 @@ class TicketsController < ApplicationController
     @tickets = {
       owned:    Ticket.where(owner_id: current_user.id)
                 .joins(:group)
-                .where(groups: { status: 1 })
+                .where(groups: { status: true })
                 .joins(:event)
                 .where("start_time #{operator} ?", Time.zone.now)
                 .by_date.by_seat,
       assigned: Ticket.where.not(owner_id: current_user.id)
                 .where(user_id: current_user.id)
                 .joins(:group)
-                .where(groups: { status: 1 })
+                .where(groups: { status: true })
                 .joins(:event)
                 .where("start_time #{operator} ?", Time.zone.now)
                 .by_date.by_seat

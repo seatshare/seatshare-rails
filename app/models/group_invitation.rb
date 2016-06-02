@@ -6,7 +6,7 @@ class GroupInvitation < ActiveRecord::Base
 
   validates :email, :user_id, :group_id, :invitation_code, presence: true
 
-  scope :accepted, -> { where('status = 0') }
+  scope :accepted, -> { where(status: false) }
   attr_accessor :message
 
   ##
@@ -14,7 +14,7 @@ class GroupInvitation < ActiveRecord::Base
   # - attributes: attributes for object
   def initialize(attributes = {})
     attr_with_defaults = {
-      status: 1,
+      status: true,
       invitation_code: generate_invite_code
     }.merge(attributes)
     super(attr_with_defaults)
@@ -36,8 +36,8 @@ class GroupInvitation < ActiveRecord::Base
   ##
   # Mark invitation as used
   def use_invitation
-    fail 'InvitationAlreadyUsed' if status == 0
-    self.status = 0
+    fail 'InvitationAlreadyUsed' unless status?
+    self.status = false
     self.save!
   end
 

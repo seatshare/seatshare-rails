@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203213623) do
+ActiveRecord::Schema.define(version: 20160501030459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,11 +51,11 @@ ActiveRecord::Schema.define(version: 20151203213623) do
 
   create_table "entities", force: :cascade do |t|
     t.string   "entity_name",    limit: 255
-    t.integer  "status",                     default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "import_key",     limit: 255, default: "", null: false
+    t.string   "import_key",     limit: 255, default: "",    null: false
     t.integer  "entity_type_id",             default: 0
+    t.boolean  "status",                     default: false
   end
 
   add_index "entities", ["import_key"], name: "index_entities_on_import_key", unique: true, using: :btree
@@ -76,11 +76,11 @@ ActiveRecord::Schema.define(version: 20151203213623) do
     t.string   "event_name",  limit: 255
     t.text     "description"
     t.datetime "start_time"
-    t.integer  "date_tba"
-    t.integer  "time_tba"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "import_key",  limit: 255, default: "", null: false
+    t.string   "import_key",  limit: 255, default: "",    null: false
+    t.boolean  "date_tba",                default: false
+    t.boolean  "time_tba",                default: false
   end
 
   add_index "events", ["entity_id"], name: "index_events_on_entity_id", using: :btree
@@ -91,9 +91,9 @@ ActiveRecord::Schema.define(version: 20151203213623) do
     t.integer  "group_id"
     t.string   "email",           limit: 255
     t.string   "invitation_code", limit: 255
-    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "status",                      default: false
   end
 
   add_index "group_invitations", ["group_id"], name: "index_group_invitations_on_group_id", using: :btree
@@ -105,13 +105,13 @@ ActiveRecord::Schema.define(version: 20151203213623) do
     t.string   "group_name",          limit: 255
     t.integer  "creator_id"
     t.string   "invitation_code",     limit: 255
-    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "status",                          default: false
   end
 
   add_index "groups", ["creator_id"], name: "index_groups_on_creator_id", using: :btree
@@ -122,11 +122,11 @@ ActiveRecord::Schema.define(version: 20151203213623) do
     t.integer  "group_id"
     t.integer  "user_id"
     t.string   "role",            limit: 255
-    t.integer  "daily_reminder"
-    t.integer  "weekly_reminder"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "mine_only"
+    t.boolean  "daily_reminder",              default: false
+    t.boolean  "weekly_reminder",             default: false
+    t.boolean  "mine_only",                   default: false
   end
 
   add_index "memberships", ["group_id", "user_id"], name: "index_memberships_on_group_id_and_user_id", using: :btree
@@ -184,15 +184,14 @@ ActiveRecord::Schema.define(version: 20151203213623) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
-    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "email",                  limit: 255, default: "",    null: false
+    t.string   "encrypted_password",     limit: 255, default: "",    null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -205,6 +204,7 @@ ActiveRecord::Schema.define(version: 20151203213623) do
     t.string   "calendar_token",         limit: 255
     t.string   "provider"
     t.string   "uid"
+    t.boolean  "status",                             default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

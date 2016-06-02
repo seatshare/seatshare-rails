@@ -2,46 +2,46 @@ jim:
   group_id: 1
   user_id: 1
   role: admin
-  weekly_reminder: 1
-  daily_reminder: 1
-  mine_only: 0
+  weekly_reminder: true
+  daily_reminder: true
+  mine_only: false
 
 jill:
   group_id: 1
   user_id: 2
   role: member
-  weekly_reminder: 1
-  daily_reminder: 1
-  mine_only: 0
+  weekly_reminder: true
+  daily_reminder: true
+  mine_only: false
 
 rick:
   group_id: 2
   user_id: 3
   role: admin
-  weekly_reminder: 1
-  daily_reminder: 1
-  mine_only: 1
+  weekly_reminder: true
+  daily_reminder: true
+  mine_only: true
 
 jill_2:
   group_id: 2
   user_id: 2
   role: member
-  weekly_reminder: 1
-  daily_reminder: 1
-  mine_only: 0
+  weekly_reminder: true
+  daily_reminder: true
+  mine_only: false
 
 rick_2:
   group_id: 1
   user_id: 3
   role: member
-  weekly_reminder: 1
-  daily_reminder: 1
-  mine_only: 0
+  weekly_reminder: true
+  daily_reminder: true
+  mine_only: false
 
 sarah:
   group_id: 3
   user_id: 4
   role: admin
-  weekly_reminder: 1
-  daily_reminder: 1
-  mine_only: 1
+  weekly_reminder: true
+  daily_reminder: true
+  mine_only: true
