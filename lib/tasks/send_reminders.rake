@@ -11,9 +11,9 @@ namespace :send_reminders do
       events = group.events.today.confirmed.by_date
       if events.count > 0
         for membership in group.memberships
-          if membership.daily_reminder == 1
+          if membership.daily_reminder?
             user = User.find(membership.user_id)
-            if (membership.mine_only == 1)
+            if (membership.mine_only?)
               has_tickets = events.map { |e| e.user_has_ticket?(user) }
               next unless has_tickets.include?(true)
             end
@@ -41,9 +41,9 @@ namespace :send_reminders do
     events = group.events.next_seven_days.confirmed.by_date
       if events.count > 0
         for membership in group.memberships
-          if membership.weekly_reminder == 1
+          if membership.weekly_reminder?
             user = User.find(membership.user_id)
-            if (membership.mine_only == 1)
+            if (membership.mine_only?)
               has_tickets = events.map { |e| e.user_has_ticket?(user) }
               next unless has_tickets.include?(true)
             end

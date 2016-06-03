@@ -9,9 +9,9 @@ class Membership < ActiveRecord::Base
   # - attributes: attributes for object
   def initialize(attributes = {})
     attr_with_defaults = {
-      daily_reminder: 1,
-      weekly_reminder: 1,
-      mine_only: 0
+      daily_reminder: true,
+      weekly_reminder: true,
+      mine_only: false
     }.merge(attributes)
     super(attr_with_defaults)
   end

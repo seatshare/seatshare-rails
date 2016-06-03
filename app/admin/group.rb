@@ -93,17 +93,17 @@ ActiveAdmin.register Group do
         ul do
           membership = user.memberships.each do |m|
             next if m.group_id != group.id
-            if m.weekly_reminder == 1
+            if m.weekly_reminder?
               li status_tag('Weekly Reminder', :ok)
             else
               li status_tag('Weekly Reminder')
             end
-            if m.daily_reminder == 1
+            if m.daily_reminder?
               li status_tag('Daily Reminder', :ok)
             else
               li status_tag('Daily Reminder')
             end
-            if m.mine_only == 1
+            if m.mine_only?
               li status_tag('Mine Only', :ok)
             else
               li status_tag('Mine Only')

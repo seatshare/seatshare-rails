@@ -82,9 +82,9 @@ class GroupsController < ApplicationController
   def update_notifications
     group = Group.find(params[:id]) || not_found
     fail 'NotGroupMember' unless group.member?(current_user)
-    daily = params[:membership][:daily_reminder].to_i
-    weekly = params[:membership][:weekly_reminder].to_i
-    mine = params[:membership][:mine_only].to_i
+    daily = params[:membership][:daily_reminder]
+    weekly = params[:membership][:weekly_reminder]
+    mine = params[:membership][:mine_only]
     flash.keep
     status = Membership
              .where(user_id: current_user.id, group_id: group.id)
