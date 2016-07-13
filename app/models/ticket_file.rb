@@ -34,7 +34,7 @@ class TicketFile < ActiveRecord::Base
     ) do |file|
       file.write(uploaded_file.read)
     end
-    fail 'TicketFileNotSaved' unless File.exist?(
+    raise 'TicketFileNotSaved' unless File.exist?(
       Rails.root.join('tmp', 'uploads', uploaded_file.original_filename)
     )
     path = Rails.root.join('tmp', 'uploads', uploaded_file.original_filename)

@@ -45,7 +45,7 @@ class Ticket < ActiveRecord::Base
   def unassign
     self.user_id = 0
     self.alias_id = 0
-    self.save!
+    save!
   end
 
   ##
@@ -62,11 +62,7 @@ class Ticket < ActiveRecord::Base
   # - action: string of action
   def self.log_ticket_history(ticket = nil, action = nil, actor)
     user = User.find_by_id(ticket.user_id)
-    if !user.nil?
-      user_record = user.attributes
-    else
-      user_record = nil
-    end
+    user_record = user.attributes unless user.nil?
     ticket_history = TicketHistory.new(
       event_id: ticket.event_id,
       user_id: actor.id,
@@ -85,6 +81,6 @@ class Ticket < ActiveRecord::Base
   # Validate that ticket has a seat location
   def seat_location?
     empty_error = 'Ticket must have a section, row or seat'
-    errors[:base] << (empty_error) if display_name.blank?
+    errors[:base] << empty_error if display_name.blank?
   end
 end

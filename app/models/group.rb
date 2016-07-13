@@ -51,7 +51,7 @@ class Group < ActiveRecord::Base
   ##
   # Display name for group
   def display_name
-    "#{group_name}"
+    group_name
   end
 
   ##
@@ -85,8 +85,8 @@ class Group < ActiveRecord::Base
   # - role: string of role
   def join_group(user = nil, role = nil)
     role = 'member' if role != 'admin'
-    fail 'NotValidGroup' if id.nil?
-    fail 'AlreadyMember' if member?(user)
+    raise 'NotValidGroup' if id.nil?
+    raise 'AlreadyMember' if member?(user)
     user_group = Membership.new(
       user_id: user.id,
       group_id: id,
@@ -101,7 +101,7 @@ class Group < ActiveRecord::Base
   # - user: User object
   def leave_group(user = nil)
     membership = Membership.find_by user_id: user.id, group_id: id
-    fail 'AdminUserCannotLeave' if membership.role == 'admin'
+    raise 'AdminUserCannotLeave' if membership.role == 'admin'
 
     Ticket.where(group_id: id, owner_id: user.id).delete_all
     Ticket.where(group_id: id, user_id: user.id).find_each(&:unassign)

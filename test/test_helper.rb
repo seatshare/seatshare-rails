@@ -75,8 +75,8 @@ end
 #
 # Returns the value of the yielded block when no test assertion fails.
 def fails_intermittently(issue_link, args = {}, &_block)
-  fail ArgumentError, 'provide a GitHub issue link' unless issue_link
-  fail ArgumentError, 'a block is required' unless block_given?
+  raise ArgumentError, 'provide a GitHub issue link' unless issue_link
+  raise ArgumentError, 'a block is required' unless block_given?
   yield
 rescue MiniTest::Assertion, StandardError => boom # we have a test failure!
   STDERR.puts "\n\nIntermittent test failure! See: #{issue_link}"

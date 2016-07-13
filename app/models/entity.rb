@@ -64,23 +64,23 @@ class Entity < ActiveRecord::Base
   ##
   # SeatGeek Schedule
   def seatgeek_schedule
-    fail 'Not a SeatGeek entity' unless seatgeek?
+    raise 'Not a SeatGeek entity' unless seatgeek?
     params = Rack::Utils.parse_query URI(import_key).query
     params[:per_page] = 500
     response = SeatGeek::Connection.events(params)
-    fail response[:body] if response.key?(:status) && response[:status] != 200
-    fail 'No events.' unless response && response['events'].count > 0
+    raise response[:body] if response.key?(:status) && response[:status] != 200
+    raise 'No events.' unless response && response['events'].count > 0
     response
   end
 
   ##
   # SeatGeek Performer
   def seatgeek_performer
-    fail 'Not a SeatGeek entity' unless seatgeek?
+    raise 'Not a SeatGeek entity' unless seatgeek?
     params = Rack::Utils.parse_query URI(import_key).query
     response = SeatGeek::Connection.performers(slug: params['performers.slug'])
-    fail response[:body] if response.key?(:status) && response[:status] != 200
-    fail 'No performer data.' unless response['performers'].count > 0
+    raise response[:body] if response.key?(:status) && response[:status] != 200
+    raise 'No performer data.' unless response['performers'].count > 0
     response['performers'].first
   end
 

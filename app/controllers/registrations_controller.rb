@@ -30,11 +30,9 @@ class RegistrationsController < Devise::RegistrationsController
     else
       @entity = nil
     end
-    if params[:group_code]
-      @group = Group.find_by_invitation_code(params[:group_code])
-    else
-      @group = nil
-    end
+    @group = if params[:group_code]
+               Group.find_by_invitation_code(params[:group_code])
+             end
     super
   end
 

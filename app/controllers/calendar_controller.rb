@@ -61,7 +61,7 @@ class CalendarController < ApplicationController
     user = User.find_by_calendar_token(params[:token])
     show_404 unless user
     group = Group.find(params[:group_id]) || show_404
-    fail 'NotGroupMember' unless group.member?(user)
+    raise 'NotGroupMember' unless group.member?(user)
 
     # Create calendar object
     cal = Icalendar::Calendar.new
