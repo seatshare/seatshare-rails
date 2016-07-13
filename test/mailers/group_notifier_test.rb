@@ -22,13 +22,13 @@ class GroupNotifierTest < ActionMailer::TestCase
     )
     assert_includes(
       email.body.to_s,
-      "<a href=\"http://localhost:3000/register/invite/ABCDEFG123\">"\
+      '<a href="http://localhost:3000/register/invite/ABCDEFG123">'\
         'Use Invitation ABCDEFG123</a>'
     )
     assert_includes(
       email.body.to_s,
       'Sarah Becker has invited you to join our <strong>Nashville '\
-        "Predators</strong> group on <a href=\"http://localhost:3000/\">"\
+        'Predators</strong> group on <a href="http://localhost:3000/">'\
         'SeatShare</a>, a service that helps manage our season tickets.'
     )
   end

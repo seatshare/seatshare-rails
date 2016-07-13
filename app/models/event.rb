@@ -52,8 +52,8 @@ class Event < ActiveRecord::Base
   # - group: Group object
   # - user: User object
   def ticket_stats(group = nil, user = nil)
-    fail 'NoGroupSpecified' if group.nil?
-    fail 'NoUserSpecified' if user.nil?
+    raise 'NoGroupSpecified' if group.nil?
+    raise 'NoUserSpecified' if user.nil?
 
     tickets = self.tickets(group)
 
@@ -123,7 +123,7 @@ class Event < ActiveRecord::Base
       collisions = Event.where(
         start_time: hash[:start_time], entity_id: event.entity_id
       )
-      return collisions.first if collisions.size > 0
+      return collisions.first unless collisions.empty?
     end
 
     event.save!
@@ -160,22 +160,6 @@ class Event < ActiveRecord::Base
     event
   end
 
-  private
-
-  ##
-  # Generate an import key for new events
-  # - attrs: attributes for object
-  def generate_import_key(attrs)
-    "#{attrs[:entity_id]}: #{attrs[:event_name]} #{attrs[:start_time]}"
-      .parameterize
-  end
-
-  ##
-  # Run import key generator if not set
-  def clean_import_key
-    self.import_key = generate_import_key(self) if import_key.blank?
-  end
-
   ##
   # Next Seven Days
   def self.next_seven_days
@@ -194,5 +178,21 @@ class Event < ActiveRecord::Base
       Time.zone.today.beginning_of_day.utc,
       Time.zone.today.end_of_day.utc
     )
+  end
+
+  private
+
+  ##
+  # Generate an import key for new events
+  # - attrs: attributes for object
+  def generate_import_key(attrs)
+    "#{attrs[:entity_id]}: #{attrs[:event_name]} #{attrs[:start_time]}"
+      .parameterize
+  end
+
+  ##
+  # Run import key generator if not set
+  def clean_import_key
+    self.import_key = generate_import_key(self) if import_key.blank?
   end
 end

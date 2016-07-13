@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   # Returns a 404 page
   def not_found
     not_found_message = ActionController::RoutingError.new('Not Found')
-    fail not_found_message
+    raise not_found_message
   end
 
   protected
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   ##
   # Obtains data shared across all controllers
   def load_shared_interface_variables
-    @group_selector = current_user.groups.by_name.active.collect do|p|
+    @group_selector = current_user.groups.by_name.active.collect do |p|
       [p.group_name, p.id]
     end
   end

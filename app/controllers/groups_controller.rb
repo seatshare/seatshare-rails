@@ -63,7 +63,7 @@ class GroupsController < ApplicationController
   # Process group edits
   def update
     group = Group.find(params[:id]) || not_found
-    fail 'NotGroupAdmin' unless group.admin?(current_user)
+    raise 'NotGroupAdmin' unless group.admin?(current_user)
     group.group_name = group_params[:group_name]
     group.avatar = group_params[:avatar] unless group_params[:avatar].nil?
     group.avatar = nil if group_params[:remove_avatar] == '1'
@@ -81,7 +81,7 @@ class GroupsController < ApplicationController
   # Process notification edits
   def update_notifications
     group = Group.find(params[:id]) || not_found
-    fail 'NotGroupMember' unless group.member?(current_user)
+    raise 'NotGroupMember' unless group.member?(current_user)
     daily = params[:membership][:daily_reminder]
     weekly = params[:membership][:weekly_reminder]
     mine = params[:membership][:mine_only]
@@ -121,7 +121,7 @@ class GroupsController < ApplicationController
   def events_feed
     @group = Group.find_by_id(params[:id]) || not_found
     not_found unless @group.status?
-    fail 'NotGroupMember' unless @group.member?(current_user)
+    raise 'NotGroupMember' unless @group.member?(current_user)
     @events = @group.events.confirmed.by_date
 
     feed = []
@@ -184,22 +184,22 @@ class GroupsController < ApplicationController
   # Process leaving a group
   def do_leave
     flash.keep
-    if params[:user_id]
-      user = User.find(params[:user_id])
-    else
-      user = current_user
-    end
+    user = if params[:user_id]
+             User.find(params[:user_id])
+           else
+             current_user
+           end
     group = Group.find_by_id(params[:id]) || not_found
     if user != current_user && !group.admin?(current_user)
       flash[:error] = 'You do not have permission to remove other users.'
       redirect_to(action: 'show', id: group.id) && return
     end
     group.leave_group(user)
-    if user == current_user
-      flash[:notice] = "You have left #{group.group_name}"
-    else
-      flash[:notice] = "#{user.display_name} has been removed"
-    end
+    flash[:notice] = if user == current_user
+                       "You have left #{group.group_name}"
+                     else
+                       "#{user.display_name} has been removed"
+                     end
     if group.admin?(current_user)
       redirect_to(action: 'edit', id: group.id) && return
     else
@@ -266,7 +266,7 @@ class GroupsController < ApplicationController
   # Process a group invitaiton code reset
   def do_reset_invite
     group = Group.find(params[:id]) || not_found
-    fail 'AccessDenied' unless group.admin?(current_user)
+    raise 'AccessDenied' unless group.admin?(current_user)
     group.invitation_code = nil
     group.save!
     flash.keep

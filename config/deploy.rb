@@ -83,7 +83,7 @@ namespace :rails do
   #   bundle exec cap production rails:rake task=seatgeek:update_entities
   desc 'Invoke rake task on the server'
   task :rake do
-    fail 'no task provided' unless ENV['task']
+    raise 'no task provided' unless ENV['task']
 
     on roles(:app) do
       within release_path do

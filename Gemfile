@@ -71,9 +71,6 @@ gem 'github-markdown', '~> 0.6.9'
 # REST Client (for Google Analytics goal tracking)
 gem 'rest-client', '~> 1.8.0'
 
-# Readline support (for remote console)
-gem 'rb-readline', '~> 0.5.3'
-
 # Paperclip
 gem 'paperclip', '~> 4.3.2'
 
@@ -109,6 +106,8 @@ group :test do
 end
 
 group :development do
+  gem 'rubocop', '~> 0.41.2'
+  gem 'bundler', '~> 1.12.5'
   gem 'rack-livereload', '~> 0.3.16'
   gem 'guard-livereload', '~> 2.5.1'
   gem 'guard-bundler', '~> 2.1.0'

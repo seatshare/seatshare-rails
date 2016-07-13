@@ -16,18 +16,18 @@ class TicketsController < ApplicationController
     end
     @tickets = {
       owned:    Ticket.where(owner_id: current_user.id)
-                .joins(:group)
-                .where(groups: { status: true })
-                .joins(:event)
-                .where("start_time #{operator} ?", Time.zone.now)
-                .by_date.by_seat,
+                      .joins(:group)
+                      .where(groups: { status: true })
+                      .joins(:event)
+                      .where("start_time #{operator} ?", Time.zone.now)
+                      .by_date.by_seat,
       assigned: Ticket.where.not(owner_id: current_user.id)
-                .where(user_id: current_user.id)
-                .joins(:group)
-                .where(groups: { status: true })
-                .joins(:event)
-                .where("start_time #{operator} ?", Time.zone.now)
-                .by_date.by_seat
+                      .where(user_id: current_user.id)
+                      .joins(:group)
+                      .where(groups: { status: true })
+                      .joins(:event)
+                      .where("start_time #{operator} ?", Time.zone.now)
+                      .by_date.by_seat
     }
     render layout: 'single-column'
   end
@@ -67,13 +67,13 @@ class TicketsController < ApplicationController
     @members = @group.members.by_name.collect { |p| [p.display_name, p.id] }
     @members.unshift(['Unassigned', 0])
     @user_aliases = current_user.user_aliases.by_name
-                    .collect { |p| [p.display_name, p.id] }
+                                .collect { |p| [p.display_name, p.id] }
     @user_aliases.unshift(['Not Set', 0])
 
     if params[:event_id]
       @event = Event.find_by_id(params[:event_id]) || not_found
       @ticket_stats = @event.ticket_stats(@group, current_user)
-      @page_title = "#{@event.event_name}"
+      @page_title = @event.event_name
     else
       @events = @group.events.by_date.future.confirmed
       @page_title = 'Add Tickets'
@@ -84,19 +84,19 @@ class TicketsController < ApplicationController
   # Process ticket creation
   def create
     group = Group.find(params[:group_id])
-    fail 'NotGroupMember' unless group.member?(current_user)
+    raise 'NotGroupMember' unless group.member?(current_user)
     ticket = Ticket.new(
       group_id: params[:group_id], section: ticket_params[:section],
       row: ticket_params[:row], seat: ticket_params[:seat],
       cost: ticket_params[:cost].gsub(/[^0-9\.]/, '').to_f,
       user_id: ticket_params[:user_id].to_i, owner_id: current_user.id
     )
-    if !ticket_params[:alias_id].nil? &&
-       ticket_params[:user_id].to_i == current_user.id
-      ticket.alias_id = ticket_params[:alias_id].to_i
-    else
-      ticket.alias_id = 0
-    end
+    ticket.alias_id = if !ticket_params[:alias_id].nil? &&
+                         ticket_params[:user_id].to_i == current_user.id
+                        ticket_params[:alias_id].to_i
+                      else
+                        0
+                      end
     flash.keep
     if ticket_params[:event_id].is_a? String
       ticket.event_id = ticket_params[:event_id]
@@ -152,12 +152,12 @@ class TicketsController < ApplicationController
     end
     @ticket_stats = @event.ticket_stats(@group, current_user)
     @members = @group.members
-               .by_name
-               .by_name
-               .collect { |p| [p.display_name, p.id] }
+                     .by_name
+                     .by_name
+                     .collect { |p| [p.display_name, p.id] }
     @members.unshift(['Unassigned', 0])
     @user_aliases = current_user.user_aliases
-                    .collect { |p| [p.display_name, p.id] }
+                                .collect { |p| [p.display_name, p.id] }
     @user_aliases.unshift(['Unassigned', 0])
   end
 
@@ -165,18 +165,18 @@ class TicketsController < ApplicationController
   # Process ticket updates
   def update
     ticket = Ticket.find(params[:id])
-    fail 'AccessDenied' unless ticket.can_edit?(current_user)
-    fail 'NotGroupMember' unless ticket.group.member?(current_user)
+    raise 'AccessDenied' unless ticket.can_edit?(current_user)
+    raise 'NotGroupMember' unless ticket.group.member?(current_user)
     original_ticket = ticket.dup
     ticket.cost = ticket_params[:cost].gsub(/[^0-9\.]/, '').to_f
     ticket.user_id = ticket_params[:user_id].to_i
     ticket.note = ticket_params[:note]
-    if !ticket_params[:alias_id].nil? &&
-       ticket_params[:user_id].to_i == current_user.id
-      ticket.alias_id = ticket_params[:alias_id].to_i
-    else
-      ticket.alias_id = 0
-    end
+    ticket.alias_id = if !ticket_params[:alias_id].nil? &&
+                         ticket_params[:user_id].to_i == current_user.id
+                        ticket_params[:alias_id].to_i
+                      else
+                        ticket.alias_id = 0
+                      end
     unless ticket_params[:ticket_file].nil?
       attrs = ticket_params
       attrs[:ticket_id] = ticket.id
@@ -188,7 +188,7 @@ class TicketsController < ApplicationController
       if ticket.user_id != current_user.id &&
          ticket.user_id != 0 &&
          original_ticket.user_id != ticket.user_id
-        fail 'NotGroupMember' unless ticket.group.member?(ticket.assigned)
+        raise 'NotGroupMember' unless ticket.group.member?(ticket.assigned)
         TicketNotifier.assign(ticket, current_user).deliver_now
         TwilioSMS.new.assign_ticket(ticket, current_user)
         Ticket.log_ticket_history ticket, 'assigned', current_user
@@ -210,7 +210,7 @@ class TicketsController < ApplicationController
     @group = Group.find_by_id(params[:group_id]) || not_found
     @event = Event.find_by_id(params[:event_id]) || not_found
     @ticket = Ticket.find_by_id(params[:id]) || not_found
-    fail 'NotGroupMember' unless @group.member?(current_user)
+    raise 'NotGroupMember' unless @group.member?(current_user)
     @ticket_stats = @event.ticket_stats(@group, current_user)
     redirect_to(
       action: 'edit', id: @ticket.id
@@ -221,7 +221,7 @@ class TicketsController < ApplicationController
   # Process a ticket request
   def do_request_ticket
     ticket = Ticket.find_by_id(params[:id]) || not_found
-    fail 'NotGroupMember' unless ticket.group.member?(current_user)
+    raise 'NotGroupMember' unless ticket.group.member?(current_user)
     message = params[:message][:personalization]
     TicketNotifier.request_ticket(ticket, current_user, message).deliver_now
     TwilioSMS.new.request_ticket(ticket, current_user)
@@ -238,7 +238,7 @@ class TicketsController < ApplicationController
   # Process a ticket unassignment
   def unassign
     ticket = Ticket.find_by_id(params[:id]) || not_found
-    fail 'AccessDenied' unless ticket.can_edit?(current_user)
+    raise 'AccessDenied' unless ticket.can_edit?(current_user)
     ticket.unassign
     Ticket.log_ticket_history ticket, 'unassigned', current_user
     flash.keep
@@ -253,7 +253,7 @@ class TicketsController < ApplicationController
   # Process a ticket delete
   def delete
     ticket = Ticket.find_by_id(params[:id]) || not_found
-    fail 'AccessDenied' unless ticket.can_edit?(current_user)
+    raise 'AccessDenied' unless ticket.can_edit?(current_user)
     ticket.destroy!
     flash.keep
     flash[:notice] = 'Ticket deleted!'
@@ -268,7 +268,7 @@ class TicketsController < ApplicationController
   def delete_ticket_file
     ticket_file = TicketFile.find(params[:id]) || not_found
     ticket = ticket_file.ticket
-    fail 'AccessDenied' unless ticket.can_edit?(current_user)
+    raise 'AccessDenied' unless ticket.can_edit?(current_user)
     ticket_file.destroy!
     redirect_to(
       controller: 'tickets', action: 'edit',
