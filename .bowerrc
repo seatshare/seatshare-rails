@@ -1,4 +1,10 @@
 {
   "directory": "vendor/assets/components",
-  "storage": { "packages":"tmp/bower" }
+  "storage": { "packages":"tmp/bower" },
+  "ignoredDependencies": [
+    "jquery",
+    "bootstrap",
+    "bootstrap-sass",
+    "bootstrap-sass-official"
+  ]
 }
