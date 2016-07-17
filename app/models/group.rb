@@ -26,6 +26,7 @@ class Group < ActiveRecord::Base
       access_key_id: ENV['SEATSHARE_S3_KEY'],
       secret_access_key: ENV['SEATSHARE_S3_SECRET']
     },
+    s3_region: ENV['SEATSHARE_S3_REGION'],
     url: ':s3_alias_url',
     s3_host_alias: ENV['SEATSHARE_S3_PUBLIC'].gsub(%r{https?://}, ''),
     path: ':class-avatars/:id-:style-:hash.:extension',

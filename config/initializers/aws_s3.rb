@@ -4,7 +4,8 @@ if ENV['SEATSHARE_S3_BUCKET'].nil? || ENV['SEATSHARE_S3_BUCKET'].nil? || ENV['SE
   Rails.logger.warn "S3 configuration is not present!"
 end
 
-AWS.config(
-  access_key_id:     ENV['SEATSHARE_S3_KEY'],
-  secret_access_key: ENV['SEATSHARE_S3_SECRET']
-)
+## SDK v2
+Aws.config.update({
+  region: ENV['SEATSHARE_S3_REGION'],
+  credentials: Aws::Credentials.new(ENV['SEATSHARE_S3_KEY'], ENV['SEATSHARE_S3_SECRET'])
+})

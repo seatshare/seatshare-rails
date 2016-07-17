@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.5.1'
+gem 'rails', '~> 4.2.5.2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.4'
@@ -41,7 +41,7 @@ gem 'momentjs-rails', '~> 2.10.6'
 gem 'underscore-rails', '~> 1.8.3'
 
 # S3
-gem 'aws-sdk-v1', '~> 1.66.0'
+gem 'aws-sdk', '~> 2.3.22'
 
 # Postgres
 gem 'pg', '~> 0.18.4'
@@ -72,7 +72,7 @@ gem 'github-markdown', '~> 0.6.9'
 gem 'rest-client', '~> 1.8.0'
 
 # Paperclip
-gem 'paperclip', '~> 4.3.2'
+gem 'paperclip', '~> 5.0.0'
 
 # Twilio / SMS related
 gem 'twilio-ruby', '~> 4.9.0'

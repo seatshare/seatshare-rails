@@ -38,18 +38,18 @@ class TicketFile < ActiveRecord::Base
       Rails.root.join('tmp', 'uploads', uploaded_file.original_filename)
     )
     path = Rails.root.join('tmp', 'uploads', uploaded_file.original_filename)
+    hex = SecureRandom.hex
+    ticket_id = attrs[:ticket_id].to_i
+    file_s3_key = "#{ticket_id}-#{hex}/#{uploaded_file.original_filename}"
+    s3 = Aws::S3::Resource.new(region: ENV['SEATSHARE_S3_REGION'])
+    obj = s3.bucket(ENV['SEATSHARE_S3_BUCKET']).object(file_s3_key)
     File.open(path, 'rb') do |file|
-      hex = SecureRandom.hex
-      ticket_id = attrs[:ticket_id].to_i
-      file_s3_key = "#{ticket_id}-#{hex}/#{uploaded_file.original_filename}"
-      s3 = AWS::S3.new
-      object = s3.buckets[ENV['SEATSHARE_S3_BUCKET']].objects[file_s3_key]
-      object.write(open(file))
-      {
-        file_name: uploaded_file.original_filename,
-        path: file_s3_key
-      }
+      obj.put(body: file, storage_class: 'REDUCED_REDUNDANCY')
     end
+    {
+      path: file_s3_key,
+      file_name: uploaded_file.original_filename
+    }
   end
 
   private
@@ -57,8 +57,7 @@ class TicketFile < ActiveRecord::Base
   ##
   # Delete S3 file
   def delete_s3_file
-    s3 = AWS::S3.new
-    object = s3.buckets[ENV['SEATSHARE_S3_BUCKET']].objects[path]
-    object.delete
+    s3 = Aws::S3::Resource.new
+    s3.bucket(ENV['SEATSHARE_S3_BUCKET']).object(path).delete
   end
 end
