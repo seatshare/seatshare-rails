@@ -41,7 +41,7 @@ class TicketFile < ActiveRecord::Base
     hex = SecureRandom.hex
     ticket_id = attrs[:ticket_id].to_i
     file_s3_key = "#{ticket_id}-#{hex}/#{uploaded_file.original_filename}"
-    s3 = Aws::S3::Resource.new(region: 'us-east-1')
+    s3 = Aws::S3::Resource.new(region: ENV['SEATSHARE_S3_REGION'])
     obj = s3.bucket(ENV['SEATSHARE_S3_BUCKET']).object(file_s3_key)
     File.open(path, 'rb') do |file|
       obj.put(body: file, storage_class: 'REDUCED_REDUNDANCY')

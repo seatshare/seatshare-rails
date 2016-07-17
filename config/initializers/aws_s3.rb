@@ -6,6 +6,6 @@ end
 
 ## SDK v2
 Aws.config.update({
-  region: 'us-east-1',
+  region: ENV['SEATSHARE_S3_REGION'],
   credentials: Aws::Credentials.new(ENV['SEATSHARE_S3_KEY'], ENV['SEATSHARE_S3_SECRET'])
 })
