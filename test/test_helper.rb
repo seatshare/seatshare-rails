@@ -2,7 +2,7 @@ $LOAD_PATH << 'test'
 require 'rubygems'
 require 'spork'
 require 'webmock/minitest'
-AWS.stub!
+Aws.config.update(stub_responses: true)
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,

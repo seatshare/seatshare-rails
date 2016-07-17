@@ -14,8 +14,8 @@ class TicketFileTest < ActiveSupport::TestCase
       ticket_file: uploaded_file
     )
 
-    assert ticket_file.file_name == '000000-00000.pdf'
-    assert !ticket_file.path.nil?
+    assert_equal '000000-00000.pdf', ticket_file.file_name
+    refute_nil ticket_file.path
   end
 
   test 'delete' do
@@ -28,6 +28,8 @@ class TicketFileTest < ActiveSupport::TestCase
   test 'download link' do
     tf = TicketFile.find(1)
 
-    assert tf.download_link == "#{ENV['SEATSHARE_S3_PUBLIC']}/abcdefg1234.pdf"
+    assert_equal(
+      "#{ENV['SEATSHARE_S3_PUBLIC']}/abcdefg1234.pdf", tf.download_link
+    )
   end
 end
