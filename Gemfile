@@ -72,7 +72,7 @@ gem 'github-markdown', '~> 0.6.9'
 gem 'rest-client', '~> 1.8.0'
 
 # Paperclip
-gem 'paperclip', '~> 4.3.2'
+gem 'paperclip', '~> 5.0.0'
 
 # Twilio / SMS related
 gem 'twilio-ruby', '~> 4.9.0'
