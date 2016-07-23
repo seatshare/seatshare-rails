@@ -1,5 +1,4 @@
 SeatShare::Application.routes.draw do
-
   use_doorkeeper
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -72,11 +71,6 @@ SeatShare::Application.routes.draw do
 
   match '/404' => 'errors#error404', via: [:get, :post, :patch, :delete]
 
-  namespace :admin_api, defaults: {format: 'json'} do
-    namespace :v1 do
-      root 'admin_api#index'
-      get ':action' => 'admin_api#:action'
-    end
-  end
-
+  # Public API
+  mount API => '/'
 end

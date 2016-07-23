@@ -42,6 +42,7 @@ gem 'grape', '~> 0.16.2'
 gem 'doorkeeper', '~> 3.1.0'
 gem 'kaminari', '~> 0.16.3'
 gem 'api-pagination', '~> 4.3.0'
+gem 'grape-swagger', '~> 0.22.0'
 
 # Javascript libraries
 gem 'momentjs-rails', '~> 2.10.6'

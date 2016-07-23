@@ -47,5 +47,14 @@ module SeatShare
 
     # Don't supress errors in after_rollback and after_commit callbacks
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Autoload the API controllers
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+
+    # Configure API pagination
+    ApiPagination.configure do |config|
+      config.paginator = :kaminari
+    end
   end
 end
