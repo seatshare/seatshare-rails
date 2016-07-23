@@ -37,6 +37,12 @@ gem 'font-awesome-rails', '~> 4.5.0.0'
 # Use Devise
 gem 'devise', '~> 3.5.4'
 
+# API Gems
+gem 'grape', '~> 0.16.2'
+gem 'doorkeeper', '~> 3.1.0'
+gem 'kaminari', '~> 0.16.3'
+gem 'api-pagination', '~> 4.3.0'
+
 # Javascript libraries
 gem 'momentjs-rails', '~> 2.10.6'
 gem 'underscore-rails', '~> 1.8.3'

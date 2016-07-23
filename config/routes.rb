@@ -1,5 +1,6 @@
 SeatShare::Application.routes.draw do
 
+  use_doorkeeper
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
 
