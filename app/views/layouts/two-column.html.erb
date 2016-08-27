@@ -50,6 +50,8 @@
 
 <%= yield :page_footer %>
 
+<%= render 'layouts/changelog' %>
+
 <%= render 'layouts/adwords' if flash[:conversion] == true %>
 
 </body>
