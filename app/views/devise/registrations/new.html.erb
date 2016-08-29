@@ -61,6 +61,21 @@
   </style>
   <% end %>
 </div>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "SportsTeam",
+  "name": "<%= @entity.entity_name %>",
+  "memberOf": [
+    {
+      "@type": "SportsOrganization",
+      "name": "<%= @entity.entity_type.entity_type_name %>"
+    }
+  ]
+}
+</script>
+
 <% end %>
 
 <%= form_for(resource, html: {class: "form-horizontal", role: "form"}, as: resource_name, url: registration_path(resource_name)) do |f| %>
