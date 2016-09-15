@@ -54,6 +54,12 @@ gem 'active_admin_importable', github: 'krhorst/active_admin_importable'
 # Mailchimp API
 gem 'mailchimp-api', '~> 2.0.6'
 
+# Foundation email-assets
+gem 'foundation_emails'
+
+# Premailer to inline CSS styles (requires nokogiri)
+gem 'premailer-rails'
+
 # SeatGeek data provider
 gem 'seatgeek', '~> 1.0.0'
 

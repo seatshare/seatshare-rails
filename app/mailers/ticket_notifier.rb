@@ -32,9 +32,11 @@ class TicketNotifier < ActionMailer::Base
       reply_to: "#{@user.display_name} <#{@user.email}>"
     )
 
-    headers['X-MC-Tags'] = 'AssignTicket'
-    headers['X-MC-Subaccount'] = 'SeatShare'
-    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+    headers['X-Mailgun-Tag'] = 'AssignTicket'
+    headers['X-Mailgun-Dkim'] = 'yes'
+    headers['X-Mailgun-Track'] = 'yes'
+    headers['X-Mailgun-Track-Clicks'] = 'yes'
+    headers['X-Mailgun-Track-Opens'] = 'yes'
   end
 
   ##
@@ -67,8 +69,10 @@ class TicketNotifier < ActionMailer::Base
       reply_to: "#{@user.display_name} <#{@user.email}>"
     )
 
-    headers['X-MC-Tags'] = 'RequestTicket'
-    headers['X-MC-Subaccount'] = 'SeatShare'
-    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+    headers['X-Mailgun-Tag'] = 'RequestTicket'
+    headers['X-Mailgun-Dkim'] = 'yes'
+    headers['X-Mailgun-Track'] = 'yes'
+    headers['X-Mailgun-Track-Clicks'] = 'yes'
+    headers['X-Mailgun-Track-Opens'] = 'yes'
   end
 end

@@ -1,0 +1,27 @@
+@import "foundation-emails";
+
+.header {
+  background: #4963AE;
+}
+
+.header .columns {
+  padding-bottom: 0;
+}
+
+.header p {
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.header .wrapper-inner {
+  padding: 20px;
+  /*controls the height of the header*/
+}
+
+.header .container {
+  background: #4963AE;
+}
+
+.wrapper.secondary {
+  background: #f3f3f3;
+}

@@ -2,65 +2,127 @@
 
 <p>This is your week ahead for <%= link_to @group.group_name, :controller => 'groups', :action => 'show', :id => @group.id, :only_path => false %>. We send these every every Monday morning if there are events that week. You can update your reminder settings on <%= link_to 'the group page', :controller => 'groups', :action => 'edit', :id => @group.id, :only_path => false %>.</p>
 
-<% for day_of_week, index in Date::DAYNAMES.each_with_index.to_a.rotate(1) %>
-<hr />
-<% if day_of_week === 'Monday' %>
-<h2>Today</h2>
-<% else %>
-<h2><%= day_of_week %></h2>
-<% end %>
-
-<% for event in @events_day_of_week[index] %>
-
-<table cellpadding="10px">
-  <tr>
-    <th style="width:100px">Event</th>
-    <td><%= link_to event.event_name, { :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id, :only_path => false } %></td>
-  </tr>
-  <tr>
-    <th>Starts</th>
-    <td><%= event.date_time %></td>
-  </tr>
-  <% if !event.description.blank? %>
-  <tr>
-    <th>Description</th>
-    <td><%= raw(event.description_md) %></td>
-  </tr>
-  <% end %>
-
-  <% tickets = event.tickets(@group) %>
-  <% ticket_stats = event.ticket_stats(@group, @user) %>
-
-  <tr>
-    <th>Tickets</th>
-    <td>
-      <ul>
-        <li><span style="font-weight:bold;"><%= ticket_stats[:available] %></span> available in the group</li>
-        <li><span style="font-weight:bold;"><%= ticket_stats[:total] %></span> total in the group</li>
-        <li><span style="font-weight:bold;"><%= ticket_stats[:held] %></span> held by you</li>
-      </ul>
-      <% if tickets.count > 0 %>
-      <table width="100%" cellpadding="10px">
-        <tbody>
-          <% for ticket in tickets %>
-          <% next if ticket.assigned? %>
-          <tr>
-            <td><%= link_to ticket.display_name, { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %></td>
-            <td>via <%= ticket.owner.display_name; %></td>
-            <td>
-              <%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <% end %>
-    </td>
-  </tr>
+<table class="hr">
+  <tbody>
+    <tr>
+      <th></th>
+    </tr>
+  </tbody>
 </table>
 
+<table class="spacer">
+  <tbody>
+    <tr>
+      <td height="16px" style="font-size:16px;line-height:16px;">&#xA0;</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <% for day_of_week, index in Date::DAYNAMES.each_with_index.to_a.rotate(1) %>
+  <tr>
+    <th>
+      <table>
+        <tbody>
+          <tr>
+            <th style="width:100px;padding:4px;background-color:#f5f5f5;border-color:#dddddd;">
+              <small style="color:#333333;"><%= (day_of_week === 'Monday') ? 'Today' : day_of_week %></small>
+            </th>
+            <th>
+              &nbsp;
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </th>
+    <th>
+
+      <% if @events_day_of_week[index].empty? %>
+      <p><em>No events.</em></p>
+      <% end %>
+
+      <% for event in @events_day_of_week[index] %>
+
+      <table cellpadding="10px">
+        <tr>
+          <td><small><%= event.date_time %></small></td>
+        </tr>
+        <tr>
+          <td><h3><%= link_to event.event_name, { :controller => 'events', :action => 'show', :group_id => @group.id, :id => event.id, :only_path => false } %></h3></td>
+        </tr>
+        <% if !event.description.blank? %>
+        <tr>
+          <td><%= raw(event.description_md) %></td>
+        </tr>
+        <% end %>
+
+        <% tickets = event.tickets(@group) %>
+        <% ticket_stats = event.ticket_stats(@group, @user) %>
+
+        <% if ticket_stats[:available] > 0 %>
+        <tr>
+          <th>
+            <table class="callout">
+              <tr>
+                <th class="callout-inner primary">
+                  <strong>There are tickets available for this event!</srong>
+                </th>
+              </tr>
+            </table>
+          </th>
+        </tr>
+        <% end %>
+
+        <tr>
+          <th>
+            <table style="border:0;" cellpadding="0" cellspacing="0" width="250">
+              <tr>
+                <td bgcolor="#5cb85c" style="width:<%= ((ticket_stats[:available].to_f/ticket_stats[:total].to_f)*100).to_i %>%; background-color:#5cb85c; float:left; height:15px;"></td>
+                <td bgcolor="#f5f5f5" style="width:<%= 100-((ticket_stats[:available].to_f/ticket_stats[:total].to_f)*100).to_i %>%; background-color:#f5f5f5; float:left; height:15px;"></td>
+              </tr>
+            </table>
+          </th>
+        </tr>
+
+        <tr>
+          <td>
+            <ul>
+              <li><span style="font-weight:bold;"><%= ticket_stats[:available] %></span> available in the group</li>
+              <li><span style="font-weight:bold;"><%= ticket_stats[:total] %></span> total in the group</li>
+              <li><span style="font-weight:bold;"><%= ticket_stats[:held] %></span> held by you</li>
+            </ul>
+            <% if tickets.count > 0 %>
+            <table width="100%" cellpadding="10px">
+              <tbody>
+                <tr>
+                  <th><strong>Section</strong></th>
+                  <th><strong>Owner</strong></th>
+                  <th><strong>Cost</strong></th>
+                </tr>
+                <% for ticket in tickets %>
+                <% next if ticket.assigned? %>
+                <tr>
+                  <td><%= link_to ticket.display_name, { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %></td>
+                  <td>via <%= ticket.owner.display_name; %></td>
+                  <td>
+                    <%= link_to number_to_currency(ticket.cost), { :controller => 'tickets', :action => 'edit', :group_id => @group.id, :event_id => ticket.event_id, :id => ticket.id, :only_path => false } %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <br />
+            <hr />
+            <br />
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </th>
+  <% end %>
+  </tr>
 <% end %>
-<% end %>
+</table>
 
 <% content_for :footer do %>
   <%= link_to 'Manage My Reminders', { :controller => 'groups', :action => 'edit', :id => @group.id, :only_path => false } %>

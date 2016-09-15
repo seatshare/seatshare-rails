@@ -19,9 +19,11 @@ class CustomDeviseMailer < Devise::Mailer
       description: 'Click to confirm your account.'
     }
 
-    headers['X-MC-Tags'] = 'ConfirmationInstructions'
-    headers['X-MC-Subaccount'] = 'SeatShare'
-    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+    headers['X-Mailgun-Tag'] = 'ConfirmationInstructions'
+    headers['X-Mailgun-Dkim'] = 'yes'
+    headers['X-Mailgun-Track'] = 'yes'
+    headers['X-Mailgun-Track-Clicks'] = 'yes'
+    headers['X-Mailgun-Track-Opens'] = 'yes'
     super
   end
 
@@ -37,9 +39,11 @@ class CustomDeviseMailer < Devise::Mailer
       description: 'Click to select a new password.'
     }
 
-    headers['X-MC-Tags'] = 'ResetPasswordInstructions'
-    headers['X-MC-Subaccount'] = 'SeatShare'
-    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+    headers['X-Mailgun-Tag'] = 'ResetPasswordInstructions'
+    headers['X-Mailgun-Dkim'] = 'yes'
+    headers['X-Mailgun-Track'] = 'yes'
+    headers['X-Mailgun-Track-Clicks'] = 'yes'
+    headers['X-Mailgun-Track-Opens'] = 'yes'
     super
   end
 
@@ -55,9 +59,11 @@ class CustomDeviseMailer < Devise::Mailer
       description: 'Click to unlock your account.'
     }
 
-    headers['X-MC-Tags'] = 'UnlockInstructions'
-    headers['X-MC-Subaccount'] = 'SeatShare'
-    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+    headers['X-Mailgun-Tag'] = 'UnlockInstructions'
+    headers['X-Mailgun-Dkim'] = 'yes'
+    headers['X-Mailgun-Track'] = 'yes'
+    headers['X-Mailgun-Track-Clicks'] = 'yes'
+    headers['X-Mailgun-Track-Opens'] = 'yes'
     super
   end
 end
