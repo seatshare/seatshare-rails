@@ -32,8 +32,8 @@ class CustomDeviseMailerTest < ActionMailer::TestCase
     assert_not_nil mail
   end
 
-  test 'content type should be set to html' do
-    assert mail.content_type.include?('text/html')
+  test 'content type should be set to multipart' do
+    assert mail.content_type.include?('multipart/alternative')
   end
 
   test 'send confirmation instructions to the user email' do
@@ -46,20 +46,5 @@ class CustomDeviseMailerTest < ActionMailer::TestCase
 
   test 'body should have user info' do
     assert_match user.email, mail.body.encoded
-  end
-
-  test 'body should have link to confirm the account' do
-    if mail.body.encoded =~ %r{/password/edit\?reset_password_token=([^"]+)">}
-      assert_equal(
-        Devise.token_generator.digest(
-          user.class,
-          :reset_password_token,
-          Regexp.last_match[1]
-        ),
-        user.reset_password_token
-      )
-    else
-      flunk 'expected reset password url regex to match'
-    end
   end
 end
