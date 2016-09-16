@@ -24,25 +24,28 @@ class ScheduleNotifierTest < ActionMailer::TestCase
     assert_equal ['stonej@example.net'], email.to
     assert_equal 'Today\'s events for Geeks Watching Hockey', email.subject
     assert_includes(
-      email.body.to_s,
-      '<title>Today&#39;s events for Geeks Watching Hockey</title>'
+      email.html_part.to_s,
+      '<title>Today\'s events for Geeks Watching Hockey</title>'
     )
     assert_includes(
-      email.body.to_s,
-      '<td><a href="http://localhost:3000/groups/1/event-7">Nashville '\
-        'Predators vs. Florida Panthers</a></td>'
+      email.html_part.to_s,
+      'http://localhost:3000/groups/1/event-7'
     )
     assert_includes(
-      email.body.to_s,
-      '<li><span style="font-weight:bold;">1</span> available in the group</li>'
+      email.html_part.to_s,
+      'Nashville Predators vs. Florida Panthers'
     )
     assert_includes(
-      email.body.to_s,
-      '<li><span style="font-weight:bold;">2</span> total in the group</li>'
+      email.html_part.to_s,
+      '1</span> available in the group</li>'
     )
     assert_includes(
-      email.body.to_s,
-      '<li><span style="font-weight:bold;">1</span> held by you</li>'
+      email.html_part.to_s,
+      '2</span> total in the group</li>'
+    )
+    assert_includes(
+      email.html_part.to_s,
+      '1</span> held by you</li>'
     )
   end
 
@@ -60,25 +63,25 @@ class ScheduleNotifierTest < ActionMailer::TestCase
     assert_equal ['stonej@example.net'], email.to
     assert_equal 'The week ahead for Geeks Watching Hockey', email.subject
     assert_includes(
-      email.body.to_s,
+      email.html_part.to_s,
       '<title>The week ahead for Geeks Watching Hockey</title>'
     )
     assert_includes(
-      email.body.to_s,
-      '<td><a href="http://localhost:3000/groups/1/event-6">Nashville '\
-        'Predators vs. Los Angeles Kings</a></td>'
+      email.html_part.to_s,
+      'http://localhost:3000/groups/1/event-6'
+    )
+    assert_includes email.html_part.to_s, 'Predators vs. Los Angeles Kings'
+    assert_includes(
+      email.html_part.to_s,
+      '1</span> available in the group</li>'
     )
     assert_includes(
-      email.body.to_s,
-      '<li><span style="font-weight:bold;">1</span> available in the group</li>'
+      email.html_part.to_s,
+      '2</span> total in the group</li>'
     )
     assert_includes(
-      email.body.to_s,
-      '<li><span style="font-weight:bold;">2</span> total in the group</li>'
-    )
-    assert_includes(
-      email.body.to_s,
-      '<li><span style="font-weight:bold;">1</span> held by you</li>'
+      email.html_part.to_s,
+      '1</span> held by you</li>'
     )
   end
 end

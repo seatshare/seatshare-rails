@@ -30,9 +30,11 @@ class ScheduleNotifier < ActionMailer::Base
       subject: "Today's events for #{@group.group_name}"
     )
 
-    headers['X-MC-Tags'] = 'DailyReminder'
-    headers['X-MC-Subaccount'] = 'SeatShare'
-    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+    headers['X-Mailgun-Tag'] = 'DailyReminder'
+    headers['X-Mailgun-Dkim'] = 'yes'
+    headers['X-Mailgun-Track'] = 'yes'
+    headers['X-Mailgun-Track-Clicks'] = 'yes'
+    headers['X-Mailgun-Track-Opens'] = 'yes'
   end
 
   ##
@@ -61,9 +63,11 @@ class ScheduleNotifier < ActionMailer::Base
       subject: "The week ahead for #{@group.group_name}"
     )
 
-    headers['X-MC-Tags'] = 'WeeklyReminder'
-    headers['X-MC-Subaccount'] = 'SeatShare'
-    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+    headers['X-Mailgun-Tag'] = 'WeeklyReminder'
+    headers['X-Mailgun-Dkim'] = 'yes'
+    headers['X-Mailgun-Track'] = 'yes'
+    headers['X-Mailgun-Track-Clicks'] = 'yes'
+    headers['X-Mailgun-Track-Opens'] = 'yes'
   end
 
   private

@@ -15,8 +15,10 @@ class WelcomeEmail < ActionMailer::Base
       reply_to: 'SeatShare Support <contact@myseatshare.com>'
     )
 
-    headers['X-MC-Tags'] = 'NewUser'
-    headers['X-MC-Subaccount'] = 'SeatShare'
-    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+    headers['X-Mailgun-Tag'] = 'NewUser'
+    headers['X-Mailgun-Dkim'] = 'yes'
+    headers['X-Mailgun-Track'] = 'yes'
+    headers['X-Mailgun-Track-Clicks'] = 'yes'
+    headers['X-Mailgun-Track-Opens'] = 'yes'
   end
 end

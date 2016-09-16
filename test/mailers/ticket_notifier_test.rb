@@ -22,12 +22,13 @@ class TicketNotifierTest < ActionMailer::TestCase
       email.subject,
       'Rick has assigned you a ticket via Geeks Watching Hockey'
     )
-    assert_includes email.body.to_s, '<p>Jill,</p>'
+    assert_includes email.html_part.to_s, 'Jill,</p>'
+    assert_includes email.html_part.to_s, 'mailto:rick.taylor@example.net'
+    assert_includes email.html_part.to_s, 'Rick Taylor'
     assert_includes(
-      email.body.to_s,
-      '<p>Rick Taylor (<a href="mailto:rick.taylor@example.net">'\
-        'rick.taylor@example.net</a>) has assigned a ticket to you for the '\
-        'following event in your group Geeks Watching Hockey.</p>'
+      email.html_part.to_s,
+      'has assigned a ticket to you for the following event in your group'\
+        ' Geeks Watching Hockey.</p>'
     )
     fails_intermittently(
       'https://github.com/stephenyeargin/seatshare-rails/issues/109',
@@ -35,16 +36,15 @@ class TicketNotifierTest < ActionMailer::TestCase
       'Time.zone.name' => Time.zone.name, 'user.timezone' => user.timezone
     ) do
       assert_includes(
-        email.body.to_s,
-        '<td>Nashville Predators vs. St. Louis Blues : Saturday, '\
+        email.html_part.to_s,
+        'Nashville Predators vs. St. Louis Blues : Saturday, '\
           'October 26, 2013 - 8:00 pm CDT</td>'
       )
     end
     assert_includes(
-      email.body.to_s,
-      '<td><a href="http://localhost:3000/groups/1/event-4/ticket-7">'\
-        '326 K 13</a></td>'
+      email.html_part.to_s, 'http://localhost:3000/groups/1/event-4/ticket-7'
     )
+    assert_includes email.html_part.to_s, '326 K 13</a></td>'
   end
 
   test 'ticket requested from user' do
@@ -60,12 +60,13 @@ class TicketNotifierTest < ActionMailer::TestCase
       email.subject,
       'Jill has requested your ticket via Geeks Watching Hockey'
     )
-    assert_includes email.body.to_s, '<p>Jim,</p>'
+    assert_includes email.html_part.to_s, 'Jim,</p>'
+    assert_includes email.html_part.to_s, 'Jill Smith'
+    assert_includes email.html_part.to_s, 'mailto:jillsmith83@us.example.org'
     assert_includes(
-      email.body.to_s,
-      '<p>Jill Smith (<a href="mailto:jillsmith83@us.example.org">'\
-        'jillsmith83@us.example.org</a>) has requested your ticket for the '\
-        'following event in your group Geeks Watching Hockey.</p>'
+      email.html_part.to_s,
+      'has requested your ticket for the following event in your group'\
+        ' Geeks Watching Hockey.'
     )
     fails_intermittently(
       'https://github.com/stephenyeargin/seatshare-rails/issues/109',
@@ -74,15 +75,14 @@ class TicketNotifierTest < ActionMailer::TestCase
       'user.timezone' => user.timezone
     ) do
       assert_includes(
-        email.body.to_s,
-        '<td>Nashville Predators vs. St. Louis Blues : Saturday, October 26, '\
+        email.html_part.to_s,
+        'Nashville Predators vs. St. Louis Blues : Saturday, October 26, '\
           '2013 - 8:00 pm CDT</td>'
       )
     end
     assert_includes(
-      email.body.to_s,
-      '<td><a href="http://localhost:3000/groups/1/event-4/ticket-2">'\
-        '326 K 10</a></td>'
+      email.html_part.to_s, 'http://localhost:3000/groups/1/event-4/ticket-2'
     )
+    assert_includes email.html_part.to_s, '326 K 10'
   end
 end

@@ -17,19 +17,21 @@ class GroupNotifierTest < ActionMailer::TestCase
       email.subject
     )
     assert_includes(
-      email.body.to_s,
+      email.html_part.to_s,
       '<title>You have been invited to join Geeks Watching Hockey</title>'
     )
     assert_includes(
-      email.body.to_s,
-      '<a href="http://localhost:3000/register/invite/ABCDEFG123">'\
-        'Use Invitation ABCDEFG123</a>'
+      email.html_part.to_s,
+      'Use Invitation ABCDEFG123'
     )
     assert_includes(
-      email.body.to_s,
+      email.html_part.to_s,
+      'href="http://localhost:3000/register/invite/ABCDEFG123"'
+    )
+    assert_includes(
+      email.html_part.to_s,
       'Sarah Becker has invited you to join our <strong>Nashville '\
-        'Predators</strong> group on <a href="http://localhost:3000/">'\
-        'SeatShare</a>, a service that helps manage our season tickets.'
+        'Predators</strong> group'
     )
   end
 
@@ -62,14 +64,14 @@ class GroupNotifierTest < ActionMailer::TestCase
       email.subject
     )
     assert_includes(
-      email.body.to_s,
+      email.html_part.to_s,
       '<title>[Geeks Watching Hockey] Anyone want to go to the game '\
         'on Friday?</title>'
     )
     assert_includes(
-      email.body.to_s,
-      "<p>I'll have an extra ticket to spare.</p>"
+      email.html_part.to_s,
+      "I'll have an extra ticket to spare.</p>"
     )
-    assert_includes email.body.to_s, '<p>Free to a good home.</p>'
+    assert_includes email.html_part.to_s, 'Free to a good home.</p>'
   end
 end

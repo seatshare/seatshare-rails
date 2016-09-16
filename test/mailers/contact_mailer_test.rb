@@ -18,9 +18,9 @@ class ContactMailerTest < ActionMailer::TestCase
     assert_equal 'This is a sample message', email.subject
 
     assert_includes(
-      email.body.to_s,
-      "<p>This is a long message that\n<br /> has a line "\
-      "break or\n<br /> two in it.</p>"
+      email.html_part.to_s,
+      "This is a long message that\r\n<br> has a line break "\
+      "or\r\n<br> two in it.</p>"
     )
   end
 end

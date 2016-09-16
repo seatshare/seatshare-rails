@@ -27,8 +27,10 @@ class ContactMailer < ActionMailer::Base
       reply_to: "#{name} <#{email}>"
     )
 
-    headers['X-MC-Tags'] = 'SupportTicket'
-    headers['X-MC-Subaccount'] = 'SeatShare'
-    headers['X-MC-SigningDomain'] = 'myseatshare.com'
+    headers['X-Mailgun-Tag'] = 'SupportTicket'
+    headers['X-Mailgun-Dkim'] = 'yes'
+    headers['X-Mailgun-Track'] = 'yes'
+    headers['X-Mailgun-Track-Clicks'] = 'yes'
+    headers['X-Mailgun-Track-Opens'] = 'yes'
   end
 end
