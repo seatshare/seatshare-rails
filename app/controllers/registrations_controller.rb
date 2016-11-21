@@ -41,7 +41,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
-    if resource.save
+    if verify_recaptcha(model: resource) && resource.save
 
       # Send welcome email
       WelcomeEmail.welcome(resource).deliver_now

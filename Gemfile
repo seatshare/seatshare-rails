@@ -94,6 +94,9 @@ gem 'icalendar', '~> 2.3.0'
 # Slack Notifier
 gem 'slack-notifier', '~> 1.5.1'
 
+# reCAPTCHTA
+gem 'recaptcha', require: 'recaptcha/rails'
+
 group :doc do
   gem 'sdoc', '~> 0.4.1', require: false
 end
@@ -113,6 +116,7 @@ group :test do
 end
 
 group :development do
+  gem 'pry-coolline', '~> 0.2.4'
   gem 'rubocop', '~> 0.41.2'
   gem 'bundler', '~> 1.12.5'
   gem 'rack-livereload', '~> 0.3.16'
