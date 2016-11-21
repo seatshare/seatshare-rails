@@ -139,6 +139,26 @@ ol.user-steps {
   z-index: 99999;
 }
 
+/* Form Errors */
+#error_explanation {
+  border:solid 1px #000;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  h2 {
+    color: #fff;
+    background-color: red;
+    border-radius: 10px 10px 0 0;
+    margin: 0 0 1em 0;
+    padding: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+  }
+  ul {
+    list-style: outside;
+    margin: 0 0 18px 0;
+  }
+}
+
 /* Inline Images */
 .image-text-inline {
   vertical-align: middle;
