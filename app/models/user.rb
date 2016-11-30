@@ -80,6 +80,18 @@ class User < ActiveRecord::Base
     false
   end
 
+  ##
+  # Destroy
+  def destroy
+    Membership.where(user_id: id).delete_all
+    Ticket.where(owner_id: id).delete_all
+    Ticket.where(user_id: id).find_each do |ticket|
+      ticket.user_id = 0
+      ticket.save!
+    end
+    super
+  end
+
   private
 
   ##

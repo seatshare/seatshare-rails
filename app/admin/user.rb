@@ -44,6 +44,22 @@ ActiveAdmin.register User do
     f.actions
   end
 
+  batch_action :deactivate do |ids|
+    User.find(ids).each do |user|
+      user.status = 0
+      user.save!
+    end
+    redirect_to collection_path, alert: 'User(s) deactivated.'
+  end
+
+  batch_action :activate do |ids|
+    User.find(ids).each do |user|
+      user.status = 1
+      user.save!
+    end
+    redirect_to collection_path, alert: 'User(s) activated.'
+  end
+
   sidebar 'User Groups', only: :show do
     ul do
       User.find(resource.id).groups.by_name.collect do |group|

@@ -31,6 +31,22 @@ ActiveAdmin.register Group do
   filter :invitation_code
   filter :status
 
+  batch_action :deactivate do |ids|
+    Group.find(ids).each do |group|
+      group.status = 0
+      group.save!
+    end
+    redirect_to collection_path, alert: 'Group(s) deactivated.'
+  end
+
+  batch_action :activate do |ids|
+    Group.find(ids).each do |group|
+      group.status = 1
+      group.save!
+    end
+    redirect_to collection_path, alert: 'Group(s) activated.'
+  end
+
   show do
     attributes_table do
       row :group_name

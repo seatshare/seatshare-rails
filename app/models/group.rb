@@ -148,6 +148,13 @@ class Group < ActiveRecord::Base
     options + members.map { |m| [m.display_name, m.id] }
   end
 
+  ##
+  # Destroy
+  def destroy
+    Ticket.where(group_id: id).delete_all
+    Membership.where(group_id: id).delete_all
+  end
+
   private
 
   ##

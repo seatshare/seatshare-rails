@@ -75,6 +75,13 @@ class Ticket < ActiveRecord::Base
     ticket_history.save
   end
 
+  ##
+  # Destroy
+  def destroy
+    TicketHistory.where(ticket_id: id).delete_all
+    super
+  end
+
   private
 
   ##
