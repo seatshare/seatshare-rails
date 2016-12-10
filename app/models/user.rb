@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :tickets
-  has_many :user_aliases
-  has_many :memberships
-  has_many :groups, through: :memberships
+  has_many :tickets, dependent: :destroy, foreign_key: :owner_id
+  has_many :user_aliases, dependent: :destroy
+  has_many :memberships, dependent: :delete_all
+  has_many :groups, through: :memberships, dependent: :destroy,
+                    foreign_key: :creator_id
 
   before_save :clean_calendar_token
 
@@ -78,6 +79,16 @@ class User < ActiveRecord::Base
     end
     return true if shared_users.include? user.id
     false
+  end
+
+  ##
+  # Destroy
+  def destroy
+    Ticket.where(user_id: id).find_each do |ticket|
+      ticket.user_id = 0
+      ticket.save!
+    end
+    super
   end
 
   private

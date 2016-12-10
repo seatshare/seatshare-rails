@@ -102,7 +102,7 @@ class Entity < ActiveRecord::Base
   ##
   # Generate a unique import key for new entities
   def generate_import_key(attributes)
-    et = EntityType.find_by_id(attributes[:entity_type_id]) || nil
+    et = EntityType.find_by(id: attributes[:entity_type_id]) || nil
     if et.nil?
       "#{attributes[:entity_type_id]}: #{attributes[:entity_name]}".parameterize
     else

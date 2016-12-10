@@ -59,7 +59,7 @@ class TicketsController < ApplicationController
   ##
   # New ticket form
   def new
-    @group = Group.find_by_id(params[:group_id]) || not_found
+    @group = Group.find_by(id: params[:group_id]) || not_found
     @ticket = Ticket.new(
       owner_id: current_user.id, user_id: current_user.id
     )
@@ -71,7 +71,7 @@ class TicketsController < ApplicationController
     @user_aliases.unshift(['Not Set', 0])
 
     if params[:event_id]
-      @event = Event.find_by_id(params[:event_id]) || not_found
+      @event = Event.find_by(id: params[:event_id]) || not_found
       @ticket_stats = @event.ticket_stats(@group, current_user)
       @page_title = @event.event_name
     else
@@ -144,9 +144,9 @@ class TicketsController < ApplicationController
   ##
   # Edit ticket properties if owner
   def edit
-    @group = Group.find_by_id(params[:group_id]) || not_found
-    @event = Event.find_by_id(params[:event_id]) || not_found
-    @ticket = Ticket.find_by_id(params[:id]) || not_found
+    @group = Group.find_by(id: params[:group_id]) || not_found
+    @event = Event.find_by(id: params[:event_id]) || not_found
+    @ticket = Ticket.find_by(id: params[:id]) || not_found
     if @ticket.assigned != current_user && @ticket.owner != current_user
       redirect_to action: 'request_ticket', id: @ticket.id
     end
@@ -207,9 +207,9 @@ class TicketsController < ApplicationController
   ##
   # Request a ticket if not owner
   def request_ticket
-    @group = Group.find_by_id(params[:group_id]) || not_found
-    @event = Event.find_by_id(params[:event_id]) || not_found
-    @ticket = Ticket.find_by_id(params[:id]) || not_found
+    @group = Group.find_by(id: params[:group_id]) || not_found
+    @event = Event.find_by(id: params[:event_id]) || not_found
+    @ticket = Ticket.find_by(id: params[:id]) || not_found
     raise 'NotGroupMember' unless @group.member?(current_user)
     @ticket_stats = @event.ticket_stats(@group, current_user)
     redirect_to(
@@ -220,7 +220,7 @@ class TicketsController < ApplicationController
   ##
   # Process a ticket request
   def do_request_ticket
-    ticket = Ticket.find_by_id(params[:id]) || not_found
+    ticket = Ticket.find_by(id: params[:id]) || not_found
     raise 'NotGroupMember' unless ticket.group.member?(current_user)
     message = params[:message][:personalization]
     TicketNotifier.request_ticket(ticket, current_user, message).deliver_now
@@ -237,7 +237,7 @@ class TicketsController < ApplicationController
   ##
   # Process a ticket unassignment
   def unassign
-    ticket = Ticket.find_by_id(params[:id]) || not_found
+    ticket = Ticket.find_by(id: params[:id]) || not_found
     raise 'AccessDenied' unless ticket.can_edit?(current_user)
     ticket.unassign
     Ticket.log_ticket_history ticket, 'unassigned', current_user
@@ -252,7 +252,7 @@ class TicketsController < ApplicationController
   ##
   # Process a ticket delete
   def delete
-    ticket = Ticket.find_by_id(params[:id]) || not_found
+    ticket = Ticket.find_by(id: params[:id]) || not_found
     raise 'AccessDenied' unless ticket.can_edit?(current_user)
     ticket.destroy!
     flash.keep

@@ -2,7 +2,7 @@
 # Ticket model
 class Ticket < ActiveRecord::Base
   has_many :ticket_files
-  has_many :ticket_histories
+  has_many :ticket_histories, dependent: :destroy
   belongs_to :event
   belongs_to :group, class_name: 'Group'
   belongs_to :user, class_name: 'User'
@@ -25,13 +25,13 @@ class Ticket < ActiveRecord::Base
   ##
   # Relation of assigned user
   def assigned
-    User.find_by_id(user_id)
+    User.find_by(id: user_id)
   end
 
   ##
   # True if ticket is available
   def available?
-    user_id == 0
+    user_id.zero?
   end
 
   ##
@@ -61,7 +61,7 @@ class Ticket < ActiveRecord::Base
   # - ticket: Ticket object
   # - action: string of action
   def self.log_ticket_history(ticket = nil, action = nil, actor)
-    user = User.find_by_id(ticket.user_id)
+    user = User.find_by(id: ticket.user_id)
     user_record = user.attributes unless user.nil?
     ticket_history = TicketHistory.new(
       event_id: ticket.event_id,
