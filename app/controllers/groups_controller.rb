@@ -17,7 +17,7 @@ class GroupsController < ApplicationController
     active_entities = Entity.active.includes(:entity_type).order(
       'entity_types.sort ASC'
     ).by_name
-    @entity = Entity.find_by_id(params[:entity_id])
+    @entity = Entity.find_by(id: params[:entity_id])
     options = {}
     active_entities.each_with_object({}) do |e|
       (options[e.entity_type.display_name] ||= []) << [e.entity_name, e.id]
@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
   ##
   # Processes a new group
   def create
-    entity = Entity.find_by_id(group_params[:entity_id]) || not_found
+    entity = Entity.find_by(id: group_params[:entity_id]) || not_found
     group = Group.new(
       group_name: "#{entity.entity_name} Group",
       entity_id: group_params[:entity_id],
@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
   ##
   # Edit group form
   def edit
-    @group = Group.find_by_id(params[:id]) || not_found
+    @group = Group.find_by(id: params[:id]) || not_found
     redirect_to(action: 'index') && return unless @group.member?(current_user)
     @members = @group.members.by_name
     @membership = Membership.where(
@@ -107,7 +107,7 @@ class GroupsController < ApplicationController
   ##
   # Initial page after login for a group member
   def show
-    @group = Group.find_by_id(params[:id]) || not_found
+    @group = Group.find_by(id: params[:id]) || not_found
     @entity = @group.entity
     not_found unless @group.status?
     redirect_to(action: 'index') && return unless @group.member?(current_user)
@@ -119,7 +119,7 @@ class GroupsController < ApplicationController
   ##
   # JSON feed for calendar widget
   def events_feed
-    @group = Group.find_by_id(params[:id]) || not_found
+    @group = Group.find_by(id: params[:id]) || not_found
     not_found unless @group.status?
     raise 'NotGroupMember' unless @group.member?(current_user)
     @events = @group.events.confirmed.by_date
@@ -174,7 +174,7 @@ class GroupsController < ApplicationController
   ##
   # Leave a group form
   def leave
-    @group = Group.find_by_id(params[:id]) || not_found
+    @group = Group.find_by(id: params[:id]) || not_found
     redirect_to(
       action: 'show', id: @group.id
     ) && return if @group.admin?(current_user)
@@ -189,7 +189,7 @@ class GroupsController < ApplicationController
            else
              current_user
            end
-    group = Group.find_by_id(params[:id]) || not_found
+    group = Group.find_by(id: params[:id]) || not_found
     if user != current_user && !group.admin?(current_user)
       flash[:error] = 'You do not have permission to remove other users.'
       redirect_to(action: 'show', id: group.id) && return
@@ -210,7 +210,7 @@ class GroupsController < ApplicationController
   ##
   # Deactivate Group
   def deactivate
-    @group = Group.find_by_id(params[:id]) || not_found
+    @group = Group.find_by(id: params[:id]) || not_found
     redirect_to(
       action: 'show', id: @group.id
     ) && return unless @group.admin?(current_user)

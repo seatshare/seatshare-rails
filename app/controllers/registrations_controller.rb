@@ -14,7 +14,7 @@ class RegistrationsController < Devise::RegistrationsController
       @invite = nil
     end
     if params[:entity_id]
-      @entity = Entity.find_by_id(params[:entity_id])
+      @entity = Entity.find_by(id: params[:entity_id])
       begin
         schedule = @entity.seatgeek_schedule
         @schedule = schedule['events']

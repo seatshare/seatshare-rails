@@ -4,9 +4,9 @@ class Group < ActiveRecord::Base
   belongs_to :entity
   belongs_to :creator, class_name: 'User'
 
-  has_many :memberships
+  has_many :memberships, dependent: :delete_all
   has_many :members, through: :memberships, source: :user
-  has_many :tickets
+  has_many :tickets, dependent: :destroy
   has_many :events, through: :entity
 
   validates :entity_id, :group_name, :creator_id, presence: true
@@ -146,13 +146,6 @@ class Group < ActiveRecord::Base
     options = []
     options << ['', ''] if append_empty
     options + members.map { |m| [m.display_name, m.id] }
-  end
-
-  ##
-  # Destroy
-  def destroy
-    Ticket.where(group_id: id).delete_all
-    Membership.where(group_id: id).delete_all
   end
 
   private

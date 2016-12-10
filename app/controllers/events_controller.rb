@@ -6,8 +6,8 @@ class EventsController < ApplicationController
   ##
   # Shows the list of tickets for an event
   def show
-    @group = Group.find_by_id(params[:group_id]) || not_found
-    @event = Event.find_by_id(params[:id]) || not_found
+    @group = Group.find_by(id: params[:group_id]) || not_found
+    @event = Event.find_by(id: params[:id]) || not_found
     not_found unless @group.entity.id == @event.entity.id
     @tickets = @event.tickets.where(group_id: @group.id).by_seat
     @ticket_stats = @event.ticket_stats(@group, current_user)

@@ -31,7 +31,7 @@ class UserAliasesController < ApplicationController
   ##
   # Edit user alias form
   def edit
-    @user_alias = UserAlias.find_by_id(params[:id]) || not_found
+    @user_alias = UserAlias.find_by(id: params[:id]) || not_found
     redirect_to(
       controller: :users, action: :edit
     ) && return if @user_alias.user_id != current_user.id
@@ -40,7 +40,7 @@ class UserAliasesController < ApplicationController
   ##
   # Process user alias updates
   def update
-    user_alias = UserAlias.find_by_id(params[:id]) || not_found
+    user_alias = UserAlias.find_by(id: params[:id]) || not_found
     user_alias.first_name = user_alias_params[:first_name]
     user_alias.last_name = user_alias_params[:last_name]
     flash.keep
@@ -58,7 +58,7 @@ class UserAliasesController < ApplicationController
   ##
   # Process a user alias delete
   def destroy
-    user_alias = UserAlias.find_by_id(params[:id]) || not_found
+    user_alias = UserAlias.find_by(id: params[:id]) || not_found
     if user_alias.user_id != current_user.id
       redirect_to(controller: :users, action: :edit) && return
     end
