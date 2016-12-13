@@ -28,7 +28,7 @@ class TicketFileTest < ActiveSupport::TestCase
   test 'download link' do
     tf = TicketFile.find(1)
 
-    assert_contains(
+    assert_match(
       "#{ENV['SEATSHARE_S3_PUBLIC']}/abcdefg1234.pdf?X-Amz-Algorithm=",
       tf.download_link
     )
