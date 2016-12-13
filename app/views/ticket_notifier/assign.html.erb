@@ -4,15 +4,15 @@
 
 <table cellpadding="10px">
   <tr>
-    <th style="width:100px">Group</th>
+    <th style="width:100px"><small>Group</small></th>
     <td><%= @group.group_name %></td>
   </tr>
   <tr>
-    <th>Event</th>
+    <th><small>Event</small></th>
     <td><%= @event.event_name %> : <%= @event.date_time %></td>
   </tr>
   <tr>
-    <th>Ticket</th>
+    <th><small>Ticket</small></th>
     <td><%= link_to @ticket.display_name, { :controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id, :only_path => false } %></td>
   </tr>
 </table>
@@ -20,7 +20,7 @@
 <% if !@ticket.ticket_files.blank? %>
 <table cellpadding="10px">
   <tr>
-    <th style="width:100px">Attachments</th>
+    <th style="width:100px"><small>Attachments</small></th>
     <td>
       <table>
         <% for file in @ticket.ticket_files %>
@@ -29,11 +29,12 @@
         </tr>
         <% end %>
       </table>
+      <p><small><u>Note:</u> Emailed ticket links expire in 24 hours. <%= link_to 'Login', { :controller => 'tickets', :action => 'edit', :group_id => @ticket.group_id, :event_id => @ticket.event_id, :id => @ticket.id, :only_path => false } %> to download.</small></p>
     </td>
   </tr>
 </table>
 <% end %>
- 
+
 <p>
   ---<br />
   <%= link_to 'SeatShare', { :controller => 'public', :action => 'index', :only_path => false } %>  on behalf of <%= @user.display_name %><br />
