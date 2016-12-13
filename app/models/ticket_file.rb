@@ -21,9 +21,16 @@ class TicketFile < ActiveRecord::Base
   end
 
   ##
-  # Format path as a download link
+  # Format path as a signed download link
   def download_link
-    "#{ENV['SEATSHARE_S3_PUBLIC']}/#{path}"
+    s3 = Aws::S3::Client.new
+    signer = Aws::S3::Presigner.new(client: s3)
+    signer.presigned_url(
+      :get_object,
+      bucket: ENV['SEATSHARE_S3_BUCKET'],
+      key: path,
+      expires_in: 86_400
+    )
   end
 
   ##
