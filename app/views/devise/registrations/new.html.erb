@@ -62,19 +62,7 @@
   <% end %>
 </div>
 
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "SportsTeam",
-  "name": "<%= @entity.entity_name %>",
-  "memberOf": [
-    {
-      "@type": "SportsOrganization",
-      "name": "<%= @entity.entity_type.entity_type_name %>"
-    }
-  ]
-}
-</script>
+<%= raw(@entity.to_json_ld) %>
 
 <% end %>
 
