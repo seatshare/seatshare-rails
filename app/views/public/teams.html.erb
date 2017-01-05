@@ -19,6 +19,7 @@
       <% for team in teams %>
       <div class="col-md-4">
         <p><%= link_to truncate(team.entity_name, length: 30), register_with_entity_id_path(nil, { :entity_slug => team.display_name.parameterize, :entity_id => team.id}), class: 'btn btn-link', title: team.display_name %></p>
+        <%= raw(team.to_json_ld) %>
       </div>
       <%  end %>
     </div>

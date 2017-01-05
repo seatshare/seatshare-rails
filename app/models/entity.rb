@@ -97,6 +97,22 @@ class Entity < ActiveRecord::Base
     end
   end
 
+  ##
+  # JSON-LD
+  def to_json_ld
+    json = {
+      :@context => 'http://schema.org',
+      :@type => 'SportsTeam',
+      :name => entity_name,
+      :image => default_avatar,
+      :memberOf => {
+        :@type => 'SportsOrganization',
+        :name => entity_type.entity_type_name
+      }
+    }.to_json
+    "<script type='application/ld+json'>#{json}</script>"
+  end
+
   private
 
   ##
