@@ -62,15 +62,21 @@ class UserTest < ActiveSupport::TestCase
 
   test 'uses markdown for bio' do
     user = User.find(1)
-    user.bio = "*I'm a teapot*"
 
+    user.bio = "*I'm a teapot*"
     assert_equal user.bio_md, "<p><em>I&#39;m a teapot</em></p>\n"
 
     user.bio = 'http://google.com'
-
     assert_equal(
-      user.bio_md,
-      "<p><a href=\"http://google.com\">http://google.com</a></p>\n"
+      "<p><a href=\"http://google.com\">http://google.com</a></p>\n",
+      user.bio_md
     )
+  end
+
+  test 'included a script tag in bio' do
+    user = User.find(1)
+
+    user.bio = "<script>window.alert('evil')</script>"
+    assert_equal "<p>window.alert(&#39;evil&#39;)</p>\n", user.bio_md
   end
 end

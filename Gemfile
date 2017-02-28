@@ -73,7 +73,7 @@ gem 'slackistrano', '~> 1.0.0', require: false
 gem 'whenever', '~> 0.9.4', require: false
 
 # Markdown Support
-gem 'github-markdown', '~> 0.6.9'
+gem 'redcarpet', '~> 3.4.0'
 
 # REST Client (for Google Analytics goal tracking)
 gem 'rest-client', '~> 1.8.0'
@@ -118,7 +118,7 @@ end
 group :development do
   gem 'pry-coolline', '~> 0.2.4'
   gem 'rubocop', '~> 0.41.2'
-  gem 'bundler', '~> 1.12.5'
+  gem 'bundler'
   gem 'rack-livereload', '~> 0.3.16'
   gem 'guard-livereload', '~> 2.5.1'
   gem 'guard-bundler', '~> 2.1.0'
