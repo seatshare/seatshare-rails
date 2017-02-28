@@ -98,7 +98,9 @@ class Event < ActiveRecord::Base
   ##
   # Description as Markdown
   def description_md
-    GitHub::Markdown.render(description)
+    renderer = Redcarpet::Render::HTML.new(filter_html: true)
+    markdown = Redcarpet::Markdown.new(renderer, autolink: true)
+    markdown.render(description || '')
   end
 
   ##

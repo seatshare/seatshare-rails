@@ -63,7 +63,9 @@ class User < ActiveRecord::Base
   ##
   # Bio as Markdown
   def bio_md
-    GitHub::Markdown.render(bio)
+    renderer = Redcarpet::Render::HTML.new(filter_html: true)
+    markdown = Redcarpet::Markdown.new(renderer, autolink: true)
+    markdown.render(bio || '')
   end
 
   ##
