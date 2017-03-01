@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby ENV['CUSTOM_RUBY_VERSION'] || '2.3.1'
 
+# Use Unicorn as the app server
+gem 'unicorn'
+
 # dotenv
 gem 'dotenv-rails', groups: [:development, :test]
 
