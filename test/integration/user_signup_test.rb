@@ -7,7 +7,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     SeatGeek::Connection.client_id = 'a_test_client_id'
     stub_request(
       :get,
-      'https://a_test_client_id:@api.seatgeek.com/2/events'\
+      'https://api.seatgeek.com/2/events'\
         '?per_page=500&performers.slug=nashville-predators&venue.id=2195'
     ).to_return(
       status: 200,
@@ -17,8 +17,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     )
     stub_request(
       :get,
-      'https://a_test_client_id:@api.seatgeek.com/2/performers'\
-        '?slug=nashville-predators'
+      'https://api.seatgeek.com/2/performers?slug=nashville-predators'
     ).to_return(
       status: 200,
       body: File.new(
@@ -45,7 +44,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     )
 
     assert_response :success
-    assert_equal nil, flash[:alert]
+    assert_nil flash[:alert]
     assert_equal 'Welcome! You have signed up successfully.', flash[:notice]
     assert_equal '/groups/new', path
   end
@@ -88,7 +87,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     )
 
     assert_response :success
-    assert_equal nil, flash[:alert]
+    assert_nil flash[:alert]
     assert_equal 'Welcome! You have signed up successfully.', flash[:notice]
     assert_equal '/groups/1', path
   end
@@ -107,7 +106,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     )
 
     assert_response :success
-    assert_equal nil, flash[:alert]
+    assert_nil flash[:alert]
     assert_equal 'Welcome! You have signed up successfully.', flash[:notice]
     assert_equal '/groups', path
   end
@@ -130,7 +129,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     )
 
     assert_response :success
-    assert_equal nil, flash[:alert]
+    assert_nil flash[:alert]
     assert_equal 'Welcome! You have signed up successfully.', flash[:notice]
     assert_equal '/groups/new', path
   end
@@ -150,7 +149,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     )
 
     assert_response :success
-    assert_equal nil, flash[:alert]
+    assert_nil flash[:alert]
     assert_equal 'User alias created!', flash[:notice]
     assert_equal edit_user_path, path
   end
@@ -167,7 +166,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
     delete_via_redirect user_alias_path(2)
 
     assert_response :success
-    assert_equal nil, flash[:alert]
+    assert_nil flash[:alert]
     assert_equal 'User Alias deleted.', flash[:notice]
     assert_equal edit_user_path, path
   end

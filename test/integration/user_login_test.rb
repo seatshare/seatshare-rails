@@ -13,7 +13,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
       '/login',
       user: { email: users(:jim).email, password: 'testing123' }
     )
-    assert_equal nil, flash[:alert]
+    assert_nil flash[:alert]
     assert_equal 'Signed in successfully.', flash[:notice]
     assert_equal '/groups/1', path
   end
@@ -26,7 +26,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
       '/login',
       user: { email: users(:sarah).email, password: 'testing123' }
     )
-    assert_equal nil, flash[:alert]
+    assert_nil flash[:alert]
     assert_equal 'Signed in successfully.', flash[:notice]
     assert_equal '/groups', path
   end
@@ -51,7 +51,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
       '/login',
       user: { email: users(:jim).email, password: 'testing123' }
     )
-    assert_equal nil, flash[:alert]
+    assert_nil flash[:alert]
     assert_equal 'Signed in successfully.', flash[:notice]
     assert_equal '/groups/1', path
 

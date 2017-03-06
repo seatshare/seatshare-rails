@@ -11,7 +11,7 @@ class EntityTest < ActiveSupport::TestCase
     SeatGeek::Connection.client_id = 'a_test_client_id'
     stub_request(
       :get,
-      'https://a_test_client_id:@api.seatgeek.com/2/events'\
+      'https://api.seatgeek.com/2/events'\
         '?per_page=500&performers.slug=nashville-predators&venue.id=2195'
     ).to_return(
       status: 200,
@@ -21,7 +21,7 @@ class EntityTest < ActiveSupport::TestCase
     )
     stub_request(
       :get,
-      'https://a_test_client_id:@api.seatgeek.com/2/performers'\
+      'https://api.seatgeek.com/2/performers'\
         '?slug=nashville-predators'
     ).to_return(
       status: 200,

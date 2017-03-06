@@ -1,11 +1,8 @@
 source 'https://rubygems.org'
 ruby ENV['CUSTOM_RUBY_VERSION'] || '2.3.1'
 
-# dotenv
-gem 'dotenv-rails', groups: [:development, :test]
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.7.1'
+gem 'rails', '~> 4.2.8'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.4'
@@ -98,31 +95,30 @@ gem 'slack-notifier', '~> 1.5.1'
 gem 'recaptcha', require: 'recaptcha/rails'
 
 group :doc do
-  gem 'sdoc', '~> 0.4.1', require: false
+  gem 'sdoc', require: false
 end
 
 group :production do
-  gem 'rails_12factor', '~> 0.0.3'
-  gem 'newrelic_rpm', '~> 3.14.1.311'
+  gem 'newrelic_rpm'
+  gem 'rails_12factor'
 end
 
-group :test do
-  gem 'webmock', '~> 1.22.3'
-  gem 'guard-minitest', '~> 2.4.4'
-  gem 'guard-spork', '~> 2.1.0'
-  gem 'spork-rails', '~> 4.0.0'
-  gem 'spork-minitest', github: 'dekart/spork-minitest'
-  gem 'minitest-ci', github: 'circleci/minitest-ci'
-end
-
-group :development do
-  gem 'pry-coolline', '~> 0.2.4'
-  gem 'rubocop', '~> 0.41.2'
+group :development, :test do
+  gem 'dotenv-rails'
   gem 'bundler'
-  gem 'rack-livereload', '~> 0.3.16'
-  gem 'guard-livereload', '~> 2.5.1'
-  gem 'guard-bundler', '~> 2.1.0'
-  gem 'guard-rubocop', '~> 1.2.0'
-  gem 'pry-rails', '~> 0.3.4'
-  gem 'pry-nav', '~> 0.2.4'
+  gem 'guard-bundler'
+  gem 'guard-livereload'
+  gem 'guard-minitest'
+  gem 'guard-rubocop'
+  gem 'guard-spork'
+  gem 'minitest'
+  gem 'minitest-ci', github: 'circleci/minitest-ci'
+  gem 'pry-coolline'
+  gem 'pry-nav'
+  gem 'pry-rails'
+  gem 'rack-livereload'
+  gem 'rubocop'
+  gem 'spork-minitest', github: 'dekart/spork-minitest'
+  gem 'spork-rails'
+  gem 'webmock'
 end
