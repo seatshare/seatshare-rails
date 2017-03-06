@@ -20,7 +20,6 @@
 # Ignore local config files
 /config/database.yml
 .env
-/config/deploy/slack.rb
 
 # Ignore bower components
 /vendor/assets/components
