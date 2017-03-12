@@ -1,3 +1,9 @@
+# Generates coverage reports
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/admin/'
+end
+
 $LOAD_PATH << 'test'
 require 'rubygems'
 require 'spork'

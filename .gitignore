@@ -40,3 +40,4 @@
 
 # Ignore generated test reports
 /test/reports/*
+/coverage/*

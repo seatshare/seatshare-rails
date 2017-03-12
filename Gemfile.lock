@@ -137,6 +137,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    docile (1.1.5)
     domain_name (0.5.20170223)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.2.0)
@@ -375,6 +376,11 @@ GEM
       rake
       yajl-ruby
     shellany (0.0.1)
+    simplecov (0.13.0)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     slack-notifier (1.5.1)
     slackistrano (1.0.0)
       capistrano (>= 3.0.1)
@@ -476,6 +482,7 @@ DEPENDENCIES
   sass-rails (~> 5.0.4)
   sdoc
   seatgeek (~> 1.0.0)
+  simplecov
   slack-notifier (~> 1.5.1)
   slackistrano (~> 1.0.0)
   spork-minitest!
