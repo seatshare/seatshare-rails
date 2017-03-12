@@ -1,5 +1,9 @@
 # Generates coverage reports
 require 'simplecov'
+
+# Set coverage reports to use the reports directory
+SimpleCov.coverage_dir(File.join('test', 'reports', 'coverage'))
+
 SimpleCov.start do
   add_filter '/admin/'
 end
