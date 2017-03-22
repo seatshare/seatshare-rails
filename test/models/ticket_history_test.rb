@@ -49,4 +49,13 @@ class TicketHistoryTest < ActiveSupport::TestCase
 
     assert_equal 'Jim Stone', ticket_history.user.display_name
   end
+
+  test 'history returned in a reverse chronological order' do
+    ticket_history = Ticket.find(2).ticket_histories
+
+    assert_equal 2, ticket_history[0].id
+    assert_equal 4, ticket_history[1].id
+    assert_equal 3, ticket_history[2].id
+  end
+
 end
