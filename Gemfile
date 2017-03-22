@@ -104,6 +104,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'simplecov'
   gem 'dotenv-rails'
   gem 'bundler'
   gem 'guard-bundler'
