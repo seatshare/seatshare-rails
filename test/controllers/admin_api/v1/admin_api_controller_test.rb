@@ -19,10 +19,10 @@ module AdminApi
         json = JSON.parse(@response.body)
 
         assert_response :success
-        assert json['version'] == 1
-        assert json['method'] == 'methods'
-        assert json['status'] == 'success'
-        assert json['data'].length == 9
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'methods'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'].length, 9
       end
 
       test 'get API error with incorrect key' do
@@ -31,9 +31,9 @@ module AdminApi
         json = JSON.parse(@response.body)
 
         assert_response :forbidden
-        assert json['version'] == 1
-        assert json['status'] == 'error'
-        assert json['error'] == 'Invalid API key'
+        assert_equal json['version'], 1
+        assert_equal json['status'], 'error'
+        assert_equal json['error'], 'Invalid API key'
       end
 
       test 'get API error with no key established' do
@@ -43,9 +43,9 @@ module AdminApi
         json = JSON.parse(@response.body)
 
         assert_response :forbidden
-        assert json['version'] == 1
-        assert json['status'] == 'error'
-        assert json['error'] == 'Invalid API key'
+        assert_equal json['version'], 1
+        assert_equal json['status'], 'error'
+        assert_equal json['error'], 'Invalid API key'
       end
 
       test 'get user counts' do
@@ -53,10 +53,10 @@ module AdminApi
 
         json = JSON.parse(@response.body)
 
-        assert json['version'] == 1
-        assert json['method'] == 'user_count'
-        assert json['status'] == 'success'
-        assert json['data'] == 6
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'user_count'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'], 7
       end
 
       test 'get group counts' do
@@ -64,10 +64,10 @@ module AdminApi
 
         json = JSON.parse(@response.body)
 
-        assert json['version'] == 1
-        assert json['method'] == 'group_count'
-        assert json['status'] == 'success'
-        assert json['data'] == 2
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'group_count'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'], 2
       end
 
       test 'get total invites' do
@@ -75,10 +75,10 @@ module AdminApi
 
         json = JSON.parse(@response.body)
 
-        assert json['version'] == 1
-        assert json['method'] == 'total_invites'
-        assert json['status'] == 'success'
-        assert json['data'] == 0
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'total_invites'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'], 0
       end
 
       test 'get accepted invites' do
@@ -86,10 +86,10 @@ module AdminApi
 
         json = JSON.parse(@response.body)
 
-        assert json['version'] == 1
-        assert json['method'] == 'accepted_invites'
-        assert json['status'] == 'success'
-        assert json['data'] == 0
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'accepted_invites'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'], 0
       end
 
       test 'get recent groups' do
@@ -97,10 +97,10 @@ module AdminApi
 
         json = JSON.parse(@response.body)
 
-        assert json['version'] == 1
-        assert json['method'] == 'recent_groups'
-        assert json['status'] == 'success'
-        assert json['data'].length == 3
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'recent_groups'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'].length, 3
       end
 
       test 'get recent users' do
@@ -108,10 +108,10 @@ module AdminApi
 
         json = JSON.parse(@response.body)
 
-        assert json['version'] == 1
-        assert json['method'] == 'recent_users'
-        assert json['status'] == 'success'
-        assert json['data'].length == 5
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'recent_users'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'].length, 5
       end
 
       test 'get total tickets' do
@@ -119,10 +119,10 @@ module AdminApi
 
         json = JSON.parse(@response.body)
 
-        assert json['version'] == 1
-        assert json['method'] == 'total_tickets'
-        assert json['status'] == 'success'
-        assert json['data'] == 9
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'total_tickets'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'], 9
       end
 
       test 'get tickets transferred' do
@@ -130,10 +130,10 @@ module AdminApi
 
         json = JSON.parse(@response.body)
 
-        assert json['version'] == 1
-        assert json['method'] == 'tickets_transferred'
-        assert json['status'] == 'success'
-        assert json['data'] == 2
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'tickets_transferred'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'], 2
       end
 
       # tickets_unused
@@ -142,10 +142,10 @@ module AdminApi
 
         json = JSON.parse(@response.body)
 
-        assert json['version'] == 1
-        assert json['method'] == 'tickets_unused'
-        assert json['status'] == 'success'
-        assert json['data'] == 2
+        assert_equal json['version'], 1
+        assert_equal json['method'], 'tickets_unused'
+        assert_equal json['status'], 'success'
+        assert_equal json['data'], 2
       end
     end
   end

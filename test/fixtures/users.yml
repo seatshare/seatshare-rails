@@ -69,3 +69,12 @@ jane:
   encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
   status: true
   calendar_token: 18eqlBdVVd7hxyBcXCYTOw
+
+larry:
+  id: 8
+  first_name: Larry
+  last_name: Jennings
+  email: larry@example.net
+  encrypted_password: $2a$10$/FjTIo/TTt6ebMH.ahTE6uDKUFxLDqoBT1lAfkn4YTYVuSXZFAc3C
+  status: true
+  calendar_token: CY0YbuOyiFrSTQuj0sJE4x

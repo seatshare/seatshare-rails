@@ -73,6 +73,7 @@ class User < ActiveRecord::Base
   # - user: instance of user to see if they have a common group
   def user_can_view?(user)
     return false if user.nil?
+    return true if user.id == id
     shared_users = []
     groups.collect do |group|
       group.members.collect do |u|
