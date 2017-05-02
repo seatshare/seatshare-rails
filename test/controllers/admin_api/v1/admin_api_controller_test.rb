@@ -9,6 +9,8 @@ module AdminApi
     ##
     # Admin API Controller
     class AdminApiControllerTest < ActionController::TestCase
+      include Devise::Test::ControllerHelpers
+
       def setup
         ENV['ADMIN_API_KEY'] = 'ABCD12345EFG'
       end

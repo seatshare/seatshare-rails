@@ -3,6 +3,8 @@ require 'test_helper'
 ##
 # Groups controller test
 class GroupsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   test 'should be redirected' do
     get :index
 
@@ -12,7 +14,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should get index' do
     @user = User.find(2)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :index
     assert_response :success, 'got a 200 status'
@@ -22,7 +24,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should see group creation page' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :new
     assert_response :success, 'got a 200 status'
@@ -36,7 +38,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should see join page' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :join
     assert_response :success, 'got a 200 status'
@@ -45,7 +47,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should see join page with pre-populated code' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :join, invite_code: 'ABC123'
     assert_response :success, 'got a 200 status'
@@ -56,7 +58,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should see invite page' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :invite, id: 2
     assert_response :success, 'got a 200 status'
@@ -65,7 +67,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should see leave page' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :leave, id: 2
     assert_response :success, 'got a 200 status'
@@ -74,7 +76,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should see deactivate page' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :deactivate, id: 1
     assert_response :success, 'got a 200 status'
@@ -83,7 +85,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should get group page' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :show, id: 1
     assert_response :success, 'got a 200 status'
@@ -92,7 +94,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'non-member should get redirected to groups index' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :show, id: 2
     assert_response :redirect, 'was redirected to groups listing'
@@ -101,7 +103,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should see remove user option' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :edit, id: 1
     assert_response :success, 'got a 200 status'
@@ -111,7 +113,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test 'should not see remove user option' do
     @user = User.find(2)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :edit, id: 1
     remove_user_column = css_select('.remove-user')
@@ -123,7 +125,7 @@ class GroupsControllerTest < ActionController::TestCase
     @user = User.find(1)
     @removed = User.find(2)
     @group = Group.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     post :do_leave, user_id: @removed, id: @group.id
     assert_response :redirect, 'got a 304 status'
@@ -134,7 +136,7 @@ class GroupsControllerTest < ActionController::TestCase
     @user = User.find(3)
     @removed = User.find(3)
     @group = Group.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     post :do_leave, user_id: @removed, id: @group.id
     assert_response :redirect, 'got a 304 status'
@@ -146,7 +148,7 @@ class GroupsControllerTest < ActionController::TestCase
       @user = User.find(1)
       @removed = User.find(1)
       @group = Group.find(1)
-      sign_in :user, @user
+      sign_in @user, scope: :user
 
       post :do_leave, user_id: @removed, id: @group.id
     end
@@ -156,7 +158,7 @@ class GroupsControllerTest < ActionController::TestCase
     @user = User.find(3)
     @removed = User.find(2)
     @group = Group.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     post :do_leave, user_id: @removed, id: @group.id
     assert_response :redirect, 'got a 304 status'
@@ -170,7 +172,7 @@ class GroupsControllerTest < ActionController::TestCase
     @user = User.find(1)
     @group = Group.find(1)
 
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :message,  id: @group.id
 

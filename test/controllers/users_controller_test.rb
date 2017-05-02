@@ -3,6 +3,8 @@ require 'test_helper'
 ##
 # Users controller test
 class UsersControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   test 'should be redirected' do
     get :show, id: 3
 
@@ -12,7 +14,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test 'should get profile of another user' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :show, id: 3
 
@@ -24,7 +26,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test 'should get own profile with edit' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :show, id: 1
 
@@ -36,7 +38,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :edit
 
