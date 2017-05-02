@@ -1,5 +1,5 @@
-# config valid only for Capistrano 3.4.1
-lock '3.4.1'
+# config valid only for Capistrano 3.8.1
+lock '3.8.1'
 
 set :application, 'seatshare'
 set :repo_url, 'git@github.com:stephenyeargin/seatshare-rails.git'
@@ -31,7 +31,10 @@ set :keep_releases, 5
 
 ##
 # Slackistrano (for notifying Slack)
-load 'config/deploy/slack.rb'
+set :slackistrano, {
+  channel: '#general',
+  webhook: ENV['SLACK_WEBHOOK_URL']
+}
 
 ##
 # Whenever (for scheduled jobs)
