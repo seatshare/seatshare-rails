@@ -5,51 +5,51 @@ ruby ENV['CUSTOM_RUBY_VERSION'] || '2.3.1'
 gem 'rails', '~> 4.2.8'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.4'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 2.7.2'
+gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.1.1'
+gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.0.5'
+gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 2.5.3'
+gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.3.2'
+gem 'jbuilder'
 
 # Use thin instead of Webrick
-gem 'thin', '~> 1.6.4'
+gem 'thin'
 
 # Use Bootstrap
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass'
 
 # Use Font Awesome
-gem 'font-awesome-rails', '~> 4.5.0.0'
+gem 'font-awesome-rails'
 
 # Use Devise
-gem 'devise', '~> 3.5.4'
+gem 'devise'
 
 # Javascript libraries
-gem 'momentjs-rails', '~> 2.10.6'
-gem 'underscore-rails', '~> 1.8.3'
+gem 'momentjs-rails'
+gem 'underscore-rails'
 
 # S3
-gem 'aws-sdk', '~> 2.3.22'
+gem 'aws-sdk'
 
 # Postgres
-gem 'pg', '~> 0.18.4'
+gem 'pg'
 
 # ActiveAdmin
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_admin_importable', github: 'krhorst/active_admin_importable'
 
 # Mailchimp API
-gem 'mailchimp-api', '~> 2.0.6'
+gem 'mailchimp-api'
 
 # Foundation email-assets
 gem 'foundation_emails'
@@ -58,38 +58,38 @@ gem 'foundation_emails'
 gem 'premailer-rails'
 
 # SeatGeek data provider
-gem 'seatgeek', '~> 1.0.0'
+gem 'seatgeek'
 
 # Capistrano
-gem 'capistrano', '~> 3.4.0'
-gem 'capistrano-rails', '~> 1.1.5'
-gem 'capistrano-bower', '~> 1.1.0'
-gem 'slackistrano', '~> 1.0.0', require: false
+gem 'capistrano'
+gem 'capistrano-rails'
+gem 'capistrano-bower'
+gem 'slackistrano', require: false
 
 # Whenever
-gem 'whenever', '~> 0.9.4', require: false
+gem 'whenever', require: false
 
 # Markdown Support
-gem 'redcarpet', '~> 3.4.0'
+gem 'redcarpet'
 
 # REST Client (for Google Analytics goal tracking)
-gem 'rest-client', '~> 1.8.0'
+gem 'rest-client'
 
 # Paperclip
-gem 'paperclip', '~> 5.0.0'
+gem 'paperclip'
 
 # Twilio / SMS related
-gem 'twilio-ruby', '~> 4.9.0'
-gem 'global_phone', '~> 1.0.1'
+gem 'twilio-ruby'
+gem 'global_phone'
 
 # Sitemaps
-gem 'dynamic_sitemaps', '~> 2.0.0'
+gem 'dynamic_sitemaps'
 
 # iCalendar
-gem 'icalendar', '~> 2.3.0'
+gem 'icalendar'
 
 # Slack Notifier
-gem 'slack-notifier', '~> 1.5.1'
+gem 'slack-notifier'
 
 # reCAPTCHTA
 gem 'recaptcha', require: 'recaptcha/rails'

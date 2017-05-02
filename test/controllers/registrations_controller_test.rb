@@ -3,6 +3,8 @@ require 'test_helper'
 ##
 # Registrations controller test
 class RegistrationsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   def setup
     SeatGeek::Connection.client_id = 'a_test_client_id'
     stub_request(

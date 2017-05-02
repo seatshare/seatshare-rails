@@ -3,6 +3,8 @@ require 'test_helper'
 ##
 # Events controller test
 class EventsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   test 'should be redirected' do
     get :show, id: 1, group_id: 2
 
@@ -12,7 +14,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'should get show' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :show, id: 4, group_id: 1
 
@@ -28,7 +30,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'should see localized timezone' do
     @user = User.find(2)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :show, id: 4, group_id: 1
 
@@ -41,7 +43,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'should get the correct ticket counts' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :show, id: 4, group_id: 1
 
@@ -53,7 +55,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'should get calendar event in ical format' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :show, id: 4, group_id: 1, format: 'ics'
 

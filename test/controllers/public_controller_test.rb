@@ -3,6 +3,8 @@ require 'test_helper'
 ##
 # Public controller test
 class PublicControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   test 'gets home page when not logged in' do
     get :index
     assert_response :success, 'got home page'
@@ -11,7 +13,7 @@ class PublicControllerTest < ActionController::TestCase
 
   test 'gets redirected when logged in and has no groups' do
     @user = User.find(6)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :index
     assert_response :redirect, 'redirected to another page'
@@ -20,7 +22,7 @@ class PublicControllerTest < ActionController::TestCase
 
   test 'gets redirected when logged in and is a group member' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :index
     assert_response :redirect, 'redirected to another page'

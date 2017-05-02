@@ -3,6 +3,8 @@ require 'test_helper'
 ##
 # User Aliases controller test
 class UserAliasesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   test 'should get redirected' do
     get :new
 
@@ -12,7 +14,7 @@ class UserAliasesControllerTest < ActionController::TestCase
 
   test 'should get redirected if not owned by user' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :edit, id: 1
 
@@ -22,7 +24,7 @@ class UserAliasesControllerTest < ActionController::TestCase
 
   test 'should get add' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :new
 
@@ -32,7 +34,7 @@ class UserAliasesControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     @user = User.find(4)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :edit, id: 1
 
@@ -42,7 +44,7 @@ class UserAliasesControllerTest < ActionController::TestCase
 
   test 'should get destroy' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :destroy, id: 1
 

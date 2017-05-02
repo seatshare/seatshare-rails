@@ -3,6 +3,8 @@ require 'test_helper'
 ##
 # Calendar Controller Test
 class CalendarControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   ##
   # Setup test
   def setup
@@ -11,7 +13,7 @@ class CalendarControllerTest < ActionController::TestCase
 
   test 'get calendar index' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :index
 

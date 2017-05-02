@@ -44,14 +44,6 @@ Spork.prefork do
     end
   end
 
-  module ActionController
-    ##
-    # Test Case class
-    class TestCase
-      include Devise::TestHelpers
-    end
-  end
-
   ##
   # Devise Controller class
   class DeviseController
