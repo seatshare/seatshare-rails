@@ -9,4 +9,4 @@ loginReady = ->
       $(this).addClass 'enabled'
 
 $(document).ready(loginReady)
-$(document).on('page:load', loginReady)
+$(document).on('turbolinks:load', loginReady)
