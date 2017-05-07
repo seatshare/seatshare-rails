@@ -10,7 +10,7 @@ class GoogleAnalyticsApi
   # - action: specific action taken
   # - client_id: the Google Analytics-generated unique identifier
   def event(category, action, client_id = '555')
-    return unless ENV['GOOGLE_ANALYTICS_ID'].present?
+    return if ENV['GOOGLE_ANALYTICS_ID'].blank?
     params = {
       v: 1,
       tid: ENV['GOOGLE_ANALYTICS_ID'],

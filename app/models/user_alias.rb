@@ -5,7 +5,7 @@ class UserAlias < ActiveRecord::Base
 
   validates :first_name, :last_name, :user_id, presence: true
 
-  scope :by_name, -> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') }
+  scope :by_name, (-> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') })
 
   ##
   # Display name for user alias

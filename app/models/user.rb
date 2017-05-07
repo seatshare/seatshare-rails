@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, :email, presence: true
 
-  scope :by_name, -> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') }
-  scope :active, -> { where(status: true) }
+  scope :by_name, (-> { order('LOWER(last_name) ASC, LOWER(first_name) ASC') })
+  scope :active, (-> { where(status: true) })
 
   attr_accessor :entity_id
   attr_accessor :newsletter_signup

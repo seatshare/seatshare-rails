@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
   def new
     @user = User.new
     if params[:invite_code]
-      @invite = GroupInvitation.find_by_invitation_code(params[:invite_code])
+      @invite = GroupInvitation.find_by(invitation_code: params[:invite_code])
     else
       @invite = nil
     end
@@ -31,7 +31,7 @@ class RegistrationsController < Devise::RegistrationsController
       @entity = nil
     end
     @group = if params[:group_code]
-               Group.find_by_invitation_code(params[:group_code])
+               Group.find_by(invitation_code: params[:group_code])
              end
     super
   end
@@ -70,9 +70,11 @@ class RegistrationsController < Devise::RegistrationsController
           respond_with resource, location: groups_new_path
         end
       else
-        set_flash_message(
-          :notice, :"signed_up_but_#{resource.inactive_message}"
-        ) if is_flashing_format?
+        if is_flashing_format?
+          set_flash_message(
+            :notice, :"signed_up_but_#{resource.inactive_message}"
+          )
+        end
         expire_data_after_sign_in!
         respond_with(
           resource,
@@ -104,7 +106,7 @@ class RegistrationsController < Devise::RegistrationsController
         invite_code: "#{params[:group_code]}#{params[:invite_code]}"
       ) && return
     end
-    require_no_authentication unless %w(edit update).include? params[:action]
+    require_no_authentication unless %w[edit update].include? params[:action]
   end
 
   ##

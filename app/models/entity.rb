@@ -9,8 +9,8 @@ class Entity < ActiveRecord::Base
   validates :entity_name, presence: true, uniqueness: { scope: :entity_type }
   before_save :clean_import_key
 
-  scope :by_name, -> { order('LOWER(entity_name) ASC') }
-  scope :active, -> { where(status: true) }
+  scope :by_name, (-> { order('LOWER(entity_name) ASC') })
+  scope :active, (-> { where(status: true) })
 
   ##
   # New entity object
@@ -69,7 +69,7 @@ class Entity < ActiveRecord::Base
     params[:per_page] = 500
     response = SeatGeek::Connection.events(params)
     raise response[:body] if response.key?(:status) && response[:status] != 200
-    raise 'No events.' unless response && response['events'].count > 0
+    raise 'No events.' unless response && response['events'].count.positive?
     response
   end
 
@@ -80,7 +80,7 @@ class Entity < ActiveRecord::Base
     params = Rack::Utils.parse_query URI(import_key).query
     response = SeatGeek::Connection.performers(slug: params['performers.slug'])
     raise response[:body] if response.key?(:status) && response[:status] != 200
-    raise 'No performer data.' unless response['performers'].count > 0
+    raise 'No performer data.' unless response['performers'].count.positive?
     response['performers'].first
   end
 
@@ -90,7 +90,7 @@ class Entity < ActiveRecord::Base
     style = 'medium' if style.nil?
     abbr = entity_type.entity_type_abbreviation.downcase
     image_path = File.join 'entity_types', "#{abbr}-group-#{style}-missing.png"
-    if File.exist?(File.join(Rails.root, 'app', 'assets', 'images', image_path))
+    if File.exist?(Rails.root.join('app', 'assets', 'images', image_path))
       ActionController::Base.helpers.asset_path image_path
     else
       ActionController::Base.helpers.asset_path("group-#{style}-missing.png")

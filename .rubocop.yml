@@ -17,3 +17,7 @@ AllCops:
     - 'log/**/*'
     - 'public/**/*'
     - 'vendor/**/*'
+    - 'test/**/*'
+    - 'lib/tasks/**/*'
+    - 'Guardfile'
+    - 'Gemfile'

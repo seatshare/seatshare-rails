@@ -6,7 +6,7 @@ ActiveAdmin.register_page 'Dashboard' do
     columns do
       column do
         panel 'Groups Without Upcoming Events' do
-          groups = Group.active.by_name.select { |g| g.events.future.count == 0 }
+          groups = Group.active.by_name.select { |g| g.events.future.count.zero? }
           unless groups.empty?
             table do
               thead do

@@ -43,18 +43,15 @@ class PublicController < ApplicationController
 
   ##
   # Terms of Service
-  def tos
-  end
+  def tos; end
 
   ##
   # Privacy policy
-  def privacy
-  end
+  def privacy; end
 
   ##
   # Contact form
-  def contact
-  end
+  def contact; end
 
   ##
   # Send Contact Form
@@ -88,7 +85,7 @@ class PublicController < ApplicationController
   # Redirect user to default group on index route
   def redirect_to_default_group
     groups = current_user.groups.active
-    if groups.count == 0
+    if groups.count.zero?
       redirect_to(
         controller: 'groups', action: 'index', status: 302
       ) && return

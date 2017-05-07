@@ -13,8 +13,8 @@ class Ticket < ActiveRecord::Base
   validates :group_id, :event_id, :owner_id, :user_id, presence: true
   validates :cost, numericality: { greater_than_or_equal_to: 0 }
 
-  scope :by_date, -> { joins(:event).order('events.start_time ASC') }
-  scope :by_seat, -> { order(:section, :row, :seat) }
+  scope :by_date, (-> { joins(:event).order('events.start_time ASC') })
+  scope :by_seat, (-> { order(:section, :row, :seat) })
 
   ##
   # Display name for ticket
@@ -37,7 +37,7 @@ class Ticket < ActiveRecord::Base
   ##
   # True if ticket is assigned
   def assigned?
-    user_id > 0
+    user_id.positive?
   end
 
   ##

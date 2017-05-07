@@ -17,7 +17,7 @@ class TwilioSMS
   # Send notification of an assigned ticket
   def assign_ticket(ticket, acting_user)
     assignee = ticket.assigned
-    return false unless !assignee.mobile.blank? && assignee.sms_notify
+    return false unless assignee.mobile.present? && assignee.sms_notify
     twilio_client.messages.create(
       from: ENV['TWILIO_OUTBOUND_NUMBER'], to: assignee.mobile_e164,
       body: "#{acting_user.display_name} has assigned you "\
@@ -32,7 +32,7 @@ class TwilioSMS
   # Send notification of a requested ticket
   def request_ticket(ticket, acting_user)
     owner = ticket.owner
-    return false unless !owner.mobile.blank? && owner.sms_notify
+    return false unless owner.mobile.present? && owner.sms_notify
     twilio_client.messages.create(
       from: ENV['TWILIO_OUTBOUND_NUMBER'], to: owner.mobile_e164,
       body: "#{acting_user.display_name} has requested #{ticket.display_name} "\
