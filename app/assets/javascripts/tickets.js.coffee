@@ -27,4 +27,4 @@ ticketsReady = ->
 	true
 
 $(document).ready(ticketsReady)
-$(document).on('page:load', ticketsReady)
+$(document).on('turbolinks:load', ticketsReady)
