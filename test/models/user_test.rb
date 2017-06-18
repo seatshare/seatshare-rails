@@ -48,11 +48,13 @@ class UserTest < ActiveSupport::TestCase
     user2 = User.find(2)
     user3 = User.find(3)
     user4 = User.find(4)
+    user8 = User.find(8)
 
     assert user1.user_can_view?(user2) == true
     assert user2.user_can_view?(user3) == true
     assert user3.user_can_view?(user4) == false
     assert user4.user_can_view?(user2) == false
+    assert user8.user_can_view?(user8) == true
   end
 
   test 'convert phone number to E.164 format' do

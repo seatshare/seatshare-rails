@@ -1,4 +1,4 @@
-$(document).on 'page:load ready', ->
+$(document).on 'turbolinks:load ready', ->
   # Navbar group switching
   $('#group_switcher select#group_selector').change (e) ->
     window.location = '/groups/' + $(this).val()

@@ -1,3 +1,13 @@
+# Generates coverage reports
+require 'simplecov'
+
+# Set coverage reports to use the reports directory
+SimpleCov.coverage_dir(File.join('test', 'reports', 'coverage'))
+
+SimpleCov.start do
+  add_filter '/admin/'
+end
+
 $LOAD_PATH << 'test'
 require 'rubygems'
 require 'spork'
@@ -31,14 +41,6 @@ Spork.prefork do
       fixtures :all
 
       # Add more helper methods to be used by all tests here...
-    end
-  end
-
-  module ActionController
-    ##
-    # Test Case class
-    class TestCase
-      include Devise::TestHelpers
     end
   end
 

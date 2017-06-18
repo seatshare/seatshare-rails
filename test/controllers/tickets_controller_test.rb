@@ -3,6 +3,8 @@ require 'test_helper'
 ##
 # Tickets controller test
 class TicketsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   test 'should be redirected' do
     get :edit, group_id: 1, event_id: 1, id: 2
 
@@ -12,7 +14,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :edit, group_id: 1, event_id: 1, id: 2
 
@@ -25,7 +27,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should unassign ticket' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :unassign, group_id: 1, event_id: 1, id: 2
 
@@ -35,7 +37,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should delete ticket' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :delete, group_id: 1, event_id: 1, id: 2
 
@@ -45,7 +47,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should delete ticket file' do
     @user = User.find(1)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :delete_ticket_file, group_id: 1, event_id: 4, ticket_id: 1, id: 1
 
@@ -55,7 +57,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should be redirected to request' do
     @user = User.find(2)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :edit, group_id: 1, event_id: 1, id: 2
 
@@ -64,7 +66,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should get request' do
     @user = User.find(2)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :request_ticket, group_id: 1, event_id: 1, id: 2
 
@@ -77,7 +79,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should get future tickets' do
     @user = User.find(2)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :index
 
@@ -87,7 +89,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should get past tickets' do
     @user = User.find(2)
-    sign_in :user, @user
+    sign_in @user, scope: :user
 
     get :index, filter: 'past'
 

@@ -5,3 +5,8 @@ database:
   override:
     - mv config/database.ci.yml config/database.yml
     - bundle exec rake db:create db:migrate --trace
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: seatshare-app

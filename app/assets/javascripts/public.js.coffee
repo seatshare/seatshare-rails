@@ -14,4 +14,4 @@ publicTeamsReady = ->
   wordLoop()
 
 $(document).ready(publicTeamsReady)
-$(document).on('page:load', publicTeamsReady)
+$(document).on('turbolinks:load', publicTeamsReady)

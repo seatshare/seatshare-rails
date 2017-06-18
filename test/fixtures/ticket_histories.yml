@@ -14,4 +14,25 @@ history_2:
   group_id: 1
   event_id: 4
   user_id: 1
-  entry: '{"text":"created","user":null,"ticket":{"event_id":"1","section":"326","row":"K","seat":"9","cost":"32.00","user_id":"0","id":2}}'
+  entry: '{"text":"created","user":null,"ticket":{"event_id":"1","section":"326","row":"K","seat":"9","cost":"30.00","user_id":"0","id":2}}'
+  created_at: Wed, 20 Nov 2013 17:30:00 +0000
+
+history_3:
+  id: 3
+  ticket_id: 2
+  event_id: 1
+  group_id: 1
+  event_id: 4
+  user_id: 1
+  entry: '{"text":"updated","user":null,"ticket":{"event_id":"1","section":"326","row":"K","seat":"9","cost":"31.00","user_id":"0","id":2}}'
+  created_at: Wed, 20 Nov 2013 17:10:00 +0000
+
+history_4:
+  id: 4
+  ticket_id: 2
+  event_id: 1
+  group_id: 1
+  event_id: 4
+  user_id: 1
+  entry: '{"text":"updated","user":null,"ticket":{"event_id":"1","section":"326","row":"K","seat":"9","cost":"32.00","user_id":"0","id":2}}'
+  created_at: Wed, 20 Nov 2013 17:20:00 +0000

@@ -8,6 +8,8 @@ class TicketHistory < ActiveRecord::Base
 
   validates :ticket_id, :group_id, :event_id, :user_id, :entry, presence: true
 
+  default_scope { order(created_at: :desc) }
+
   ##
   # Display name for ticket history record
   def display_name
