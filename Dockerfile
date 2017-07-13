@@ -4,6 +4,14 @@ FROM ruby:2.3.1-slim
 # Install essential Linux packages
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev postgresql-client git-all
 
+# Install node support files
+RUN apt-get install -y -qq npm
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
+# Install bower
+RUN npm install --global bower
+RUN echo '{ "allow_root": true }' > /root/.bowerrc
+
 # Define where our application will live inside the image
 ENV RAILS_ROOT /var/www/seatshare_app
 
@@ -23,12 +31,14 @@ COPY Gemfile.lock Gemfile.lock
 # Prevent bundler warnings; ensure that the bundler version executed is >= that which created Gemfile.lock
 RUN gem install bundler
 
-# Finish establishing our Ruby enviornment
+# Finish establishing our Ruby environment
 RUN bundle install
 
 # Copy the Rails application into place
 COPY . .
 
+# Compile the assets
+RUN npm install
+
 # Define the script we want run once the container boots
-# Use the "exec" form of CMD so our script shuts down gracefully on SIGTERM (i.e. `docker stop`)
-CMD [ "config/containers/app_cmd.sh" ]
+CMD ["bundle", "exec", "rails", "s"]
