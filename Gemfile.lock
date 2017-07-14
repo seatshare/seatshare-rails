@@ -451,7 +451,7 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass
   bundler
-  capistrano
+  capistrano (~> 3.8)
   capistrano-npm
   capistrano-rails
   coffee-rails
