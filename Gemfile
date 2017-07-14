@@ -61,8 +61,9 @@ gem 'premailer-rails'
 gem 'seatgeek'
 
 # Capistrano
-gem 'capistrano'
+gem 'capistrano', '~> 3.8'
 gem 'capistrano-rails'
+gem 'capistrano-npm'
 gem 'slackistrano', require: false
 
 # Whenever

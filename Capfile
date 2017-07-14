@@ -4,6 +4,7 @@ require 'capistrano/setup'
 # Includes default deployment tasks
 require 'capistrano/deploy'
 require 'capistrano/rails'
+require 'capistrano/npm'
 
 # Use Dotenv
 if File.exist? '.env'
