@@ -35,8 +35,8 @@ class Group < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\Z}i
 
-  scope :by_name, -> { order('LOWER(group_name) ASC') }
-  scope :active, -> { where(status: true) }
+  scope :by_name, (-> { order('LOWER(group_name) ASC') })
+  scope :active, (-> { where(status: true) })
 
   ##
   # New group object
@@ -124,14 +124,14 @@ class Group < ActiveRecord::Base
 
     # Start by attempting to using a GroupInvite
     invitation = GroupInvitation.get_by_invitation_code(invitation_code)
-    unless invitation.blank?
+    if invitation.present?
       invitation.group.join_group(user, 'member')
       invitation.use_invitation
       return invitation.group
     end
 
     # If that didn't work, use a group.invitation_code
-    group = find_by_invitation_code(invitation_code)
+    group = find_by(invitation_code: invitation_code)
     unless group.nil?
       group.join_group(user, 'member')
       return group
@@ -160,7 +160,7 @@ class Group < ActiveRecord::Base
   # Generate a generic invitation code for group
   # - size: integer of generated string length
   def generate_invite_code(size = 10)
-    charset = %w(2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z)
+    charset = %w[2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z]
     (0...size).map { charset.to_a[rand(charset.size)] }.join
   end
 end

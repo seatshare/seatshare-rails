@@ -15,11 +15,11 @@ module AdminApi
       def index
         respond_with json_response(
           'methods',
-          %w(
+          %w[
             user_count group_count total_invites accepted_invites
             recent_groups recent_users total_tickets tickets_transferred
             tickets_unused
-          )
+          ]
         )
       end
 

@@ -52,7 +52,7 @@ namespace :seatgeek do
     entities = Entity.select(&:seatgeek?)
     puts 'Updating SeatGeek schedules'
     entities.each do |entity|
-      next if entity.groups.count == 0
+      next if entity.groups.count.zero?
       puts "Updating schedule for #{entity.display_name}"
       events = entity.seatgeek_import
       if events.nil?

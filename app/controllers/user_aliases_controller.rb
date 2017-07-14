@@ -32,9 +32,8 @@ class UserAliasesController < ApplicationController
   # Edit user alias form
   def edit
     @user_alias = UserAlias.find_by(id: params[:id]) || not_found
-    redirect_to(
-      controller: :users, action: :edit
-    ) && return if @user_alias.user_id != current_user.id
+    redirect_to(controller: :users, action: :edit) \
+      if @user_alias.user_id != current_user.id
   end
 
   ##

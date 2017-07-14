@@ -88,9 +88,11 @@ class GroupsController < ApplicationController
     flash.keep
     status = Membership
              .where(user_id: current_user.id, group_id: group.id)
-             .update_all(
-               daily_reminder: daily, weekly_reminder: weekly, mine_only: mine
-             )
+             .each do |membership|
+               membership.update_attributes(
+                 daily_reminder: daily, weekly_reminder: weekly, mine_only: mine
+               )
+             end
     if status
       flash[:notice] = 'Reminder settings updated!'
     else
@@ -153,7 +155,7 @@ class GroupsController < ApplicationController
     flash.keep
     begin
       # Use group invitation
-      group = Group.find_by_invitation_code(params[:group][:invitation_code])
+      group = Group.find_by(invitation_code: params[:group][:invitation_code])
       # Fall back to normal user invitation
       if group.blank?
         invitation = GroupInvitation.get_by_invitation_code(
@@ -175,9 +177,8 @@ class GroupsController < ApplicationController
   # Leave a group form
   def leave
     @group = Group.find_by(id: params[:id]) || not_found
-    redirect_to(
-      action: 'show', id: @group.id
-    ) && return if @group.admin?(current_user)
+    redirect_to(action: 'show', id: @group.id) && return \
+      if @group.admin?(current_user)
   end
 
   ##
@@ -211,9 +212,8 @@ class GroupsController < ApplicationController
   # Deactivate Group
   def deactivate
     @group = Group.find_by(id: params[:id]) || not_found
-    redirect_to(
-      action: 'show', id: @group.id
-    ) && return unless @group.admin?(current_user)
+    redirect_to(action: 'show', id: @group.id) && return \
+      unless @group.admin?(current_user)
   end
 
   ##

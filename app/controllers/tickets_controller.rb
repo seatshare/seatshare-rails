@@ -35,7 +35,7 @@ class TicketsController < ApplicationController
   ##
   # Process cost updates from ticket index
   def bulk_update
-    unless params[:ticket].nil?
+    unless params[:ticket]&.nil?
       params[:ticket].each do |ticket_id, ticket_values|
         ticket = Ticket.find(ticket_id)
         next unless ticket.can_edit?(current_user)
@@ -212,9 +212,8 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find_by(id: params[:id]) || not_found
     raise 'NotGroupMember' unless @group.member?(current_user)
     @ticket_stats = @event.ticket_stats(@group, current_user)
-    redirect_to(
-      action: 'edit', id: @ticket.id
-    ) if @ticket.assigned == current_user || @ticket.owner == current_user
+    redirect_to(action: 'edit', id: @ticket.id) \
+      if @ticket.assigned == current_user || @ticket.owner == current_user
   end
 
   ##

@@ -2,7 +2,7 @@
 # Entity Type model
 class EntityType < ActiveRecord::Base
   has_many :entities
-  scope :by_sort, -> { order('sort ASC') }
+  scope :by_sort, (-> { order('sort ASC') })
 
   ##
   # Display name for entity type
