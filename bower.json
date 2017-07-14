@@ -1,9 +1,0 @@
-{
-  "name": "seatshare-rails",
-  "dependencies": {
-    "clndr": "1.4.7",
-    "clipboard": "1.5.9",
-    "select2": "4.0.2",
-    "select2-bootstrap-theme": "0.1.0-beta.4"
-  }
-}

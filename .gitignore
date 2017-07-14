@@ -21,9 +21,6 @@
 /config/database.yml
 .env
 
-# Ignore bower components
-/vendor/assets/components
-
 # Ignore pre-compiled assets
 /public/assets/
 

@@ -45,8 +45,8 @@ gem 'aws-sdk'
 gem 'pg'
 
 # ActiveAdmin
-gem 'activeadmin', github: 'activeadmin'
-gem 'active_admin_importable', github: 'krhorst/active_admin_importable'
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin.git'
+gem 'active_admin_importable', git: 'https://github.com/krhorst/active_admin_importable.git'
 
 # Mailchimp API
 gem 'mailchimp-api'
@@ -63,7 +63,6 @@ gem 'seatgeek'
 # Capistrano
 gem 'capistrano'
 gem 'capistrano-rails'
-gem 'capistrano-bower'
 gem 'slackistrano', require: false
 
 # Whenever
@@ -113,13 +112,13 @@ group :development, :test do
   gem 'guard-rubocop'
   gem 'guard-spork'
   gem 'minitest'
-  gem 'minitest-ci', github: 'circleci/minitest-ci'
+  gem 'minitest-ci', git: 'https://github.com/circleci/minitest-ci.git'
   gem 'pry-coolline'
   gem 'pry-nav'
   gem 'pry-rails'
   gem 'rack-livereload'
   gem 'rubocop'
-  gem 'spork-minitest', github: 'dekart/spork-minitest'
+  gem 'spork-minitest', git: 'https://github.com/dekart/spork-minitest.git'
   gem 'spork-rails'
   gem 'webmock'
 end
