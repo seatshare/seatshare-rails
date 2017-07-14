@@ -17,6 +17,6 @@
 //= require moment
 //= require underscore
 //= require clndr
-//= require select2
-//= require clipboard
+//= require select2/dist/js/select2
+//= require clipboard/dist/clipboard
 //= require_directory .

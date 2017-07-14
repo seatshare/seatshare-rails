@@ -24,7 +24,7 @@ module SeatShare
     config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
 
     # Add the components path to the list of assets
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
+    config.assets.paths << Rails.root.join('node_modules')
 
     # We don't want the default of everything that isn't js or css, because it pulls too many things in
     config.assets.precompile.shift
@@ -42,7 +42,7 @@ module SeatShare
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
     # Better error messages
-    require Rails.root.join('lib/custom_public_exceptions')
+    require Rails.root.join('lib', 'custom_public_exceptions')
     config.exceptions_app = CustomPublicExceptions.new(Rails.public_path)
 
     # Don't supress errors in after_rollback and after_commit callbacks

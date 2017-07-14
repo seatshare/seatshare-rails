@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require select2
+ *= require select2/dist/css/select2
  *= require select2-bootstrap-theme
  *= require_directory .
  */
