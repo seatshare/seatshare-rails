@@ -20,3 +20,4 @@
 //= require select2/dist/js/select2
 //= require clipboard/dist/clipboard
 //= require_directory .
+//= stub active_admin
