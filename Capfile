@@ -4,12 +4,10 @@ require 'capistrano/setup'
 # Includes default deployment tasks
 require 'capistrano/deploy'
 require 'capistrano/rails'
-
-# Bower (for assets)
-require 'capistrano/bower'
+require 'capistrano/npm'
 
 # Use Dotenv
-if File.exists? '.env'
+if File.exist? '.env'
   require 'dotenv'
   Dotenv.load
 end

@@ -31,9 +31,9 @@ class ApplicationController < ActionController::Base
   ##
   # Defines the Devise permitted parameters for registrations
   def configure_devise_permitted_parameters
-    registration_params = [
-      :first_name, :last_name, :email, :password, :password_confirmation,
-      :newsletter_signup, :invite_code, :entity_id
+    registration_params = %i[
+      first_name last_name email password password_confirmation
+      newsletter_signup invite_code entity_id
     ]
 
     if params[:action] == 'update'

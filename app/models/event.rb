@@ -8,12 +8,12 @@ class Event < ActiveRecord::Base
   validates :entity_id, :event_name, :start_time, presence: true
   before_save :clean_import_key
 
-  scope :by_date, -> { order('start_time ASC') }
-  scope :future, -> { where('start_time > ?', Time.zone.now) }
-  scope :past, -> { where('start_time < ?', Time.zone.now) }
-  scope :next_seven_days, -> { next_seven_days }
-  scope :today, -> { today }
-  scope :confirmed, -> { where(date_tba: false) }
+  scope :by_date, (-> { order('start_time ASC') })
+  scope :future, (-> { where('start_time > ?', Time.zone.now) })
+  scope :past, (-> { where('start_time < ?', Time.zone.now) })
+  scope :next_seven_days, (-> { next_seven_days })
+  scope :today, (-> { today })
+  scope :confirmed, (-> { where(date_tba: false) })
 
   @ticket_stats = nil
 
@@ -59,12 +59,12 @@ class Event < ActiveRecord::Base
 
     stats = { available: 0, total: 0, held: 0 }
     tickets.each do |ticket|
-      stats[:available] += 1 if ticket.user_id == 0
+      stats[:available] += 1 if ticket.user_id.zero?
       stats[:held] += 1 if ticket.user_id == user.id
       stats[:total] += 1
     end
 
-    if stats[:total] > 0
+    if stats[:total].positive?
       stats[:percent_full] = (
         (stats[:total].to_f - stats[:available].to_f) / stats[:total].to_f
       ) * 100
@@ -109,7 +109,7 @@ class Event < ActiveRecord::Base
   # - overwrite: whether to overwrite the title and description
   # - allow_duplicate: whether to allow duplicate at same time slot
   def self.import(hash = nil, overwrite = false, allow_duplicate = false)
-    event = find_by_import_key(hash[:import_key]) || new
+    event = find_by(import_key: hash[:import_key]) || new
     event.entity_id = hash[:entity_id]
     event.event_name = hash[:event_name]
     if overwrite || event.new_record?

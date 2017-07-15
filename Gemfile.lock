@@ -1,38 +1,41 @@
 GIT
+<<<<<<< HEAD
   remote: git://github.com/activeadmin/activeadmin.git
   revision: e1c413f18398d7a83bd908f2e6526e7b502403b8
+=======
+  remote: https://github.com/activeadmin/activeadmin.git
+  revision: 36e65d56e9f46145e3f71671e3b3b12d57a1f3c4
+>>>>>>> master
   specs:
     activeadmin (1.0.0)
       arbre (>= 1.1.1)
-      bourbon
       coffee-rails
       formtastic (~> 3.1)
       formtastic_i18n
       inherited_resources (~> 1.7)
       jquery-rails
-      jquery-ui-rails
       kaminari (>= 0.15, < 2.0)
       railties (>= 4.2, < 5.2)
       ransack (~> 1.3)
-      sass-rails
+      sass (~> 3.1)
       sprockets (< 4.1)
 
 GIT
-  remote: git://github.com/circleci/minitest-ci.git
+  remote: https://github.com/circleci/minitest-ci.git
   revision: f533c14822e2de21323d26d0c0601adb580e9d5f
   specs:
     minitest-ci (3.2.0)
       minitest (>= 5.0.6)
 
 GIT
-  remote: git://github.com/dekart/spork-minitest.git
+  remote: https://github.com/dekart/spork-minitest.git
   revision: c20d6ae6d6efda826b2e9e1f6dbcada305dec9e0
   specs:
     spork-minitest (1.0.0.beta2)
       spork
 
 GIT
-  remote: git://github.com/krhorst/active_admin_importable.git
+  remote: https://github.com/krhorst/active_admin_importable.git
   revision: c01f9c0d4f6f1666f45e32d4a227d65377d562b1
   specs:
     active_admin_importable (1.1.2)
@@ -40,36 +43,36 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.2.8)
-      actionpack (= 4.2.8)
-      actionview (= 4.2.8)
-      activejob (= 4.2.8)
+    actionmailer (4.2.9)
+      actionpack (= 4.2.9)
+      actionview (= 4.2.9)
+      activejob (= 4.2.9)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 1.0, >= 1.0.5)
-    actionpack (4.2.8)
-      actionview (= 4.2.8)
-      activesupport (= 4.2.8)
+    actionpack (4.2.9)
+      actionview (= 4.2.9)
+      activesupport (= 4.2.9)
       rack (~> 1.6)
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (4.2.8)
-      activesupport (= 4.2.8)
+    actionview (4.2.9)
+      activesupport (= 4.2.9)
       builder (~> 3.1)
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activejob (4.2.8)
-      activesupport (= 4.2.8)
+    activejob (4.2.9)
+      activesupport (= 4.2.9)
       globalid (>= 0.3.0)
-    activemodel (4.2.8)
-      activesupport (= 4.2.8)
+    activemodel (4.2.9)
+      activesupport (= 4.2.9)
       builder (~> 3.1)
-    activerecord (4.2.8)
-      activemodel (= 4.2.8)
-      activesupport (= 4.2.8)
+    activerecord (4.2.9)
+      activemodel (= 4.2.9)
+      activesupport (= 4.2.9)
       arel (~> 6.0)
-    activesupport (4.2.8)
+    activesupport (4.2.9)
       i18n (~> 0.7)
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
@@ -82,6 +85,7 @@ GEM
       activesupport (>= 3.0.0)
     arel (6.0.4)
     ast (2.3.0)
+<<<<<<< HEAD
     autoprefixer-rails (7.1.1.2)
       execjs
     aws-sdk (2.9.42)
@@ -92,28 +96,44 @@ GEM
     aws-sdk-resources (2.9.42)
       aws-sdk-core (= 2.9.42)
     aws-sigv4 (1.0.0)
+=======
+    autoprefixer-rails (7.1.2.2)
+      execjs
+    aws-sdk (2.10.11)
+      aws-sdk-resources (= 2.10.11)
+    aws-sdk-core (2.10.11)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.10.11)
+      aws-sdk-core (= 2.10.11)
+    aws-sigv4 (1.0.1)
+>>>>>>> master
     bcrypt (3.1.11)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    bourbon (4.3.4)
-      sass (~> 3.4)
-      thor (~> 0.19)
     builder (3.2.3)
     capistrano (3.8.2)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bower (1.1.0)
-      capistrano (~> 3.0)
     capistrano-bundler (1.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+<<<<<<< HEAD
     capistrano-rails (1.3.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     childprocess (0.7.0)
+=======
+    capistrano-npm (1.0.2)
+      capistrano (>= 3.0.0)
+    capistrano-rails (1.3.0)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    childprocess (0.7.1)
+>>>>>>> master
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     climate_control (0.2.0)
@@ -154,7 +174,11 @@ GEM
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
     eventmachine (1.2.3)
+<<<<<<< HEAD
     excon (0.57.0)
+=======
+    excon (0.57.1)
+>>>>>>> master
     execjs (2.7.0)
     faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
@@ -207,7 +231,11 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
+<<<<<<< HEAD
     i18n (0.8.4)
+=======
+    i18n (0.8.6)
+>>>>>>> master
     icalendar (2.4.1)
     inherited_resources (1.7.2)
       actionpack (>= 3.2, < 5.2.x)
@@ -222,8 +250,6 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (6.0.1)
-      railties (>= 3.2.16)
     json (1.8.6)
     jwt (1.5.6)
     kaminari (1.0.1)
@@ -238,7 +264,11 @@ GEM
       activerecord
       kaminari-core (= 1.0.1)
     kaminari-core (1.0.1)
+<<<<<<< HEAD
     kgio (2.11.0)
+=======
+    libxml-ruby (3.0.0)
+>>>>>>> master
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -291,7 +321,7 @@ GEM
       addressable
       css_parser (>= 1.4.10)
       htmlentities (>= 4.0.0)
-    premailer-rails (1.9.6)
+    premailer-rails (1.9.7)
       actionmailer (>= 3, < 6)
       premailer (~> 1.7, >= 1.7.9)
     pry (0.10.4)
@@ -310,16 +340,16 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (4.2.8)
-      actionmailer (= 4.2.8)
-      actionpack (= 4.2.8)
-      actionview (= 4.2.8)
-      activejob (= 4.2.8)
-      activemodel (= 4.2.8)
-      activerecord (= 4.2.8)
-      activesupport (= 4.2.8)
+    rails (4.2.9)
+      actionmailer (= 4.2.9)
+      actionpack (= 4.2.9)
+      actionview (= 4.2.9)
+      activejob (= 4.2.9)
+      activemodel (= 4.2.9)
+      activerecord (= 4.2.9)
+      activesupport (= 4.2.9)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.2.8)
+      railties (= 4.2.9)
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -334,9 +364,9 @@ GEM
       rails_stdout_logging
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
-    railties (4.2.8)
-      actionpack (= 4.2.8)
-      activesupport (= 4.2.8)
+    railties (4.2.9)
+      actionpack (= 4.2.9)
+      activesupport (= 4.2.9)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (2.2.2)
@@ -349,7 +379,11 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.3)
+<<<<<<< HEAD
     rb-fsevent (0.9.8)
+=======
+    rb-fsevent (0.10.2)
+>>>>>>> master
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rdoc (4.3.0)
@@ -373,7 +407,15 @@ GEM
     ruby-progressbar (1.8.1)
     ruby_dep (1.5.0)
     safe_yaml (1.0.4)
+<<<<<<< HEAD
     sass (3.4.24)
+=======
+    sass (3.5.1)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+>>>>>>> master
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
@@ -394,7 +436,11 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.1)
+<<<<<<< HEAD
     slack-notifier (2.2.1)
+=======
+    slack-notifier (2.2.2)
+>>>>>>> master
     slackistrano (3.8.1)
       capistrano (>= 3.8.1)
     slop (3.6.0)
@@ -409,10 +455,14 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sshkit (1.13.1)
+    sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+<<<<<<< HEAD
     thin (1.7.1)
+=======
+    thin (1.7.2)
+>>>>>>> master
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
       rack (>= 1, < 3)
@@ -422,10 +472,17 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
+<<<<<<< HEAD
     twilio-ruby (4.13.0)
       builder (>= 2.1.2)
       jwt (~> 1.0)
       multi_json (>= 1.3.0)
+=======
+    twilio-ruby (5.0.0)
+      faraday (~> 0.9)
+      jwt (~> 1.5)
+      libxml-ruby (= 3.0.0)
+>>>>>>> master
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -434,7 +491,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
-    unicode-display_width (1.2.1)
+    unicode-display_width (1.3.0)
     unicode_utils (1.4.0)
     unicorn (5.3.0)
       kgio (~> 2.6)
@@ -458,8 +515,8 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass
   bundler
-  capistrano
-  capistrano-bower
+  capistrano (~> 3.8)
+  capistrano-npm
   capistrano-rails
   coffee-rails
   devise

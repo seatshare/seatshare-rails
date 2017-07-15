@@ -1,7 +1,7 @@
 ##
 # Calendar Controller
 class CalendarController < ApplicationController
-  before_action :authenticate_user!, except: [:full, :group]
+  before_action :authenticate_user!, except: %i[full group]
   layout 'two-column'
 
   ##
@@ -14,7 +14,7 @@ class CalendarController < ApplicationController
   ##
   # Complete Feed
   def full
-    user = User.find_by_calendar_token(params[:token])
+    user = User.find_by(calendar_token: params[:token])
     show_404 unless user
     groups = user.groups
 
@@ -58,7 +58,7 @@ class CalendarController < ApplicationController
   ##
   # Group Feed
   def group
-    user = User.find_by_calendar_token(params[:token])
+    user = User.find_by(calendar_token: params[:token])
     show_404 unless user
     group = Group.find(params[:group_id]) || show_404
     raise 'NotGroupMember' unless group.member?(user)

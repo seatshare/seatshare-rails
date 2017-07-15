@@ -1,4 +1,4 @@
-<% if @group.tickets.count == 0 && @group.events.future.count > 0 %>
+<% if @group.tickets.count.zero? && @group.events.future.count > 0 %>
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="sidebar-icon"><%= link_to raw('<span class="fa fa-ticket"></span>'), { :controller => 'tickets', :action => 'new', :group_id => @group.id } %></div>

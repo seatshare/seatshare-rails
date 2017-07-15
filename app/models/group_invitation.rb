@@ -6,7 +6,7 @@ class GroupInvitation < ActiveRecord::Base
 
   validates :email, :user_id, :group_id, :invitation_code, presence: true
 
-  scope :accepted, -> { where(status: false) }
+  scope :accepted, (-> { where(status: false) })
   attr_accessor :message
 
   ##
@@ -46,7 +46,7 @@ class GroupInvitation < ActiveRecord::Base
   ##
   # Generate a group invitation code
   def generate_invite_code(size = 10)
-    charset = %w(2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z)
+    charset = %w[2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z]
     (0...size).map { charset.to_a[rand(charset.size)] }.join
   end
 end

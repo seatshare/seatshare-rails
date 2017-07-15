@@ -1,6 +1,3 @@
-# config valid only for Capistrano 3.8.1
-lock '3.8.1'
-
 set :application, 'seatshare'
 set :repo_url, 'git@github.com:stephenyeargin/seatshare-rails.git'
 
