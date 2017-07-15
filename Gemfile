@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby ENV['CUSTOM_RUBY_VERSION'] || '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.8'
+gem 'rails', '~> 4.2.9'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -42,7 +42,7 @@ gem 'underscore-rails'
 gem 'aws-sdk'
 
 # Postgres
-gem 'pg'
+gem 'pg', '0.20'
 
 # ActiveAdmin
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin.git'
