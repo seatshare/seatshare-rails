@@ -1,11 +1,6 @@
 GIT
-<<<<<<< HEAD
-  remote: git://github.com/activeadmin/activeadmin.git
-  revision: e1c413f18398d7a83bd908f2e6526e7b502403b8
-=======
   remote: https://github.com/activeadmin/activeadmin.git
   revision: 36e65d56e9f46145e3f71671e3b3b12d57a1f3c4
->>>>>>> master
   specs:
     activeadmin (1.0.0)
       arbre (>= 1.1.1)
@@ -85,29 +80,16 @@ GEM
       activesupport (>= 3.0.0)
     arel (6.0.4)
     ast (2.3.0)
-<<<<<<< HEAD
-    autoprefixer-rails (7.1.1.2)
-      execjs
-    aws-sdk (2.9.42)
-      aws-sdk-resources (= 2.9.42)
-    aws-sdk-core (2.9.42)
-      aws-sigv4 (~> 1.0)
-      jmespath (~> 1.0)
-    aws-sdk-resources (2.9.42)
-      aws-sdk-core (= 2.9.42)
-    aws-sigv4 (1.0.0)
-=======
     autoprefixer-rails (7.1.2.2)
       execjs
-    aws-sdk (2.10.11)
-      aws-sdk-resources (= 2.10.11)
-    aws-sdk-core (2.10.11)
+    aws-sdk (2.10.12)
+      aws-sdk-resources (= 2.10.12)
+    aws-sdk-core (2.10.12)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.10.11)
-      aws-sdk-core (= 2.10.11)
+    aws-sdk-resources (2.10.12)
+      aws-sdk-core (= 2.10.12)
     aws-sigv4 (1.0.1)
->>>>>>> master
     bcrypt (3.1.11)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
@@ -121,19 +103,12 @@ GEM
     capistrano-bundler (1.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-<<<<<<< HEAD
-    capistrano-rails (1.3.0)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
-    childprocess (0.7.0)
-=======
     capistrano-npm (1.0.2)
       capistrano (>= 3.0.0)
     capistrano-rails (1.3.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     childprocess (0.7.1)
->>>>>>> master
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     climate_control (0.2.0)
@@ -174,11 +149,7 @@ GEM
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
     eventmachine (1.2.3)
-<<<<<<< HEAD
-    excon (0.57.0)
-=======
     excon (0.57.1)
->>>>>>> master
     execjs (2.7.0)
     faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
@@ -231,11 +202,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
-<<<<<<< HEAD
-    i18n (0.8.4)
-=======
     i18n (0.8.6)
->>>>>>> master
     icalendar (2.4.1)
     inherited_resources (1.7.2)
       actionpack (>= 3.2, < 5.2.x)
@@ -264,11 +231,8 @@ GEM
       activerecord
       kaminari-core (= 1.0.1)
     kaminari-core (1.0.1)
-<<<<<<< HEAD
     kgio (2.11.0)
-=======
     libxml-ruby (3.0.0)
->>>>>>> master
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -379,11 +343,7 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.3)
-<<<<<<< HEAD
-    rb-fsevent (0.9.8)
-=======
     rb-fsevent (0.10.2)
->>>>>>> master
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rdoc (4.3.0)
@@ -407,15 +367,11 @@ GEM
     ruby-progressbar (1.8.1)
     ruby_dep (1.5.0)
     safe_yaml (1.0.4)
-<<<<<<< HEAD
-    sass (3.4.24)
-=======
     sass (3.5.1)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
->>>>>>> master
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
@@ -436,11 +392,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.1)
-<<<<<<< HEAD
-    slack-notifier (2.2.1)
-=======
     slack-notifier (2.2.2)
->>>>>>> master
     slackistrano (3.8.1)
       capistrano (>= 3.8.1)
     slop (3.6.0)
@@ -458,11 +410,7 @@ GEM
     sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-<<<<<<< HEAD
-    thin (1.7.1)
-=======
     thin (1.7.2)
->>>>>>> master
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
       rack (>= 1, < 3)
@@ -472,17 +420,10 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
-<<<<<<< HEAD
-    twilio-ruby (4.13.0)
-      builder (>= 2.1.2)
-      jwt (~> 1.0)
-      multi_json (>= 1.3.0)
-=======
     twilio-ruby (5.0.0)
       faraday (~> 0.9)
       jwt (~> 1.5)
       libxml-ruby (= 3.0.0)
->>>>>>> master
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
