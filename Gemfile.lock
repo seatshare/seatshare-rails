@@ -16,6 +16,12 @@ GIT
       sprockets (< 4.1)
 
 GIT
+  remote: https://github.com/berga/active_admin_importable.git
+  revision: 3c3f02a01db62b6fd3366d2bbcc076b500a03079
+  specs:
+    active_admin_importable (1.1.2)
+
+GIT
   remote: https://github.com/circleci/minitest-ci.git
   revision: f533c14822e2de21323d26d0c0601adb580e9d5f
   specs:
@@ -28,12 +34,6 @@ GIT
   specs:
     spork-minitest (1.0.0.beta2)
       spork
-
-GIT
-  remote: https://github.com/krhorst/active_admin_importable.git
-  revision: c01f9c0d4f6f1666f45e32d4a227d65377d562b1
-  specs:
-    active_admin_importable (1.1.2)
 
 GEM
   remote: https://rubygems.org/
@@ -82,13 +82,13 @@ GEM
     ast (2.3.0)
     autoprefixer-rails (7.1.2.2)
       execjs
-    aws-sdk (2.10.11)
-      aws-sdk-resources (= 2.10.11)
-    aws-sdk-core (2.10.11)
+    aws-sdk (2.10.12)
+      aws-sdk-resources (= 2.10.12)
+    aws-sdk-core (2.10.12)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.10.11)
-      aws-sdk-core (= 2.10.11)
+    aws-sdk-resources (2.10.12)
+      aws-sdk-core (= 2.10.12)
     aws-sigv4 (1.0.1)
     bcrypt (3.1.11)
     bootstrap-sass (3.3.7)

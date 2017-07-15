@@ -46,7 +46,7 @@ gem 'pg', '0.20'
 
 # ActiveAdmin
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin.git'
-gem 'active_admin_importable', git: 'https://github.com/krhorst/active_admin_importable.git'
+gem 'active_admin_importable', git: 'https://github.com/berga/active_admin_importable.git'
 
 # Mailchimp API
 gem 'mailchimp-api'
