@@ -8,10 +8,6 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev postgresq
 RUN apt-get install -y -qq npm
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
-# Install bower
-RUN npm install --global bower
-RUN echo '{ "allow_root": true }' > /root/.bowerrc
-
 # Define where our application will live inside the image
 ENV RAILS_ROOT /var/www/seatshare_app
 

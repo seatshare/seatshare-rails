@@ -6,7 +6,7 @@ db:
 
   # persist the database between containers by storing it in a volume
   volumes:
-    - docker-example-postgres:/var/lib/postgresql/data
+    - seatshare-postgres:/var/lib/postgresql/data
 
 # service configuration for our web server
 web:
@@ -24,6 +24,6 @@ web:
   environment:
     RAILS_ENV: $RAILS_ENV
 
-  # expose the port we configured Nginx to bind to
+  # expose the port we configured Rails to bind to
   ports:
     - "3000:3000"
