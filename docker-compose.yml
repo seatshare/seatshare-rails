@@ -1,29 +1,18 @@
 # service configuration for our database
-db:
-  # use the preferred version of the official Postgres image
-  # see https://hub.docker.com/_/postgres/
-  image: postgres:9.4.5
-
-  # persist the database between containers by storing it in a volume
-  volumes:
-    - seatshare-postgres:/var/lib/postgresql/data
+postgres:
+  container_name: seatshare-postgres
+  image: postgres:9.4
+  ports:
+    - "5432"
 
 # service configuration for our web server
 web:
-  # set the build context to the root of the Rails app
+  container_name: seatshare-web
   build: .
-
-  # sources environment variable configuration for our app
-  env_file: .env
-
-  # makes the web container aware of the app container
-  links:
-    - db
-
-  # rely on the RAILS_ENV value of the host machine
-  environment:
-    RAILS_ENV: $RAILS_ENV
-
-  # expose the port we configured Rails to bind to
+  command: rails server -p 3000 -b '0.0.0.0'
+  volumes:
+    - .:/app
   ports:
     - "3000:3000"
+  links:
+    - postgres

@@ -1,40 +1,37 @@
-# Base our image on an official, minimal image of our preferred Ruby
-FROM ruby:2.3.1-slim
+FROM ruby:2.3-slim 
 
-# Install essential Linux packages
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev postgresql-client git-all
+# Install apt based dependencies required to run Rails as 
+# well as RubyGems. As the Ruby image itself is based on a 
+# Debian image, we use apt-get to install those.
+RUN apt-get update && apt-get install -y \ 
+  build-essential \ 
+  nodejs \
+  git \
+  postgresql \
+  libpq-dev \
+  libxml2
 
-# Install node support files
-RUN apt-get install -y -qq npm
-RUN ln -s /usr/bin/nodejs /usr/bin/node
+# Configure the main working directory. This is the base 
+# directory used in any further RUN, COPY, and ENTRYPOINT 
+# commands.
+RUN mkdir -p /app 
+WORKDIR /app
 
-# Define where our application will live inside the image
-ENV RAILS_ROOT /var/www/seatshare_app
+# Copy the Gemfile as well as the Gemfile.lock and install 
+# the RubyGems. This is a separate step so the dependencies 
+# will be cached unless changes to one of those two files 
+# are made.
+COPY Gemfile Gemfile.lock ./ 
+RUN gem install bundler && bundle install --jobs 20 --retry 5
 
-# Create application home. App server will need the pids dir so just create everything in one shot
-RUN mkdir -p $RAILS_ROOT/tmp/pids
+# Copy the main application.
+COPY . ./
 
-# Set our working directory inside the image
-WORKDIR $RAILS_ROOT
+# Expose port 3000 to the Docker host, so we can access it 
+# from the outside.
+EXPOSE 3000
 
-# Use the Gemfiles as Docker cache markers. Always bundle before copying app src.
-# (the src likely changed and we don't want to invalidate Docker's cache too early)
-# http://ilikestuffblog.com/2014/01/06/how-to-skip-bundle-install-when-deploying-a-rails-app-to-docker/
-COPY Gemfile Gemfile
-
-COPY Gemfile.lock Gemfile.lock
-
-# Prevent bundler warnings; ensure that the bundler version executed is >= that which created Gemfile.lock
-RUN gem install bundler
-
-# Finish establishing our Ruby environment
-RUN bundle install
-
-# Copy the Rails application into place
-COPY . .
-
-# Compile the assets
-RUN npm install
-
-# Define the script we want run once the container boots
-CMD ["bundle", "exec", "rails", "s"]
+# The main command to run when the container starts. Also 
+# tell the Rails dev server to bind to all interfaces by 
+# default.
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
