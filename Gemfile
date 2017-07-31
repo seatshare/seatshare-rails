@@ -79,7 +79,7 @@ gem 'rest-client'
 gem 'paperclip'
 
 # Twilio / SMS related
-gem 'twilio-ruby'
+gem 'twilio-ruby', '~>4.11.1'
 gem 'global_phone'
 
 # Sitemaps
