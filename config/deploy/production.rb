@@ -1,1 +1,2 @@
-server 'linode.myseatshare.com', user: 'deploy', roles: %w{web app db}
+set :deploy_to, '/u/apps/seatshare_production'
+server 'app.myseatshare.com', user: 'deploy', roles: %w{web app db}
