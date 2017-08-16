@@ -179,4 +179,120 @@ class GroupsControllerTest < ActionController::TestCase
     assert_response :success, 'got a 200 status'
     assert_select 'title', 'Send a Group Message to Geeks Watching Hockey'
   end
+
+  test 'should get events feed' do
+    @user = User.find(1)
+    @group = Group.find(1)
+
+    sign_in @user, scope: :user
+
+    get :events_feed,  id: @group.id
+    events = JSON.parse(response.body)
+
+    assert_response :success
+    assert_equal 7, events.length
+    assert_equal(
+      '8:00 pm CDT - Nashville Predators vs. Minnesota Wild',
+      events[0]['title']
+    )
+  end
+
+  test 'should update notification options' do
+    @user = User.find(1)
+    @group = Group.find(1)
+
+    sign_in @user, scope: :user
+
+    post :update_notifications, {
+      id: @group.id, 
+      membership: {
+        daily_reminder: true,
+        weekly_reminder: true,
+        mine_only: false
+      }
+    }
+
+    assert_response :redirect
+    assert_equal flash[:notice], 'Reminder settings updated!'
+  end
+
+  test 'should send message' do
+    @user = User.find(1)
+    @group = Group.find(1)
+
+    sign_in @user, scope: :user
+
+    post :do_message, {
+      id: @group.id, 
+      message: {
+        recipients: [1],
+        subject: 'Test message subject',
+        message: 'Test message body'
+      }
+    }
+
+    assert_response :redirect
+    assert_equal flash[:notice], 'Message sent!'
+  end
+
+  test 'should fail to send message' do
+    @user = User.find(1)
+    @group = Group.find(1)
+
+    sign_in @user, scope: :user
+
+    post :do_message, {
+      id: @group.id, 
+      message: {
+        recipients: [],
+        subject: 'Test message subject',
+        message: 'Test message body'
+      }
+    }
+
+    assert_response :redirect
+    assert_equal flash[:error], 'You must select at least one recipient.'
+  end
+  
+  test 'should reset invitation code' do
+    @user = User.find(1)
+    @group = Group.find(1)
+
+    sign_in @user, scope: :user
+
+    post :do_reset_invite, {
+      id: @group.id
+    }
+
+    assert_response :redirect
+    assert_equal flash[:notice], 'Invitation code reset!'
+  end
+
+  test 'should deactivate group' do
+    @user = User.find(1)
+    @group = Group.find(1)
+
+    sign_in @user, scope: :user
+
+    post :do_deactivate, {
+      id: @group.id
+    }
+
+    assert_response :redirect
+    assert_equal flash[:notice], 'Your group has been deactivated!'
+  end
+
+  test 'should request notification of new events' do
+    @user = User.find(1)
+    @group = Group.find(1)
+
+    sign_in @user, scope: :user
+
+    post :do_request_notify, {
+      id: @group.id
+    }
+
+    assert_response :redirect
+    assert_equal flash[:notice], 'Schedule request sent!'
+  end
 end
