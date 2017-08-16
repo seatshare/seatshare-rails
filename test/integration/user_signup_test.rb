@@ -4,6 +4,7 @@ require 'test_helper'
 # User Signup test
 class UserSignupTest < ActionDispatch::IntegrationTest
   def setup
+    ENV['GOOGLE_ANALYTICS_ID'] = 'foobarbaz'
     SeatGeek::Connection.client_id = 'a_test_client_id'
     stub_request(
       :get,
@@ -25,6 +26,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
       ).read
     )
     stub_request(:any, /api.mailchimp.com/)
+    stub_request(:any, /www.google-analytics.com/)
   end
 
   test 'signup for an account - success' do

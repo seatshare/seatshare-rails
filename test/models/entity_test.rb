@@ -122,4 +122,13 @@ class EntityTest < ActiveSupport::TestCase
       performer['image']
     )
   end
+
+  test 'gets an import key without an entity type' do
+    entity = Entity.new(
+      entity_name: 'Nashville Sportsball (Inactive)'
+    )
+    
+    assert_equal 'nashville-sportsball-inactive', entity.import_key
+  end
+
 end
