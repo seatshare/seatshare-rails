@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.8'
+gem 'rails', '~> 4.2.9'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -44,11 +44,11 @@ gem 'underscore-rails'
 gem 'aws-sdk'
 
 # Postgres
-gem 'pg'
+gem 'pg', '0.20'
 
 # ActiveAdmin
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin.git'
-gem 'active_admin_importable', git: 'https://github.com/krhorst/active_admin_importable.git'
+gem 'active_admin_importable', git: 'https://github.com/berga/active_admin_importable.git'
 
 # Mailchimp API
 gem 'mailchimp-api'
@@ -81,7 +81,7 @@ gem 'rest-client'
 gem 'paperclip'
 
 # Twilio / SMS related
-gem 'twilio-ruby'
+gem 'twilio-ruby', '~>4.11.1'
 gem 'global_phone'
 
 # Sitemaps

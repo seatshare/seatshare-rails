@@ -286,7 +286,7 @@ class GroupsController < ApplicationController
   def do_message
     group = Group.find(params[:id]) || not_found
     flash.keep
-    if params[:message][:recipients].nil?
+    if params[:message][:recipients].blank?
       flash[:error] = 'You must select at least one recipient.'
       redirect_to(action: 'message', id: group.id) && return
     end

@@ -42,6 +42,22 @@ class UserAliasesControllerTest < ActionController::TestCase
     assert_select 'title', 'Edit User Alias'
   end
 
+  test 'should update' do
+    @user = User.find(4)
+    sign_in @user, scope: :user
+
+    put :update, {
+      id: 1,
+      user_alias: {
+        first_name: 'Joe',
+        last_name: 'Doe'
+      }
+    }
+
+    assert_response :redirect
+    assert_equal flash[:notice], 'User Alias updated!'
+  end
+
   test 'should get destroy' do
     @user = User.find(1)
     sign_in @user, scope: :user

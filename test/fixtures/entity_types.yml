@@ -3,6 +3,7 @@ nhl:
   entity_type_name: National Hockey League
   entity_type_abbreviation: NHL
   sort: 40
+  import_key: http://api.seatgeek.com/2/performers?taxonomies.name=nhl
 
 ncaamb:
   id: 2

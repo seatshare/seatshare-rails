@@ -9,6 +9,7 @@ class TicketFlowTest < ActionDispatch::IntegrationTest
   # Set up test
   def setup
     stub_request(:any, /api.twilio.com/)
+    stub_request(:any, /www.google-analytics.com/)
     Time.zone = 'Central Time (US & Canada)'
   end
 

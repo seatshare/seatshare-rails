@@ -6,6 +6,7 @@ class RegistrationsControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   def setup
+    ENV['GOOGLE_ANALYTICS_ID'] = 'foobarbaz'
     SeatGeek::Connection.client_id = 'a_test_client_id'
     stub_request(
       :get,
@@ -25,6 +26,13 @@ class RegistrationsControllerTest < ActionController::TestCase
       body: File.new(
         'test/fixtures/seatgeek/performers-nashville-predators.json'
       ).read
+    )
+    stub_request(
+      :get,
+      'http://www.google-analytics.com/collect?cid&ea=signup&ec=user&t=event&tid=foobarbaz&v=1'
+    ).to_return(
+      status: 200,
+      body: 'ok'
     )
   end
 
