@@ -3,7 +3,7 @@ postgres:
   container_name: seatshare-postgres
   image: postgres:9.4
   ports:
-    - "5432"
+    - "55432:5432"
 
 # service configuration for our web server
 web:

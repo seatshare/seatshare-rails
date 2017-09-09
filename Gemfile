@@ -107,7 +107,6 @@ end
 
 group :development, :test do
   gem 'simplecov'
-  gem 'dotenv-rails'
   gem 'bundler'
   gem 'guard-bundler'
   gem 'guard-livereload'
