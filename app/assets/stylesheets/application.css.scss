@@ -78,8 +78,12 @@ ul.group-members li {
 }
 
 /* Data Credit */
-.data-credit img {
-  height: 25px;
+.data-credit {
+  line-height: 1rem;
+  img {
+    height: 1.5rem;
+    margin-top: -4px;
+  }
 }
 
 /* Action Well */
