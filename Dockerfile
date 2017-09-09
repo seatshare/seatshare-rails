@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y \
   git \
   postgresql \
   libpq-dev \
-  libxml2
+  libxml2 \
+  vim
 
 # Configure the main working directory. This is the base 
 # directory used in any further RUN, COPY, and ENTRYPOINT 
