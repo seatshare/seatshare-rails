@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.3.1'
+
+# dotenv
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.9'
@@ -39,7 +41,7 @@ gem 'momentjs-rails'
 gem 'underscore-rails'
 
 # S3
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 2'
 
 # Postgres
 gem 'pg', '0.20'
@@ -105,7 +107,6 @@ end
 
 group :development, :test do
   gem 'simplecov'
-  gem 'dotenv-rails'
   gem 'bundler'
   gem 'guard-bundler'
   gem 'guard-livereload'

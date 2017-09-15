@@ -1,0 +1,25 @@
+development:
+  host: seatshare-postgres
+  username: postgres
+  password:
+  port: 5432
+  adapter: postgresql
+  encoding: unicode
+  database: seatshare_development
+  pool: 5
+
+test:
+  host: seatshare-postgres
+  username: postgres
+  password:
+  port: 5432
+  adapter: postgresql
+  encoding: unicode
+  database: seatshare_test
+  pool: 5
+
+production:
+  hostname: localhost
+  port: 5432
+  adapter: postgresql
+  pool: 5
