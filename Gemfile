@@ -41,7 +41,7 @@ gem 'momentjs-rails'
 gem 'underscore-rails'
 
 # S3
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 2'
 
 # Postgres
 gem 'pg', '0.20'
