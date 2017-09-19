@@ -9,7 +9,7 @@ class WelcomeEmailTest < ActionMailer::TestCase
     email = WelcomeEmail.welcome(user).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal ['no-reply@myseatshare.com'], email.from
+    assert_equal [ENV['SEATSHARE_EMAIL_FROM']], email.from
     assert_equal ['stonej@example.net'], email.to
     assert_equal 'Welcome to SeatShare, Jim!', email.subject
   end

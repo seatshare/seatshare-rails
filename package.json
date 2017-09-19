@@ -5,6 +5,7 @@
     "bootstrap-sass": "^3.3.7",
     "clipboard": "^1.5.9",
     "clndr": "^1.4.7",
+    "jquery-ujs": "^1.2.2",
     "select2": "^4.0.3",
     "select2-bootstrap-theme": "0.1.0-beta.10"
   },

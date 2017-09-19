@@ -1,7 +1,7 @@
 ##
 # Custom Devise Mailer class
 class CustomDeviseMailer < Devise::Mailer
-  default from: 'no-reply@myseatshare.com'
+  default from: ENV['SEATSHARE_EMAIL_FROM']
   layout 'email'
 
   helper :application

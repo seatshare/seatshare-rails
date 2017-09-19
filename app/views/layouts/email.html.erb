@@ -27,7 +27,7 @@
                                   <table>
                                     <tr>
                                       <th>
-                                        <%= link_to image_tag("http://email-assets.seatsha.re/email-header-600x100.png", :alt => 'SeatShare Logo', :style => 'max-width:600px;', :only_path => false), {:controller => 'public', :action => 'index', :only_path => false } %>
+                                        <%= link_to image_tag("http://email-assets.seatsha.re/email-header-600x100.png", :alt => 'SeatShare Logo', :style => 'max-width:600px;', :only_path => false), root_url, { only_path: false } %>
                                       </th>
                                     </tr>
                                   </table>
@@ -94,7 +94,7 @@
                                         <% if !(yield :footer).blank? %>
                                         <%= yield :footer %>
                                         <% else %>
-                                        Sent through <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %>.
+                                        Sent through <%= link_to 'SeatShare', root_url, { only_path: false } %>.
                                         <% end %>
                                       </th>
                                     </tr>

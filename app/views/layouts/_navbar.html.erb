@@ -20,14 +20,12 @@
       </form>
       <% end %>
       <ul class="nav navbar-nav">
-        <li class=""><%= link_to "Dashboard", root_path %></li>
         <li class=""><%= link_to "Groups", groups_path %></li>
         <li class=""><%= link_to "Tickets", tickets_path %></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
-        <li class="visible-lg"><a><span class="changelog-badge"></span></a></li>
         <li><%= link_to current_user.display_name, edit_user_path %></li>
-        <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+        <li><%= link_to "Logout", destroy_user_session_path, :method => :destroy %></li>
       </ul>
       <% else %>
       <ul class="nav navbar-nav pull-right">

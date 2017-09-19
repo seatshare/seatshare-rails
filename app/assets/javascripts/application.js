@@ -11,13 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
+//= require jquery-ujs
 //= require turbolinks
-//= require bootstrap
-//= require moment
-//= require underscore
-//= require clndr
-//= require select2/dist/js/select2
-//= require clipboard/dist/clipboard
+
 //= require_directory .
 //= stub active_admin

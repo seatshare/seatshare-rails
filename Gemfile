@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.9'
+gem 'rails', '~> 4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -81,7 +81,7 @@ gem 'rest-client'
 gem 'paperclip'
 
 # Twilio / SMS related
-gem 'twilio-ruby', '~>4.11.1'
+gem 'twilio-ruby', '~> 4'
 gem 'global_phone'
 
 # Sitemaps

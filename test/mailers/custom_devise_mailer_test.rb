@@ -24,7 +24,7 @@ class CustomDeviseMailerTest < ActionMailer::TestCase
     assert_not_nil mail, 'email sent after reseting the user password'
     assert mail.content_type.include?('multipart/alternative'), 'content type should be set to multipart'
     assert_equal [user.email], mail.to, 'send confirmation instructions to the user email'
-    assert_equal ['no-reply@myseatshare.com'], mail.from, 'setup sender from configuration'
+    assert_equal [ENV['SEATSHARE_EMAIL_FROM']], mail.from, 'setup sender from configuration'
     assert_match user.email, mail.body.encoded,  'message body includes email address'
   end
 end

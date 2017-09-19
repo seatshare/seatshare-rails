@@ -1,7 +1,7 @@
 ##
 # Ticket Notifier class
 class TicketNotifier < ActionMailer::Base
-  default from: 'no-reply@myseatshare.com'
+  default from: ENV['SEATSHARE_EMAIL_FROM']
   layout 'email'
 
   ##

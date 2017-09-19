@@ -1,9 +1,0 @@
-<% if user_signed_in? %>
-<script>
-  var HW_config = {
-    selector: ".changelog-badge", // CSS selector where to inject the badge
-    account: "<%= ENV['HEADWAYAPP_ACCOUNT_ID'] %>" // your account ID
-  };
-</script>
-<script async src="//cdn.headwayapp.co/widget.js"> </script>
-<% end %>

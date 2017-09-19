@@ -5,14 +5,8 @@ SeatShare::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "registrations"}, :path => '/', :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'register' }
 
-  root 'public#index'
-
-  get 'teams' => 'public#teams'
-  get 'teams/:entity_type_abbreviation' => 'public#league', as: 'league'
-  get 'tos' => 'public#tos'
-  get 'privacy' => 'public#privacy'
-  get 'contact' => 'public#contact'
-  post 'contact' => 'public#do_contact'
+  # Default route for app is authenticated, so will redirect
+  root 'groups#current'
 
   devise_scope :user do
     get "register/group/:group_code", to: "registrations#new", as: 'register_with_group_code'

@@ -50,7 +50,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
       }
     )
     assert_response :success
-    assert_equal '/groups/1', path
+    assert_equal '/groups', path
     assert_equal 'You updated your account successfully.', flash[:notice]
   end
 

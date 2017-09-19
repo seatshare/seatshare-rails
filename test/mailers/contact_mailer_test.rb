@@ -14,7 +14,7 @@ class ContactMailerTest < ActionMailer::TestCase
     assert_not ActionMailer::Base.deliveries.empty?
     assert_equal ['john@example.com'], email.from
     assert_equal ['john@example.com'], email.reply_to
-    assert_equal ['contact@myseatshare.com'], email.to
+    assert_equal [ENV['SEATSHARE_EMAIL_SUPPORT']], email.to
     assert_equal 'This is a sample message', email.subject
 
     assert_includes(

@@ -2,7 +2,7 @@
 
 <p><%= @recipient.first_name %>,</p>
 
-<p>You have successfully created your <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %> account. We are glad to have you on board!</p>
+<p>You have successfully created your <%= link_to 'SeatShare', root_url, { only_path: false } %> account. We are glad to have you on board!</p>
 
 <p><strong>Your next steps:</strong></p>
 
@@ -42,9 +42,9 @@
 
 <hr />
 
-<p>Now you know how to manage your tickets! If you have any questions, be sure to <%= mail_to 'contact@myseatshare.com', 'let us know' %>!
+<p>Now you know how to manage your tickets! If you have any questions, be sure to <%= mail_to ENV['SEATSHARE_EMAIL_SUPPORT'], 'let us know' %>!
 
 <p>
   ---<br />
-  <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %>
+  <%= link_to 'SeatShare', root_url, { only_path: false } %>
 </p>

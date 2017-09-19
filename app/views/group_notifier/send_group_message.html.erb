@@ -2,7 +2,7 @@
  
 <p>
   ---<br />
-  <%= link_to 'SeatShare', :controller => 'public', :action => 'index', :only_path => false %>, on behalf of
+  <%= link_to 'SeatShare', root_url, { only_path: false } %>, on behalf of
   <%= @sender.display_name %><br />
   <%= mail_to @sender.email, @sender.email %>
 </p>
