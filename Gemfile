@@ -47,7 +47,7 @@ gem 'aws-sdk', '~> 2'
 gem 'pg', '0.20'
 
 # ActiveAdmin
-gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin.git'
+gem 'activeadmin', '~> 1.1'
 gem 'active_admin_importable', git: 'https://github.com/berga/active_admin_importable.git'
 
 # Mailchimp API

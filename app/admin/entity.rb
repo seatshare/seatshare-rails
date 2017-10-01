@@ -57,9 +57,9 @@ ActiveAdmin.register Entity do
     column :entity_name
     column :status do |entity|
       if entity.status?
-        status_tag('active', :ok)
+        status_tag('active', class: 'yes')
       else
-        status_tag('inactive')
+        status_tag('inactive', class: 'no')
       end
     end
     column :groups do |entity|
@@ -81,9 +81,9 @@ ActiveAdmin.register Entity do
       row :entity_name
       row :status do |entity|
         if entity.status?
-          status_tag('active', :ok)
+          status_tag('active', class: 'yes')
         else
-          status_tag('inactive')
+          status_tag('inactive', class: 'no')
         end
       end
       row :import_key

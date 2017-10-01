@@ -38,9 +38,9 @@ ActiveAdmin.register EntityType do
         end
         column :status do |e|
           if e.status?
-            status_tag('active', :ok)
+            status_tag('active', class: 'yes')
           else
-            status_tag('inactive')
+            status_tag('inactive', class: 'no')
           end
         end
         column :groups do |e|
