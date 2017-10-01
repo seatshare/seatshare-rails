@@ -10,9 +10,9 @@ ActiveAdmin.register Group do
     column :invitation_code
     column :status do |group|
       if group.status?
-        status_tag('active', :ok)
+        status_tag('active', class: 'yes')
       else
-        status_tag('inactive')
+        status_tag('inactive', class: 'no')
       end
     end
     column :members do |group|
@@ -52,9 +52,9 @@ ActiveAdmin.register Group do
       row :group_name
       row :status do |group|
         if group.status?
-          status_tag('active', :ok)
+          status_tag('active', class: 'yes')
         else
-          status_tag('inactive')
+          status_tag('inactive', class: 'no')
         end
       end
       row :invitation_code
@@ -110,19 +110,19 @@ ActiveAdmin.register Group do
           membership = user.memberships.each do |m|
             next if m.group_id != group.id
             if m.weekly_reminder?
-              li status_tag('Weekly Reminder', :ok)
+              li status_tag('Weekly Reminder', class: 'yes')
             else
-              li status_tag('Weekly Reminder')
+              li status_tag('Weekly Reminder', class: 'no')
             end
             if m.daily_reminder?
-              li status_tag('Daily Reminder', :ok)
+              li status_tag('Daily Reminder', class: 'yes')
             else
-              li status_tag('Daily Reminder')
+              li status_tag('Daily Reminder', class: 'no')
             end
             if m.mine_only?
-              li status_tag('Mine Only', :ok)
+              li status_tag('Mine Only', class: 'yes')
             else
-              li status_tag('Mine Only')
+              li status_tag('Mine Only', class: 'no')
             end
           end
         end
