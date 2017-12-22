@@ -8,9 +8,9 @@ ActiveAdmin.register User do
     column :email
     column :status do |u|
       if u.status?
-        status_tag('active', :ok)
+        status_tag('active', class: 'yes')
       else
-        status_tag('inactive')
+        status_tag('inactive', class: 'no')
       end
     end
     column :groups do |u|
@@ -68,19 +68,19 @@ ActiveAdmin.register User do
           group.memberships.each do |m|
             next if m.user_id != user.id
             if m.weekly_reminder?
-              li status_tag('Weekly Reminder', :ok)
+              li status_tag('Weekly Reminder', class: 'yes')
             else
-              li status_tag('Weekly Reminder')
+              li status_tag('Weekly Reminder', class: 'no')
             end
             if m.daily_reminder?
-              li status_tag('Daily Reminder', :ok)
+              li status_tag('Daily Reminder', class: 'yes')
             else
-              li status_tag('Daily Reminder')
+              li status_tag('Daily Reminder', class: 'no')
             end
             if m.mine_only?
-              li status_tag('Mine Only', :ok)
+              li status_tag('Mine Only', class: 'yes')
             else
-              li status_tag('Mine Only')
+              li status_tag('Mine Only', class: 'no')
             end
           end
         end
