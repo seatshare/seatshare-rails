@@ -83,11 +83,8 @@ SeatShare::Application.configure do
   config.action_mailer.smtp_settings = {
     address:              ENV['SMTP_HOST'],
     port:                 587,
-    domain:               'myseatshare.com',
     user_name:            ENV['SMTP_USER'],
     password:             ENV['SMTP_PASS'],
     authentication:       'plain',
     enable_starttls_auto: true  }
-  config.action_mailer.default_url_options = { :host => 'https://myseatshare.com' }
-
 end

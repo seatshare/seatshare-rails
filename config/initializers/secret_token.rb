@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-SeatShare::Application.config.secret_key_base = '1f8508a618f833ec5d691e1d6f7a06dc64e92e53911338642a5f2d21adf802f19cab56d156a749a4d260ca02d3c836ddcbeac00b3edb7769863277a35f212b2c'
+SeatShare::Application.config.secret_key_base = ENV["SECRET_KEY_BASE"]

@@ -2,7 +2,7 @@
 ##
 # Contact Mailer
 class ContactMailer < ActionMailer::Base
-  default from: 'no-reply@myseatshare.com'
+  default from: ENV['SEATSHARE_EMAIL_FROM']
 
   ##
   # Send Support Ticket
@@ -21,7 +21,7 @@ class ContactMailer < ActionMailer::Base
     from.display_name = name.dup # ex: "John Doe"
 
     mail(
-      to: 'SeatShare Support <contact@myseatshare.com>',
+      to: "SeatShare Support <#{ENV['SEATSHARE_EMAIL_SUPPORT']}>",
       from: from.format,
       subject: subject,
       reply_to: "#{name} <#{email}>"

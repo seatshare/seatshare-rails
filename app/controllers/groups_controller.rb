@@ -12,6 +12,21 @@ class GroupsController < ApplicationController
   end
 
   ##
+  # Go to last active group
+  def current
+    if session[:current_group_id].is_a? Numeric
+      redirect_to(
+        controller: 'groups', action: 'show',
+        id: session[:current_group_id], status: 302
+      ) && return
+    else
+      redirect_to(
+        controller: 'groups', action: 'index'
+      )
+    end
+  end
+
+  ##
   # New group form
   def new
     active_entities = Entity.active.includes(:entity_type).order(

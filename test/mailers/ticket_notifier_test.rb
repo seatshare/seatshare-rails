@@ -16,7 +16,7 @@ class TicketNotifierTest < ActionMailer::TestCase
     email = TicketNotifier.assign(ticket, user).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal email.from, ['no-reply@myseatshare.com']
+    assert_equal email.from, [ENV['SEATSHARE_EMAIL_FROM']]
     assert_equal email.to, ['jillsmith83@us.example.org']
     assert_equal(
       email.subject,
@@ -54,7 +54,7 @@ class TicketNotifierTest < ActionMailer::TestCase
     email = TicketNotifier.request_ticket(ticket, user).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal email.from, ['no-reply@myseatshare.com']
+    assert_equal email.from, [ENV['SEATSHARE_EMAIL_FROM']]
     assert_equal email.to, ['stonej@example.net']
     assert_equal(
       email.subject,

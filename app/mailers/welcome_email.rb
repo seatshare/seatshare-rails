@@ -1,7 +1,7 @@
 ##
 # Welcome email
 class WelcomeEmail < ActionMailer::Base
-  default from: 'no-reply@myseatshare.com'
+  default from: ENV['SEATSHARE_EMAIL_FROM']
   layout 'email'
 
   ##
@@ -12,7 +12,7 @@ class WelcomeEmail < ActionMailer::Base
     mail(
       to: "#{@recipient.display_name} <#{@recipient.email}>",
       subject: "Welcome to SeatShare, #{@recipient.first_name}!",
-      reply_to: 'SeatShare Support <contact@myseatshare.com>'
+      reply_to: "SeatShare Support <#{ENV['SEATSHARE_EMAIL_SUPPORT']}>",
     )
 
     headers['X-Mailgun-Tag'] = 'NewUser'

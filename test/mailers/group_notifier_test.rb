@@ -9,7 +9,7 @@ class GroupNotifierTest < ActionMailer::TestCase
     email = GroupNotifier.create_invite(invite).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal ['no-reply@myseatshare.com'], email.from
+    assert_equal [ENV['SEATSHARE_EMAIL_FROM']], email.from
     assert_equal ['sarahb@example.org'], email.reply_to
     assert_equal ['bob@example.com'], email.to
     assert_equal(
@@ -49,7 +49,7 @@ class GroupNotifierTest < ActionMailer::TestCase
     ).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal ['no-reply@myseatshare.com'], email.from
+    assert_equal [ENV['SEATSHARE_EMAIL_FROM']], email.from
     assert_equal ['stonej@example.net'], email.reply_to
     assert_equal(
       [

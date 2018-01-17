@@ -15,7 +15,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     )
     assert_nil flash[:alert]
     assert_equal 'Signed in successfully.', flash[:notice]
-    assert_equal '/groups/1', path
+    assert_equal '/groups', path
   end
 
   test 'login and view group landing page' do
@@ -53,7 +53,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     )
     assert_nil flash[:alert]
     assert_equal 'Signed in successfully.', flash[:notice]
-    assert_equal '/groups/1', path
+    assert_equal '/groups', path
 
     delete '/logout'
     assert_equal 'Signed out successfully.', flash[:notice]

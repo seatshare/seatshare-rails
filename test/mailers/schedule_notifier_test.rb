@@ -20,7 +20,7 @@ class ScheduleNotifierTest < ActionMailer::TestCase
     email = ScheduleNotifier.daily_schedule(events, group, user).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal ['no-reply@myseatshare.com'], email.from
+    assert_equal [ENV['SEATSHARE_EMAIL_FROM']], email.from
     assert_equal ['stonej@example.net'], email.to
     assert_equal 'Today\'s events for Geeks Watching Hockey', email.subject
     assert_includes(
@@ -59,7 +59,7 @@ class ScheduleNotifierTest < ActionMailer::TestCase
     email = ScheduleNotifier.weekly_schedule(events, group, user).deliver_now
 
     assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal ['no-reply@myseatshare.com'], email.from
+    assert_equal [ENV['SEATSHARE_EMAIL_FROM']], email.from
     assert_equal ['stonej@example.net'], email.to
     assert_equal 'The week ahead for Geeks Watching Hockey', email.subject
     assert_includes(
