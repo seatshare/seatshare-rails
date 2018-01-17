@@ -22,7 +22,7 @@ class TwilioSMS
       from: ENV['TWILIO_OUTBOUND_NUMBER'], to: assignee.mobile_e164,
       body: "#{acting_user.display_name} has assigned you "\
         "#{ticket.display_name} for #{ticket.event.event_name}. Log in to "\
-        'https://myseatshare.com to view.'
+        'https://app.myseatshare.com to view.'
     )
   rescue StandardError => e
     e.message
@@ -37,7 +37,7 @@ class TwilioSMS
       from: ENV['TWILIO_OUTBOUND_NUMBER'], to: owner.mobile_e164,
       body: "#{acting_user.display_name} has requested #{ticket.display_name} "\
         "for #{ticket.event.event_name}. Log in to "\
-        'https://myseatshare.com to assign.'
+        'https://app.myseatshare.com to assign.'
     )
   rescue StandardError => e
     e.message
