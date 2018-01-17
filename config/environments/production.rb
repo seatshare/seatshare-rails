@@ -87,4 +87,8 @@ SeatShare::Application.configure do
     password:             ENV['SMTP_PASS'],
     authentication:       'plain',
     enable_starttls_auto: true  }
+
+    config.action_mailer.asset_host = "https://app.myseatshare.com"
+    config.action_mailer.default_url_options = { :host => 'https://app.myseatshare.com' }
+
 end
