@@ -6,9 +6,9 @@ GIT
 
 GIT
   remote: https://github.com/circleci/minitest-ci.git
-  revision: 93cd2baa6b6a5d4befdbb5e558c6d8d8699bbc8a
+  revision: 8b72b0f32f154d91b53d63d1d0a8a8fb3b01d726
   specs:
-    minitest-ci (3.3.0)
+    minitest-ci (3.4.0)
       minitest (>= 5.0.6)
 
 GIT
