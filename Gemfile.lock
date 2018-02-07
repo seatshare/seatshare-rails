@@ -6,9 +6,9 @@ GIT
 
 GIT
   remote: https://github.com/circleci/minitest-ci.git
-  revision: 93cd2baa6b6a5d4befdbb5e558c6d8d8699bbc8a
+  revision: 8b72b0f32f154d91b53d63d1d0a8a8fb3b01d726
   specs:
-    minitest-ci (3.3.0)
+    minitest-ci (3.4.0)
       minitest (>= 5.0.6)
 
 GIT
@@ -198,7 +198,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
-    i18n (0.9.1)
+    i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     icalendar (2.4.1)
     inherited_resources (1.8.0)
@@ -248,7 +248,7 @@ GEM
     mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
-    minitest (5.10.3)
+    minitest (5.11.3)
     momentjs-rails (2.17.1)
       railties (>= 3.1)
     multi_json (1.12.2)
@@ -265,7 +265,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
-    paperclip (5.1.0)
+    paperclip (5.2.1)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
@@ -419,7 +419,7 @@ GEM
       builder (>= 2.1.2)
       jwt (~> 1.0)
       multi_json (>= 1.3.0)
-    tzinfo (1.2.4)
+    tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.0.2)
       execjs (>= 0.3.0, < 3)
