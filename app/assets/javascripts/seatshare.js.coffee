@@ -11,7 +11,7 @@ $(document).on 'turbolinks:load ready', ->
   $('a[data-toggle="tooltip"], span[data-toggle="tooltip"], div[data-toggle="tooltip"], button[data-toggle="tooltip"]').tooltip()
 
   # Clipboard.js
-  clipboard = new Clipboard('.btn-clipboard')
+  clipboard = new ClipboardJS('.btn-clipboard')
   clipboard.on 'success', (e) ->
     $(e.trigger).attr('title', 'Copied!').tooltip('show')
     $(e.trigger).on 'hidden.bs.tooltip', () ->
@@ -24,5 +24,5 @@ $(document).on 'turbolinks:load ready', ->
     $('.table-responsive').css "overflow", "auto"
 
 $(document).on 'page:before-change', ->
-  clipboard = new Clipboard('.btn-clipboard')
+  clipboard = new ClipboardJS('.btn-clipboard')
   clipboard.destroy()
