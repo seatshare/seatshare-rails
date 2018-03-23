@@ -77,13 +77,13 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (8.2.0)
       execjs
-    aws-sdk (2.11.20)
-      aws-sdk-resources (= 2.11.20)
-    aws-sdk-core (2.11.20)
+    aws-sdk (2.10.108)
+      aws-sdk-resources (= 2.10.108)
+    aws-sdk-core (2.10.108)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.11.20)
-      aws-sdk-core (= 2.11.20)
+    aws-sdk-resources (2.10.108)
+      aws-sdk-core (= 2.10.108)
     aws-sigv4 (1.0.2)
     bcrypt (3.1.11)
     bootstrap-sass (3.3.7)
@@ -444,7 +444,7 @@ PLATFORMS
 DEPENDENCIES
   active_admin_importable!
   activeadmin (~> 1.1)
-  aws-sdk (~> 2)
+  aws-sdk (= 2.10.108)
   bootstrap-sass
   bundler
   capistrano (~> 3.8)
