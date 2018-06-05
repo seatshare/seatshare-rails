@@ -37,5 +37,5 @@ SeatShare::Application.configure do
   config.action_mailer.default_url_options = { :host => 'http://localhost:3000' }
 
   # Enable LiveReload in asset pipeline
-  config.middleware.use Rack::LiveReload
+  config.middleware.use(Rack::LiveReload, host: 'localhost', source: :vendored)
 end
