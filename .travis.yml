@@ -7,7 +7,7 @@ rvm:
 before_install:
   - gem update --system
   - gem install bundler
-  - mv config/database.yaml.dist config/database.yml
+  - mv config/database.yml.dist config/database.yml
 
 install: bundle install --retry=3
 
