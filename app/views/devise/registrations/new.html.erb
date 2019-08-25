@@ -71,7 +71,7 @@
 <fieldset>
   <legend>Your Details</legend>
 
-  <%= devise_error_messages! %>
+  <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="form-group">
     <%= f.label :name, :class => 'col-md-3 control-label' %>
