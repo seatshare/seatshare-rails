@@ -44,7 +44,7 @@ gem 'underscore-rails'
 gem 'aws-sdk-s3', '~> 1.13'
 
 # Postgres
-gem 'pg', '1.1.4'
+gem 'pg', '~> 0.18'
 
 # ActiveAdmin
 gem 'activeadmin', '~> 1.1'
@@ -107,7 +107,7 @@ end
 
 group :development, :test do
   gem 'simplecov'
-  gem 'bundler'
+  gem 'bundler', '~> 1.17.3'
   gem 'guard-bundler'
   gem 'guard-livereload'
   gem 'guard-minitest'
