@@ -282,7 +282,7 @@ GEM
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
-    pg (1.1.4)
+    pg (0.21.0)
     premailer (1.11.1)
       addressable
       css_parser (>= 1.6.0)
@@ -455,7 +455,7 @@ DEPENDENCIES
   activeadmin (~> 1.1)
   aws-sdk-s3 (~> 1.13)
   bootstrap-sass
-  bundler
+  bundler (~> 1.17.3)
   capistrano (~> 3.8)
   capistrano-npm
   capistrano-rails
@@ -480,7 +480,7 @@ DEPENDENCIES
   momentjs-rails
   newrelic_rpm
   paperclip
-  pg (= 1.1.4)
+  pg (~> 0.18)
   premailer-rails
   pry-coolline
   pry-nav
