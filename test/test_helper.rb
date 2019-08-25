@@ -49,7 +49,6 @@ Spork.prefork do
   class DeviseController
     include DeviseHelper
     include ActionView::Helpers::TagHelper
-    helper_method :devise_error_messages!
     helper_method :content_tag
   end
 end
