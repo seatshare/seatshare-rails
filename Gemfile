@@ -44,7 +44,7 @@ gem 'underscore-rails'
 gem 'aws-sdk-s3', '~> 1.13'
 
 # Postgres
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 1.1'
 
 # ActiveAdmin
 gem 'activeadmin', '~> 1.1'
