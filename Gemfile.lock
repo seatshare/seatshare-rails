@@ -98,7 +98,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
     builder (3.2.3)
-    capistrano (3.11.0)
+    capistrano (3.11.1)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
@@ -456,7 +456,7 @@ DEPENDENCIES
   aws-sdk-s3 (~> 1.13)
   bootstrap-sass
   bundler (~> 1.17.3)
-  capistrano (~> 3.8)
+  capistrano (~> 3.11)
   capistrano-npm
   capistrano-rails
   coffee-rails
