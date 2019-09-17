@@ -266,7 +266,6 @@ GEM
       net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
     netrc (0.11.0)
-    newrelic_rpm (6.5.0.357)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.3)
@@ -478,7 +477,6 @@ DEPENDENCIES
   minitest
   minitest-ci!
   momentjs-rails
-  newrelic_rpm
   paperclip
   pg (~> 0.18)
   premailer-rails
